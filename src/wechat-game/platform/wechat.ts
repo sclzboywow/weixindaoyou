@@ -251,6 +251,7 @@ export interface WechatGameApi {
     fail?: (error: { errMsg?: string }) => void;
   }): void;
   onTouchStart(callback: (event: WxTouchEvent) => void): void;
+  offTouchStart?: (callback?: (event: WxTouchEvent) => void) => void;
   onTouchMove?: (callback: (event: WxTouchEvent) => void) => void;
   onTouchEnd?: (callback: (event: WxTouchEvent) => void) => void;
   onTouchCancel?: (callback: (event: WxTouchEvent) => void) => void;

@@ -1,4 +1,9 @@
-import { getWx, type WxCanvas, type WxImage } from './platform/wechat';
+import {
+  getWx,
+  type WxCanvas,
+  type WxImage,
+  type WxTouchEvent,
+} from './platform/wechat';
 import { installWechatStartupBridge } from './startupBridge';
 import { drawNativeAlchemyWorkspace } from './ui/nativeAlchemyWorkspace';
 import { createNativeCelebration } from './ui/nativeCelebration';
@@ -11,6 +16,7 @@ const PAPER = '#f8f3e6';
 const INK = '#2c1810';
 const INK_SECONDARY = '#5a4a42';
 const CRIMSON = '#c1121f';
+const MAX_CORE_ENTRY_ATTEMPTS = 3;
 
 function normalizeStartupCanvasText(text: string): string {
   return String(text ?? '').replace(/[\ufe0e\ufe0f]/g, '');
@@ -25,7 +31,12 @@ class WechatStartupShell {
   private ratio: number;
   private paper: WxImage | null = null;
   private logo: WxImage | null = null;
-  private wechatLogin: WxImage | null = null;
+  private retryRect: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null = null;
   private progress = 0;
   private status = '灵气汇聚，万界将启';
   private error = '';
@@ -38,6 +49,7 @@ class WechatStartupShell {
   private coreStart: (() => void) | null = null;
   private launchTimer: ReturnType<typeof setTimeout> | null = null;
   private coreEntryFallbackTimer: ReturnType<typeof setTimeout> | null = null;
+  private coreEntryAttempts = 0;
   private shellAssetsPending = 0;
   private bodyFont = '"Kaiti SC", "KaiTi", serif';
   private headingFont = '"STKaiti", "KaiTi", serif';
@@ -53,6 +65,23 @@ class WechatStartupShell {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.scale(this.ratio, this.ratio);
   }
+
+  private readonly startupTouchHandler = (event: WxTouchEvent): void => {
+    if (!this.active || !this.error || !this.retryRect) return;
+    const touch = event.changedTouches[0] ?? event.touches[0];
+    if (!touch) return;
+    const x = touch.clientX ?? touch.pageX ?? touch.x ?? 0;
+    const y = touch.clientY ?? touch.pageY ?? touch.y ?? 0;
+    const rect = this.retryRect;
+    if (
+      x < rect.x ||
+      x > rect.x + rect.width ||
+      y < rect.y ||
+      y > rect.y + rect.height
+    )
+      return;
+    this.loadCore();
+  };
 
   start(): void {
     this.loadStartupFonts();
@@ -81,16 +110,7 @@ class WechatStartupShell {
     this.loadShellImage('assets/daoyou_logo.png', (image) => {
       this.logo = image;
     });
-    this.loadShellImage('assets/wechat-login.png', (image) => {
-      this.wechatLogin = image;
-    });
-    this.wx.onTouchStart((event) => {
-      if (!this.active || !this.error) return;
-      const touch = event.changedTouches[0] ?? event.touches[0];
-      if (!touch) return;
-      const y = touch.clientY ?? touch.pageY ?? touch.y ?? 0;
-      if (y >= this.height * 0.62 && y <= this.height * 0.72) this.loadCore();
-    });
+    this.wx.onTouchStart(this.startupTouchHandler);
     this.timer = setInterval(() => {
       if (!this.active) return;
       this.tick += 1;
@@ -159,6 +179,9 @@ class WechatStartupShell {
       this.render();
       return;
     }
+    this.packageLoaded = false;
+    this.coreEntryAttempts = 0;
+    this.retryRect = null;
     this.loading = true;
     this.error = '';
     this.progress = 1;
@@ -216,6 +239,7 @@ class WechatStartupShell {
     }
     this.loadWatchdog = setTimeout(() => {
       if (!this.active || !this.loading) return;
+      failed = true;
       this.loading = false;
       this.error = '核心卷宗初始化超时，请点击重试';
       this.status = '灵气暂歇';
@@ -230,6 +254,13 @@ class WechatStartupShell {
     // without evaluating its game.js entry immediately. Give the normal
     // handoff a brief opportunity, then explicitly require the core entry.
     if (!this.coreStart) {
+      if (this.coreEntryAttempts >= MAX_CORE_ENTRY_ATTEMPTS) {
+        this.loading = false;
+        this.error = '核心入口载入失败，请点击重试';
+        this.status = '道途未启';
+        this.render();
+        return;
+      }
       if (!this.coreEntryFallbackTimer) {
         this.coreEntryFallbackTimer = setTimeout(() => {
           this.coreEntryFallbackTimer = null;
@@ -237,6 +268,7 @@ class WechatStartupShell {
           const runtime = globalThis as typeof globalThis & {
             require?: (path: string) => unknown;
           };
+          this.coreEntryAttempts += 1;
           try {
             runtime.require?.('game-core/game.js');
           } catch (error) {
@@ -273,7 +305,9 @@ class WechatStartupShell {
     if (this.coreEntryFallbackTimer) clearTimeout(this.coreEntryFallbackTimer);
     this.coreEntryFallbackTimer = null;
     if (this.timer) clearInterval(this.timer);
+    this.wx.offTouchStart?.(this.startupTouchHandler);
     this.timer = null;
+    this.retryRect = null;
   }
 
   private clearLoadWatchdog(): void {
@@ -405,117 +439,9 @@ class WechatStartupShell {
     ctx.font = `${11 * scale}px ${this.bodyFont}`;
     ctx.fillText('在纸墨之间落下道号，自此入界修行、', centerX, y(341));
     ctx.fillText('历练、炼造与论道。', centerX, y(365));
-
-    ctx.strokeStyle = 'rgba(142,111,76,.42)';
-    ctx.beginPath();
-    ctx.moveTo(centerX - 104 * scale, y(407));
-    ctx.lineTo(centerX - 54 * scale, y(407));
-    ctx.moveTo(centerX + 54 * scale, y(407));
-    ctx.lineTo(centerX + 104 * scale, y(407));
-    ctx.stroke();
-    ctx.fillStyle = INK;
-    ctx.font = `600 ${23 * scale}px ${this.headingFont}`;
-    ctx.fillText('踏入万界', centerX, y(414));
     ctx.fillStyle = INK_SECONDARY;
     ctx.font = `${12 * scale}px ${this.bodyFont}`;
-    ctx.fillText('正在准备你的道途', centerX, y(444));
-
-    const buttonWidth = Math.min(this.width - 52, 286 * scale);
-    const buttonX = centerX - buttonWidth / 2;
-    const wechatRect = {
-      x: buttonX,
-      y: y(464),
-      width: buttonWidth,
-      height: 72 * scale,
-    };
-    ctx.fillStyle = '#963820';
-    ctx.strokeStyle = 'rgba(92,33,19,.78)';
-    ctx.fillRect(
-      wechatRect.x,
-      wechatRect.y,
-      wechatRect.width,
-      wechatRect.height,
-    );
-    ctx.strokeRect(
-      wechatRect.x,
-      wechatRect.y,
-      wechatRect.width,
-      wechatRect.height,
-    );
-    ctx.strokeStyle = 'rgba(250,232,203,.55)';
-    ctx.strokeRect(
-      wechatRect.x + 4,
-      wechatRect.y + 4,
-      wechatRect.width - 8,
-      wechatRect.height - 8,
-    );
-    if (this.wechatLogin) {
-      ctx.drawImage(
-        this.wechatLogin as unknown as CanvasImageSource,
-        wechatRect.x + 24 * scale,
-        wechatRect.y + 17 * scale,
-        43 * scale,
-        32 * scale,
-      );
-    }
-    ctx.fillStyle = '#fff5e5';
-    ctx.font = `600 ${21 * scale}px ${this.bodyFont}`;
-    ctx.fillText(
-      '微信入界',
-      wechatRect.x + wechatRect.width * 0.61,
-      wechatRect.y + 31 * scale,
-    );
-    ctx.fillStyle = 'rgba(255,245,229,.86)';
-    ctx.font = `${10 * scale}px ${this.bodyFont}`;
-    ctx.fillText(
-      '会话与卷宗准备中',
-      wechatRect.x + wechatRect.width * 0.61,
-      wechatRect.y + 54 * scale,
-    );
-
-    const emailRect = {
-      x: buttonX,
-      y: y(550),
-      width: buttonWidth,
-      height: 66 * scale,
-    };
-    ctx.fillStyle = 'rgba(248,243,230,.64)';
-    ctx.strokeStyle = 'rgba(142,111,76,.44)';
-    ctx.fillRect(emailRect.x, emailRect.y, emailRect.width, emailRect.height);
-    ctx.strokeRect(emailRect.x, emailRect.y, emailRect.width, emailRect.height);
-    ctx.strokeStyle = 'rgba(142,111,76,.25)';
-    ctx.strokeRect(
-      emailRect.x + 4,
-      emailRect.y + 4,
-      emailRect.width - 8,
-      emailRect.height - 8,
-    );
-    ctx.strokeStyle = '#68402b';
-    ctx.strokeRect(
-      emailRect.x + 29 * scale,
-      emailRect.y + 22 * scale,
-      32 * scale,
-      23 * scale,
-    );
-    ctx.beginPath();
-    ctx.moveTo(emailRect.x + 29 * scale, emailRect.y + 22 * scale);
-    ctx.lineTo(emailRect.x + 45 * scale, emailRect.y + 36 * scale);
-    ctx.lineTo(emailRect.x + 61 * scale, emailRect.y + 22 * scale);
-    ctx.stroke();
-    ctx.fillStyle = '#533221';
-    ctx.font = `${21 * scale}px ${this.bodyFont}`;
-    ctx.fillText(
-      '邮箱入界',
-      emailRect.x + emailRect.width * 0.61,
-      emailRect.y + 31 * scale,
-    );
-    ctx.fillStyle = INK_SECONDARY;
-    ctx.font = `${10 * scale}px ${this.bodyFont}`;
-    ctx.fillText(
-      '验证码登录 · 跨端亦可寻回道籍',
-      emailRect.x + emailRect.width * 0.61,
-      emailRect.y + 54 * scale,
-    );
+    ctx.fillText('正在准备你的道途', centerX, y(420));
 
     const dots = '·'.repeat((this.tick % 3) + 1);
     const progressText = normalizeStartupCanvasText(
@@ -523,7 +449,7 @@ class WechatStartupShell {
     );
     const barWidth = Math.min(286 * scale, this.width - 52);
     const barX = centerX - barWidth / 2;
-    const barY = y(640);
+    const barY = y(458);
     ctx.fillStyle = 'rgba(44,24,16,.10)';
     ctx.fillRect(barX, barY, barWidth, 2);
     ctx.fillStyle = CRIMSON;
@@ -537,8 +463,16 @@ class WechatStartupShell {
       centerX,
       barY + 24 * scale,
     );
+    this.retryRect = this.error
+      ? {
+          x: barX,
+          y: barY + 4 * scale,
+          width: barWidth,
+          height: 40 * scale,
+        }
+      : null;
 
-    const footerY = Math.max(y(658), viewportBottom - 18);
+    const footerY = Math.max(y(540), viewportBottom - 18);
     ctx.globalAlpha = 0.16;
     ctx.fillStyle = '#76604b';
     ctx.beginPath();
