@@ -1,0 +1,76 @@
+{
+  "description": "万界道友微信小游戏",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "enhance": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "condition": false,
+    "compileWorklet": false,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "useCompilerPlugins": false
+  },
+  "compileType": "game",
+  "miniprogramRoot": "dist/wechat-game/",
+  "libVersion": "3.16.2",
+  "appid": "wxded7d126f13e0ddf",
+  "projectname": "wanjiedaoyou",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": []
+    }
+  },
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": [
+      {
+        "value": "assets",
+        "type": "folder"
+      },
+      {
+        "value": "official-assets/assets",
+        "type": "folder"
+      },
+      {
+        "value": "merit-assets/assets",
+        "type": "folder"
+      },
+      {
+        "value": "official-ui/assets",
+        "type": "folder"
+      }
+    ]
+  },
+  "isGameTourist": false,
+  "editorSetting": {}
+}

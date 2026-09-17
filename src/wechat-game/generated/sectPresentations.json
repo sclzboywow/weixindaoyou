@@ -1,0 +1,5458 @@
+{
+  "lingxiao": {
+    "name": "红尘剑宗",
+    "mapTitle": "红尘剑宗舆图",
+    "mapDescription": "殿阁沿山势铺开，主路穿过山门直通城郭。择一处前往，继续今日的宗门事务。",
+    "announcement": "近日山下商路多有邪修出没，外出历练者须结伴而行；归宗后记得向执事堂补录见闻。",
+    "aspectRatio": 1.7768331562167907,
+    "onboarding": {
+      "summary": "从红尘中学剑，以平生所见养成剑意，在照影游尘与守拙藏锋之间走出自己的剑路。",
+      "traits": [
+        "入世问剑",
+        "快重由心",
+        "此剑平生"
+      ],
+      "script": {
+        "id": "lingxiao-onboarding",
+        "title": "人间问剑",
+        "theme": "steel",
+        "backdrop": {
+          "src": "/assets/sect/onboarding/lingxiao.webp",
+          "alt": "红尘剑宗山门朝向山下城郭，负剑弟子沿石阶往来于山门与人间"
+        },
+        "acts": [
+          {
+            "id": "downhill-gate",
+            "title": "山下之门",
+            "scene": "红尘剑宗 · 山门",
+            "body": "山门立在半山，门外石阶没有隐入云海，而是一路通向炊烟初起的城郭。有人衣衫整肃，正负剑下山；也有人带着满身风尘，从长路归来。",
+            "speaker": "守门弟子：“上山学剑，下山用剑。红尘剑宗的路，从来要走两遍。”",
+            "backgroundPosition": "58% 46%",
+            "tone": "mist"
+          },
+          {
+            "id": "ask-the-sword",
+            "title": "先问其剑",
+            "scene": "红尘剑宗 · 问剑堂",
+            "body": "传功长老没有命你劈开试剑石，只从旧架上取下一柄寻常铁剑，横放在你面前。剑锋不见灵光，剑鞘上却留着许多经年磨痕。",
+            "speaker": "传功长老：“剑能斩什么，不难。难的是你要知道，什么不该斩。”",
+            "backgroundPosition": "30% 52%",
+            "tone": "steel"
+          },
+          {
+            "id": "sword-record",
+            "title": "红尘剑录",
+            "scene": "红尘剑宗 · 剑录阁",
+            "body": "旧卷中既有剑招，也夹着地名、人名、残缺书信与未能兑现的约定。许多段落只有寥寥数笔，却被后来者反复翻阅。",
+            "speaker": "守阁长老：“剑法可以传，平生不可照抄。前人的答案，只能替你问出自己的问题。”",
+            "backgroundPosition": "72% 38%",
+            "tone": "stillness"
+          },
+          {
+            "id": "two-sword-paths",
+            "title": "两道剑途",
+            "scene": "红尘剑宗 · 照影崖",
+            "body": "崖前剑影一快一重。快剑连绵，转瞬已在石壁留下数道剑痕；重剑静立，直至来势逼近，才以后发一击震开尘土。",
+            "speaker": "传功长老：“照影游尘，见招而变；守拙藏锋，承势而决。剑路不同，最后问的却是同一件事。”",
+            "backgroundPosition": "42% 44%",
+            "tone": "mist"
+          },
+          {
+            "id": "one-life-one-sword",
+            "title": "此剑平生",
+            "scene": "红尘剑宗 · 弟子名册前",
+            "body": "你的名字被写入弟子名册，《红尘剑录》中属于你的那一页仍然空白。长老合上旧卷，将那柄铁剑连同剑鞘一并交到你手中。",
+            "speaker": "传功长老：“今日不必写。等你真正明白为何出剑，再回来落这一笔。”",
+            "backgroundPosition": "54% 35%",
+            "tone": "steel"
+          }
+        ]
+      }
+    },
+    "facilityLabels": {
+      "archive": "剑录阁",
+      "cultivation_room": "养剑室",
+      "workshop": "丹器坊",
+      "spirit_vein": "灵脉",
+      "herb_garden": "药田",
+      "formation": "护山大阵"
+    },
+    "rooms": {
+      "affairs": {
+        "description": "旧剑与功簿分列堂中，三席经办之人各守一案。寻到对应之人，便可当面接下或交回事务。",
+        "actors": [
+          {
+            "id": "lingxiao-lin-yanqiu",
+            "roleKey": "daily",
+            "sigil": "执",
+            "name": "陆青崖",
+            "identity": "值日执事",
+            "responsibility": "负责日常委托。",
+            "greeting": "今日事务已经理清，你先说想办哪一桩。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "daily"
+            }
+          },
+          {
+            "id": "lingxiao-gu-wenfeng",
+            "roleKey": "weekly",
+            "sigil": "簿",
+            "name": "裴守拙",
+            "identity": "功簿执事",
+            "responsibility": "负责周常委托。",
+            "greeting": "本周功簿在此，小比与悬赏也都记着。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "weekly"
+            }
+          },
+          {
+            "id": "lingxiao-xie-tingyun",
+            "roleKey": "promotion",
+            "sigil": "传",
+            "name": "听剑老人",
+            "identity": "传功长老",
+            "responsibility": "负责晋升试炼。",
+            "greeting": "晋升问的不是锋芒多少，而是这一剑为何而出。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "promotion"
+            }
+          }
+        ]
+      },
+      "hall": {
+        "description": "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。",
+        "actors": [
+          {
+            "id": "lingxiao-shen-chijian",
+            "roleKey": "registry",
+            "sigil": "掌",
+            "name": "顾怀真",
+            "identity": "掌籍执事",
+            "responsibility": "负责弟子身份与同门名录。",
+            "greeting": "玉牒和同门名录都已理好，你想查哪一项？",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.registry"
+          },
+          {
+            "id": "lingxiao-wen-fenglu",
+            "roleKey": "stipend",
+            "sigil": "俸",
+            "name": "柳七",
+            "identity": "俸禄执事",
+            "responsibility": "负责核算和发放宗门周俸。",
+            "greeting": "本周该发的都已算清，要核对还是领取，你直说便是。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.stipend"
+          }
+        ]
+      },
+      "treasury": {
+        "description": "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。",
+        "actors": [
+          {
+            "id": "lingxiao-cangfeng-weng",
+            "roleKey": "keeper",
+            "sigil": "库",
+            "name": "叶归鸿",
+            "identity": "司库执事",
+            "responsibility": "负责宝库库存与贡献兑换。",
+            "greeting": "架上的东西各有标价，你看中哪件便报来。",
+            "appearance": "person",
+            "conversationRenderer": "sect.treasury.shop"
+          }
+        ]
+      },
+      "industries": {
+        "description": "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。",
+        "actors": [
+          {
+            "id": "lingxiao-zhu-baigong",
+            "roleKey": "construction",
+            "sigil": "造",
+            "name": "杜长庚",
+            "identity": "营造执事",
+            "responsibility": "负责各处设施等级与建设进度。",
+            "greeting": "各处设施修到哪里、还差多少，我都能说给你听。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.construction"
+          },
+          {
+            "id": "lingxiao-shi-sanjin",
+            "roleKey": "donation",
+            "sigil": "石",
+            "name": "苗小满",
+            "identity": "建设执事",
+            "responsibility": "负责灵石捐献与建设登记。",
+            "greeting": "今日可择一处设施捐献灵石，我替你登记。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.donation"
+          }
+        ]
+      },
+      "archive": {
+        "description": "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。",
+        "actors": [
+          {
+            "id": "lingxiao-xie-guanjian",
+            "roleKey": "keeper",
+            "sigil": "阁",
+            "name": "温不言",
+            "identity": "守阁长老",
+            "responsibility": "负责心法经卷与研习。",
+            "greeting": "六卷心法都在架上，先说你想读哪一卷。",
+            "appearance": "person",
+            "conversationRenderer": "sect.archive.methods"
+          }
+        ]
+      },
+      "paths": {
+        "description": "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。",
+        "actors": [
+          {
+            "id": "lingxiao-wenjian-sou",
+            "roleKey": "guide",
+            "sigil": "引",
+            "name": "祝平生",
+            "identity": "引道长老",
+            "responsibility": "负责流派选择与参悟引导。",
+            "greeting": "路要自己走，眼下看不明白的地方可以先问。",
+            "appearance": "person",
+            "conversationRenderer": "sect.paths.guidance"
+          }
+        ]
+      },
+      "arena": {
+        "description": "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。",
+        "actors": [
+          {
+            "id": "lingxiao-fu-shifeng",
+            "roleKey": "instructor",
+            "sigil": "武",
+            "name": "霍千钧",
+            "identity": "演武教习",
+            "responsibility": "负责神通配置与自动战术。",
+            "greeting": "招式合不合手，上场一试便知；先把你的神通排给我看。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.loadout"
+          },
+          {
+            "id": "lingxiao-chen-shoutai",
+            "roleKey": "marshal",
+            "sigil": "场",
+            "name": "苏放鹤",
+            "identity": "值场执事",
+            "responsibility": "负责演武场秩序与入场引导。",
+            "greeting": "场中已经收拾妥当，有小比在身便可入场。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.marshal"
+          },
+          {
+            "id": "sect-arena-ring",
+            "roleKey": "ring",
+            "sigil": "⚔️",
+            "name": "宗门擂台",
+            "identity": "宗门设施",
+            "responsibility": "开启宗门小比战局。",
+            "greeting": "擂台阵纹已归位，有小比在身便可登台。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.arena.tournament",
+            "conversationParameters": {
+              "locationKey": "sect.arena"
+            }
+          }
+        ]
+      },
+      "cultivation": {
+        "description": "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。",
+        "actors": [
+          {
+            "id": "lingxiao-su-jing",
+            "roleKey": "keeper",
+            "sigil": "阵",
+            "name": "晏无声",
+            "identity": "守阵执事",
+            "responsibility": "负责聚灵阵与闭关安排。",
+            "greeting": "阵息正稳，想问此地灵效，还是现在入静？",
+            "appearance": "person",
+            "conversationRenderer": "sect.cultivation.retreat"
+          }
+        ]
+      },
+      "alchemy": {
+        "description": "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。",
+        "actors": [
+          {
+            "id": "lingxiao-yan-danshi",
+            "roleKey": "keeper",
+            "sigil": "丹",
+            "name": "程晚照",
+            "identity": "丹房执事",
+            "responsibility": "负责丹房状态与炼丹安排。",
+            "greeting": "火候正好，想先问丹房灵效，还是直接开炉？",
+            "appearance": "person",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "请执事说说丹房灵效",
+              "workspaceReply": "有劳执事为我开炉炼丹"
+            }
+          },
+          {
+            "id": "sect-alchemy-furnace",
+            "roleKey": "furnace",
+            "sigil": "鼎",
+            "name": "宗门丹炉",
+            "identity": "炼丹设施",
+            "responsibility": "纳药、引火、聚蕴、凝丹。",
+            "greeting": "炉腹传来低沉回响，地火阵纹正等待灵石与药气。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "以神识察看丹炉灵效",
+              "workspaceReply": "唤醒丹炉，开始炼丹"
+            }
+          }
+        ]
+      },
+      "refinery": {
+        "description": "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。",
+        "actors": [
+          {
+            "id": "lingxiao-ou-yeqing",
+            "roleKey": "keeper",
+            "sigil": "器",
+            "name": "谭折柳",
+            "identity": "器坊执事",
+            "responsibility": "负责器坊状态与炼器安排。",
+            "greeting": "地火还稳，想先问器坊灵效，还是就此动手？",
+            "appearance": "person",
+            "conversationRenderer": "sect.refinery.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "refinery",
+              "workspaceHref": "/game/sect/refinery?workspace=craft",
+              "statusReply": "请执事说说器坊灵效",
+              "workspaceReply": "有劳执事为我开炉炼器"
+            }
+          }
+        ]
+      },
+      "spiritVein": {
+        "description": "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。",
+        "actors": [
+          {
+            "id": "lingxiao-luo-tingmai",
+            "roleKey": "keeper",
+            "sigil": "脉",
+            "name": "邵沉川",
+            "identity": "守脉执事",
+            "responsibility": "负责矿场巡视交接。",
+            "greeting": "矿道巡视封签已经备好，有差事便在这里核对。",
+            "appearance": "person",
+            "conversationRenderer": "sect.spirit-vein.patrol",
+            "conversationParameters": {
+              "locationKey": "sect.spirit-vein"
+            }
+          },
+          {
+            "id": "lingxiao-lingmai-kuangchang",
+            "roleKey": "facility",
+            "sigil": "⛏️",
+            "name": "灵脉矿场",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级、灵石收益并进行灵矿采掘。",
+            "greeting": "矿壁间青光沿岩隙缓缓游走，脉息沉稳如常。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.spirit-vein.mining",
+            "conversationParameters": {
+              "facilityKey": "spirit_vein",
+              "effectKey": "spirit_vein",
+              "detail": "灵石收益会随周俸一并核算，无需在矿场另行采收。"
+            }
+          }
+        ]
+      },
+      "herbGarden": {
+        "description": "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。",
+        "actors": [
+          {
+            "id": "lingxiao-he-caowei",
+            "roleKey": "keeper",
+            "sigil": "药",
+            "name": "秦晚晴",
+            "identity": "药园执事",
+            "responsibility": "负责草木长势与周期产出。",
+            "greeting": "晨露刚退，田里长势不错，草木值录已经写好了。",
+            "appearance": "person",
+            "conversationRenderer": "sect.herb-garden.caretaker",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。",
+              "stages": [
+                "新畦初醒",
+                "灵苗成行",
+                "药香盈陌",
+                "四时不歇",
+                "百草丰登"
+              ]
+            }
+          },
+          {
+            "id": "lingxiao-zongmen-yaotian",
+            "roleKey": "facility",
+            "sigil": "🌿",
+            "name": "宗门药田",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级与药田近况。",
+            "greeting": "层层药畦顺山势铺开，灵泉正沿石渠润过根须。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.herb-garden.status",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "effectKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。"
+            }
+          }
+        ]
+      },
+      "gate": {
+        "description": "山门内外人声往来，守山执事在门侧整理当日来往记录。",
+        "actors": [
+          {
+            "id": "lingxiao-zhou-shanmen",
+            "roleKey": "keeper",
+            "sigil": "门",
+            "name": "骆长亭",
+            "identity": "守山执事",
+            "responsibility": "负责山门动态与来往记录。",
+            "greeting": "山下已经有人来往，今日来客与山门动静都记在这里。",
+            "appearance": "person",
+            "conversationRenderer": "sect.gate.news"
+          },
+          {
+            "id": "lingxiao-shanmen",
+            "roleKey": "facility",
+            "sigil": "⛰️",
+            "name": "山门",
+            "identity": "宗门设施",
+            "responsibility": "进入山门步道完成清扫。",
+            "greeting": "门外石阶一路通向山下，晨风卷来几片新落的叶子。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.gate.sweep"
+          }
+        ]
+      },
+      "formation": {
+        "description": "护宗阵枢仍在封禁之中。",
+        "actors": [
+          {
+            "id": "warden",
+            "roleKey": "warden",
+            "sigil": "护",
+            "name": "护阵长老",
+            "identity": "护阵长老",
+            "responsibility": "负责护宗阵法管理。",
+            "greeting": "阵枢尚未开放，今日无需入内。",
+            "appearance": "person",
+            "conversationRenderer": "sect.formation.status"
+          }
+        ]
+      }
+    },
+    "scenes": {
+      "map": {
+        "title": "红尘剑宗舆图",
+        "description": "殿阁沿山势铺开，主路穿过山门直通城郭。择一处前往，继续今日的宗门事务。"
+      },
+      "hall": {
+        "title": "问剑堂",
+        "description": "堂中不设试剑石，只悬历代门人的旧剑与归宗名册；身份玉牒、俸禄名册皆由录事在此核验。"
+      },
+      "affairs": {
+        "title": "执事堂",
+        "description": "木榜上新令墨迹未干，今日差事、周录与晋升试炼各有封签；诸令皆可逐一揭下，办妥后回堂交卷领赏。"
+      },
+      "archive": {
+        "title": "剑录阁",
+        "description": "檀木长架上既有六卷心法，也收着历代弟子的行剑手记；在此逐卷研习，不必再穿行别阁。"
+      },
+      "paths": {
+        "title": "照影崖",
+        "description": "崖壁遍布历代门人留下的试剑痕迹，快重二道皆由此分流；择定道途后，沿经脉继续参悟。"
+      },
+      "arena": {
+        "title": "试剑台",
+        "description": "演武场中央阵纹已启，宗门神通将在当前流派与参悟方案下显化威能。"
+      },
+      "treasury": {
+        "title": "宗门宝库",
+        "description": "铜锁开启，木架深处的常备物资与本周珍材依次显露；持弟子令牌即可按贡献支取。"
+      },
+      "industries": {
+        "title": "百业院",
+        "description": "各处设施的等级与建设进度依次列于案台，弟子可择一处捐献灵石。"
+      },
+      "cultivation": {
+        "title": "养剑室",
+        "description": "聚灵阵纹绕蒲团缓缓流转，静香已燃；定下闭关年数，宗门灵气会在结算时自然汇入。"
+      },
+      "alchemy": {
+        "title": "丹房",
+        "description": "赤铜丹炉吞吐灵焰，药柜沿墙依性归置；投下灵材、定住丹意，便可在此守候成丹。"
+      },
+      "refinery": {
+        "title": "铸剑坊",
+        "description": "地火自山腹引入锻台，冷铁与灵材依次落位；选定器型后即可在此开炉成器。"
+      },
+      "spiritVein": {
+        "title": "灵脉矿场",
+        "description": "矿壁间青光沿岩隙缓缓游走，执事循脉定井；每周俸禄中的灵石加成皆从此处汇出。"
+      },
+      "herbGarden": {
+        "title": "宗门药田",
+        "description": "层层药畦顺山势铺开，灵泉沿石渠润过根须；药田产出玩法后续开放。"
+      },
+      "gate": {
+        "title": "山门",
+        "description": "石阶从门外一路通往山下城郭，守门弟子在晨钟后换过值守；今日宗门内外动静都写在门侧木牌上。"
+      },
+      "cave": {
+        "title": "私人洞府",
+        "description": "石门隔去峰间喧声，竹影从纸窗落入蒲团；这是内门弟子留在宗门中的一处清修居所。"
+      },
+      "taskBattle": {
+        "title": "宗门战局",
+        "description": "完成当前宗门战斗事务。"
+      }
+    },
+    "hotspots": [
+      {
+        "id": "hall",
+        "label": "问剑堂",
+        "note": "身份 · 同门 · 周俸",
+        "route": "/game/sect/hall",
+        "permission": "sect.hall.view",
+        "position": [
+          46,
+          25
+        ]
+      },
+      {
+        "id": "archive",
+        "label": "剑录阁",
+        "note": "心法研习",
+        "route": "/game/sect/archive",
+        "permission": "sect.archive.use",
+        "facility": "archive",
+        "position": [
+          15,
+          31
+        ]
+      },
+      {
+        "id": "cliff",
+        "label": "照影崖",
+        "note": "流派 · 参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          88,
+          19
+        ]
+      },
+      {
+        "id": "arena",
+        "label": "试剑台",
+        "note": "神通 · 战术 · 小比",
+        "route": "/game/sect/arena",
+        "permission": "sect.arena.use",
+        "position": [
+          57,
+          64
+        ]
+      },
+      {
+        "id": "affairs",
+        "label": "执事堂",
+        "note": "日常 · 周常 · 晋升",
+        "route": "/game/sect/affairs",
+        "permission": "sect.tasks.use",
+        "position": [
+          42,
+          48
+        ]
+      },
+      {
+        "id": "treasury",
+        "label": "宗门宝库",
+        "note": "贡献兑换",
+        "route": "/game/sect/treasury",
+        "permission": "sect.shop.use",
+        "position": [
+          57,
+          36
+        ]
+      },
+      {
+        "id": "industries",
+        "label": "百业院",
+        "note": "设施建设 · 灵石捐献",
+        "route": "/game/sect/industries",
+        "permission": "sect.construction.view",
+        "position": [
+          55,
+          53
+        ]
+      },
+      {
+        "id": "cultivation",
+        "label": "养剑室",
+        "note": "闭关修炼 · 设施灵效",
+        "route": "/game/sect/cultivation-room",
+        "permission": "sect.facility.cultivation.use",
+        "facility": "cultivation_room",
+        "position": [
+          17,
+          72
+        ]
+      },
+      {
+        "id": "alchemy",
+        "label": "丹房",
+        "note": "炼丹 · 设施灵效",
+        "route": "/game/sect/alchemy",
+        "permission": "sect.facility.alchemy.use",
+        "facility": "workshop",
+        "position": [
+          64,
+          43
+        ]
+      },
+      {
+        "id": "refinery",
+        "label": "铸剑坊",
+        "note": "炼器 · 设施灵效",
+        "route": "/game/sect/refinery",
+        "permission": "sect.facility.refinery.use",
+        "facility": "workshop",
+        "position": [
+          69,
+          51
+        ]
+      },
+      {
+        "id": "vein",
+        "label": "灵脉矿场",
+        "note": "矿场巡视 · 灵石收益 · 采矿",
+        "route": "/game/sect/spirit-vein",
+        "permission": "sect.spirit_vein.view",
+        "facility": "spirit_vein",
+        "position": [
+          84,
+          46
+        ]
+      },
+      {
+        "id": "garden",
+        "label": "药田",
+        "note": "草木长势 · 产出待开放",
+        "route": "/game/sect/herb-garden",
+        "permission": "sect.herb_garden.view",
+        "facility": "herb_garden",
+        "position": [
+          83,
+          75
+        ]
+      },
+      {
+        "id": "gate",
+        "label": "山门",
+        "note": "山门动态 · 清扫差事",
+        "route": "/game/sect/gate",
+        "permission": "sect.gate.view",
+        "visitor": {
+          "description": "山门外的石阶直通城郭，守门弟子会为外客登记来意与拜帖。"
+        },
+        "position": [
+          48,
+          77
+        ]
+      },
+      {
+        "id": "cave",
+        "label": "私人洞府",
+        "note": "弟子居所",
+        "route": "/game/sect/cave",
+        "permission": "sect.cave.view",
+        "position": [
+          26,
+          66
+        ]
+      },
+      {
+        "id": "formation",
+        "label": "护山大阵",
+        "note": "宗门战后续开放",
+        "permission": "sect.formation.view",
+        "facility": "formation",
+        "locked": true,
+        "visitor": {
+          "description": "剑痕沿群峰与山路首尾相接，外客只能在阵外看见偶尔掠过云层的锋光。"
+        },
+        "position": [
+          49,
+          8
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "id": "lingxiao-canon",
+        "name": "《红尘剑录》",
+        "description": "历代门人将一生所见与问剑所得录入其中。此录不定剑招，只论剑从何起、当向何处。",
+        "primary": true
+      },
+      {
+        "id": "sword-guidance",
+        "name": "《剑气长歌》",
+        "description": "以气驭剑，使锋芒连绵不绝；剑气养于胸臆，动时如长风振野。"
+      },
+      {
+        "id": "void-step",
+        "name": "《凌虚步》",
+        "description": "御气踏虚，身随剑走；方寸之间腾挪换位，不使自身困于敌势。"
+      },
+      {
+        "id": "edge-cleansing",
+        "name": "《观微剑意》",
+        "description": "静观一息之变，明察毫厘之机；敌势未成，破绽已映于剑心。"
+      },
+      {
+        "id": "origin-returning",
+        "name": "《澄心剑诀》",
+        "description": "收束心神，使剑意澄明；外法虽变化万端，不能动摇持剑之念。"
+      },
+      {
+        "id": "sword-nurturing",
+        "name": "《不灭剑体》",
+        "description": "以身作剑，以骨为脊，经千锤百炼而锋芒不折、形神不摧。"
+      }
+    ],
+    "paths": [
+      {
+        "id": "swift-sword",
+        "name": "照影游尘",
+        "description": "剑随身走，身随势变；以迅疾剑式连缀攻势，在交锋之间留下剑痕，最终将诸般剑影收束于《此剑平生》。",
+        "tactics": [
+          {
+            "id": "aggressive",
+            "name": "追风",
+            "description": "剑意达到3点即可施展《此剑平生》，优先追击气血较低的目标。"
+          },
+          {
+            "id": "steady",
+            "name": "连势",
+            "description": "剑痕不足2层时优先补痕，达到6点剑意且剑痕充足后收束。"
+          },
+          {
+            "id": "counter",
+            "name": "回燕",
+            "description": "优先补《藏锋听雷》；身法不占优且《踏雪无痕》缺失时，先踏雪再施展《剑荡山河》；剑意达到5点后收束。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "swift-opening",
+            "layerId": "1",
+            "name": "风起",
+            "description": "战斗开始时获得2点剑意；首回合身法提高8%。"
+          },
+          {
+            "id": "swift-hidden-edge",
+            "layerId": "1",
+            "name": "敛锋",
+            "description": "本场战斗首次受到直接伤害时，该次伤害降低10%，并获得3点剑意。"
+          },
+          {
+            "id": "swift-probing-edge",
+            "layerId": "1",
+            "name": "探虚",
+            "description": "《问剑式》每累计命中2次，额外获得1点剑意，并施加1层随《红尘剑录》成长的剑痕。"
+          },
+          {
+            "id": "swift-split-light",
+            "layerId": "2",
+            "name": "分光",
+            "description": "《剑荡山河》维持3段攻击并获得3点剑意；总伤害随《剑气长歌》成长。"
+          },
+          {
+            "id": "swift-stacking-waves",
+            "layerId": "2",
+            "name": "叠浪",
+            "description": "施展《剑荡山河》后，其当前冷却减少1回合。"
+          },
+          {
+            "id": "swift-retained-force",
+            "layerId": "2",
+            "name": "留痕",
+            "description": "《剑荡山河》额外施加1层剑痕，共施加2层。"
+          },
+          {
+            "id": "swift-returning-swallow",
+            "layerId": "3",
+            "name": "燕返",
+            "description": "提高《藏锋听雷》的首次闪避反击伤害，命中后施加1层随《红尘剑录》成长的剑痕。"
+          },
+          {
+            "id": "swift-borrowed-force",
+            "layerId": "3",
+            "name": "借风",
+            "description": "每回合首次受到直接伤害时，获得1点剑意。"
+          },
+          {
+            "id": "swift-guarded-edge",
+            "layerId": "3",
+            "name": "守锋",
+            "description": "被控制而跳过行动时剑意不衰减；下一次通过积势神通获得剑意时额外获得1点。"
+          },
+          {
+            "id": "swift-mountain-breaking",
+            "layerId": "4",
+            "name": "破妄",
+            "description": "施展《此剑平生》时消耗全部剑痕；每消耗1层，追加一次随《红尘剑录》成长且无视防御的伤害。"
+          },
+          {
+            "id": "swift-life-chasing",
+            "layerId": "4",
+            "name": "追命",
+            "description": "目标气血低于25%时，《此剑平生》造成的伤害提高15%。"
+          },
+          {
+            "id": "swift-sheathing",
+            "layerId": "4",
+            "name": "归鞘",
+            "description": "《此剑平生》伤害降低15%，施展后返还2点剑意，并获得随《红尘剑录》成长的护盾。剑有出时，也应有归处。"
+          },
+          {
+            "id": "swift-gapless",
+            "layerId": "5",
+            "name": "无隙",
+            "description": "施展《此剑平生》后，下一次《剑起沧澜》不消耗法力，并额外获得1点剑意。"
+          },
+          {
+            "id": "swift-linked-city",
+            "layerId": "5",
+            "name": "连城",
+            "description": "施展《剑荡山河》后，其他快剑神通的当前冷却减少1回合，每回合最多触发一次。"
+          },
+          {
+            "id": "swift-still-tide",
+            "layerId": "5",
+            "name": "静潮",
+            "description": "连续两次自身行动未施展《此剑平生》后，暂停剑意衰减；下一次《此剑平生》伤害提高15%。"
+          },
+          {
+            "id": "swift-endless-flow",
+            "layerId": "ultimate",
+            "name": "无间",
+            "description": "施展《此剑平生》后，追加随《红尘剑录》成长的追击并获得1点剑意，每3回合最多触发一次。"
+          },
+          {
+            "id": "swift-shadow-line",
+            "layerId": "ultimate",
+            "name": "绝影",
+            "description": "以6点剑意施展《此剑平生》时，总伤害降低15%，全部伤害段必定暴击，冷却增加1回合。"
+          },
+          {
+            "id": "swift-unending-wind",
+            "layerId": "ultimate",
+            "name": "回风",
+            "description": "每次《藏锋听雷》持续期间首次闪避时，获得随《凌虚步》成长的护盾，并施加1层剑痕。"
+          }
+        ]
+      },
+      {
+        "id": "heavy-sword",
+        "name": "守拙藏锋",
+        "description": "重剑不争一时之快，以身承势，以守养锋；剑意未足时稳住自身，剑意既成后，以一剑决定胜负。",
+        "tactics": [
+          {
+            "id": "heavy-break",
+            "name": "后发",
+            "description": "优先施展《藏锋听雷》，围绕受到伤害与反击积蓄剑意，达到3点后即可收束。"
+          },
+          {
+            "id": "heavy-full",
+            "name": "极势",
+            "description": "4点剑意起且裂甲不足2层时，提前准备《藏锋听雷》；6点剑意但裂甲仍不足时先补甲，满足后以《此剑平生》收束。"
+          },
+          {
+            "id": "heavy-guard",
+            "name": "守山",
+            "description": "无护盾时优先《踏雪无痕》；气血低于65%且《剑心通明》缺失时施展剑心；剑意达到5点后收束。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "heavy-opening",
+            "layerId": "1",
+            "name": "立地",
+            "description": "战斗开始时获得1点剑意，并获得相当于35%物攻的护盾。"
+          },
+          {
+            "id": "heavy-hidden-weight",
+            "layerId": "1",
+            "name": "承锋",
+            "description": "本场战斗首次受到直接伤害时，该次伤害降低15%，并获得2点剑意。"
+          },
+          {
+            "id": "heavy-testing-frame",
+            "layerId": "1",
+            "name": "守拙",
+            "description": "每回合首次护盾破裂时，额外获得1点剑意。不争一时得失，以守势积成后手。"
+          },
+          {
+            "id": "heavy-triple-ridge",
+            "layerId": "2",
+            "name": "蓄岳",
+            "description": "提高《藏锋听雷》蓄势期间随《凌虚步》成长的直接伤害减免。"
+          },
+          {
+            "id": "heavy-shattering-armor",
+            "layerId": "2",
+            "name": "听雷",
+            "description": "提高《藏锋听雷》的后发攻击，并使其共施加2层裂甲。"
+          },
+          {
+            "id": "heavy-retained-frame",
+            "layerId": "2",
+            "name": "守心",
+            "description": "施展《藏锋听雷》开始蓄势时，获得随《凌虚步》成长的护盾。"
+          },
+          {
+            "id": "heavy-crossing-pass",
+            "layerId": "3",
+            "name": "镇关",
+            "description": "《踏雪无痕》提供的护盾提高50%。"
+          },
+          {
+            "id": "heavy-borrowed-weight",
+            "layerId": "3",
+            "name": "回澜",
+            "description": "护盾破裂时，反击造成相当于75%物攻的伤害，每回合最多触发一次。"
+          },
+          {
+            "id": "heavy-unmoved",
+            "layerId": "3",
+            "name": "固守",
+            "description": "拥有护盾时，受到的直接伤害降低10%。"
+          },
+          {
+            "id": "heavy-rending-mountain",
+            "layerId": "4",
+            "name": "横关",
+            "description": "每回合首次以护盾吸收直接伤害时，反击造成相当于55%物攻的伤害，并获得1点剑意。"
+          },
+          {
+            "id": "heavy-ending-life",
+            "layerId": "4",
+            "name": "借力",
+            "description": "返还本次护盾吸收量20%的伤害，反击伤害不超过相当于60%物攻。"
+          },
+          {
+            "id": "heavy-returning-peak",
+            "layerId": "4",
+            "name": "震锋",
+            "description": "每回合首次受到直接伤害时，反击造成相当于40%物攻的伤害，并驱散敌方1个正面状态。"
+          },
+          {
+            "id": "heavy-aftershock",
+            "layerId": "5",
+            "name": "裂岳",
+            "description": "《此剑平生》获得15%穿防。"
+          },
+          {
+            "id": "heavy-linked-mountains",
+            "layerId": "5",
+            "name": "断命",
+            "description": "目标气血低于25%时，《此剑平生》造成的伤害提高15%。"
+          },
+          {
+            "id": "heavy-steady-mountain",
+            "layerId": "5",
+            "name": "回峰",
+            "description": "《此剑平生》伤害降低15%，施展后返还2点剑意，并获得随《红尘剑录》成长的护盾。"
+          },
+          {
+            "id": "heavy-heaven-cleaving",
+            "layerId": "ultimate",
+            "name": "开天",
+            "description": "《此剑平生》改为仅可在6点剑意时施展，提高随《红尘剑录》成长的总倍率并获得20%穿防；冷却增加1回合。"
+          },
+          {
+            "id": "heavy-immovable-mountain",
+            "layerId": "ultimate",
+            "name": "不动如山",
+            "description": "《剑心通明》额外提供随《万法不侵》成长的护盾；持续期间每回合可反击一次，造成随该心法成长的伤害。"
+          },
+          {
+            "id": "heavy-mountain-river-echo",
+            "layerId": "ultimate",
+            "name": "山河回响",
+            "description": "施展《此剑平生》后恢复气血并获得随《红尘剑录》成长的护盾，每3回合最多触发一次。"
+          }
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sect-ultimate",
+        "name": "此剑平生",
+        "description": "剑意至极，平生所见皆归于一锋。此剑不借天威，只决眼前之局。",
+        "methodId": "lingxiao-canon",
+        "methodName": "《红尘剑录》",
+        "unlockRequirement": "《红尘剑录》10级",
+        "level": 10
+      },
+      {
+        "id": "guiding-sword",
+        "name": "剑起沧澜",
+        "description": "剑意初动，如沧海生澜；一势既起，后招便随之而来。",
+        "methodId": "sword-guidance",
+        "methodName": "《剑气长歌》",
+        "unlockRequirement": "《剑气长歌》1级",
+        "level": 1
+      },
+      {
+        "id": "linked-edge",
+        "name": "剑荡山河",
+        "description": "剑锋纵横，数势相连；前剑未尽，后剑已越其锋。",
+        "methodId": "sword-guidance",
+        "methodName": "《剑气长歌》",
+        "unlockRequirement": "《剑气长歌》5级",
+        "level": 5
+      },
+      {
+        "id": "turning-body",
+        "name": "藏锋听雷",
+        "description": "收剑藏势，静候敌招；待来势真正落下，再以后发之剑应之。",
+        "methodId": "void-step",
+        "methodName": "《凌虚步》",
+        "unlockRequirement": "《凌虚步》3级",
+        "level": 3
+      },
+      {
+        "id": "shadow-step",
+        "name": "踏雪无痕",
+        "description": "身随剑行，进退不滞；剑光掠过之后，唯余风雪未定。",
+        "methodId": "void-step",
+        "methodName": "《凌虚步》",
+        "unlockRequirement": "《凌虚步》5级",
+        "level": 5
+      },
+      {
+        "id": "breaking-edge",
+        "name": "一剑破妄",
+        "description": "剑意照见虚实，以锋芒截断敌方变化，使诸般护持无所藏形。",
+        "methodId": "edge-cleansing",
+        "methodName": "《观微剑意》",
+        "unlockRequirement": "《观微剑意》3级",
+        "level": 3
+      },
+      {
+        "id": "sword-aegis",
+        "name": "剑心通明",
+        "description": "心念澄澈，剑意自明；外法临身，只见其变，不为其所动。",
+        "methodId": "origin-returning",
+        "methodName": "《澄心剑诀》",
+        "unlockRequirement": "《澄心剑诀》3级",
+        "level": 3
+      },
+      {
+        "id": "nurturing-sword",
+        "name": "人剑合一",
+        "description": "气随意转，意随剑行；持剑之人与手中之锋再无迟滞。",
+        "methodId": "sword-nurturing",
+        "methodName": "《不灭剑体》",
+        "unlockRequirement": "《不灭剑体》3级",
+        "level": 3
+      }
+    ]
+  },
+  "wuxiang": {
+    "name": "无相禅宗",
+    "mapTitle": "无相禅宗舆图",
+    "mapDescription": "黑白二峰隔血池相望，诸院不分佛魔，只依门人当下一念显出不同面目。",
+    "announcement": "晨钟后将开一场无相问心会，愿照见本念者可赴旧铜镜前静坐，不拘佛魔二途。",
+    "aspectRatio": 1.7768331562167907,
+    "onboarding": {
+      "summary": "把色身视作道场，在佛相、魔相与无相之间照见苦、承受苦、横渡苦。",
+      "traits": [
+        "佛魔同修",
+        "以身渡厄",
+        "临危转念"
+      ],
+      "script": {
+        "id": "wuxiang-onboarding",
+        "title": "无相照身",
+        "theme": "ember",
+        "backdrop": {
+          "src": "/assets/sect/onboarding/wuxiang.webp",
+          "alt": "黑白双峰与血莲池之间，一座未合圆环形山门立在雾中"
+        },
+        "acts": [
+          {
+            "id": "nondual-gate",
+            "title": "不二门",
+            "scene": "无相禅宗 · 不二门",
+            "body": "山门没有门扇，门额只留着一道未合的圆。钟声越过黑白双峰，也越过山间那片暗红莲池；知客僧向你合掌。",
+            "speaker": "知客僧：“不必先证明清净，肯照见自己，便可入门。”",
+            "backgroundPosition": "52% 40%",
+            "tone": "stillness"
+          },
+          {
+            "id": "bronze-mirror",
+            "title": "铜镜照身",
+            "scene": "无相禅宗 · 旧镜前",
+            "body": "旧铜镜里没有佛光，也没有魔影，只有一路跋涉至此的你。灯火照过衣上的尘，也照过每一道尚未说出口的迟疑。",
+            "speaker": "知客僧：“你怕的是痛苦，还是那个会在痛苦里变得陌生的自己？”",
+            "backgroundPosition": "72% 56%",
+            "tone": "stillness"
+          },
+          {
+            "id": "buddha-and-demon",
+            "title": "佛与魔",
+            "scene": "无相禅宗 · 问身场",
+            "body": "白衣门人迎着来势，把因果稳稳留在身前；红衣门人踏进险境，以自身作舟，强渡将倾的一刻。这里的佛与魔不是善恶两张面具，而是面对苦难时都要付诸本心的选择。",
+            "backgroundPosition": "40% 48%",
+            "tone": "ember"
+          },
+          {
+            "id": "body-as-dojo",
+            "title": "色身道场",
+            "scene": "无相禅宗 · 诸院",
+            "body": "药师从血莲池采露，火供院的锤声慢而不绝，面壁窟里有人静坐到天明。无相门人不厌弃身体，也不纵容欲念；皮囊会痛、会倦、会留下痕迹，正因如此，它才是最诚实的道场。",
+            "backgroundPosition": "30% 58%",
+            "tone": "mist"
+          },
+          {
+            "id": "unfinished-circle",
+            "title": "圆未合",
+            "scene": "无相禅宗 · 名牒前",
+            "body": "知客僧在你的名牒旁落下一点墨。钟声再起，那道未完的圆仿佛正等你迈入其中。",
+            "speaker": "知客僧：“能见诸苦，不必逃；能借诸苦，不可欺心。最后这一笔，由你自己来合。”",
+            "backgroundPosition": "52% 35%",
+            "tone": "ember"
+          }
+        ]
+      }
+    },
+    "facilityLabels": {
+      "archive": "贝叶藏",
+      "cultivation_room": "止观室",
+      "workshop": "火供院",
+      "spirit_vein": "骨玉窟",
+      "herb_garden": "血莲池",
+      "formation": "两界曼荼罗"
+    },
+    "rooms": {
+      "affairs": {
+        "description": "晨钟余音尚在，白榜上的差事由三位僧人分掌；领下一事，便结下一段今日之因。",
+        "actors": [
+          {
+            "id": "wuxiang-mingchen",
+            "roleKey": "daily",
+            "sigil": "执",
+            "name": "法明",
+            "identity": "值日执事",
+            "responsibility": "负责日常委托。",
+            "greeting": "白榜上的日务都在这里，肯做哪一件便说。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "daily"
+            }
+          },
+          {
+            "id": "wuxiang-zhaoye",
+            "roleKey": "weekly",
+            "sigil": "簿",
+            "name": "慧觉",
+            "identity": "功簿执事",
+            "responsibility": "负责周常委托。",
+            "greeting": "功簿只记所行，不替人评说，你可自行查问。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "weekly"
+            }
+          },
+          {
+            "id": "wuxiang-due",
+            "roleKey": "promotion",
+            "sigil": "传",
+            "name": "空慈方丈",
+            "identity": "传功长老",
+            "responsibility": "负责晋升试炼。",
+            "greeting": "要过此关，先要肯照见自己带来的业。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "promotion"
+            }
+          }
+        ]
+      },
+      "hall": {
+        "description": "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。",
+        "actors": [
+          {
+            "id": "wuxiang-huiming",
+            "roleKey": "registry",
+            "sigil": "掌",
+            "name": "慧澄",
+            "identity": "掌籍执事",
+            "responsibility": "负责弟子身份与同门名录。",
+            "greeting": "玉牒与僧录皆在案前，想查哪一项便问。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.registry"
+          },
+          {
+            "id": "wuxiang-mingji",
+            "roleKey": "stipend",
+            "sigil": "俸",
+            "name": "明济",
+            "identity": "俸禄执事",
+            "responsibility": "负责核算和发放宗门周俸。",
+            "greeting": "本周供养已经分定，领取之前也可先核对。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.stipend"
+          }
+        ]
+      },
+      "treasury": {
+        "description": "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。",
+        "actors": [
+          {
+            "id": "wuxiang-kongzang",
+            "roleKey": "keeper",
+            "sigil": "库",
+            "name": "寂照禅师",
+            "identity": "司库执事",
+            "responsibility": "负责宝库库存与贡献兑换。",
+            "greeting": "诸物各待其用，你想看哪一件？",
+            "appearance": "person",
+            "conversationRenderer": "sect.treasury.shop"
+          }
+        ]
+      },
+      "industries": {
+        "description": "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。",
+        "actors": [
+          {
+            "id": "wuxiang-mingzhu",
+            "roleKey": "construction",
+            "sigil": "造",
+            "name": "行深",
+            "identity": "营造执事",
+            "responsibility": "负责各处设施等级与建设进度。",
+            "greeting": "一砖一木皆有来处，各处建设可逐项说与你听。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.construction"
+          },
+          {
+            "id": "wuxiang-xingcang",
+            "roleKey": "donation",
+            "sigil": "石",
+            "name": "明简",
+            "identity": "建设执事",
+            "responsibility": "负责灵石捐献与建设登记。",
+            "greeting": "今日可择一处设施布施灵石，再记入册中。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.donation"
+          }
+        ]
+      },
+      "archive": {
+        "description": "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。",
+        "actors": [
+          {
+            "id": "wuxiang-kongdu",
+            "roleKey": "keeper",
+            "sigil": "阁",
+            "name": "空渡禅师",
+            "identity": "守阁长老",
+            "responsibility": "负责心法经卷与研习。",
+            "greeting": "贝叶六匣都在这里，你想先读哪一卷？",
+            "appearance": "person",
+            "conversationRenderer": "sect.archive.methods"
+          }
+        ]
+      },
+      "paths": {
+        "description": "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。",
+        "actors": [
+          {
+            "id": "wuxiang-huizhao",
+            "roleKey": "guide",
+            "sigil": "引",
+            "name": "慧照",
+            "identity": "引道长老",
+            "responsibility": "负责流派选择与参悟引导。",
+            "greeting": "壁有明暗两面，你想先照见哪一条道途？",
+            "appearance": "person",
+            "conversationRenderer": "sect.paths.guidance"
+          }
+        ]
+      },
+      "arena": {
+        "description": "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。",
+        "actors": [
+          {
+            "id": "wuxiang-jiefeng",
+            "roleKey": "instructor",
+            "sigil": "武",
+            "name": "法忍禅师",
+            "identity": "演武教习",
+            "responsibility": "负责神通配置与自动战术。",
+            "greeting": "神通发于身心，若要调整，先看你当下如何运用。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.loadout"
+          },
+          {
+            "id": "wuxiang-huiwu",
+            "roleKey": "marshal",
+            "sigil": "场",
+            "name": "行觉",
+            "identity": "值场执事",
+            "responsibility": "负责演武场秩序与入场引导。",
+            "greeting": "木人已经归位，有小比在身便可入场。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.marshal"
+          },
+          {
+            "id": "sect-arena-ring",
+            "roleKey": "ring",
+            "sigil": "⚔️",
+            "name": "宗门擂台",
+            "identity": "宗门设施",
+            "responsibility": "开启宗门小比战局。",
+            "greeting": "擂台阵纹已归位，有小比在身便可登台。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.arena.tournament",
+            "conversationParameters": {
+              "locationKey": "sect.arena"
+            }
+          }
+        ]
+      },
+      "cultivation": {
+        "description": "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。",
+        "actors": [
+          {
+            "id": "wuxiang-zhiguan",
+            "roleKey": "keeper",
+            "sigil": "阵",
+            "name": "寂然禅师",
+            "identity": "守阵执事",
+            "responsibility": "负责聚灵阵与闭关安排。",
+            "greeting": "一席一灯都已备好，想先问灵效，还是就此入静？",
+            "appearance": "person",
+            "conversationRenderer": "sect.cultivation.retreat"
+          }
+        ]
+      },
+      "alchemy": {
+        "description": "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。",
+        "actors": [
+          {
+            "id": "wuxiang-faming-yaoshi",
+            "roleKey": "keeper",
+            "sigil": "丹",
+            "name": "明恕",
+            "identity": "丹房执事",
+            "responsibility": "负责丹房状态与炼丹安排。",
+            "greeting": "药性无分净秽，炉火正稳，要问灵效还是开炉？",
+            "appearance": "person",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "请执事说说丹房灵效",
+              "workspaceReply": "有劳执事为我开炉炼丹"
+            }
+          },
+          {
+            "id": "sect-alchemy-furnace",
+            "roleKey": "furnace",
+            "sigil": "鼎",
+            "name": "宗门丹炉",
+            "identity": "炼丹设施",
+            "responsibility": "纳药、引火、聚蕴、凝丹。",
+            "greeting": "炉腹传来低沉回响，地火阵纹正等待灵石与药气。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "以神识察看丹炉灵效",
+              "workspaceReply": "唤醒丹炉，开始炼丹"
+            }
+          }
+        ]
+      },
+      "refinery": {
+        "description": "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。",
+        "actors": [
+          {
+            "id": "wuxiang-huoyuan",
+            "roleKey": "keeper",
+            "sigil": "器",
+            "name": "法圆",
+            "identity": "器坊执事",
+            "responsibility": "负责器坊状态与炼器安排。",
+            "greeting": "火候已足，材料也可查验，要问灵效还是炼器？",
+            "appearance": "person",
+            "conversationRenderer": "sect.refinery.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "refinery",
+              "workspaceHref": "/game/sect/refinery?workspace=craft",
+              "statusReply": "请执事说说器坊灵效",
+              "workspaceReply": "有劳执事为我开炉炼器"
+            }
+          }
+        ]
+      },
+      "spiritVein": {
+        "description": "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。",
+        "actors": [
+          {
+            "id": "wuxiang-shouyu",
+            "roleKey": "keeper",
+            "sigil": "脉",
+            "name": "慧海",
+            "identity": "守脉执事",
+            "responsibility": "负责矿场巡视交接。",
+            "greeting": "窟中今日平稳，巡视封签已经放在案前。",
+            "appearance": "person",
+            "conversationRenderer": "sect.spirit-vein.patrol",
+            "conversationParameters": {
+              "locationKey": "sect.spirit-vein"
+            }
+          },
+          {
+            "id": "wuxiang-guyu-ku",
+            "roleKey": "facility",
+            "sigil": "⛏️",
+            "name": "骨玉窟",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级、灵石收益并进行灵矿采掘。",
+            "greeting": "白色矿髓沿黑岩静静生长，窟中脉息未见异动。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.spirit-vein.mining",
+            "conversationParameters": {
+              "facilityKey": "spirit_vein",
+              "effectKey": "spirit_vein",
+              "detail": "灵石收益会随周俸一并核算，无需在矿场另行采收。"
+            }
+          }
+        ]
+      },
+      "herbGarden": {
+        "description": "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。",
+        "actors": [
+          {
+            "id": "wuxiang-huilian",
+            "roleKey": "keeper",
+            "sigil": "药",
+            "name": "行愿",
+            "identity": "药园执事",
+            "responsibility": "负责草木长势与周期产出。",
+            "greeting": "池水无波，草木各循时生长，今日长势已经记下。",
+            "appearance": "person",
+            "conversationRenderer": "sect.herb-garden.caretaker",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。",
+              "stages": [
+                "新畦初醒",
+                "灵苗成行",
+                "药香盈陌",
+                "四时不歇",
+                "百草丰登"
+              ]
+            }
+          },
+          {
+            "id": "wuxiang-xuelian-chi",
+            "roleKey": "facility",
+            "sigil": "🌿",
+            "name": "血莲池",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级与药田近况。",
+            "greeting": "暗红池水静映晨光，莲叶托着露珠缓缓舒展。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.herb-garden.status",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "effectKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。"
+            }
+          }
+        ]
+      },
+      "gate": {
+        "description": "山门内外人声往来，守山执事在门侧整理当日来往记录。",
+        "actors": [
+          {
+            "id": "wuxiang-mingmen",
+            "roleKey": "keeper",
+            "sigil": "门",
+            "name": "道安禅师",
+            "identity": "守山执事",
+            "responsibility": "负责山门动态与来往记录。",
+            "greeting": "钟声已过，今日来往与山门近况都可在此问。",
+            "appearance": "person",
+            "conversationRenderer": "sect.gate.news"
+          },
+          {
+            "id": "wuxiang-buer-men",
+            "roleKey": "facility",
+            "sigil": "⛰️",
+            "name": "不二门",
+            "identity": "宗门设施",
+            "responsibility": "进入山门步道完成清扫。",
+            "greeting": "未合的圆环立在雾中，门前石阶散着新落的叶片。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.gate.sweep"
+          }
+        ]
+      },
+      "formation": {
+        "description": "护宗阵枢仍在封禁之中。",
+        "actors": [
+          {
+            "id": "warden",
+            "roleKey": "warden",
+            "sigil": "护",
+            "name": "护阵长老",
+            "identity": "护阵长老",
+            "responsibility": "负责护宗阵法管理。",
+            "greeting": "阵枢尚未开放，今日无需入内。",
+            "appearance": "person",
+            "conversationRenderer": "sect.formation.status"
+          }
+        ]
+      }
+    },
+    "scenes": {
+      "map": {
+        "title": "无相禅宗舆图",
+        "description": "黑白二峰隔血池相望，诸院不分佛魔，只依门人当下一念显出不同面目。"
+      },
+      "hall": {
+        "title": "无相殿",
+        "description": "殿中不塑金身，只有一面照见来者全身的旧铜镜；身份玉牒与周俸名册置于镜下。"
+      },
+      "affairs": {
+        "title": "知客寮",
+        "description": "晨钟后三炷香内，新差事会被写上白榜；接下便是今日与自身色身结下的因。"
+      },
+      "archive": {
+        "title": "贝叶藏",
+        "description": "六卷心法分别藏在六只旧木匣中，贝叶上既有朱砂佛偈，也有后来人以血补下的旁注。"
+      },
+      "paths": {
+        "title": "照业壁",
+        "description": "石壁正面如镜，背面焦黑。明镜照业与魔心渡厄并非善恶二路，只是承受与偿还的先后不同。"
+      },
+      "arena": {
+        "title": "问身场",
+        "description": "场中木人不会退让。佛相留下因，魔相兑现果，无相只在心念圆满的一念间显现。"
+      },
+      "treasury": {
+        "title": "宗门宝库",
+        "description": "使用宗门贡献兑换常备物资与轮换珍材。"
+      },
+      "industries": {
+        "title": "建设院",
+        "description": "选择宗门设施并捐献灵石，推进常态建设。"
+      },
+      "cultivation": {
+        "title": "止观室",
+        "description": "室内只容一席一灯。呼吸落在皮肉，念头落在灯芯，直到两者都不再需要命名。"
+      },
+      "alchemy": {
+        "title": "药师寮",
+        "description": "血莲、骨玉与寻常灵草分柜存放，药师只问药性，不问净秽。"
+      },
+      "refinery": {
+        "title": "火供院",
+        "description": "炉火映出忿怒相，锤声却始终缓慢；每一件法器都要在火中去掉多余的名字。"
+      },
+      "spiritVein": {
+        "title": "骨玉窟",
+        "description": "白色矿髓沿黑岩生长，如同山腹中的巨大骨骼。"
+      },
+      "herbGarden": {
+        "title": "血莲池",
+        "description": "暗红池水并无腥气，莲叶托着晨露；药田产出玩法后续开放。"
+      },
+      "gate": {
+        "title": "不二门",
+        "description": "门额只有一道未写完的圆。来者从哪一侧入门，都由同一道钟声迎接。"
+      },
+      "cave": {
+        "title": "面壁窟",
+        "description": "石窟里没有装饰，只有前人留下的坐痕与指印。"
+      },
+      "taskBattle": {
+        "title": "宗门战局",
+        "description": "完成当前宗门战斗事务。"
+      }
+    },
+    "hotspots": [
+      {
+        "id": "hall",
+        "label": "无相殿",
+        "note": "身份 · 同门 · 周俸",
+        "route": "/game/sect/hall",
+        "permission": "sect.hall.view",
+        "position": [
+          48,
+          22
+        ]
+      },
+      {
+        "id": "archive",
+        "label": "贝叶藏",
+        "note": "心法研习",
+        "route": "/game/sect/archive",
+        "permission": "sect.archive.use",
+        "facility": "archive",
+        "position": [
+          24,
+          45
+        ]
+      },
+      {
+        "id": "cliff",
+        "label": "照业壁",
+        "note": "流派 · 参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          18,
+          24
+        ]
+      },
+      {
+        "id": "arena",
+        "label": "问身场",
+        "note": "神通 · 战术 · 小比",
+        "route": "/game/sect/arena",
+        "permission": "sect.arena.use",
+        "position": [
+          45,
+          57
+        ]
+      },
+      {
+        "id": "affairs",
+        "label": "知客寮",
+        "note": "日常 · 周常 · 晋升",
+        "route": "/game/sect/affairs",
+        "permission": "sect.tasks.use",
+        "position": [
+          35,
+          46
+        ]
+      },
+      {
+        "id": "treasury",
+        "label": "七宝库",
+        "note": "贡献兑换",
+        "route": "/game/sect/treasury",
+        "permission": "sect.shop.use",
+        "position": [
+          61,
+          68
+        ]
+      },
+      {
+        "id": "industries",
+        "label": "营造院",
+        "note": "设施建设 · 灵石捐献",
+        "route": "/game/sect/industries",
+        "permission": "sect.construction.view",
+        "position": [
+          49,
+          78
+        ]
+      },
+      {
+        "id": "cultivation",
+        "label": "止观室",
+        "note": "闭关修炼 · 设施灵效",
+        "route": "/game/sect/cultivation-room",
+        "permission": "sect.facility.cultivation.use",
+        "facility": "cultivation_room",
+        "position": [
+          13,
+          62
+        ]
+      },
+      {
+        "id": "alchemy",
+        "label": "药师寮",
+        "note": "炼丹 · 设施灵效",
+        "route": "/game/sect/alchemy",
+        "permission": "sect.facility.alchemy.use",
+        "facility": "workshop",
+        "position": [
+          72,
+          51
+        ]
+      },
+      {
+        "id": "refinery",
+        "label": "火供院",
+        "note": "炼器 · 设施灵效",
+        "route": "/game/sect/refinery",
+        "permission": "sect.facility.refinery.use",
+        "facility": "workshop",
+        "position": [
+          81,
+          71
+        ]
+      },
+      {
+        "id": "vein",
+        "label": "骨玉窟",
+        "note": "矿场巡视 · 灵石收益 · 采矿",
+        "route": "/game/sect/spirit-vein",
+        "permission": "sect.spirit_vein.view",
+        "facility": "spirit_vein",
+        "position": [
+          90,
+          45
+        ]
+      },
+      {
+        "id": "garden",
+        "label": "血莲池",
+        "note": "草木长势 · 产出待开放",
+        "route": "/game/sect/herb-garden",
+        "permission": "sect.herb_garden.view",
+        "facility": "herb_garden",
+        "position": [
+          70,
+          39
+        ]
+      },
+      {
+        "id": "gate",
+        "label": "不二门",
+        "note": "山门动态 · 清扫差事",
+        "route": "/game/sect/gate",
+        "permission": "sect.gate.view",
+        "visitor": {
+          "description": "不二门没有门扇，知客僧在未合圆环下为外客验明拜帖。"
+        },
+        "position": [
+          49,
+          85
+        ]
+      },
+      {
+        "id": "cave",
+        "label": "面壁窟",
+        "note": "弟子居所",
+        "route": "/game/sect/cave",
+        "permission": "sect.cave.view",
+        "position": [
+          88,
+          36
+        ]
+      },
+      {
+        "id": "formation",
+        "label": "两界曼荼罗",
+        "note": "宗门战后续开放",
+        "permission": "sect.formation.view",
+        "facility": "formation",
+        "locked": true,
+        "visitor": {
+          "description": "黑白双峰与血莲池共同构成阵势，来客立于界外，只能看见未合圆环缓慢转动。"
+        },
+        "position": [
+          80,
+          13
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "id": "wuxiang-canon",
+        "name": "《无相真解》",
+        "description": "观色身诸相皆无定相，于一念之间容佛、容魔，亦容无相。",
+        "primary": true
+      },
+      {
+        "id": "blood-lotus",
+        "name": "《血海生莲》",
+        "description": "血海不净，莲亦由此而生；知其污浊，方能借之渡身。"
+      },
+      {
+        "id": "white-bone",
+        "name": "《白骨照身》",
+        "description": "去皮肉浮相，见白骨本真；以朽坏之身承受来力。"
+      },
+      {
+        "id": "wrathful-ming",
+        "name": "《明王降魔》",
+        "description": "明王怒目，不为嗔心，只借烈相斩断迟疑。"
+      },
+      {
+        "id": "six-senses",
+        "name": "《六根守识》",
+        "description": "声色香味触法皆至于前，心识自守，不随外境转移。"
+      },
+      {
+        "id": "reed-crossing-method",
+        "name": "《一苇渡苦》",
+        "description": "苦海无边，轻身不待舟楫；一苇所向，只问彼岸。"
+      }
+    ],
+    "paths": [
+      {
+        "id": "mirror-karma",
+        "name": "明镜照业",
+        "description": "以承受制造因，以魔相兑现果。来力不急于拒绝，只把每一道因果留在镜中；佛相立因，魔相现报，无相令因果同时照见。",
+        "tactics": [
+          {
+            "id": "guard",
+            "name": "守镜",
+            "description": "优先保持3层业痕与防守状态；3层业痕且达到3点心念，或达到5点心念后入魔，优先使用防御神通维持血线。"
+          },
+          {
+            "id": "present",
+            "name": "现报",
+            "description": "至少1层业痕且达到3点心念便入魔，优先使用可即时消费业痕的攻击神通。"
+          },
+          {
+            "id": "formless",
+            "name": "无相",
+            "description": "原则上积满6点心念再显无相；低于35%气血且已有3点心念时允许提前入魔自救。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "mirror-vow-body",
+            "layerId": "1",
+            "name": "戒由身起",
+            "description": "所有佛相神通气血成本提高1个百分点；成功施展后获得2%最大气血护盾。"
+          },
+          {
+            "id": "mirror-guest-in-mirror",
+            "layerId": "1",
+            "name": "镜中留客",
+            "description": "每轮首次受到敌方直接伤害时，额外留下1层业痕。"
+          },
+          {
+            "id": "mirror-fruit-in-time",
+            "layerId": "1",
+            "name": "果不逾时",
+            "description": "每层业痕提供的佛相反伤比例由3%提高至4%。"
+          },
+          {
+            "id": "mirror-loud-flower",
+            "layerId": "2",
+            "name": "花落有声",
+            "description": "叩心戒的伤害衰减由10%提高至18%。"
+          },
+          {
+            "id": "mirror-welcome-tide",
+            "layerId": "2",
+            "name": "潮来不拒",
+            "description": "血海听潮的直接伤害减免由15%提高至25%。"
+          },
+          {
+            "id": "mirror-fourth-knock",
+            "layerId": "2",
+            "name": "门叩第四声",
+            "description": "三叩业门额外留下第四层业门；倒叩时允许追加第四段明确伤害。"
+          },
+          {
+            "id": "mirror-see-guest",
+            "layerId": "3",
+            "name": "闭目见客",
+            "description": "闭目观劫首次直接伤害减免由35%提高至50%。"
+          },
+          {
+            "id": "mirror-skandhas-mark",
+            "layerId": "3",
+            "name": "蕴去痕留",
+            "description": "照见五蕴成功驱散增益时获得2层业痕。"
+          },
+          {
+            "id": "mirror-carry-karma",
+            "layerId": "3",
+            "name": "一苇载业",
+            "description": "一苇横江的直接伤害减免由40%提高至50%。"
+          },
+          {
+            "id": "mirror-form-beyond",
+            "layerId": "4",
+            "name": "相外有相",
+            "description": "魔相止观的直接伤害减免由20%提高至30%。"
+          },
+          {
+            "id": "mirror-back-demon",
+            "layerId": "4",
+            "name": "镜背生魔",
+            "description": "每次进入魔相时，第一门神通无需消耗业痕，也能触发一次现报；无相不受影响。"
+          },
+          {
+            "id": "mirror-formless-two",
+            "layerId": "4",
+            "name": "一念两照",
+            "description": "成功施展无相神通后额外获得2层业痕；《一念无间》气血成本增加2个百分点。"
+          },
+          {
+            "id": "mirror-full-light",
+            "layerId": "5",
+            "name": "业满成光",
+            "description": "业痕满层时，佛相即时反伤额外提高5%。"
+          },
+          {
+            "id": "mirror-fast-fruit",
+            "layerId": "5",
+            "name": "现报无迟",
+            "description": "现报成功后，攻击神通额外造成0.20倍物攻伤害；自身防御神通额外获得4%最大气血护盾。"
+          },
+          {
+            "id": "mirror-return-source",
+            "layerId": "5",
+            "name": "照还来处",
+            "description": "每次实际消耗1层业痕触发现报时，恢复2%最大气血；免费现报不触发。"
+          },
+          {
+            "id": "mirror-not-platform",
+            "layerId": "ultimate",
+            "name": "明镜非台",
+            "description": "佛相且业痕满层时，受到的直接伤害降低10%。"
+          },
+          {
+            "id": "mirror-all-karma",
+            "layerId": "ultimate",
+            "name": "万业同门",
+            "description": "无相现报实际消耗业痕后，会再尝试消耗1层；成功时攻击神通额外造成0.60倍物攻伤害，防御神通获得8%最大气血护盾。"
+          },
+          {
+            "id": "mirror-return-thought",
+            "layerId": "ultimate",
+            "name": "来去一念",
+            "description": "成功施展无相神通后返还2点心念。"
+          }
+        ]
+      },
+      {
+        "id": "demon-crossing",
+        "name": "魔心渡厄",
+        "description": "以佛相主动沉血，以魔相强渡两息，以无相令燃血与渡厄同时显化。气血不是怒气的别名，而是每一门神通真正支付的渡河之资。",
+        "tactics": [
+          {
+            "id": "trial-fire",
+            "name": "试火",
+            "description": "达到3点心念且低于65%气血时入魔；危急时先以攻击吸血，再用防御神通稳住血线。"
+          },
+          {
+            "id": "sink-boat",
+            "name": "沉舟",
+            "description": "尽量积至5点心念并主动压至50%气血以下，入魔后优先连续使用攻击神通收束。"
+          },
+          {
+            "id": "one-thought",
+            "name": "一念",
+            "description": "优先积满6点心念使用无相；低于30%气血时允许以3点心念提前入魔自救。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "demon-blood-oil",
+            "layerId": "1",
+            "name": "血作灯油",
+            "description": "所有佛相神通气血成本提高1个百分点；成功施展后获得2%最大气血护盾。"
+          },
+          {
+            "id": "demon-three-shores",
+            "layerId": "1",
+            "name": "三岸留痕",
+            "description": "每场战斗首次因自身神通成本降至35%气血以下时，获得8%最大气血护盾。"
+          },
+          {
+            "id": "demon-bone-tide",
+            "layerId": "1",
+            "name": "潮伏骨中",
+            "description": "血海听潮获得的基础护盾由10%提高至15%最大气血。"
+          },
+          {
+            "id": "demon-flower-inward",
+            "layerId": "2",
+            "name": "花开向内",
+            "description": "心隙令下一次宗门直接伤害提高25%。"
+          },
+          {
+            "id": "demon-no-return-tide",
+            "layerId": "2",
+            "name": "潮不回头",
+            "description": "血海听潮生成的下一门宗门直接伤害加成由20%提高至30%；无相仍以30%为准。"
+          },
+          {
+            "id": "demon-third-outside",
+            "layerId": "2",
+            "name": "门外三声",
+            "description": "三叩业门强化第三击的气血线由45%提高至55%。"
+          },
+          {
+            "id": "demon-slow-fire",
+            "layerId": "3",
+            "name": "劫火缓行",
+            "description": "闭目观劫的直接伤害减免由40%提高至50%。"
+          },
+          {
+            "id": "demon-skandhas-fuel",
+            "layerId": "3",
+            "name": "五蕴作薪",
+            "description": "照见五蕴的佛相净化数量由1提高至2；显化无相时共净化3个减益。"
+          },
+          {
+            "id": "demon-short-reed",
+            "layerId": "3",
+            "name": "苇短水长",
+            "description": "一苇横江的佛相直接伤害减免由20%提高至30%；魔相最终提高到40%。"
+          },
+          {
+            "id": "demon-first-thought",
+            "layerId": "4",
+            "name": "第一念魔",
+            "description": "进入魔相或无相时获得第一念：下一门攻击神通额外造成0.35倍物攻伤害，防御神通获得5%最大气血护盾。"
+          },
+          {
+            "id": "demon-second-shore",
+            "layerId": "4",
+            "name": "第二岸苦",
+            "description": "魔相期间每成功施展一门宗门神通，恢复2.5%最大气血；无相仅触发一次。"
+          },
+          {
+            "id": "demon-two-gates",
+            "layerId": "4",
+            "name": "两门同渡",
+            "description": "进入魔相时获得的护盾由6%提高至10%最大气血。"
+          },
+          {
+            "id": "demon-body-breaks",
+            "layerId": "5",
+            "name": "身坏心明",
+            "description": "每场战斗首次因自身神通成本降至30%气血以下时，获得1回合控制免疫。"
+          },
+          {
+            "id": "demon-blood-empty",
+            "layerId": "5",
+            "name": "血尽潮生",
+            "description": "每场战斗首次因自身神通成本降至25%气血以下时，恢复5%最大气血。"
+          },
+          {
+            "id": "demon-leave-boat",
+            "layerId": "5",
+            "name": "渡后留舟",
+            "description": "魔相结束时获得6%最大气血护盾；无相结束不触发。"
+          },
+          {
+            "id": "demon-one-furnace",
+            "layerId": "ultimate",
+            "name": "佛魔同炉",
+            "description": "强化六门神通的无相变化，使收束伤害、恢复、护盾或净化获得提升。"
+          },
+          {
+            "id": "demon-no-gap",
+            "layerId": "ultimate",
+            "name": "一息无间",
+            "description": "魔相与无相的单行动吸血上限提高至12%最大气血，但渡厄直接伤害减免由20%降低至10%。"
+          },
+          {
+            "id": "demon-look-back",
+            "layerId": "ultimate",
+            "name": "回首彼岸",
+            "description": "魔相或无相结束时，若存活且低于20%气血，恢复5%最大气血；每次转相最多一次。"
+          }
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "blood-tide",
+        "name": "血海听潮",
+        "description": "不拒血海来潮，先听清每一道苦声从何处生，再于回澜时借势渡身。",
+        "methodId": "blood-lotus",
+        "methodName": "《血海生莲》",
+        "unlockRequirement": "《血海生莲》1级",
+        "level": 1
+      },
+      {
+        "id": "three-knocks",
+        "name": "三叩业门",
+        "description": "一叩问因，二叩问果，三叩之后，门内门外皆由一念开合。",
+        "methodId": "white-bone",
+        "methodName": "《白骨照身》",
+        "unlockRequirement": "《白骨照身》3级",
+        "level": 3
+      },
+      {
+        "id": "observe-calamity",
+        "name": "闭目观劫",
+        "description": "闭目并非不见，而是不被劫相夺去心神；开眼之时，劫已照明。",
+        "methodId": "wrathful-ming",
+        "methodName": "《明王降魔》",
+        "unlockRequirement": "《明王降魔》3级",
+        "level": 3
+      },
+      {
+        "id": "five-skandhas",
+        "name": "照见五蕴",
+        "description": "色受想行识逐一照破。佛相辨其虚实，魔相借火自渡，无相令诸蕴俱空。",
+        "methodId": "six-senses",
+        "methodName": "《六根守识》",
+        "unlockRequirement": "《六根守识》3级",
+        "level": 3
+      },
+      {
+        "id": "reed-crossing",
+        "name": "一苇横江",
+        "description": "江阔浪急，脚下只留一苇；佛相守住此岸，魔相强渡彼岸，无相则知两岸非岸。",
+        "methodId": "reed-crossing-method",
+        "methodName": "《一苇渡苦》",
+        "unlockRequirement": "《一苇渡苦》3级",
+        "level": 3
+      },
+      {
+        "id": "turn-form",
+        "name": "一念未生",
+        "description": "心念未足时，一念尚伏于心；心念既成，佛、魔与无相只在翻掌之间。",
+        "methodId": "wuxiang-canon",
+        "methodName": "《无相真解》",
+        "unlockRequirement": "《无相真解》5级",
+        "level": 5
+      }
+    ]
+  },
+  "tianyan": {
+    "name": "天衍圣地",
+    "mapTitle": "天衍圣地舆图",
+    "mapDescription": "五峰环绕中宫，水脉、药圃、炉院、土台与矿路首尾相接；诸峰各有所长，却始终在同一轮推演中运转。",
+    "announcement": "五峰水脉本旬将依新阵图调度，诸弟子行经中宫时请勿挪动地刻与测算标记。",
+    "aspectRatio": 1.7768331562167907,
+    "onboarding": {
+      "summary": "以无色太初灵气推演五行，让前一法留下的余势决定后一法的变化。",
+      "traits": [
+        "五行推演",
+        "法印衔术",
+        "四法择局"
+      ],
+      "script": {
+        "id": "tianyan-onboarding",
+        "title": "天衍有缺",
+        "theme": "mist",
+        "backdrop": {
+          "src": "/assets/sect/onboarding/tianyan.webp",
+          "alt": "雨后中宫演法台上，一名新弟子沿石阶走向等候在五行汇流地刻前的执教，五峰殿宇隐于云雾"
+        },
+        "acts": [
+          {
+            "id": "five-peaks-above-clouds",
+            "title": "云上五峰",
+            "scene": "天衍圣地 · 观象阶",
+            "body": "石阶越过云海，五座外峰渐次显出轮廓。玄水自墨青山壁流入药圃，木架与药篓沿廊桥送往暗朱炉院；窑灰归入赭土，矿路再通向覆着白铜屋面的冷峰。所有去路都没有停在一峰，最终绕回雨后的中宫。",
+            "speaker": "执教：“先看它们如何相接。记住，五行从来不是五座互不相干的院子。”",
+            "backgroundPosition": "50% 38%",
+            "tone": "mist"
+          },
+          {
+            "id": "primordial-without-color",
+            "title": "太初无色",
+            "scene": "天衍圣地 · 中宫演法台",
+            "body": "执教站在汇流地刻中央，抬手送出一线无色玄光。灵光越过湿润石面，只留下转瞬即逝的浅白痕迹；它没有火的炽烈，也没有金的锋响，更没有惊动地刻中缓缓流动的水。",
+            "speaker": "执教：“这是太初。它不替你选择，所以也不会扰乱你已经留下的答案。”",
+            "backgroundPosition": "50% 64%",
+            "tone": "stillness"
+          },
+          {
+            "id": "one-art-leaves-mark",
+            "title": "一法留痕",
+            "scene": "天衍圣地 · 五行地刻",
+            "body": "木气先在傀儡胸前结成一枚青印。下一刻，火光沿印纹展开，不再只是一束直焰；余火映入雨水，沿石缝中原有的细流照亮了另一段去路。",
+            "speaker": "执教：“第一法不是未完成的失败。它是在替第二法留下去处。”",
+            "backgroundPosition": "72% 58%",
+            "tone": "ember"
+          },
+          {
+            "id": "the-escaped-one",
+            "title": "遁去其一",
+            "scene": "天衍圣地 · 五经阁前",
+            "body": "五枚经简在案上依次展开，执教却只将四枚推到你面前。余下的一枚没有收走，只被放在灯影之外。",
+            "speaker": "执教：“五行皆可学，临敌不可尽携。肯留下一个未知，才算真正开始推演。”",
+            "backgroundPosition": "28% 42%",
+            "tone": "steel"
+          },
+          {
+            "id": "derivation-remains-open",
+            "title": "天衍有缺",
+            "scene": "天衍圣地 · 衍天殿",
+            "body": "你走到执教面前，将本命灵气送入中宫汇流地刻。灵光先随浅水掠过根须，又映过远处炉火与赭色泥沙，最后在白铜冷光中卸去原有偏向，归入一条从未走过的无色经路。五峰没有同时显威，只在云雾之间依次传来回应。",
+            "speaker": "掌教：“天机从不因推演而失去变化。今日入门，愿你知其可为，也知其不可尽为。”",
+            "backgroundPosition": "50% 56%",
+            "tone": "mist"
+          }
+        ]
+      }
+    },
+    "facilityLabels": {
+      "archive": "五经阁",
+      "cultivation_room": "太初静室",
+      "workshop": "太白铸府",
+      "spirit_vein": "坤元地脉",
+      "herb_garden": "长生圃",
+      "formation": "五峰归流阵眼"
+    },
+    "rooms": {
+      "affairs": {
+        "description": "司算院长卷依时辰铺开，日常、周常与晋升事务各归一席。",
+        "actors": [
+          {
+            "id": "tianyan-ji-sichen",
+            "roleKey": "daily",
+            "sigil": "执",
+            "name": "知微",
+            "identity": "值日执事",
+            "responsibility": "负责日常委托。",
+            "greeting": "今日时序已经排定，眼下可办的差事都在这里。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "daily"
+            }
+          },
+          {
+            "id": "tianyan-xu-hengzhang",
+            "roleKey": "weekly",
+            "sigil": "簿",
+            "name": "玄衡道人",
+            "identity": "功簿执事",
+            "responsibility": "负责周常委托。",
+            "greeting": "本周诸事已有定数，但落子之人仍要你自己选。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "weekly"
+            }
+          },
+          {
+            "id": "tianyan-rong-guanlan",
+            "roleKey": "promotion",
+            "sigil": "传",
+            "name": "观澜真人",
+            "identity": "传功长老",
+            "responsibility": "负责晋升试炼。",
+            "greeting": "晋升试炼不求捷径，只看你能否辨清下一步。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "promotion"
+            }
+          }
+        ]
+      },
+      "hall": {
+        "description": "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。",
+        "actors": [
+          {
+            "id": "tianyan-siming",
+            "roleKey": "registry",
+            "sigil": "掌",
+            "name": "含章真人",
+            "identity": "掌籍执事",
+            "responsibility": "负责弟子身份与同门名录。",
+            "greeting": "玉牒与名录已经复核，你可以从任何一项开始查验。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.registry"
+          },
+          {
+            "id": "tianyan-duzhi",
+            "roleKey": "stipend",
+            "sigil": "俸",
+            "name": "清和",
+            "identity": "俸禄执事",
+            "responsibility": "负责核算和发放宗门周俸。",
+            "greeting": "本周俸数已按实录核定，领取前也可再核一遍。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.stipend"
+          }
+        ]
+      },
+      "treasury": {
+        "description": "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。",
+        "actors": [
+          {
+            "id": "tianyan-tianku",
+            "roleKey": "keeper",
+            "sigil": "库",
+            "name": "怀谷道人",
+            "identity": "司库执事",
+            "responsibility": "负责宝库库存与贡献兑换。",
+            "greeting": "常备与轮换库存已经清点，你想先看哪一类？",
+            "appearance": "person",
+            "conversationRenderer": "sect.treasury.shop"
+          }
+        ]
+      },
+      "industries": {
+        "description": "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。",
+        "actors": [
+          {
+            "id": "tianyan-banji",
+            "roleKey": "construction",
+            "sigil": "造",
+            "name": "鸣谦道人",
+            "identity": "营造执事",
+            "responsibility": "负责各处设施等级与建设进度。",
+            "greeting": "各处设施都有实数可查，你想先听哪一项进展？",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.construction"
+          },
+          {
+            "id": "tianyan-ducai",
+            "roleKey": "donation",
+            "sigil": "石",
+            "name": "履霜",
+            "identity": "建设执事",
+            "responsibility": "负责灵石捐献与建设登记。",
+            "greeting": "灵石数目须与建设档位相合，你想投向哪处设施？",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.donation"
+          }
+        ]
+      },
+      "archive": {
+        "description": "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。",
+        "actors": [
+          {
+            "id": "tianyan-yanshu",
+            "roleKey": "keeper",
+            "sigil": "阁",
+            "name": "既白真人",
+            "identity": "守阁长老",
+            "responsibility": "负责心法经卷与研习。",
+            "greeting": "六卷真经都已归位，你想从哪一卷开始研习？",
+            "appearance": "person",
+            "conversationRenderer": "sect.archive.methods"
+          }
+        ]
+      },
+      "paths": {
+        "description": "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。",
+        "actors": [
+          {
+            "id": "tianyan-heluozhi",
+            "roleKey": "guide",
+            "sigil": "引",
+            "name": "观复真人",
+            "identity": "引道长老",
+            "responsibility": "负责流派选择与参悟引导。",
+            "greeting": "推演先看已有之势，你想从哪条道途开始辨明？",
+            "appearance": "person",
+            "conversationRenderer": "sect.paths.guidance"
+          }
+        ]
+      },
+      "arena": {
+        "description": "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。",
+        "actors": [
+          {
+            "id": "tianyan-douheng",
+            "roleKey": "instructor",
+            "sigil": "武",
+            "name": "玄同道人",
+            "identity": "演武教习",
+            "responsibility": "负责神通配置与自动战术。",
+            "greeting": "神通次序与战术都可重排，先把当前配置展开吧。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.loadout"
+          },
+          {
+            "id": "tianyan-jiaochang",
+            "roleKey": "marshal",
+            "sigil": "场",
+            "name": "景初",
+            "identity": "值场执事",
+            "responsibility": "负责演武场秩序与入场引导。",
+            "greeting": "演武场已经归整，有小比记录便可开场。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.marshal"
+          },
+          {
+            "id": "sect-arena-ring",
+            "roleKey": "ring",
+            "sigil": "⚔️",
+            "name": "宗门擂台",
+            "identity": "宗门设施",
+            "responsibility": "开启宗门小比战局。",
+            "greeting": "擂台阵纹已归位，有小比在身便可登台。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.arena.tournament",
+            "conversationParameters": {
+              "locationKey": "sect.arena"
+            }
+          }
+        ]
+      },
+      "cultivation": {
+        "description": "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。",
+        "actors": [
+          {
+            "id": "tianyan-shouyi",
+            "roleKey": "keeper",
+            "sigil": "阵",
+            "name": "抱一真人",
+            "identity": "守阵执事",
+            "responsibility": "负责聚灵阵与闭关安排。",
+            "greeting": "阵中灵气已经归稳，想先查灵效，还是开始闭关？",
+            "appearance": "person",
+            "conversationRenderer": "sect.cultivation.retreat"
+          }
+        ]
+      },
+      "alchemy": {
+        "description": "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。",
+        "actors": [
+          {
+            "id": "tianyan-qinghe",
+            "roleKey": "keeper",
+            "sigil": "丹",
+            "name": "允中道人",
+            "identity": "丹房执事",
+            "responsibility": "负责丹房状态与炼丹安排。",
+            "greeting": "炉温与水候均在合宜范围，要查灵效还是开炉？",
+            "appearance": "person",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "请执事说说丹房灵效",
+              "workspaceReply": "有劳执事为我开炉炼丹"
+            }
+          },
+          {
+            "id": "sect-alchemy-furnace",
+            "roleKey": "furnace",
+            "sigil": "鼎",
+            "name": "宗门丹炉",
+            "identity": "炼丹设施",
+            "responsibility": "纳药、引火、聚蕴、凝丹。",
+            "greeting": "炉腹传来低沉回响，地火阵纹正等待灵石与药气。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "以神识察看丹炉灵效",
+              "workspaceReply": "唤醒丹炉，开始炼丹"
+            }
+          }
+        ]
+      },
+      "refinery": {
+        "description": "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。",
+        "actors": [
+          {
+            "id": "tianyan-baishi",
+            "roleKey": "keeper",
+            "sigil": "器",
+            "name": "松乔道人",
+            "identity": "器坊执事",
+            "responsibility": "负责器坊状态与炼器安排。",
+            "greeting": "金石与地火都已就位，要查灵效还是开始炼器？",
+            "appearance": "person",
+            "conversationRenderer": "sect.refinery.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "refinery",
+              "workspaceHref": "/game/sect/refinery?workspace=craft",
+              "statusReply": "请执事说说器坊灵效",
+              "workspaceReply": "有劳执事为我开炉炼器"
+            }
+          }
+        ]
+      },
+      "spiritVein": {
+        "description": "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。",
+        "actors": [
+          {
+            "id": "tianyan-kunyuan",
+            "roleKey": "keeper",
+            "sigil": "脉",
+            "name": "见素",
+            "identity": "守脉执事",
+            "responsibility": "负责矿场巡视交接。",
+            "greeting": "今日观测未见异常，矿道巡视封签已经排好。",
+            "appearance": "person",
+            "conversationRenderer": "sect.spirit-vein.patrol",
+            "conversationParameters": {
+              "locationKey": "sect.spirit-vein"
+            }
+          },
+          {
+            "id": "tianyan-kunyuan-dimai",
+            "roleKey": "facility",
+            "sigil": "⛏️",
+            "name": "坤元地脉",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级、灵石收益并进行灵矿采掘。",
+            "greeting": "厚土地脉沉在五峰之下，灵辉沿测线缓缓明灭。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.spirit-vein.mining",
+            "conversationParameters": {
+              "facilityKey": "spirit_vein",
+              "effectKey": "spirit_vein",
+              "detail": "灵石收益会随周俸一并核算，无需在矿场另行采收。"
+            }
+          }
+        ]
+      },
+      "herbGarden": {
+        "description": "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。",
+        "actors": [
+          {
+            "id": "tianyan-mushi",
+            "roleKey": "keeper",
+            "sigil": "药",
+            "name": "元吉",
+            "identity": "药园执事",
+            "responsibility": "负责草木长势与周期产出。",
+            "greeting": "水位、日照与长势都已记下，今日值录可以查验。",
+            "appearance": "person",
+            "conversationRenderer": "sect.herb-garden.caretaker",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。",
+              "stages": [
+                "新畦初醒",
+                "灵苗成行",
+                "药香盈陌",
+                "四时不歇",
+                "百草丰登"
+              ]
+            }
+          },
+          {
+            "id": "tianyan-changsheng-pu",
+            "roleKey": "facility",
+            "sigil": "🌿",
+            "name": "长生圃",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级与药田近况。",
+            "greeting": "田垄依照水位与日照铺开，新一季灵草正在生长。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.herb-garden.status",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "effectKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。"
+            }
+          }
+        ]
+      },
+      "gate": {
+        "description": "山门内外人声往来，守山执事在门侧整理当日来往记录。",
+        "actors": [
+          {
+            "id": "tianyan-guanxing",
+            "roleKey": "keeper",
+            "sigil": "门",
+            "name": "望舒",
+            "identity": "守山执事",
+            "responsibility": "负责山门动态与来往记录。",
+            "greeting": "今日山门记录已经补全，来往与观象结果都可查问。",
+            "appearance": "person",
+            "conversationRenderer": "sect.gate.news"
+          },
+          {
+            "id": "tianyan-guanxiang-men",
+            "roleKey": "facility",
+            "sigil": "⛰️",
+            "name": "观象门",
+            "identity": "宗门设施",
+            "responsibility": "进入山门步道完成清扫。",
+            "greeting": "门前云气刚散，石阶上还留着昨夜风雨卷来的落叶。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.gate.sweep"
+          }
+        ]
+      },
+      "formation": {
+        "description": "护宗阵枢仍在封禁之中。",
+        "actors": [
+          {
+            "id": "warden",
+            "roleKey": "warden",
+            "sigil": "护",
+            "name": "护阵长老",
+            "identity": "护阵长老",
+            "responsibility": "负责护宗阵法管理。",
+            "greeting": "阵枢尚未开放，今日无需入内。",
+            "appearance": "person",
+            "conversationRenderer": "sect.formation.status"
+          }
+        ]
+      }
+    },
+    "scenes": {
+      "map": {
+        "title": "天衍圣地舆图",
+        "description": "五峰环绕中宫，水脉、药圃、炉院、土台与矿路首尾相接；诸峰各有所长，却始终在同一轮推演中运转。"
+      },
+      "hall": {
+        "title": "衍天殿",
+        "description": "大殿不悬天命判词，只陈历代推演中被事实改写的旧卷。身份玉牒与周俸名册置于中宫汇流地刻之后，雨水沿殿前石槽缓缓分入五峰。"
+      },
+      "affairs": {
+        "title": "司算院",
+        "description": "新差事依时辰、地脉与人手写入长卷；执事会标出已知条件，却从不替接取者写下唯一答案。"
+      },
+      "archive": {
+        "title": "五经阁",
+        "description": "六卷真经分藏于中央与五行书架。卷册之间留有大量空白，供后来者记录术法相接时出现的新变化。"
+      },
+      "paths": {
+        "title": "河洛台",
+        "description": "河图刻流，洛书定位。两条道途同观五行，一条顺势成图，一条移宫断局。"
+      },
+      "arena": {
+        "title": "中宫演法台",
+        "description": "五道地刻汇于圆台。弟子在此更换神通、校验法印，也复盘每一次被错误次序覆盖的余势。"
+      },
+      "treasury": {
+        "title": "宗门宝库",
+        "description": "使用宗门贡献兑换常备物资与轮换珍材。"
+      },
+      "industries": {
+        "title": "建设院",
+        "description": "选择宗门设施并捐献灵石，推进常态建设。"
+      },
+      "cultivation": {
+        "title": "太初静室",
+        "description": "静室内没有五色阵光，只留一线无色灵气。门人需先让本命之气安静下来，才能重走太初衍脉。"
+      },
+      "alchemy": {
+        "title": "青华丹院",
+        "description": "木架、活水与温炉依次相连。药师记录的不只是药性，也包括采时、火候和前一炉留下的余温。"
+      },
+      "refinery": {
+        "title": "太白铸府",
+        "description": "金石在炉火与水渠之间往复，锤下每一道锋面都有明确去处；废料也会归入下一炉，而非弃在山外。"
+      },
+      "spiritVein": {
+        "title": "坤元地脉",
+        "description": "山腹地脉托住五峰阵基。厚土不显于天际，却决定廊桥、水渠与炉道能否在云雨之后仍守住原位。"
+      },
+      "herbGarden": {
+        "title": "长生圃",
+        "description": "灵草依水位与日照分层种植。圃中没有永远固定的田垄，每一季都会按照观象记录重新调整。"
+      },
+      "gate": {
+        "title": "观象门",
+        "description": "山门正对云海，门侧刻着历年天象与实际结果。偏差没有被抹去，反而比准确的预言保存得更久。"
+      },
+      "cave": {
+        "title": "云衡洞府",
+        "description": "洞府散在玄冥、青华二峰之间。每处门前都嵌一片集露白铜，清晨水痕会留下不同走向，提醒主人今日的判断也会随明日天光改变。"
+      },
+      "taskBattle": {
+        "title": "宗门战局",
+        "description": "完成当前宗门战斗事务。"
+      }
+    },
+    "hotspots": [
+      {
+        "id": "hall",
+        "label": "衍天殿",
+        "note": "身份 · 同门 · 周俸",
+        "route": "/game/sect/hall",
+        "permission": "sect.hall.view",
+        "position": [
+          50,
+          41
+        ]
+      },
+      {
+        "id": "archive",
+        "label": "五经阁",
+        "note": "心法研习",
+        "route": "/game/sect/archive",
+        "permission": "sect.archive.use",
+        "facility": "archive",
+        "position": [
+          29,
+          22
+        ]
+      },
+      {
+        "id": "cliff",
+        "label": "河洛台",
+        "note": "流派 · 参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          66,
+          22
+        ]
+      },
+      {
+        "id": "arena",
+        "label": "中宫演法台",
+        "note": "神通 · 战术 · 小比",
+        "route": "/game/sect/arena",
+        "permission": "sect.arena.use",
+        "position": [
+          50,
+          49
+        ]
+      },
+      {
+        "id": "affairs",
+        "label": "司算院",
+        "note": "日常 · 周常 · 晋升",
+        "route": "/game/sect/affairs",
+        "permission": "sect.tasks.use",
+        "position": [
+          58,
+          47
+        ]
+      },
+      {
+        "id": "treasury",
+        "label": "天衡库",
+        "note": "贡献兑换",
+        "route": "/game/sect/treasury",
+        "permission": "sect.shop.use",
+        "position": [
+          35,
+          67
+        ]
+      },
+      {
+        "id": "industries",
+        "label": "营造司",
+        "note": "设施建设 · 灵石捐献",
+        "route": "/game/sect/industries",
+        "permission": "sect.construction.view",
+        "position": [
+          80,
+          60
+        ]
+      },
+      {
+        "id": "cultivation",
+        "label": "太初静室",
+        "note": "闭关修炼 · 设施灵效",
+        "route": "/game/sect/cultivation-room",
+        "permission": "sect.facility.cultivation.use",
+        "facility": "cultivation_room",
+        "position": [
+          15,
+          57
+        ]
+      },
+      {
+        "id": "alchemy",
+        "label": "青华丹院",
+        "note": "炼丹 · 设施灵效",
+        "route": "/game/sect/alchemy",
+        "permission": "sect.facility.alchemy.use",
+        "facility": "workshop",
+        "position": [
+          30,
+          29
+        ]
+      },
+      {
+        "id": "refinery",
+        "label": "太白铸府",
+        "note": "炼器 · 设施灵效",
+        "route": "/game/sect/refinery",
+        "permission": "sect.facility.refinery.use",
+        "facility": "workshop",
+        "position": [
+          35,
+          75
+        ]
+      },
+      {
+        "id": "vein",
+        "label": "坤元地脉",
+        "note": "矿场巡视 · 灵石收益 · 采矿",
+        "route": "/game/sect/spirit-vein",
+        "permission": "sect.spirit_vein.view",
+        "facility": "spirit_vein",
+        "position": [
+          82,
+          54
+        ]
+      },
+      {
+        "id": "garden",
+        "label": "长生圃",
+        "note": "草木长势 · 产出待开放",
+        "route": "/game/sect/herb-garden",
+        "permission": "sect.herb_garden.view",
+        "facility": "herb_garden",
+        "position": [
+          26,
+          15
+        ]
+      },
+      {
+        "id": "gate",
+        "label": "观象门",
+        "note": "山门动态 · 清扫差事",
+        "route": "/game/sect/gate",
+        "permission": "sect.gate.view",
+        "visitor": {
+          "description": "观象门正对云海，外客可在门侧石刻前递交名帖，等待执教回应。"
+        },
+        "position": [
+          50,
+          88
+        ]
+      },
+      {
+        "id": "cave",
+        "label": "云衡洞府",
+        "note": "弟子居所",
+        "route": "/game/sect/cave",
+        "permission": "sect.cave.view",
+        "position": [
+          13,
+          50
+        ]
+      },
+      {
+        "id": "formation",
+        "label": "五峰归流阵眼",
+        "note": "宗门战后续开放",
+        "permission": "sect.formation.view",
+        "facility": "formation",
+        "locked": true,
+        "visitor": {
+          "description": "五峰灵机经水脉、炉院与矿路汇入中宫，外客可观其势，不得踏入阵眼。"
+        },
+        "position": [
+          50,
+          53
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "id": "tianyan-canon",
+        "name": "《天衍五行真经》",
+        "description": "以太初为纸，以五行为字。经中不求写尽天数，只教门人辨明一法之后仍有多少去处。",
+        "primary": true
+      },
+      {
+        "id": "wood-vitality",
+        "name": "《青华生元录》",
+        "description": "草木荣枯并非两事；生机藏在未尽之处，也藏在愿意重新开始的一息里。"
+      },
+      {
+        "id": "fire-illumination",
+        "name": "《离明流火章》",
+        "description": "火能照见，也能焚去。持火者先辨所燃为何，方知余烬应当归向何处。"
+      },
+      {
+        "id": "earth-bearing",
+        "name": "《坤舆载物篇》",
+        "description": "地不与万物争先，却承受每一次落下的重量；能载其重，才能改其势。"
+      },
+      {
+        "id": "metal-severing",
+        "name": "《太白裁虚诀》",
+        "description": "金气不只断形，也裁去遮蔽与虚妄。锋芒所至，应先知道何物不必留下。"
+      },
+      {
+        "id": "water-flowing",
+        "name": "《玄冥行川法》",
+        "description": "水无常形，不与一岸相争。去路既改，仍能在曲折中守住归处。"
+      }
+    ],
+    "paths": [
+      {
+        "id": "hetu-evolution",
+        "name": "河图演生",
+        "description": "河图示其流，前法不灭，后法由此而生。三数成图之后，伤势、气血与法力都在同一轮转中得到续接。",
+        "tactics": [
+          {
+            "id": "small-cycle",
+            "name": "小周天",
+            "description": "优先选择能够继续反应的落印术，以三行闭环维持周天。"
+          },
+          {
+            "id": "nourish-origin",
+            "name": "养元",
+            "description": "血线或法力不足时优先内景法，其余时间维持反应。"
+          },
+          {
+            "id": "unbroken-flow",
+            "name": "不绝",
+            "description": "有印而无可用反应时优先移宫，否则以太初玄光保留法印。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "hetu-first-number",
+            "layerId": "1",
+            "name": "初数有应",
+            "description": "战斗开始时获得1点衍数。"
+          },
+          {
+            "id": "hetu-lasting-seal",
+            "layerId": "1",
+            "name": "印留三刻",
+            "description": "落印术施加的新法印基础持续时间提高至3回合。"
+          },
+          {
+            "id": "hetu-blank-breath",
+            "layerId": "1",
+            "name": "太初留白",
+            "description": "每回合首次以太初玄光命中带印目标时，回复3%最大法力。"
+          },
+          {
+            "id": "hetu-flow-refund",
+            "layerId": "2",
+            "name": "法随气转",
+            "description": "成功触发反应后，返还本次落印术实际支付的20点法力。"
+          },
+          {
+            "id": "hetu-shift-carries",
+            "layerId": "2",
+            "name": "移宫承流",
+            "description": "移宫换宿成功转化法印时获得1点衍数。"
+          },
+          {
+            "id": "hetu-repository-remnant",
+            "layerId": "2",
+            "name": "归藏纳余",
+            "description": "五气归藏数值收益提高20%，并获得1点衍数。"
+          },
+          {
+            "id": "hetu-verdant-endless",
+            "layerId": "3",
+            "name": "青华不竭",
+            "description": "木行治疗提高25%；首次令目标满血时获得护盾。"
+          },
+          {
+            "id": "hetu-fire-earth-shelter",
+            "layerId": "3",
+            "name": "火土相庇",
+            "description": "降低火里种莲成本并强化地载无疆。"
+          },
+          {
+            "id": "hetu-river-cleansing",
+            "layerId": "3",
+            "name": "天河洗尘",
+            "description": "天河洗心净化3个状态，回复12%最大法力并提高30%控制抗性。"
+          },
+          {
+            "id": "hetu-generation-gate",
+            "layerId": "4",
+            "name": "生门并开",
+            "description": "每次触发化生后回复2%最大气血。"
+          },
+          {
+            "id": "hetu-overcoming-harmony",
+            "layerId": "4",
+            "name": "克中留和",
+            "description": "每次触发冲克后获得3%最大气血护盾。"
+          },
+          {
+            "id": "hetu-three-talents",
+            "layerId": "4",
+            "name": "三才合契",
+            "description": "以三种不同新元素触发反应时，第三术主伤害提高20%。"
+          },
+          {
+            "id": "hetu-scroll-open",
+            "layerId": "5",
+            "name": "河图开卷",
+            "description": "河图周天主伤害增幅提高至35%。"
+          },
+          {
+            "id": "hetu-number-remains",
+            "layerId": "5",
+            "name": "余数不尽",
+            "description": "河图周天结算后保留1点衍数。"
+          },
+          {
+            "id": "hetu-inner-outer",
+            "layerId": "5",
+            "name": "内外相养",
+            "description": "施展内景法后，下一次反应额外获得1点衍数。"
+          },
+          {
+            "id": "hetu-one-line-opens",
+            "layerId": "ultimate",
+            "name": "一画开天",
+            "description": "强化河图周天主伤害与非控制反应数值。"
+          },
+          {
+            "id": "hetu-endless-life",
+            "layerId": "ultimate",
+            "name": "生生无穷",
+            "description": "河图周天额外回复气血与法力，并保留1点衍数。"
+          },
+          {
+            "id": "hetu-escaped-one-returns",
+            "layerId": "ultimate",
+            "name": "遁一归元",
+            "description": "每装备1门非落印主动神通，宗门直接伤害、治疗与护盾提高8%，最多2门。"
+          }
+        ]
+      },
+      {
+        "id": "luoshu-control",
+        "name": "洛书制化",
+        "description": "洛书定其位，不等万法自然流转。移一宫、断一势、藏一印，在敌势真正成形之前先改写它的去处。",
+        "tactics": [
+          {
+            "id": "break-pattern",
+            "name": "破阵",
+            "description": "优先触发冲克并利用太白破阵驱散敌方增益。"
+          },
+          {
+            "id": "lock-meridian",
+            "name": "锁机",
+            "description": "优先准备并触发断脉或泥沼，压缩敌方行动。"
+          },
+          {
+            "id": "decisive-derivation",
+            "name": "断局",
+            "description": "优先预期直接伤害最高的反应，必要时移宫或归藏。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "luoshu-first-number",
+            "layerId": "1",
+            "name": "一数先立",
+            "description": "战斗开始时获得1点衍数。"
+          },
+          {
+            "id": "luoshu-observe-gap",
+            "layerId": "1",
+            "name": "观印知隙",
+            "description": "宗门直接伤害对带有天衍法印的目标提高8%。"
+          },
+          {
+            "id": "luoshu-first-change",
+            "layerId": "1",
+            "name": "第一变",
+            "description": "每场战斗首次落印命中无印目标后返还80点实付法力，并使新印持续3回合。"
+          },
+          {
+            "id": "luoshu-fast-shift",
+            "layerId": "2",
+            "name": "移宫疾算",
+            "description": "移宫换宿消耗降至80，冷却降至1回合。"
+          },
+          {
+            "id": "luoshu-reverse-two",
+            "layerId": "2",
+            "name": "倒演两宫",
+            "description": "移宫换宿改为移动两位；下一次反应主伤害提高20%。"
+          },
+          {
+            "id": "luoshu-hidden-counter",
+            "layerId": "2",
+            "name": "藏印为筹",
+            "description": "五气归藏数值收益提高25%，并获得1点衍数。"
+          },
+          {
+            "id": "luoshu-flame-flow",
+            "layerId": "3",
+            "name": "炎流相激",
+            "description": "强化燎原、蒸发与熔金。"
+          },
+          {
+            "id": "luoshu-mountain-wood",
+            "layerId": "3",
+            "name": "山木倾覆",
+            "description": "强化熔岩、泥沼与崩根。"
+          },
+          {
+            "id": "luoshu-metal-water",
+            "layerId": "3",
+            "name": "金水决机",
+            "description": "强化锻锋、寒泉与断脉。"
+          },
+          {
+            "id": "luoshu-lock-position",
+            "layerId": "4",
+            "name": "定势锁机",
+            "description": "提高泥沼与断脉控制命中，并强化抵抗后的替代削弱。"
+          },
+          {
+            "id": "luoshu-exploit-weakness",
+            "layerId": "4",
+            "name": "乘虚而入",
+            "description": "目标拥有普通减益或控制时，宗门直接伤害提高15%。"
+          },
+          {
+            "id": "luoshu-dispel-truth",
+            "layerId": "4",
+            "name": "斩护见真",
+            "description": "每3回合首次触发冲克时，在主伤害前驱散1个普通增益。"
+          },
+          {
+            "id": "luoshu-chain-control",
+            "layerId": "5",
+            "name": "连环制化",
+            "description": "连续反应令后续落印术主伤害提高8%，最多3层。"
+          },
+          {
+            "id": "luoshu-shatter-seal",
+            "layerId": "5",
+            "name": "碎印夺机",
+            "description": "目标低于40%气血时粉碎新印，并追加主伤害45%的无属性伤害。"
+          },
+          {
+            "id": "luoshu-save-error",
+            "layerId": "5",
+            "name": "失算犹存",
+            "description": "每回合首次无反应覆盖时保留旧印。"
+          },
+          {
+            "id": "luoshu-nine-changes",
+            "layerId": "ultimate",
+            "name": "洛书九变",
+            "description": "洛书断局追伤提高至100%，非控制削弱增幅提高至35%。"
+          },
+          {
+            "id": "luoshu-guest-becomes-host",
+            "layerId": "ultimate",
+            "name": "反客为主",
+            "description": "洛书断局后保留1点衍数，并使本次新印持续3回合。"
+          },
+          {
+            "id": "luoshu-heaven-ends",
+            "layerId": "ultimate",
+            "name": "天机尽处",
+            "description": "目标低于35%气血时，冲克主伤害获得按已损气血缩放的法攻系数。"
+          }
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "verdant-pulse",
+        "name": "青萝生脉",
+        "description": "青萝循气而生，一端缠住敌势，一端牵回施术者尚未断绝的生机。",
+        "methodId": "wood-vitality",
+        "methodName": "《青华生元录》",
+        "unlockRequirement": "《青华生元录》1级",
+        "level": 1
+      },
+      {
+        "id": "myriad-wood-renewal",
+        "name": "万木回春",
+        "description": "不催枯枝强生新叶，只把散落的生机逐寸引回，使该续的一息重新接上。",
+        "methodId": "wood-vitality",
+        "methodName": "《青华生元录》",
+        "unlockRequirement": "《青华生元录》5级",
+        "level": 5
+      },
+      {
+        "id": "flowing-flame",
+        "name": "离火流照",
+        "description": "离火不作一瞬暴烈，沿气机流照而过；光所及处，余焰仍在暗中寻找可燃之物。",
+        "methodId": "fire-illumination",
+        "methodName": "《离明流火章》",
+        "unlockRequirement": "《离明流火章》1级",
+        "level": 1
+      },
+      {
+        "id": "lotus-in-fire",
+        "name": "火里种莲",
+        "description": "借一线心火焚去附骨之秽，又在余烬中留下一点不肯熄灭的明光。",
+        "methodId": "fire-illumination",
+        "methodName": "《离明流火章》",
+        "unlockRequirement": "《离明流火章》5级",
+        "level": 5
+      },
+      {
+        "id": "earth-bearing-seal",
+        "name": "坤岳镇形",
+        "description": "坤气落下，不急于压碎敌形，先在施术者身前立住一座可承来力的山岳。",
+        "methodId": "earth-bearing",
+        "methodName": "《坤舆载物篇》",
+        "unlockRequirement": "《坤舆载物篇》1级",
+        "level": 1
+      },
+      {
+        "id": "boundless-earth",
+        "name": "地载无疆",
+        "description": "地不拒轻重，也不问来处。法域展开之时，落在其中的每一道力量都先由厚土承接。",
+        "methodId": "earth-bearing",
+        "methodName": "《坤舆载物篇》",
+        "unlockRequirement": "《坤舆载物篇》5级",
+        "level": 5
+      },
+      {
+        "id": "metal-cloud-cutter",
+        "name": "庚金裁云",
+        "description": "庚金凝成一线，所裁并非云气，而是藏在云后的护持与虚势。",
+        "methodId": "metal-severing",
+        "methodName": "《太白裁虚诀》",
+        "unlockRequirement": "《太白裁虚诀》1级",
+        "level": 1
+      },
+      {
+        "id": "white-star-breaker",
+        "name": "太白破阵",
+        "description": "太白一线照入阵眼，先去遮蔽，再断灵机；锋芒不求伤重，只求所见再无虚假。",
+        "methodId": "metal-severing",
+        "methodName": "《太白裁虚诀》",
+        "unlockRequirement": "《太白裁虚诀》5级",
+        "level": 5
+      },
+      {
+        "id": "dark-water-return",
+        "name": "玄水回澜",
+        "description": "玄水不与来势正争，只在回澜时带走立足之力，使快者迟、满者退。",
+        "methodId": "water-flowing",
+        "methodName": "《玄冥行川法》",
+        "unlockRequirement": "《玄冥行川法》1级",
+        "level": 1
+      },
+      {
+        "id": "heavenly-river-cleansing",
+        "name": "天河洗心",
+        "description": "引天河过心窍，不洗记忆，也不洗选择，只带走此刻不应继续停留的浊意。",
+        "methodId": "water-flowing",
+        "methodName": "《玄冥行川法》",
+        "unlockRequirement": "《玄冥行川法》5级",
+        "level": 5
+      },
+      {
+        "id": "shift-palace",
+        "name": "移宫换宿",
+        "description": "星宿未移，观测之宫先改。法印沿相生次序转过一位，原本无路的下一法便有了新的去处。",
+        "methodId": "tianyan-canon",
+        "methodName": "《天衍五行真经》",
+        "unlockRequirement": "《天衍五行真经》5级",
+        "level": 5
+      },
+      {
+        "id": "five-qi-repository",
+        "name": "五气归藏",
+        "description": "推演不必每次走到尽头。将尚未用尽的法印收回太初，余势仍可归为护身、养气与下一法的凭依。",
+        "methodId": "tianyan-canon",
+        "methodName": "《天衍五行真经》",
+        "unlockRequirement": "《天衍五行真经》10级",
+        "level": 10
+      }
+    ]
+  },
+  "youdu": {
+    "name": "幽都",
+    "mapTitle": "幽都舆图",
+    "mapDescription": "黑水自山腹流过两岸诸院，灯影与人影总错开半步。",
+    "announcement": "黑水沿岸近来魂灯摇曳，夜巡弟子须两人同行；若见失名游魂，先引至招魂司登记。",
+    "aspectRatio": 1.7768331562167907,
+    "onboarding": {
+      "summary": "黑水照影，幽灯唤魂。你将在敌人仍然站立时，一层层取走支撑其形神的力量。",
+      "traits": [
+        "蚀魂叠层",
+        "魂伤越防",
+        "禁疗耐控"
+      ],
+      "script": {
+        "id": "youdu-onboarding",
+        "title": "一叹入幽都",
+        "theme": "stillness",
+        "backdrop": {
+          "src": "/assets/sect/onboarding/youdu.webp",
+          "alt": "幽都山门前，弟子沿三盏魂灯照亮的黑水石径入山，水中倒影与本人错开半步"
+        },
+        "acts": [
+          {
+            "id": "black-water-shadow",
+            "title": "黑水有影",
+            "scene": "幽都 · 黑水石径",
+            "body": "你沿北海石径入山。天上没有月，黑水却照出你的脸。水中那张脸比你迟了一息才抬眼。",
+            "backgroundPosition": "48% 54%",
+            "tone": "stillness"
+          },
+          {
+            "id": "three-calls",
+            "title": "三声唤名",
+            "scene": "幽都 · 无日关",
+            "body": "山门内有人依次唤出你的姓名、来处与心中最不愿失去之物。前两声都有回音，第三声落下时，身后的影子轻轻动了一下。",
+            "speaker": "引路人：“莫回头。能随一声呼唤离身的，未必是鬼，也可能是你自己。”",
+            "backgroundPosition": "60% 45%",
+            "tone": "mist"
+          },
+          {
+            "id": "seven-lamps",
+            "title": "七灯照身",
+            "scene": "幽都 · 七魄台",
+            "body": "七盏灯从暗处逐一亮起。你每走过一盏，脚步便轻一分，直到分不清是身体在前行，还是影子拖着身体。",
+            "backgroundPosition": "35% 48%",
+            "tone": "stillness"
+          },
+          {
+            "id": "where-soul-returns",
+            "title": "魂归何处",
+            "scene": "幽都 · 幽都殿",
+            "body": "殿中没有神像，只有一面黑水。掌门问你：若能唤走仇敌的魂，也能唤回他的魂，你以哪一声为本事？你承认自己尚不知道答案。",
+            "backgroundPosition": "50% 38%",
+            "tone": "mist"
+          },
+          {
+            "id": "one-sigh-entry",
+            "title": "一叹入门",
+            "scene": "幽都 · 魂灯前",
+            "body": "掌门吹灭其中一盏灯，灯焰却出现在你掌心。黑水里的倒影终于与你同时抬头。",
+            "speaker": "掌门：“先学叹息。唯有一声叹息，最容易让人忘记守住自己的魂。”",
+            "backgroundPosition": "52% 44%",
+            "tone": "ember"
+          }
+        ]
+      }
+    },
+    "facilityLabels": {
+      "archive": "三魂阁",
+      "cultivation_room": "返照室",
+      "workshop": "镇铁炉",
+      "spirit_vein": "黑水阴脉",
+      "herb_garden": "彼岸圃",
+      "formation": "万魂归窍阵",
+      "alchemy": "还魂药庐",
+      "refinery": "镇铁炉"
+    },
+    "rooms": {
+      "affairs": {
+        "description": "招魂司内灯影不灭，日常、周常与晋升事务各由一席经办。",
+        "actors": [
+          {
+            "id": "youdu-shen-zhaodeng",
+            "roleKey": "daily",
+            "sigil": "执",
+            "name": "照灯",
+            "identity": "值日执事",
+            "responsibility": "负责日常委托。",
+            "greeting": "今日卷宗都在灯下，你想办哪一件，直说便是。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "daily"
+            }
+          },
+          {
+            "id": "youdu-bai-shoubu",
+            "roleKey": "weekly",
+            "sigil": "簿",
+            "name": "守簿翁",
+            "identity": "功簿执事",
+            "responsibility": "负责周常委托。",
+            "greeting": "本周功簿已经归拢，你可逐项查验。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "weekly"
+            }
+          },
+          {
+            "id": "youdu-chu-yingui",
+            "roleKey": "promotion",
+            "sigil": "传",
+            "name": "归魂婆婆",
+            "identity": "传功长老",
+            "responsibility": "负责晋升试炼。",
+            "greeting": "晋升这一关，先要记得自己为何而来。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "promotion"
+            }
+          }
+        ]
+      },
+      "hall": {
+        "description": "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。",
+        "actors": [
+          {
+            "id": "youdu-luming",
+            "roleKey": "registry",
+            "sigil": "掌",
+            "name": "沈故衣",
+            "identity": "掌籍执事",
+            "responsibility": "负责弟子身份与同门名录。",
+            "greeting": "你的名字还清楚地留在册上，玉牒和同门名录都可查。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.registry"
+          },
+          {
+            "id": "youdu-fafeng",
+            "roleKey": "stipend",
+            "sigil": "俸",
+            "name": "温婆婆",
+            "identity": "俸禄执事",
+            "responsibility": "负责核算和发放宗门周俸。",
+            "greeting": "本周该给你的已经备齐，要先核对也不妨。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.stipend"
+          }
+        ]
+      },
+      "treasury": {
+        "description": "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。",
+        "actors": [
+          {
+            "id": "youdu-shoucang",
+            "roleKey": "keeper",
+            "sigil": "库",
+            "name": "阮秋声",
+            "identity": "司库执事",
+            "responsibility": "负责宝库库存与贡献兑换。",
+            "greeting": "架上的东西都清点过了，你慢慢看，选定再说。",
+            "appearance": "person",
+            "conversationRenderer": "sect.treasury.shop"
+          }
+        ]
+      },
+      "industries": {
+        "description": "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。",
+        "actors": [
+          {
+            "id": "youdu-zhuming",
+            "roleKey": "construction",
+            "sigil": "造",
+            "name": "戚百岁",
+            "identity": "营造执事",
+            "responsibility": "负责各处设施等级与建设进度。",
+            "greeting": "桥、阁与台上的建设都有记录，你想先问哪一处？",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.construction"
+          },
+          {
+            "id": "youdu-duwu",
+            "roleKey": "donation",
+            "sigil": "石",
+            "name": "阿七",
+            "identity": "建设执事",
+            "responsibility": "负责灵石捐献与建设登记。",
+            "greeting": "今日选好一处设施，我替你把灵石记入建设簿。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.donation"
+          }
+        ]
+      },
+      "archive": {
+        "description": "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。",
+        "actors": [
+          {
+            "id": "youdu-zhaojuan",
+            "roleKey": "keeper",
+            "sigil": "阁",
+            "name": "褚先生",
+            "identity": "守阁长老",
+            "responsibility": "负责心法经卷与研习。",
+            "greeting": "六卷心法都能查阅，你想先从哪一卷看起？",
+            "appearance": "person",
+            "conversationRenderer": "sect.archive.methods"
+          }
+        ]
+      },
+      "paths": {
+        "description": "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。",
+        "actors": [
+          {
+            "id": "youdu-yindeng",
+            "roleKey": "guide",
+            "sigil": "引",
+            "name": "商无咎",
+            "identity": "引道长老",
+            "responsibility": "负责流派选择与参悟引导。",
+            "greeting": "路有来处，也有归处；你想先辨哪一条？",
+            "appearance": "person",
+            "conversationRenderer": "sect.paths.guidance"
+          }
+        ]
+      },
+      "arena": {
+        "description": "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。",
+        "actors": [
+          {
+            "id": "youdu-shihun",
+            "roleKey": "instructor",
+            "sigil": "武",
+            "name": "迟归鹤",
+            "identity": "演武教习",
+            "responsibility": "负责神通配置与自动战术。",
+            "greeting": "术痕都还留在场中，要调整神通便从当前配置说起。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.loadout"
+          },
+          {
+            "id": "youdu-shouchang",
+            "roleKey": "marshal",
+            "sigil": "场",
+            "name": "桑小满",
+            "identity": "值场执事",
+            "responsibility": "负责演武场秩序与入场引导。",
+            "greeting": "场地已经安静下来，有小比在身便可开始。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.marshal"
+          },
+          {
+            "id": "sect-arena-ring",
+            "roleKey": "ring",
+            "sigil": "⚔️",
+            "name": "宗门擂台",
+            "identity": "宗门设施",
+            "responsibility": "开启宗门小比战局。",
+            "greeting": "擂台阵纹已归位，有小比在身便可登台。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.arena.tournament",
+            "conversationParameters": {
+              "locationKey": "sect.arena"
+            }
+          }
+        ]
+      },
+      "cultivation": {
+        "description": "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。",
+        "actors": [
+          {
+            "id": "youdu-shoudeng",
+            "roleKey": "keeper",
+            "sigil": "阵",
+            "name": "宁无恙",
+            "identity": "守阵执事",
+            "responsibility": "负责聚灵阵与闭关安排。",
+            "greeting": "室中一切安稳，想先问灵效，还是现在闭关？",
+            "appearance": "person",
+            "conversationRenderer": "sect.cultivation.retreat"
+          }
+        ]
+      },
+      "alchemy": {
+        "description": "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。",
+        "actors": [
+          {
+            "id": "youdu-huansheng",
+            "roleKey": "keeper",
+            "sigil": "丹",
+            "name": "白蘅",
+            "identity": "丹房执事",
+            "responsibility": "负责丹房状态与炼丹安排。",
+            "greeting": "香火未断，炉温也合适，要先问灵效还是开炉？",
+            "appearance": "person",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "请执事说说丹房灵效",
+              "workspaceReply": "有劳执事为我开炉炼丹"
+            }
+          },
+          {
+            "id": "sect-alchemy-furnace",
+            "roleKey": "furnace",
+            "sigil": "鼎",
+            "name": "宗门丹炉",
+            "identity": "炼丹设施",
+            "responsibility": "纳药、引火、聚蕴、凝丹。",
+            "greeting": "炉腹传来低沉回响，地火阵纹正等待灵石与药气。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "以神识察看丹炉灵效",
+              "workspaceReply": "唤醒丹炉，开始炼丹"
+            }
+          }
+        ]
+      },
+      "refinery": {
+        "description": "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。",
+        "actors": [
+          {
+            "id": "youdu-zhentie",
+            "roleKey": "keeper",
+            "sigil": "器",
+            "name": "祝余",
+            "identity": "器坊执事",
+            "responsibility": "负责器坊状态与炼器安排。",
+            "greeting": "低焰正稳，材料也都归位，要先问灵效还是炼器？",
+            "appearance": "person",
+            "conversationRenderer": "sect.refinery.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "refinery",
+              "workspaceHref": "/game/sect/refinery?workspace=craft",
+              "statusReply": "请执事说说器坊灵效",
+              "workspaceReply": "有劳执事为我开炉炼器"
+            }
+          }
+        ]
+      },
+      "spiritVein": {
+        "description": "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。",
+        "actors": [
+          {
+            "id": "youdu-tingyin",
+            "roleKey": "keeper",
+            "sigil": "脉",
+            "name": "贺寒川",
+            "identity": "守脉执事",
+            "responsibility": "负责矿场巡视交接。",
+            "greeting": "矿道里没有异动，巡视封签已经备妥。",
+            "appearance": "person",
+            "conversationRenderer": "sect.spirit-vein.patrol",
+            "conversationParameters": {
+              "locationKey": "sect.spirit-vein"
+            }
+          },
+          {
+            "id": "youdu-heishui-yinmai",
+            "roleKey": "facility",
+            "sigil": "⛏️",
+            "name": "黑水阴脉",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级、灵石收益并进行灵矿采掘。",
+            "greeting": "湿冷岩层间灵光幽微，黑水映不出矿壁的深处。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.spirit-vein.mining",
+            "conversationParameters": {
+              "facilityKey": "spirit_vein",
+              "effectKey": "spirit_vein",
+              "detail": "灵石收益会随周俸一并核算，无需在矿场另行采收。"
+            }
+          }
+        ]
+      },
+      "herbGarden": {
+        "description": "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。",
+        "actors": [
+          {
+            "id": "youdu-bianhua",
+            "roleKey": "keeper",
+            "sigil": "药",
+            "name": "柳十三",
+            "identity": "药园执事",
+            "responsibility": "负责草木长势与周期产出。",
+            "greeting": "两岸花叶都安稳，今日长势已经记入值录。",
+            "appearance": "person",
+            "conversationRenderer": "sect.herb-garden.caretaker",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。",
+              "stages": [
+                "新畦初醒",
+                "灵苗成行",
+                "药香盈陌",
+                "四时不歇",
+                "百草丰登"
+              ]
+            }
+          },
+          {
+            "id": "youdu-bian-pu",
+            "roleKey": "facility",
+            "sigil": "🌿",
+            "name": "彼岸圃",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级与药田近况。",
+            "greeting": "深色花叶沿黑水两岸舒展，水气停在叶尖未散。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.herb-garden.status",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "effectKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。"
+            }
+          }
+        ]
+      },
+      "gate": {
+        "description": "山门内外人声往来，守山执事在门侧整理当日来往记录。",
+        "actors": [
+          {
+            "id": "youdu-shouguan",
+            "roleKey": "keeper",
+            "sigil": "门",
+            "name": "顾长夜",
+            "identity": "守山执事",
+            "responsibility": "负责山门动态与来往记录。",
+            "greeting": "关前今日无事，来往记录都已经归拢。",
+            "appearance": "person",
+            "conversationRenderer": "sect.gate.news"
+          },
+          {
+            "id": "youdu-wuri-guan",
+            "roleKey": "facility",
+            "sigil": "⛰️",
+            "name": "无日关",
+            "identity": "宗门设施",
+            "responsibility": "进入山门步道完成清扫。",
+            "greeting": "三盏魂灯照着关前石路，阶上落叶仍待清理。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.gate.sweep"
+          }
+        ]
+      },
+      "formation": {
+        "description": "护宗阵枢仍在封禁之中。",
+        "actors": [
+          {
+            "id": "warden",
+            "roleKey": "warden",
+            "sigil": "护",
+            "name": "护阵长老",
+            "identity": "护阵长老",
+            "responsibility": "负责护宗阵法管理。",
+            "greeting": "阵枢尚未开放，今日无需入内。",
+            "appearance": "person",
+            "conversationRenderer": "sect.formation.status"
+          }
+        ]
+      }
+    },
+    "scenes": {
+      "map": {
+        "title": "幽都舆图",
+        "description": "黑水自山腹流过两岸诸院，灯影与人影总错开半步。"
+      },
+      "hall": {
+        "title": "幽都殿",
+        "description": "殿中无神像，只有映照姓名、来处与归路的一面黑水。"
+      },
+      "affairs": {
+        "title": "招魂司",
+        "description": "门人记录失名者、游魂与界隙回声，也护送愿意归去的魂。"
+      },
+      "archive": {
+        "title": "三魂阁",
+        "description": "六卷心法分藏于三层暗阁，书页以魂灯照见。"
+      },
+      "paths": {
+        "title": "七魄台",
+        "description": "招魂渡夜与镇魄司命由此分途：一者让黑水漫长，一者令铁钉落准。"
+      },
+      "arena": {
+        "title": "照影场",
+        "description": "场中不立木人，只以黑水映出每一门神通落在影上的痕迹。"
+      },
+      "treasury": {
+        "title": "宗门宝库",
+        "description": "使用宗门贡献兑换常备物资与轮换珍材。"
+      },
+      "industries": {
+        "title": "建设院",
+        "description": "选择宗门设施并捐献灵石，推进常态建设。"
+      },
+      "cultivation": {
+        "title": "返照室",
+        "description": "一灯一席，修士在寂静中确认三魂七魄仍各安其位。"
+      },
+      "alchemy": {
+        "title": "还魂药庐",
+        "description": "返照香与彼岸草分柜存放，药师只治魂魄缝隙，不许强拘生魂。"
+      },
+      "refinery": {
+        "title": "镇铁炉",
+        "description": "黑水旧铁在低焰中缓慢成形，专用来定影稳神。"
+      },
+      "spiritVein": {
+        "title": "黑水阴脉",
+        "description": "灵石沿湿冷岩层生长，表面映不出开采者的面孔。"
+      },
+      "herbGarden": {
+        "title": "彼岸圃",
+        "description": "深色花叶沿黑水两岸生长；药田产出玩法后续开放。"
+      },
+      "gate": {
+        "title": "无日关",
+        "description": "关外不见日月，三盏魂灯为每个归山者留着方向。"
+      },
+      "cave": {
+        "title": "寄魂庐",
+        "description": "庐舍门前各悬一灯，灯在便知主人形神安稳。"
+      },
+      "taskBattle": {
+        "title": "宗门战局",
+        "description": "完成当前宗门战斗事务。"
+      }
+    },
+    "hotspots": [
+      {
+        "id": "hall",
+        "label": "幽都殿",
+        "note": "身份 · 同门 · 周俸",
+        "route": "/game/sect/hall",
+        "permission": "sect.hall.view",
+        "position": [
+          49,
+          20
+        ]
+      },
+      {
+        "id": "archive",
+        "label": "三魂阁",
+        "note": "心法研习",
+        "route": "/game/sect/archive",
+        "permission": "sect.archive.use",
+        "facility": "archive",
+        "position": [
+          25,
+          40
+        ]
+      },
+      {
+        "id": "cliff",
+        "label": "七魄台",
+        "note": "流派 · 参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          18,
+          24
+        ]
+      },
+      {
+        "id": "arena",
+        "label": "照影场",
+        "note": "神通 · 战术 · 小比",
+        "route": "/game/sect/arena",
+        "permission": "sect.arena.use",
+        "position": [
+          43,
+          57
+        ]
+      },
+      {
+        "id": "affairs",
+        "label": "招魂司",
+        "note": "日常 · 周常 · 晋升",
+        "route": "/game/sect/affairs",
+        "permission": "sect.tasks.use",
+        "position": [
+          34,
+          46
+        ]
+      },
+      {
+        "id": "treasury",
+        "label": "玄冥库",
+        "note": "贡献兑换",
+        "route": "/game/sect/treasury",
+        "permission": "sect.shop.use",
+        "position": [
+          63,
+          68
+        ]
+      },
+      {
+        "id": "industries",
+        "label": "黑水坊",
+        "note": "设施建设 · 灵石捐献",
+        "route": "/game/sect/industries",
+        "permission": "sect.construction.view",
+        "position": [
+          48,
+          78
+        ]
+      },
+      {
+        "id": "cultivation",
+        "label": "返照室",
+        "note": "闭关修炼 · 设施灵效",
+        "route": "/game/sect/cultivation-room",
+        "permission": "sect.facility.cultivation.use",
+        "facility": "cultivation_room",
+        "position": [
+          12,
+          62
+        ]
+      },
+      {
+        "id": "alchemy",
+        "label": "还魂药庐",
+        "note": "炼丹 · 设施灵效",
+        "route": "/game/sect/alchemy",
+        "permission": "sect.facility.alchemy.use",
+        "facility": "workshop",
+        "position": [
+          73,
+          50
+        ]
+      },
+      {
+        "id": "refinery",
+        "label": "镇铁炉",
+        "note": "炼器 · 设施灵效",
+        "route": "/game/sect/refinery",
+        "permission": "sect.facility.refinery.use",
+        "facility": "workshop",
+        "position": [
+          82,
+          71
+        ]
+      },
+      {
+        "id": "vein",
+        "label": "黑水阴脉",
+        "note": "矿场巡视 · 灵石收益 · 采矿",
+        "route": "/game/sect/spirit-vein",
+        "permission": "sect.spirit_vein.view",
+        "facility": "spirit_vein",
+        "position": [
+          90,
+          44
+        ]
+      },
+      {
+        "id": "garden",
+        "label": "彼岸圃",
+        "note": "草木长势 · 产出待开放",
+        "route": "/game/sect/herb-garden",
+        "permission": "sect.herb_garden.view",
+        "facility": "herb_garden",
+        "position": [
+          70,
+          37
+        ]
+      },
+      {
+        "id": "gate",
+        "label": "无日关",
+        "note": "山门动态 · 清扫差事",
+        "route": "/game/sect/gate",
+        "permission": "sect.gate.view",
+        "visitor": {
+          "description": "三盏魂灯在无日关外照出访客影子，守关人只接下姓名与来意相符的拜帖。"
+        },
+        "position": [
+          49,
+          87
+        ]
+      },
+      {
+        "id": "cave",
+        "label": "寄魂庐",
+        "note": "弟子居所",
+        "route": "/game/sect/cave",
+        "permission": "sect.cave.view",
+        "position": [
+          88,
+          31
+        ]
+      },
+      {
+        "id": "formation",
+        "label": "万魂归窍阵",
+        "note": "宗门战后续开放",
+        "permission": "sect.formation.view",
+        "facility": "formation",
+        "locked": true,
+        "visitor": {
+          "description": "黑水与魂灯牵引归路，外客只能在灯外辨认阵纹，不能越过无日关。"
+        },
+        "position": [
+          79,
+          14
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "id": "youdu-canon",
+        "name": "《幽都魂典》",
+        "description": "录三魂往复、七魄离合之理，是幽都诸法的总纲。",
+        "primary": true
+      },
+      {
+        "id": "three-souls-separation",
+        "name": "《三魂离合篇》",
+        "description": "辨胎光、爽灵、幽精的去留，从影迹中寻出魂魄缝隙。"
+      },
+      {
+        "id": "forgetful-river-record",
+        "name": "《忘川渡夜录》",
+        "description": "记黑水涨落与游魂归路，令潮声在形神之间长久回荡。"
+      },
+      {
+        "id": "seven-souls-seizure",
+        "name": "《七魄夺形法》",
+        "description": "七魄各守形骸一处，去其一，身中灯火便暗一盏。"
+      },
+      {
+        "id": "soul-pinning-ironbook",
+        "name": "《镇魂铁册》",
+        "description": "以幽都旧铁定影镇魂，使离散之魂不得妄动。"
+      },
+      {
+        "id": "dead-heart-living-spirit",
+        "name": "《心死神活诀》",
+        "description": "心念寂处，神魂反得清明，不为外法轻易拘束。"
+      }
+    ],
+    "paths": [
+      {
+        "id": "tide",
+        "name": "招魂渡夜",
+        "description": "一声唤名落入黑水，千里游魂都听见自己的回音。此道让忘川一寸寸漫过归路。",
+        "tactics": [
+          {
+            "id": "tide-cycle",
+            "name": "回潮",
+            "description": "优先补忘川并维持三层蚀魂，在终结线兑现。"
+          },
+          {
+            "id": "healer-drown",
+            "name": "沉医",
+            "description": "维持忘川压疗，在高层窗口优先镇魂。"
+          },
+          {
+            "id": "long-night",
+            "name": "长夜",
+            "description": "延后终结，维持四层压力，魂火满或低血时再兑现。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "tide-first-ripple",
+            "layerId": "1",
+            "name": "一水忘川",
+            "description": "忘川的直接魂伤与每次持续魂伤提高15%。"
+          },
+          {
+            "id": "tide-call-the-name",
+            "layerId": "1",
+            "name": "唤名成痕",
+            "description": "一叹命中带有忘川的目标时，术伤提高20%并额外获得1点魂火，每回合最多一次。"
+          },
+          {
+            "id": "tide-soul-lantern",
+            "layerId": "1",
+            "name": "魂灯初照",
+            "description": "战斗开始时获得1点魂火。"
+          },
+          {
+            "id": "tide-never-ebbs",
+            "layerId": "2",
+            "name": "潮声不歇",
+            "description": "忘川持续时间由2回合提高到3回合。"
+          },
+          {
+            "id": "tide-no-medicine",
+            "layerId": "2",
+            "name": "彼岸无医",
+            "description": "忘川的受治疗削弱由20%提高到30%。"
+          },
+          {
+            "id": "tide-black-water",
+            "layerId": "2",
+            "name": "黑水浸魄",
+            "description": "带有忘川的目标速度额外降低8%。"
+          },
+          {
+            "id": "tide-three-souls-far",
+            "layerId": "3",
+            "name": "三魂皆远",
+            "description": "蚀魂3层与4层的气血上限与攻防削弱提高到10%与15%。"
+          },
+          {
+            "id": "tide-herbs-fail",
+            "layerId": "3",
+            "name": "药石难入",
+            "description": "蚀魂3层与4层的受治疗削弱提高到40%与60%。"
+          },
+          {
+            "id": "tide-crossing-echo",
+            "layerId": "3",
+            "name": "渡口回声",
+            "description": "每回合第一次对至少4层目标结算忘川时，追加0.12倍法攻魂伤。"
+          },
+          {
+            "id": "tide-no-return-current",
+            "layerId": "4",
+            "name": "江流不返",
+            "description": "忘川对至少4层目标造成的持续魂伤总计提高45%。"
+          },
+          {
+            "id": "tide-cleanse-toll",
+            "layerId": "4",
+            "name": "洗魂有价",
+            "description": "敌人驱散蚀魂层数后受到0.12倍法攻魂伤，自身获得1点魂火，每次行动最多一次。"
+          },
+          {
+            "id": "tide-shoreless",
+            "layerId": "4",
+            "name": "两岸俱失",
+            "description": "不归的速度降低由30%提高到40%；魂兮不归命中后额外获得1点魂火。"
+          },
+          {
+            "id": "tide-hundred-ghosts",
+            "layerId": "5",
+            "name": "百鬼同哭",
+            "description": "目标每次进入5层时追加0.30倍法攻魂伤，同一目标每3回合最多一次。"
+          },
+          {
+            "id": "tide-dream-invasion",
+            "layerId": "5",
+            "name": "魂梦相侵",
+            "description": "目标进入5层时刷新忘川，并立即额外结算一次基础忘川魂伤。"
+          },
+          {
+            "id": "tide-last-ferry",
+            "layerId": "5",
+            "name": "末渡无舟",
+            "description": "带有忘川的目标进入5层时，额外失去10%最大法力。"
+          },
+          {
+            "id": "tide-embers-remain",
+            "layerId": "ultimate",
+            "name": "不归亦不散",
+            "description": "魂兮不归结算后保留2层蚀魂。"
+          },
+          {
+            "id": "tide-lament-deepens",
+            "layerId": "ultimate",
+            "name": "楚些成悲",
+            "description": "魂兮不归每层追加魂伤由0.20提高到0.24。"
+          },
+          {
+            "id": "tide-burial-current",
+            "layerId": "ultimate",
+            "name": "黑潮送行",
+            "description": "魂兮不归结算后给目标施加2回合忘川。"
+          }
+        ]
+      },
+      {
+        "id": "decree",
+        "name": "镇魄司命",
+        "description": "见影而知魂，知魂而书名；铁钉落下之前，门人已量过每一道离身缝隙。",
+        "tactics": [
+          {
+            "id": "pin-the-caster",
+            "name": "钉法者",
+            "description": "优先照影并压制敌方术者，在关键窗口镇魂。"
+          },
+          {
+            "id": "judge-at-four",
+            "name": "四层判决",
+            "description": "集中单一目标，达到终结要求立即裁决；司命判词可提前到三层。"
+          },
+          {
+            "id": "take-the-fifth",
+            "name": "取其第五",
+            "description": "优先触发失魂，再在归窍窗口储存魂火。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "decree-iron-enters-shadow",
+            "layerId": "1",
+            "name": "铁入其影",
+            "description": "夺魄与镇魂的术伤、魂伤各提高20%。"
+          },
+          {
+            "id": "decree-see-true-name",
+            "layerId": "1",
+            "name": "见影知名",
+            "description": "照影持续时间提高到4回合。"
+          },
+          {
+            "id": "decree-guard-the-spirit",
+            "layerId": "1",
+            "name": "守神如城",
+            "description": "控制抗性额外提高10个百分点。"
+          },
+          {
+            "id": "decree-first-soul-taken",
+            "layerId": "2",
+            "name": "一魄先夺",
+            "description": "夺魄的降攻提高到25%，持续时间提高到3回合。"
+          },
+          {
+            "id": "decree-silent-nail",
+            "layerId": "2",
+            "name": "钉下无声",
+            "description": "镇魂法力消耗降低40点。"
+          },
+          {
+            "id": "decree-bright-prison-fire",
+            "layerId": "2",
+            "name": "狱火照名",
+            "description": "三点魂火的直接魂伤增幅由25%提高到35%。"
+          },
+          {
+            "id": "decree-three-souls-leave",
+            "layerId": "3",
+            "name": "三魂离座",
+            "description": "离魂引对至少3层目标的增伤由50%提高到70%。"
+          },
+          {
+            "id": "decree-fix-form-first",
+            "layerId": "3",
+            "name": "先定其形",
+            "description": "每场首次命中照影目标的幽都铺层神通额外增加1层蚀魂。"
+          },
+          {
+            "id": "decree-dead-heart-counter",
+            "layerId": "3",
+            "name": "心寂反照",
+            "description": "心死神活首次解控时获得2点魂火；每回合首次成功抵抗控制也获得2点。"
+          },
+          {
+            "id": "decree-four-gates-closed",
+            "layerId": "4",
+            "name": "四门皆闭",
+            "description": "镇魂命中施法前至少4层目标时，追加0.20倍法攻魂伤，并令其速度降低20%两回合。"
+          },
+          {
+            "id": "decree-punishment-measured",
+            "layerId": "4",
+            "name": "魂刑有度",
+            "description": "失魂被抵抗或控制免疫阻止时，目标攻击与速度仍降低20%两回合。"
+          },
+          {
+            "id": "decree-iron-law",
+            "layerId": "4",
+            "name": "幽都铁律",
+            "description": "对至少4层蚀魂目标施加控制时，控制命中提高15个百分点。"
+          },
+          {
+            "id": "decree-five-souls-scattered",
+            "layerId": "5",
+            "name": "五魄俱散",
+            "description": "目标从失魂回落后，攻击额外降低15%两回合。"
+          },
+          {
+            "id": "decree-returning-barrier",
+            "layerId": "5",
+            "name": "神归有垣",
+            "description": "心死神活首次解控后，获得15%最大气血护盾。"
+          },
+          {
+            "id": "decree-one-name-one-judgment",
+            "layerId": "5",
+            "name": "一名一判",
+            "description": "目标首次进入4层后获得标记；下一次终结命中返还60法力。"
+          },
+          {
+            "id": "decree-verdict",
+            "layerId": "ultimate",
+            "name": "司命判词",
+            "description": "魂兮不归基础魂伤由0.70提高到0.85，并可对3层蚀魂目标施放。"
+          },
+          {
+            "id": "decree-seven-inch-severance",
+            "layerId": "ultimate",
+            "name": "七寸断魂",
+            "description": "魂兮不归每层追加魂伤由0.20提高到0.25。"
+          },
+          {
+            "id": "decree-name-in-youdu",
+            "layerId": "ultimate",
+            "name": "名落幽都",
+            "description": "终结后目标低于35%气血时获得3魂火并返还2回合冷却，每场一次。"
+          }
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "soul-severing-call",
+        "name": "离魂引",
+        "description": "循一声呼唤牵动游魂，魂愈远，越容易被引出形骸。",
+        "methodId": "three-souls-separation",
+        "methodName": "《三魂离合篇》",
+        "unlockRequirement": "《三魂离合篇》1级",
+        "level": 1
+      },
+      {
+        "id": "reveal-shadow",
+        "name": "照影",
+        "description": "影者，魂之迹也；见影如见魂。",
+        "methodId": "three-souls-separation",
+        "methodName": "《三魂离合篇》",
+        "unlockRequirement": "《三魂离合篇》5级",
+        "level": 5
+      },
+      {
+        "id": "forgetful-river-tide",
+        "name": "忘川潮",
+        "description": "黑水无舟，闻潮者各自忘归。",
+        "methodId": "forgetful-river-record",
+        "methodName": "《忘川渡夜录》",
+        "unlockRequirement": "《忘川渡夜录》3级",
+        "level": 3
+      },
+      {
+        "id": "seize-soul",
+        "name": "夺魄",
+        "description": "七魄去其一，如灯灭一盏。",
+        "methodId": "seven-souls-seizure",
+        "methodName": "《七魄夺形法》",
+        "unlockRequirement": "《七魄夺形法》3级",
+        "level": 3
+      },
+      {
+        "id": "pin-soul",
+        "name": "镇魂",
+        "description": "以幽都之铁钉住影迹，镇汝魂魄，不得妄动。",
+        "methodId": "soul-pinning-ironbook",
+        "methodName": "《镇魂铁册》",
+        "unlockRequirement": "《镇魂铁册》5级",
+        "level": 5
+      },
+      {
+        "id": "soul-shall-not-return",
+        "name": "魂兮不归",
+        "description": "归来的呼声止于黑水，此后魂行千里，再无归路。",
+        "methodId": "youdu-canon",
+        "methodName": "《幽都魂典》",
+        "unlockRequirement": "《幽都魂典》10级",
+        "level": 10
+      }
+    ]
+  },
+  "jiujie": {
+    "name": "九劫天宫",
+    "mapTitle": "雷墟天阙",
+    "mapDescription": "雷池为心，九门为界。",
+    "announcement": "雷池今夜三次合鸣，劫簿殿已封存旧页。弟子行经天阶，须先听雷，再入宫门。",
+    "aspectRatio": 1.5,
+    "onboarding": {
+      "summary": "引天听记录众生出手，以身承劫，或以簿定罪；待劫数归于九霄，再作最后清算。",
+      "traits": [
+        "天听记行",
+        "劫雷不散",
+        "承劫定罪"
+      ],
+      "script": {
+        "id": "jiujie-onboarding",
+        "title": "雷池听劫",
+        "theme": "steel",
+        "backdrop": {
+          "src": "/assets/sect/onboarding/jiujie.webp",
+          "alt": "九劫天宫中天雷池前，新弟子接受执簿天官验名，远处九重天宫悬于云海雷光之上"
+        },
+        "acts": [
+          {
+            "id": "ascend-heaven-stair",
+            "title": "登天有阶",
+            "scene": "九劫天宫 · 引雷天阶",
+            "body": "你沿着悬在云海之上的石阶上行。阶下是无边云海，阶上没有迎客钟，也没有引路童子。只有远处宫阙之间，一道道雷光按着相同的间隔落下，像有人正在天上校准一座看不见的法阵。",
+            "speaker": "守天阶：“天宫不问来者从何处来。登上这九重天阶，便要让天听知道你将如何行事。”",
+            "backgroundPosition": "50% 46%",
+            "tone": "mist"
+          },
+          {
+            "id": "thunder-pool-verdict",
+            "title": "雷池验名",
+            "scene": "九劫天宫 · 中天雷池",
+            "body": "雷池中央立着一方空白石碑。执簿天官将你的姓名写上去，墨迹尚未干透，天雷便从云层深处垂落。雷光没有击碎石碑，只在碑面留下第一道细密的雷痕。",
+            "speaker": "执簿天官：“天威不替你行事。它只记下你已经做过的事。”",
+            "backgroundPosition": "50% 60%",
+            "tone": "steel"
+          },
+          {
+            "id": "calamity-eye",
+            "title": "劫眼临身",
+            "scene": "九劫天宫 · 劫眼峰",
+            "body": "左侧劫眼峰上的阵纹忽然睁开。雷光落在你的身上，并未立刻消散，而是沿着衣袍与经脉留下的雷痕缓缓回流。你感受到的不是一击，而是一场尚未结束的劫。",
+            "speaker": "劫眼峰长老：“若以自身为劫眼，便要先学会承受。来力经过你，才知道该归向何处。”",
+            "backgroundPosition": "24% 48%",
+            "tone": "ember"
+          },
+          {
+            "id": "heavenly-condemnation",
+            "title": "天谴加身",
+            "scene": "九劫天宫 · 天谴司",
+            "body": "右侧天谴司内，数枚雷简依次浮起。有人挥掌，雷简记下伤害；有人施术护持，雷简记下增益；有人试图封住来路，雷简便留下控制的判印。相同的雷痕再次出现时，第二道墨色判印随之落下。",
+            "speaker": "司谴官：“天宫不禁你出手。只是同一条路若再走一次，便不能说自己不知它通向何处。”",
+            "backgroundPosition": "76% 48%",
+            "tone": "steel"
+          },
+          {
+            "id": "nine-gates-entry",
+            "title": "九门入宫",
+            "scene": "九劫天宫 · 九劫天门",
+            "body": "你回到雷池中央。石碑上的雷痕已经不再空白：有的沿着你的身躯回流，有的沉入天谴司的雷简。九座天门同时亮起，却只开启了最下方的一重。",
+            "speaker": "宫门内：“我不求无劫，只求劫有所归。今日入宫，先听一雷。”",
+            "backgroundPosition": "50% 38%",
+            "tone": "mist"
+          }
+        ]
+      }
+    },
+    "facilityLabels": {
+      "archive": "劫簿殿",
+      "cultivation_room": "渡厄静室",
+      "workshop": "断劫炉",
+      "spirit_vein": "雷髓晶矿",
+      "herb_garden": "天听木圃",
+      "formation": "渡厄天梯",
+      "alchemy": "听雷丹房",
+      "refinery": "断劫炉"
+    },
+    "rooms": {
+      "affairs": {
+        "description": "堂中卷宗分由三席执事经办。寻到对应执事，便可询问、接办或交回当前事务。",
+        "actors": [
+          {
+            "id": "jiujie-daily",
+            "roleKey": "daily",
+            "sigil": "执",
+            "name": "照雷执事",
+            "identity": "值日执事",
+            "responsibility": "负责日常委托。",
+            "greeting": "今日雷声平稳，日常事务可依劫簿次序领取。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "daily"
+            }
+          },
+          {
+            "id": "jiujie-weekly",
+            "roleKey": "weekly",
+            "sigil": "簿",
+            "name": "守簿翁",
+            "identity": "功簿执事",
+            "responsibility": "负责周常委托。",
+            "greeting": "周常卷宗已按雷痕归档，想查哪一卷？",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "weekly"
+            }
+          },
+          {
+            "id": "jiujie-promotion",
+            "roleKey": "promotion",
+            "sigil": "传",
+            "name": "九门长老",
+            "identity": "传功长老",
+            "responsibility": "负责晋升试炼。",
+            "greeting": "晋升之前，先问你是否敢直面自己的劫。",
+            "appearance": "person",
+            "conversationRenderer": "sect.affairs.tasks",
+            "conversationParameters": {
+              "kind": "promotion"
+            }
+          }
+        ]
+      },
+      "hall": {
+        "description": "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。",
+        "actors": [
+          {
+            "id": "jiujie-registry",
+            "roleKey": "registry",
+            "sigil": "掌",
+            "name": "司雷",
+            "identity": "掌籍执事",
+            "responsibility": "负责弟子身份与同门名录。",
+            "greeting": "身份与名册均已听雷登记。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.registry"
+          },
+          {
+            "id": "jiujie-stipend",
+            "roleKey": "stipend",
+            "sigil": "俸",
+            "name": "听劫",
+            "identity": "俸禄执事",
+            "responsibility": "负责核算和发放宗门周俸。",
+            "greeting": "周俸按雷池规矩发放。",
+            "appearance": "person",
+            "conversationRenderer": "sect.hall.stipend"
+          }
+        ]
+      },
+      "treasury": {
+        "description": "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。",
+        "actors": [
+          {
+            "id": "jiujie-treasury",
+            "roleKey": "keeper",
+            "sigil": "库",
+            "name": "衡天",
+            "identity": "司库执事",
+            "responsibility": "负责宝库库存与贡献兑换。",
+            "greeting": "贡献与库藏皆有天平。",
+            "appearance": "person",
+            "conversationRenderer": "sect.treasury.shop"
+          }
+        ]
+      },
+      "industries": {
+        "description": "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。",
+        "actors": [
+          {
+            "id": "jiujie-construction",
+            "roleKey": "construction",
+            "sigil": "造",
+            "name": "营造监",
+            "identity": "营造执事",
+            "responsibility": "负责各处设施等级与建设进度。",
+            "greeting": "雷台与天阶的修缮均已列入簿册。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.construction"
+          },
+          {
+            "id": "jiujie-donation",
+            "roleKey": "donation",
+            "sigil": "石",
+            "name": "捐献使",
+            "identity": "建设执事",
+            "responsibility": "负责灵石捐献与建设登记。",
+            "greeting": "灵石可助天宫修复旧阵。",
+            "appearance": "person",
+            "conversationRenderer": "sect.industries.donation"
+          }
+        ]
+      },
+      "archive": {
+        "description": "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。",
+        "actors": [
+          {
+            "id": "jiujie-archive",
+            "roleKey": "keeper",
+            "sigil": "阁",
+            "name": "掌卷",
+            "identity": "守阁长老",
+            "responsibility": "负责心法经卷与研习。",
+            "greeting": "劫簿殿只收能经得起天听的记录。",
+            "appearance": "person",
+            "conversationRenderer": "sect.archive.methods"
+          }
+        ]
+      },
+      "paths": {
+        "description": "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。",
+        "actors": [
+          {
+            "id": "jiujie-guide",
+            "roleKey": "guide",
+            "sigil": "引",
+            "name": "引路天官",
+            "identity": "引道长老",
+            "responsibility": "负责流派选择与参悟引导。",
+            "greeting": "两道劫法，皆从同一声雷开始。",
+            "appearance": "person",
+            "conversationRenderer": "sect.paths.guidance"
+          }
+        ]
+      },
+      "arena": {
+        "description": "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。",
+        "actors": [
+          {
+            "id": "jiujie-instructor",
+            "roleKey": "instructor",
+            "sigil": "武",
+            "name": "演武教习",
+            "identity": "演武教习",
+            "responsibility": "负责神通配置与自动战术。",
+            "greeting": "先挂雷，再看对手是否仍要出手。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.loadout"
+          },
+          {
+            "id": "jiujie-marshal",
+            "roleKey": "marshal",
+            "sigil": "场",
+            "name": "执刑",
+            "identity": "值场执事",
+            "responsibility": "负责演武场秩序与入场引导。",
+            "greeting": "雷台只记行动，不记借口。",
+            "appearance": "person",
+            "conversationRenderer": "sect.arena.marshal"
+          },
+          {
+            "id": "sect-arena-ring",
+            "roleKey": "ring",
+            "sigil": "⚔️",
+            "name": "宗门擂台",
+            "identity": "宗门设施",
+            "responsibility": "开启宗门小比战局。",
+            "greeting": "擂台阵纹已归位，有小比在身便可登台。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.arena.tournament",
+            "conversationParameters": {
+              "locationKey": "sect.arena"
+            }
+          }
+        ]
+      },
+      "cultivation": {
+        "description": "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。",
+        "actors": [
+          {
+            "id": "jiujie-cultivation",
+            "roleKey": "keeper",
+            "sigil": "阵",
+            "name": "守静",
+            "identity": "守阵执事",
+            "responsibility": "负责聚灵阵与闭关安排。",
+            "greeting": "闭关之前，先让心神渡过雷声。",
+            "appearance": "person",
+            "conversationRenderer": "sect.cultivation.retreat"
+          }
+        ]
+      },
+      "alchemy": {
+        "description": "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。",
+        "actors": [
+          {
+            "id": "jiujie-alchemy",
+            "roleKey": "keeper",
+            "sigil": "丹",
+            "name": "听雷丹师",
+            "identity": "丹房执事",
+            "responsibility": "负责丹房状态与炼丹安排。",
+            "greeting": "雷髓入炉，火候须听天声。",
+            "appearance": "person",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "请执事说说丹房灵效",
+              "workspaceReply": "有劳执事为我开炉炼丹"
+            }
+          },
+          {
+            "id": "sect-alchemy-furnace",
+            "roleKey": "furnace",
+            "sigil": "鼎",
+            "name": "宗门丹炉",
+            "identity": "炼丹设施",
+            "responsibility": "纳药、引火、聚蕴、凝丹。",
+            "greeting": "炉腹传来低沉回响，地火阵纹正等待灵石与药气。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.alchemy.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "alchemy",
+              "workspaceHref": "/game/sect/alchemy?workspace=craft",
+              "statusReply": "以神识察看丹炉灵效",
+              "workspaceReply": "唤醒丹炉，开始炼丹"
+            }
+          }
+        ]
+      },
+      "refinery": {
+        "description": "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。",
+        "actors": [
+          {
+            "id": "jiujie-refinery",
+            "roleKey": "keeper",
+            "sigil": "器",
+            "name": "断劫使",
+            "identity": "器坊执事",
+            "responsibility": "负责器坊状态与炼器安排。",
+            "greeting": "旧劫铁已经分拣完毕。",
+            "appearance": "person",
+            "conversationRenderer": "sect.refinery.craft",
+            "conversationParameters": {
+              "facilityKey": "workshop",
+              "effectKey": "refinery",
+              "workspaceHref": "/game/sect/refinery?workspace=craft",
+              "statusReply": "请执事说说器坊灵效",
+              "workspaceReply": "有劳执事为我开炉炼器"
+            }
+          }
+        ]
+      },
+      "spiritVein": {
+        "description": "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。",
+        "actors": [
+          {
+            "id": "jiujie-vein",
+            "roleKey": "keeper",
+            "sigil": "脉",
+            "name": "雷髓监",
+            "identity": "守脉执事",
+            "responsibility": "负责矿场巡视交接。",
+            "greeting": "今日雷髓晶脉没有异常。",
+            "appearance": "person",
+            "conversationRenderer": "sect.spirit-vein.patrol",
+            "conversationParameters": {
+              "locationKey": "sect.spirit-vein"
+            }
+          },
+          {
+            "id": "jiujie-pool",
+            "roleKey": "facility",
+            "sigil": "⛏️",
+            "name": "中天雷池",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级、灵石收益并进行灵矿采掘。",
+            "greeting": "雷池中心的白光一息未停。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.spirit-vein.mining",
+            "conversationParameters": {
+              "facilityKey": "spirit_vein",
+              "effectKey": "spirit_vein",
+              "detail": "灵石收益会随周俸一并核算，无需在矿场另行采收。"
+            }
+          }
+        ]
+      },
+      "herbGarden": {
+        "description": "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。",
+        "actors": [
+          {
+            "id": "jiujie-garden",
+            "roleKey": "keeper",
+            "sigil": "药",
+            "name": "守园",
+            "identity": "药园执事",
+            "responsibility": "负责草木长势与周期产出。",
+            "greeting": "天听木的枝叶又记下了一夜雷声。",
+            "appearance": "person",
+            "conversationRenderer": "sect.herb-garden.caretaker",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。",
+              "stages": [
+                "新畦初醒",
+                "灵苗成行",
+                "药香盈陌",
+                "四时不歇",
+                "百草丰登"
+              ]
+            }
+          },
+          {
+            "id": "jiujie-wood",
+            "roleKey": "facility",
+            "sigil": "🌿",
+            "name": "天听木圃",
+            "identity": "宗门设施",
+            "responsibility": "查看设施等级与药田近况。",
+            "greeting": "古木不倒，正好承接余雷。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.herb-garden.status",
+            "conversationParameters": {
+              "facilityKey": "herb_garden",
+              "effectKey": "herb_garden",
+              "detail": "药田产出玩法后续开放。"
+            }
+          }
+        ]
+      },
+      "gate": {
+        "description": "山门内外人声往来，守山执事在门侧整理当日来往记录。",
+        "actors": [
+          {
+            "id": "jiujie-gatekeeper",
+            "roleKey": "keeper",
+            "sigil": "门",
+            "name": "守天阶",
+            "identity": "守山执事",
+            "responsibility": "负责山门动态与来往记录。",
+            "greeting": "拜帖与来意一致，方可登阶。",
+            "appearance": "person",
+            "conversationRenderer": "sect.gate.news"
+          },
+          {
+            "id": "jiujie-gate",
+            "roleKey": "facility",
+            "sigil": "⛰️",
+            "name": "九劫天阶",
+            "identity": "宗门设施",
+            "responsibility": "进入山门步道完成清扫。",
+            "greeting": "天阶尽头仍有八门未开。",
+            "appearance": "facility",
+            "conversationRenderer": "sect.gate.sweep"
+          }
+        ]
+      },
+      "formation": {
+        "description": "护宗阵枢仍在封禁之中。",
+        "actors": [
+          {
+            "id": "warden",
+            "roleKey": "warden",
+            "sigil": "护",
+            "name": "护阵长老",
+            "identity": "护阵长老",
+            "responsibility": "负责护宗阵法管理。",
+            "greeting": "阵枢尚未开放，今日无需入内。",
+            "appearance": "person",
+            "conversationRenderer": "sect.formation.status"
+          }
+        ]
+      }
+    },
+    "scenes": {
+      "map": {
+        "title": "雷墟天阙",
+        "description": "雷池为心，九门为界。"
+      },
+      "hall": {
+        "title": "宗门大殿",
+        "description": "身份、俸禄、晋升与同门名册均在此查验。"
+      },
+      "affairs": {
+        "title": "事务堂",
+        "description": "宗门日常、周常与晋升事务均在此领取和交付。"
+      },
+      "archive": {
+        "title": "传承阁",
+        "description": "宗门心法依传承次第收录，可在此逐卷研习。"
+      },
+      "paths": {
+        "title": "悟道处",
+        "description": "选择流派，并为已解锁层级配置参悟节点。"
+      },
+      "arena": {
+        "title": "演武场",
+        "description": "配置已解锁神通与自动战术，检视当前构筑效果。"
+      },
+      "treasury": {
+        "title": "宗门宝库",
+        "description": "使用宗门贡献兑换常备物资与轮换珍材。"
+      },
+      "industries": {
+        "title": "建设院",
+        "description": "选择宗门设施并捐献灵石，推进常态建设。"
+      },
+      "cultivation": {
+        "title": "修炼室",
+        "description": "使用宗门修炼设施进行闭关。"
+      },
+      "alchemy": {
+        "title": "丹房",
+        "description": "使用宗门丹房炼制丹药。"
+      },
+      "refinery": {
+        "title": "器坊",
+        "description": "使用宗门器坊炼制法器。"
+      },
+      "spiritVein": {
+        "title": "灵脉",
+        "description": "查看灵脉设施收益并办理矿场事务。"
+      },
+      "herbGarden": {
+        "title": "药田",
+        "description": "查看药田设施提供的周期产出。"
+      },
+      "gate": {
+        "title": "山门",
+        "description": "查看宗门近期动态与公共事务。"
+      },
+      "cave": {
+        "title": "弟子居所",
+        "description": "查看你在宗门中的个人居所资格。"
+      },
+      "taskBattle": {
+        "title": "宗门战局",
+        "description": "完成当前宗门战斗事务。"
+      }
+    },
+    "hotspots": [
+      {
+        "id": "hall",
+        "label": "中天雷池",
+        "note": "身份 · 同门 · 周俸",
+        "route": "/game/sect/hall",
+        "permission": "sect.hall.view",
+        "position": [
+          50,
+          50
+        ]
+      },
+      {
+        "id": "archive",
+        "label": "劫簿殿",
+        "note": "心法研习",
+        "route": "/game/sect/archive",
+        "permission": "sect.archive.use",
+        "facility": "archive",
+        "position": [
+          50,
+          8
+        ]
+      },
+      {
+        "id": "cliff",
+        "label": "劫眼峰",
+        "note": "劫眼临身 · 流派参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          17,
+          31
+        ]
+      },
+      {
+        "id": "condemnation",
+        "label": "天谴司",
+        "note": "天谴加身 · 流派参悟",
+        "route": "/game/sect/enlightenment-cliff",
+        "permission": "sect.enlightenment.use",
+        "position": [
+          82,
+          31
+        ]
+      },
+      {
+        "id": "affairs",
+        "label": "引雷天阶",
+        "note": "日常 · 周常 · 晋升",
+        "route": "/game/sect/affairs",
+        "permission": "sect.tasks.use",
+        "position": [
+          50,
+          71
+        ]
+      },
+      {
+        "id": "arena",
+        "label": "雷台演武场",
+        "note": "神通 · 战术 · 小比",
+        "route": "/game/sect/arena",
+        "permission": "sect.arena.use",
+        "position": [
+          50,
+          28
+        ]
+      },
+      {
+        "id": "treasury",
+        "label": "天衡库",
+        "note": "贡献兑换",
+        "route": "/game/sect/treasury",
+        "permission": "sect.shop.use",
+        "position": [
+          74,
+          42
+        ]
+      },
+      {
+        "id": "industries",
+        "label": "营造司",
+        "note": "设施建设 · 灵石捐献",
+        "route": "/game/sect/industries",
+        "permission": "sect.construction.view",
+        "position": [
+          82,
+          73
+        ]
+      },
+      {
+        "id": "cultivation",
+        "label": "渡厄静室",
+        "note": "闭关修炼 · 设施灵效",
+        "route": "/game/sect/cultivation-room",
+        "permission": "sect.facility.cultivation.use",
+        "facility": "cultivation_room",
+        "position": [
+          38,
+          14
+        ]
+      },
+      {
+        "id": "alchemy",
+        "label": "听雷丹房",
+        "note": "炼丹 · 设施灵效",
+        "route": "/game/sect/alchemy",
+        "permission": "sect.facility.alchemy.use",
+        "facility": "workshop",
+        "position": [
+          67,
+          14
+        ]
+      },
+      {
+        "id": "refinery",
+        "label": "断劫炉",
+        "note": "炼器 · 设施灵效",
+        "route": "/game/sect/refinery",
+        "permission": "sect.facility.refinery.use",
+        "facility": "workshop",
+        "position": [
+          89,
+          48
+        ]
+      },
+      {
+        "id": "vein",
+        "label": "雷髓晶矿",
+        "note": "矿场巡视 · 灵石收益 · 采矿",
+        "route": "/game/sect/spirit-vein",
+        "permission": "sect.spirit_vein.view",
+        "facility": "spirit_vein",
+        "position": [
+          17,
+          67
+        ]
+      },
+      {
+        "id": "garden",
+        "label": "天听木圃",
+        "note": "草木长势 · 产出待开放",
+        "route": "/game/sect/herb-garden",
+        "permission": "sect.herb_garden.view",
+        "facility": "herb_garden",
+        "position": [
+          9,
+          80
+        ]
+      },
+      {
+        "id": "gate",
+        "label": "九劫天门",
+        "note": "山门动态 · 清扫差事",
+        "route": "/game/sect/gate",
+        "permission": "sect.gate.view",
+        "visitor": {
+          "description": "九劫天门尚未全开，外客只能在山门外递交拜帖。"
+        },
+        "position": [
+          50,
+          88
+        ]
+      },
+      {
+        "id": "cave",
+        "label": "雷隐居",
+        "note": "弟子居所",
+        "route": "/game/sect/cave",
+        "permission": "sect.cave.view",
+        "position": [
+          29,
+          79
+        ]
+      },
+      {
+        "id": "formation",
+        "label": "渡厄天梯",
+        "note": "宗门战后续开放",
+        "permission": "sect.formation.view",
+        "facility": "formation",
+        "locked": true,
+        "visitor": {
+          "description": "九重天门尚未开启，外客只能在天阶尽头听见雷声。"
+        },
+        "position": [
+          61,
+          23
+        ]
+      }
+    ],
+    "methods": [
+      {
+        "id": "jiujie-canon",
+        "name": "《九劫天书》",
+        "description": "总录九劫法度，执雷而不滥刑。",
+        "primary": true
+      },
+      {
+        "id": "calamity-eye",
+        "name": "《劫眼观世》",
+        "description": "以身为劫眼，观来力而承其灾。"
+      },
+      {
+        "id": "heavenly-record",
+        "name": "《天谴录》",
+        "description": "以天听辨行为，以劫簿记主罪。"
+      },
+      {
+        "id": "thunder-prison",
+        "name": "《雷狱镇魂》",
+        "description": "雷狱穿透护持，使天罚不为法障所蔽。"
+      },
+      {
+        "id": "cause-judgment",
+        "name": "《因果问罪》",
+        "description": "问因果、收劫债，留足清算天威。"
+      },
+      {
+        "id": "crossing-calamity",
+        "name": "《渡劫归真》",
+        "description": "渡劫之后仍守法身，不以天威伤己。"
+      }
+    ],
+    "paths": [
+      {
+        "id": "calamity-eye",
+        "name": "劫眼临身",
+        "description": "以身为劫眼，将敌人的来力、自己的伤势与天雷标记串成因果，再决定反击、护命或重开劫眼。",
+        "tactics": [
+          {
+            "id": "bear-and-return",
+            "name": "承灾归劫",
+            "description": "先开启劫眼承受爆发，积满劫数后立即清算。"
+          },
+          {
+            "id": "close-the-eye",
+            "name": "闭目守劫",
+            "description": "低血时借劫护身，其余时间保留劫数等待清算。"
+          },
+          {
+            "id": "eye-of-thunder",
+            "name": "劫眼照身",
+            "description": "开启劫眼后优先落印，持续追问照见者。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "eye-open",
+            "layerId": "1",
+            "name": "开门迎劫",
+            "description": "施展《承天受劫》时获得8%最大气血护盾；该护盾在承劫期间破裂时获得1点劫数，每次施法最多一次。"
+          },
+          {
+            "id": "eye-bear",
+            "layerId": "1",
+            "name": "承灾留名",
+            "description": "劫眼第一次照见攻击者时额外反击0.15倍法攻雷伤；若其没有劫雷则施加劫雷，若已有劫雷则增加1层劫债。"
+          },
+          {
+            "id": "eye-first-light",
+            "layerId": "1",
+            "name": "雷光护心",
+            "description": "每次劫眼存续期间第一次受到直接伤害后，获得5%最大气血护盾，并额外获得1点劫数。"
+          },
+          {
+            "id": "eye-record",
+            "layerId": "2",
+            "name": "血甲同书",
+            "description": "承劫量可以记录护盾吸收的直接伤害；记录上限提高至自身最大气血的70%。"
+          },
+          {
+            "id": "eye-question",
+            "layerId": "2",
+            "name": "问劫寻隙",
+            "description": "《雷狱问行》命中照见目标时，额外推进1层劫债，并使《承天受劫》当前冷却减少1回合。"
+          },
+          {
+            "id": "eye-return",
+            "layerId": "2",
+            "name": "借劫续门",
+            "description": "《借劫回身》令当前劫眼和承天受劫各延长1回合；没有对应状态时不补开状态。"
+          },
+          {
+            "id": "eye-guard",
+            "layerId": "3",
+            "name": "不退天门",
+            "description": "承天受劫期间，气血低于40%时首次受到直接伤害，消耗1点劫数使该次伤害额外降低20%；每回合最多一次。"
+          },
+          {
+            "id": "eye-deep-return",
+            "layerId": "3",
+            "name": "劫威反震",
+            "description": "劫眼期间每回合第一次受到直接伤害后，对攻击者造成0.20倍法攻的雷属性反击伤害。"
+          },
+          {
+            "id": "eye-still",
+            "layerId": "3",
+            "name": "静候雷来",
+            "description": "若一整个回合内劫眼没有记录到直接伤害，则回合结束时获得1点劫数，并使《承天受劫》冷却减少1回合。"
+          },
+          {
+            "id": "eye-long-gaze",
+            "layerId": "4",
+            "name": "众劫归一",
+            "description": "《因果回响》命中照见目标时，额外释放当前承劫量的20%作为追击雷伤，但不消耗承劫量；每回合最多一次。"
+          },
+          {
+            "id": "eye-heavy-thunder",
+            "layerId": "4",
+            "name": "雷狱追身",
+            "description": "《雷狱问行》命中照见目标时追加0.25倍法攻雷伤，并将劫眼刷新1回合。"
+          },
+          {
+            "id": "eye-shelter",
+            "layerId": "4",
+            "name": "劫甲回生",
+            "description": "《借劫回身》的护盾破裂时，恢复6%最大气血，并为破盾者施加或刷新劫雷；每个护盾最多触发一次。"
+          },
+          {
+            "id": "eye-true-record",
+            "layerId": "5",
+            "name": "真劫入簿",
+            "description": "《九霄清算》的承劫量以45%比例转为无属性真实伤害。"
+          },
+          {
+            "id": "eye-returning-law",
+            "layerId": "5",
+            "name": "劫尽身还",
+            "description": "《九霄清算》除造成承劫伤害外，再将承劫量的25%转为自身治疗。"
+          },
+          {
+            "id": "eye-after-rain",
+            "layerId": "5",
+            "name": "清算留门",
+            "description": "消耗3点劫数施展《九霄清算》后，重新获得1回合劫眼和基础承天受劫。"
+          },
+          {
+            "id": "eye-nine-gates",
+            "layerId": "ultimate",
+            "name": "九门归劫",
+            "description": "《九霄清算》以100%比例释放承劫量；若承劫量达到记录上限，额外推进目标1层劫债。"
+          },
+          {
+            "id": "eye-heavenly-shield",
+            "layerId": "ultimate",
+            "name": "身为天门",
+            "description": "《九霄清算》释放承劫伤害的同时，将承劫量的60%转为护盾，持续2回合。"
+          },
+          {
+            "id": "eye-calamity-without-end",
+            "layerId": "ultimate",
+            "name": "劫后再开",
+            "description": "《九霄清算》后获得2回合劫眼和1回合承天受劫；期间首次受击返还1点劫数，每3回合最多一次。"
+          }
+        ]
+      },
+      {
+        "id": "heavenly-condemnation",
+        "name": "天谴加身",
+        "description": "观察目标如何行动，在重复主罪、改变罪名与退回普通攻击之间立案、追责并终审。",
+        "tactics": [
+          {
+            "id": "record-and-judge",
+            "name": "记罪清算",
+            "description": "先施劫雷，再等待目标重复主罪后清算。"
+          },
+          {
+            "id": "heavy-statute",
+            "name": "重典",
+            "description": "优先催审满债目标，再以终式兑现判词。"
+          },
+          {
+            "id": "listen-to-heaven",
+            "name": "天听",
+            "description": "维持劫雷，积累劫数后执行终审。"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "condemnation-record",
+            "layerId": "1",
+            "name": "天听记名",
+            "description": "《天听引雷》命中已有劫雷的目标时增加1层劫债；每个目标每回合最多一次。"
+          },
+          {
+            "id": "condemnation-question",
+            "layerId": "1",
+            "name": "问行取证",
+            "description": "《雷狱问行》命中已有主罪的目标时增加1层重犯并追加0.15倍法攻雷伤，但不触发主罪的即时惩罚；每回合最多一次。"
+          },
+          {
+            "id": "condemnation-first-crime",
+            "layerId": "1",
+            "name": "初罪立案",
+            "description": "目标每次新获得劫雷后，第一次使用非普通攻击的主动神通时，额外给予天宫弟子1点劫数。"
+          },
+          {
+            "id": "condemnation-repeat",
+            "layerId": "2",
+            "name": "伤罪加刑",
+            "description": "目标重复伤罪时，其造成的直接伤害降低12%，持续1回合。"
+          },
+          {
+            "id": "condemnation-heavy-debt",
+            "layerId": "2",
+            "name": "援罪断供",
+            "description": "目标重复援罪时，失去6%最大法力，并受到25%受治疗削弱，持续2回合。"
+          },
+          {
+            "id": "condemnation-long-record",
+            "layerId": "2",
+            "name": "禁罪反照",
+            "description": "目标重复禁罪时，天宫弟子获得30%控制抗性1回合，目标速度降低10%两回合。"
+          },
+          {
+            "id": "condemnation-no-pardon",
+            "layerId": "3",
+            "name": "易罪不赦",
+            "description": "目标在劫雷期间改变主罪类别时增加1层劫债，然后记录新主罪。"
+          },
+          {
+            "id": "condemnation-debt-book",
+            "layerId": "3",
+            "name": "定罪成册",
+            "description": "《劫簿落印》命中已有主罪的目标时将该主罪定案；下一次其他类别神通不会替换主罪。"
+          },
+          {
+            "id": "condemnation-heaven-hearing",
+            "layerId": "3",
+            "name": "庶行有录",
+            "description": "普通攻击仍不增加劫债和重犯，但会令劫雷延长1回合，并使本次基础雷罚提高30%。"
+          },
+          {
+            "id": "condemnation-heavy-statute",
+            "layerId": "4",
+            "name": "重法催审",
+            "description": "《因果回响》命中3层劫债目标时，消耗1层劫债，获得1点劫数并追加0.30倍法攻雷伤。"
+          },
+          {
+            "id": "condemnation-quick-record",
+            "layerId": "4",
+            "name": "疾书追罪",
+            "description": "《劫簿落印》命中已有主罪的目标后，《雷狱问行》冷却减少1回合；每回合最多一次。"
+          },
+          {
+            "id": "condemnation-three-questions",
+            "layerId": "4",
+            "name": "三问成案",
+            "description": "《雷狱问行》命中至少2层劫债目标后施加候审；下一次非普通主动神通按重复主罪结算。"
+          },
+          {
+            "id": "condemnation-reoffend",
+            "layerId": "5",
+            "name": "再犯从重",
+            "description": "《九霄清算》每层重犯的结算伤害额外计入50%强度的劫雷。"
+          },
+          {
+            "id": "condemnation-clear-book",
+            "layerId": "5",
+            "name": "清册留案",
+            "description": "《九霄清算》消费劫债和重犯，但保留当前主罪与劫雷。"
+          },
+          {
+            "id": "condemnation-no-escape",
+            "layerId": "5",
+            "name": "两避成罪",
+            "description": "同一目标在劫雷期间连续两次使用普通攻击时，第二次额外增加1层劫债。"
+          },
+          {
+            "id": "condemnation-final-verdict",
+            "layerId": "ultimate",
+            "name": "三债终审",
+            "description": "对3层劫债目标施展《九霄清算》时只消耗2点劫数，但按3点劫数计算基础清算伤害。"
+          },
+          {
+            "id": "condemnation-nine-crimes",
+            "layerId": "ultimate",
+            "name": "九罪同科",
+            "description": "《九霄清算》根据清算前的主罪追加伤罪、援罪或禁罪判词。"
+          },
+          {
+            "id": "condemnation-heavenly-punishment",
+            "layerId": "ultimate",
+            "name": "天谴不绝",
+            "description": "《九霄清算》后重新施加2回合劫雷和1层劫债，并重新开启立案。"
+          }
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "heaven-hearing",
+        "name": "天听引雷",
+        "description": "造成0.55倍法攻雷伤，并在目标身上留下不可驱散的劫雷。",
+        "methodId": "jiujie-canon",
+        "methodName": "《九劫天书》",
+        "unlockRequirement": "《九劫天书》1级",
+        "level": 1
+      },
+      {
+        "id": "receive-calamity",
+        "name": "承天受劫",
+        "description": "暂承来力，将受过的灾厄记入劫簿。",
+        "methodId": "calamity-eye",
+        "methodName": "《劫眼观世》",
+        "unlockRequirement": "《劫眼观世》1级",
+        "level": 1
+      },
+      {
+        "id": "calamity-seal",
+        "name": "劫簿落印",
+        "description": "造成0.25倍法攻雷伤并落印；目标已有劫雷时，额外增加一层劫债。",
+        "methodId": "heavenly-record",
+        "methodName": "《天谴录》",
+        "unlockRequirement": "《天谴录》1级",
+        "level": 1
+      },
+      {
+        "id": "thunder-prison-question",
+        "name": "雷狱问行",
+        "description": "造成0.65倍法攻雷伤，追问目标仍在劫中的下一步并推进天罚。",
+        "methodId": "thunder-prison",
+        "methodName": "《雷狱镇魂》",
+        "unlockRequirement": "《雷狱镇魂》1级",
+        "level": 1
+      },
+      {
+        "id": "borrow-calamity",
+        "name": "借劫回身",
+        "description": "消耗一分劫数，获得相当于最大气血15%的护盾。",
+        "methodId": "crossing-calamity",
+        "methodName": "《渡劫归真》",
+        "unlockRequirement": "《渡劫归真》1级",
+        "level": 1
+      },
+      {
+        "id": "causal-echo",
+        "name": "因果回响",
+        "description": "造成0.45倍法攻的基础雷伤，并根据劫债追加伤害。",
+        "methodId": "cause-judgment",
+        "methodName": "《因果问罪》",
+        "unlockRequirement": "《因果问罪》5级",
+        "level": 5
+      },
+      {
+        "id": "nine-sky-settlement",
+        "name": "九霄清算",
+        "description": "以劫数为引，清算目标累积的劫债。",
+        "methodId": "jiujie-canon",
+        "methodName": "《九劫天书》",
+        "unlockRequirement": "《九劫天书》10级",
+        "level": 10
+      }
+    ]
+  }
+}

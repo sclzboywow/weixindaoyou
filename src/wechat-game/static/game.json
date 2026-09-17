@@ -1,0 +1,43 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+  "workers": "workers",
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000
+  },
+  "subpackages": [
+    {
+      "name": "game-core",
+      "root": "game-core"
+    },
+    {
+      "name": "game-sect-runtime",
+      "root": "game-sect-runtime"
+    },
+    {
+      "name": "game-training-runtime",
+      "root": "game-training-runtime"
+    },
+    {
+      "name": "game-arena-runtime",
+      "root": "game-arena-runtime"
+    },
+    {
+      "name": "game-spirit-field-runtime",
+      "root": "game-spirit-field-runtime"
+    },
+    {
+      "name": "merit-assets",
+      "root": "merit-assets"
+    },
+    {
+      "name": "official-assets",
+      "root": "official-assets"
+    },
+    {
+      "name": "official-ui",
+      "root": "official-ui"
+    }
+  ]
+}

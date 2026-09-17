@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@app/*": ["./src/react-app/*"],
+      "@server/*": ["./src/server/*"],
+      "@shared/*": ["./src/shared/*"]
+    }
+  },
+  "files": [],
+  "references": [{ "path": "./tsconfig.wechat.json" }]
+}
