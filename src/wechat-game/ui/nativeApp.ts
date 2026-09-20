@@ -240,6 +240,12 @@ import {
   type NativeUser,
   type WechatUserTextContext,
 } from '../core/nativeClient';
+import {
+  clearPendingRewardedClaim,
+  readPendingRewardedClaim,
+  showRewardedVideo,
+  writePendingRewardedClaim,
+} from '../core/rewardedAd';
 import { getWechatOfficialAssetsBridge } from '../features/officialAssetsBridge';
 import { getWechatOfficialUiAssetsBridge } from '../features/officialUiAssetsBridge';
 import { getWechatSectRuntimeBridge } from '../features/sectRuntimeBridge';
@@ -2053,7 +2059,8 @@ export class NativeDaoyouApp {
         return;
       }
       await this.loadHome();
-      this.notice = '';
+      if (readPendingRewardedClaim()) await this.resumePendingRewardedClaim();
+      else this.notice = '';
     } catch (error) {
       console.error('[wechat-game] bootstrap failed', error);
       this.notice = `启动失败：${compact(errorText(error), 34)}`;
@@ -2079,7 +2086,8 @@ export class NativeDaoyouApp {
     try {
       await this.signInWechat();
       await this.loadHome();
-      this.notice = this.needsCharacter ? '微信登录成功，请先推演道身' : '';
+      if (readPendingRewardedClaim()) await this.resumePendingRewardedClaim();
+      else this.notice = this.needsCharacter ? '微信登录成功，请先推演道身' : '';
     } catch (error) {
       this.tokens.clear();
       this.user = null;
@@ -4263,7 +4271,34 @@ export class NativeDaoyouApp {
     }
   }
 
-  private async collectYield(): Promise<void> {
+  private async collectYield(
+    mode: 'normal' | 'rewarded_double' = 'normal',
+  ): Promise<void> {
+    let idempotencyKey: string | undefined;
+    if (mode === 'rewarded_double') {
+      const pending = readPendingRewardedClaim();
+      if (pending && pending.kind !== 'yield-double') {
+        this.notice = '还有一笔已看完的疗伤尚未入账，请先回秘境补领。';
+        this.render();
+        return;
+      }
+      if (pending?.kind === 'yield-double') {
+        idempotencyKey = pending.idempotencyKey;
+      } else {
+        const outcome = await showRewardedVideo('yield-double');
+        if (outcome !== 'completed') {
+          this.notice =
+            outcome === 'dismissed'
+              ? '未看完视频，不会领取双倍。'
+              : '广告暂不可用，可改用普通领取。';
+          this.render();
+          return;
+        }
+        idempotencyKey = requestId();
+        writePendingRewardedClaim({ kind: 'yield-double', idempotencyKey });
+      }
+    }
+
     let resultData: Record<string, unknown> | null = null;
     let story = '';
     let streamError = '';
@@ -4314,20 +4349,140 @@ export class NativeDaoyouApp {
     };
 
     try {
-      await this.api.yieldResources(applyEvent);
+      await this.api.yieldResources(applyEvent, { rewardMode: mode, idempotencyKey });
       if (streamError) throw new Error(streamError);
       if (!resultData || !this.yieldResult) throw new Error('历练结算缺少结果');
       if (!this.yieldResult.story)
         this.yieldResult.story = '此番历练已经落卷。';
+      if (mode === 'rewarded_double') clearPendingRewardedClaim();
       this.resources = await this.api.resources();
       this.notice = '';
       this.render();
     } catch (error) {
+      if (
+        mode === 'rewarded_double' &&
+        error instanceof NativeHttpError &&
+        error.statusCode >= 400 &&
+        error.statusCode < 500
+      ) {
+        clearPendingRewardedClaim();
+      }
       this.yieldResult = null;
       this.yieldResultScroll = 0;
       this.yieldResultScrollMax = 0;
       throw error;
     }
+  }
+
+  private async resumePendingRewardedClaim(): Promise<void> {
+    if (this.needsCharacter) return;
+    const pending = readPendingRewardedClaim();
+    if (!pending) return;
+    if (pending.kind === 'battle-heal') {
+      try {
+        await this.api.post(
+          '/api/wechat/rewarded-ad/battle-heal',
+          { runId: pending.runId },
+          { 'Idempotency-Key': pending.idempotencyKey },
+        );
+        clearPendingRewardedClaim();
+        this.resources = await this.api.resources();
+        this.notice = '上次看完的疗伤已经入账。';
+      } catch (error) {
+        if (
+          error instanceof NativeHttpError &&
+          error.statusCode >= 400 &&
+          error.statusCode < 500
+        ) {
+          clearPendingRewardedClaim();
+          this.notice = error.message;
+        } else {
+          this.notice = '上次疗伤尚未入账，联网后会自动补领。';
+        }
+      }
+      return;
+    }
+    try {
+      await this.collectYield('rewarded_double');
+      this.notice = '上次看完的双倍历练已经入账。';
+    } catch (error) {
+      if (
+        !(error instanceof NativeHttpError) ||
+        error.statusCode >= 500 ||
+        error.statusCode === 0
+      ) {
+        this.notice = '上次双倍历练尚未入账，联网后会自动补领。';
+      } else {
+        this.notice = error.message;
+      }
+    }
+  }
+
+  private async claimBattleHeal(runId: string): Promise<void> {
+    const pending = readPendingRewardedClaim();
+    if (pending && !(pending.kind === 'battle-heal' && pending.runId === runId)) {
+      this.notice =
+        pending.kind === 'yield-double'
+          ? '还有一笔已看完的双倍历练尚未入账。'
+          : '上一笔疗伤尚未入账，请先完成补领。';
+      this.render();
+      return;
+    }
+    let idempotencyKey =
+      pending?.kind === 'battle-heal' && pending.runId === runId
+        ? pending.idempotencyKey
+        : '';
+    if (!idempotencyKey) {
+      const outcome = await showRewardedVideo('battle-heal');
+      if (outcome !== 'completed') {
+        this.notice =
+          outcome === 'dismissed'
+            ? '未看完视频，疗伤未生效。'
+            : '广告暂不可用，可稍后再试或退出本轮。';
+        this.render();
+        return;
+      }
+      idempotencyKey = requestId();
+      writePendingRewardedClaim({
+        kind: 'battle-heal',
+        runId,
+        idempotencyKey,
+      });
+    }
+    try {
+      await this.api.post(
+        '/api/wechat/rewarded-ad/battle-heal',
+        { runId },
+        { 'Idempotency-Key': idempotencyKey },
+      );
+      clearPendingRewardedClaim();
+      this.resources = await this.api.resources();
+      await this.openOfficialScene('dungeon');
+      this.notice = '疗伤已成，可继续这一轮探索。';
+      this.render();
+    } catch (error) {
+      if (
+        error instanceof NativeHttpError &&
+        error.statusCode >= 400 &&
+        error.statusCode < 500
+      ) {
+        clearPendingRewardedClaim();
+      }
+      throw error;
+    }
+  }
+
+  private async declineBattleHeal(runId: string): Promise<void> {
+    const result = await this.api.post(
+      '/api/wechat/rewarded-ad/battle-heal/decline',
+      { runId },
+    );
+    const pending = readPendingRewardedClaim();
+    if (pending?.kind === 'battle-heal' && pending.runId === runId) {
+      clearPendingRewardedClaim();
+    }
+    await this.openOfficialScene('dungeon');
+    this.setDungeonMutation(result, '本轮探索到此结束');
   }
 
   private showEmailLogin(): void {
@@ -10341,6 +10496,57 @@ export class NativeDaoyouApp {
     y += SCENE_SECTION_GAP;
     urgentEntries.slice(0, 4).forEach((entry) => {
       const rowTop = y;
+      if (entry.id === 'home-yield') {
+        this.drawText(entry.title, left + 8, rowTop + 25, 13, {
+          bold: true,
+          color: INK,
+          sans: true,
+        });
+        const titleWidth = this.measureTextWidth(entry.title, 13, {
+          bold: true,
+        });
+        const badgeX = left + 14 + titleWidth;
+        if (entry.badge) {
+          this.drawText(entry.badge, badgeX, rowTop + 25, 12, {
+            bold: true,
+            color: CRIMSON,
+            sans: true,
+          });
+        }
+        const badgeWidth = entry.badge
+          ? this.measureTextWidth(entry.badge, 12, { bold: true }) + 7
+          : 0;
+        const summaryX = left + 16 + titleWidth + badgeWidth;
+        const summaryWidth = Math.max(28, right - summaryX - 8);
+        this.drawText(
+          this.truncateTextToWidth(entry.summary, summaryWidth, 12),
+          summaryX,
+          rowTop + 25,
+          12,
+          { color: INK_SECONDARY, sans: true },
+        );
+        const claimY = rowTop + 40;
+        const normalWidth = this.addInlineLink(
+          'home-yield-normal',
+          '普通领取',
+          left + 8,
+          claimY,
+          () => void this.run(() => this.collectYield('normal')),
+          true,
+        );
+        this.addInlineLink(
+          'home-yield-double',
+          '观看视频 · 双倍领取',
+          left + 16 + normalWidth,
+          claimY,
+          () => void this.run(() => this.collectYield('rewarded_double')),
+          true,
+        );
+        y += 86;
+        rule(left + 8, y, width - 16);
+        y += 8;
+        return;
+      }
       const actionWidth = Math.max(
         72,
         Array.from(entry.actionLabel).length * 14 + 24,
@@ -16108,6 +16314,7 @@ export class NativeDaoyouApp {
           response = await this.api.post('/api/dungeon/battle/execute/v5', {
             battleId,
             requestId: requestId(),
+            offerAdHeal: true,
           });
         } else {
           const taskId = this.officialRouteParams.taskId;
@@ -32769,6 +32976,53 @@ export class NativeDaoyouApp {
     return y + viewportHeight + 16;
   }
 
+  private drawDungeonPendingAdHeal(
+    left: number,
+    width: number,
+    y: number,
+    state: Record<string, unknown>,
+  ): number {
+    const runId = stringValue(state, 'runId');
+    this.drawSceneFrameTitle('疗伤续战', left, y);
+    y += SCENE_SECTION_GAP;
+    this.drawWrappedText(
+      '这一战已经落败。看完疗伤视频可各恢复一半气血与法力上限，然后继续本轮探索。同一轮只能疗伤一次。',
+      left + 8,
+      y + 22,
+      width - 16,
+      22,
+      4,
+      12,
+      { color: INK },
+    );
+    y += 110;
+    this.addButton(
+      'dungeon-ad-heal',
+      '观看视频 · 疗伤续战',
+      { x: left, y, width, height: 46 },
+      () => {
+        if (!runId) {
+          this.notice = '缺少本轮秘境编号，无法疗伤。';
+          this.render();
+          return;
+        }
+        void this.run(() => this.claimBattleHeal(runId));
+      },
+      Boolean(runId),
+    );
+    y += 56;
+    this.addButton(
+      'dungeon-ad-heal-exit',
+      '退出本轮',
+      { x: left, y, width, height: 42 },
+      () => {
+        if (!runId) return;
+        void this.run(() => this.declineBattleHeal(runId));
+      },
+    );
+    return y + 52;
+  }
+
   private renderDungeonScene(top: number, bottom: number): boolean {
     if (this.officialSceneKey !== 'dungeon') return false;
     const left = SCENE_CONTENT_LEFT;
@@ -32782,6 +33036,15 @@ export class NativeDaoyouApp {
     const stateData = asRecord(stateResponse?.data) ?? stateResponse;
     const state = asRecord(stateData?.state);
     const stateRecord = state ?? {};
+    if (
+      stringValue(stateRecord, 'status') === 'PENDING_AD_HEAL' &&
+      stateRecord.isFinished !== true
+    ) {
+      y = this.drawDungeonPendingAdHeal(left, width, y, stateRecord);
+      this.ctx.restore();
+      this.finishSceneScroll(top, bottom, y + 10);
+      return true;
+    }
     const limitResponse = asRecord(this.officialSceneData.limit);
     const limitData = asRecord(limitResponse?.data) ?? limitResponse;
     const profile = asRecord(resourceData(this.resources, 'profile'));
@@ -33486,7 +33749,7 @@ export class NativeDaoyouApp {
             { align: 'center', color: INK_SECONDARY, sans: true },
           );
           this.drawWrappedText(
-            '新手先点“神识查探”再决定。若属性差距明显，撤退不会受伤；强行战败会结束本轮探秘。',
+            '新手先点“神识查探”再决定。若属性差距明显，撤退不会受伤；强行战败后可看一次疗伤视频续战，否则本轮结束。',
             left + width / 2,
             y + 166,
             width - 34,
@@ -33631,10 +33894,21 @@ export class NativeDaoyouApp {
           true,
           () =>
             void this.run(async () => {
-              const result = await this.api.post(
-                '/api/dungeon/looting/continue',
-              );
-              this.setDungeonMutation(result, '你收好所得，继续深入');
+              try {
+                const result = await this.api.post(
+                  '/api/dungeon/looting/continue',
+                );
+                this.setDungeonMutation(result, '你收好所得，继续深入');
+              } catch (error) {
+                if (
+                  error instanceof NativeHttpError &&
+                  error.statusCode === 409
+                ) {
+                  await this.updateDungeon(error.message);
+                  return;
+                }
+                throw error;
+              }
             }),
         );
         drawLootingChoice(
@@ -33646,8 +33920,21 @@ export class NativeDaoyouApp {
           false,
           () =>
             void this.run(async () => {
-              const result = await this.api.post('/api/dungeon/looting/escape');
-              this.setDungeonMutation(result, '你带着所得离开秘境');
+              try {
+                const result = await this.api.post(
+                  '/api/dungeon/looting/escape',
+                );
+                this.setDungeonMutation(result, '你带着所得离开秘境');
+              } catch (error) {
+                if (
+                  error instanceof NativeHttpError &&
+                  error.statusCode === 409
+                ) {
+                  await this.updateDungeon(error.message);
+                  return;
+                }
+                throw error;
+              }
             }),
         );
       } else if (viewState.type === 'recoverable_error') {
@@ -35127,6 +35414,8 @@ export class NativeDaoyouApp {
     cancelLabel: string;
     onConfirm: () => void;
     onCancel: () => void;
+    tertiaryLabel?: string;
+    onTertiary?: () => void;
   } | null {
     const record = this.currentBattlePlaybackRecord();
     if (!record) {
@@ -35177,6 +35466,24 @@ export class NativeDaoyouApp {
       const ordinaryTask = this.officialRouteParams.battleKind !== 'dungeon';
       if (!ordinaryTask) {
         const callbackData = asRecord(this.battleMeta.callbackData);
+        const dungeonState = asRecord(callbackData?.dungeonState);
+        const pendingHeal =
+          !isWin && stringValue(dungeonState, 'status') === 'PENDING_AD_HEAL';
+        const runId = stringValue(dungeonState, 'runId');
+        if (pendingHeal && runId) {
+          return {
+            title: '战斗失败',
+            lines: [
+              '你在这场战斗中落败。看完疗伤视频可各恢复一半气血与法力上限，继续本轮探索；也可以就此退出。',
+            ],
+            confirmLabel: '观看视频 · 疗伤续战',
+            cancelLabel: '退出本轮',
+            tertiaryLabel: '先看看',
+            onConfirm: () => void this.run(() => this.claimBattleHeal(runId)),
+            onCancel: () => void this.run(() => this.declineBattleHeal(runId)),
+            onTertiary: () => void this.returnToDungeonAfterBattle(callbackData),
+          };
+        }
         return {
           title: isWin ? '战斗胜利' : '战斗失败',
           lines: [
@@ -35347,6 +35654,7 @@ export class NativeDaoyouApp {
       lines: dialog.lines,
       confirmLabel: dialog.confirmLabel,
       cancelLabel: dialog.cancelLabel,
+      tertiaryLabel: dialog.tertiaryLabel,
       onConfirm: () => {
         this.battleResultDialogDismissed = true;
         dialog.onConfirm();
@@ -35355,6 +35663,12 @@ export class NativeDaoyouApp {
         this.battleResultDialogDismissed = true;
         dialog.onCancel();
       },
+      onTertiary: dialog.onTertiary
+        ? () => {
+            this.battleResultDialogDismissed = true;
+            dialog.onTertiary?.();
+          }
+        : undefined,
     });
   }
 
@@ -43967,9 +44281,16 @@ export class NativeDaoyouApp {
         );
         this.addButton(
           '洞府-收取',
-          '收取洞府积蓄',
-          { x: side, y: y + h + gap, width: this.width - side * 2, height: h },
-          () => void this.run(() => this.collectYield()),
+          '普通领取',
+          { x: side, y: y + h + gap, width: two, height: h },
+          () => void this.run(() => this.collectYield('normal')),
+          true,
+        );
+        this.addButton(
+          '洞府-双倍',
+          '观看视频 · 双倍领取',
+          { x: side + two + gap, y: y + h + gap, width: two, height: h },
+          () => void this.run(() => this.collectYield('rewarded_double')),
           true,
         );
         return y + h * 2 + gap + 10;

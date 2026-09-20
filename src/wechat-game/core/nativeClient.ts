@@ -415,11 +415,20 @@ export class NativeDaoyouApi {
     });
   }
 
-  yieldResources(onEvent?: (event: unknown) => void): Promise<unknown[]> {
+  yieldResources(
+    onEvent?: (event: unknown) => void,
+    options: {
+      rewardMode?: 'normal' | 'rewarded_double';
+      idempotencyKey?: string;
+    } = {},
+  ): Promise<unknown[]> {
     return this.http.requestSse('/api/cultivator/yield', {
       method: 'POST',
-      data: {},
+      data: { rewardMode: options.rewardMode ?? 'normal' },
       timeout: 60_000,
+      headers: options.idempotencyKey
+        ? { 'Idempotency-Key': options.idempotencyKey }
+        : undefined,
       onEvent,
     });
   }

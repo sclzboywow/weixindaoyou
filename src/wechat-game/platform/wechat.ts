@@ -116,6 +116,17 @@ export interface WxGameClubButtonStyle {
   textAlign?: 'left' | 'center' | 'right';
 }
 
+export interface WxRewardedVideoAd {
+  load(): Promise<void>;
+  show(): Promise<void>;
+  onError(callback: (error: { errMsg?: string; errCode?: number }) => void): void;
+  offError?(
+    callback?: (error: { errMsg?: string; errCode?: number }) => void,
+  ): void;
+  onClose(callback: (result?: { isEnded?: boolean }) => void): void;
+  offClose?(callback?: (result?: { isEnded?: boolean }) => void): void;
+}
+
 export interface WxGameClubButton {
   style: WxGameClubButtonStyle;
   show(): void;
@@ -162,6 +173,10 @@ export interface WechatGameApi {
     load(options: { openlink: string }): Promise<unknown>;
     show(): void;
   };
+  createRewardedVideoAd?(options: {
+    adUnitId: string;
+    multiton?: boolean;
+  }): WxRewardedVideoAd;
   getWindowInfo(): WxWindowInfo;
   getDeviceInfo?: () => { platform?: string };
   getSystemInfoSync?: () => { platform?: string };
