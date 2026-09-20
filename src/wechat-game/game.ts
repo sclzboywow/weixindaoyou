@@ -1,6 +1,11 @@
 import { takeWechatStartupBridge } from './startupBridge';
 import { NativeDaoyouApp } from './ui/nativeApp';
 
+declare const GameGlobal:
+  | { __daoyouQaApp?: NativeDaoyouApp }
+  | undefined;
+declare const wx: { __daoyouQaApp?: NativeDaoyouApp } | undefined;
+
 const startup = takeWechatStartupBridge();
 const startCore = () => {
   const host = globalThis as typeof globalThis & {
@@ -23,9 +28,14 @@ const startCore = () => {
     startup?.connection,
     startup?.hudInfo,
   );
-  (
-    globalThis as typeof globalThis & { __daoyouQaApp?: NativeDaoyouApp }
-  ).__daoyouQaApp = app;
+  const qaHost = globalThis as typeof globalThis & {
+    __daoyouQaApp?: NativeDaoyouApp;
+    GameGlobal?: { __daoyouQaApp?: NativeDaoyouApp };
+    wx?: { __daoyouQaApp?: NativeDaoyouApp };
+  };
+  qaHost.__daoyouQaApp = app;
+  if (typeof GameGlobal !== 'undefined') GameGlobal.__daoyouQaApp = app;
+  if (typeof wx !== 'undefined') wx.__daoyouQaApp = app;
   app.start();
 };
 

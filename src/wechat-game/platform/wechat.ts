@@ -101,6 +101,30 @@ export interface WxUserInfoButton {
   destroy(): void;
 }
 
+export interface WxGameClubButtonStyle {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderWidth?: number;
+  borderRadius?: number;
+  color?: string;
+  fontSize?: number;
+  lineHeight?: number;
+  textAlign?: 'left' | 'center' | 'right';
+}
+
+export interface WxGameClubButton {
+  style: WxGameClubButtonStyle;
+  show(): void;
+  hide(): void;
+  destroy(): void;
+  onTap?(callback: (result: { errMsg?: string }) => void): void;
+  offTap?(callback?: (result: { errMsg?: string }) => void): void;
+}
+
 export interface WechatGameApi {
   createCanvas(): WxCanvas;
   loadFont?: (path: string) => string | null;
@@ -125,7 +149,22 @@ export interface WechatGameApi {
       borderRadius: number;
     };
   }) => WxUserInfoButton;
+  createGameClubButton?: (options: {
+    type: 'text' | 'image';
+    text?: string;
+    image?: string;
+    icon?: 'green' | 'white' | 'dark' | 'light';
+    openlink?: string;
+    hasRedDot?: boolean;
+    style: WxGameClubButtonStyle;
+  }) => WxGameClubButton | undefined;
+  createPageManager?: () => {
+    load(options: { openlink: string }): Promise<unknown>;
+    show(): void;
+  };
   getWindowInfo(): WxWindowInfo;
+  getDeviceInfo?: () => { platform?: string };
+  getSystemInfoSync?: () => { platform?: string };
   getLaunchOptionsSync?: () => { query?: Record<string, string> };
   onShow?: (
     callback: (options: { query?: Record<string, string> }) => void,

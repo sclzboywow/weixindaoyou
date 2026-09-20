@@ -247,6 +247,7 @@ import { getWechatTrainingRuntimeBridge } from '../features/trainingRuntimeBridg
 import {
   getWx,
   type WxCanvas,
+  type WxGameClubButton,
   type WxImage,
   type WxTouchEvent,
   type WxUserInfoButton,
@@ -320,12 +321,12 @@ import {
   splitNativeTextTokens,
   splitNativeTextUnits,
 } from './nativeEmoji';
+import { wrapNativeMailLines } from './nativeMailLines';
 import {
   isPersistentNotice,
   isTransientLoadingNotice,
   noticeAutoDismissMs,
 } from './noticeFeedback';
-import { wrapNativeMailLines } from './nativeMailLines';
 import {
   OFFICIAL_SCENES,
   officialSceneForNavigationId,
@@ -381,6 +382,28 @@ const RESOURCE_MP = '#1685a9';
 const ATTR_MOD_POS = '#047857';
 const ATTR_MOD_NEG = '#6d28d9';
 const RULE = 'rgba(44,24,16,.18)';
+const GENESIS_PRESETS = [
+  {
+    id: 'sword',
+    label: '剑修争锋',
+    prompt: '一介散修，以剑问道，喜欢越境挑战强敌。',
+  },
+  {
+    id: 'alchemy',
+    label: '丹修逆袭',
+    prompt: '出身普通，擅长炼丹，以丹药和机缘逆天改命。',
+  },
+  {
+    id: 'steady',
+    label: '苟道长生',
+    prompt: '不争一时胜负，稳健修炼、积攒资源，只求长生。',
+  },
+  {
+    id: 'random',
+    label: '随缘入世',
+    prompt: '身世、性格与机缘皆交由天道决定。',
+  },
+] as const;
 const SCENE_CLIP_PAD = 12;
 const SCENE_CONTENT_LEFT = 24;
 const SCENE_CONTENT_WIDTH_INSET = 48;
@@ -399,6 +422,9 @@ const SCENE_BTN_HEIGHT = 38;
 const SCENE_SURFACE_FILL = 'rgba(248,243,230,.55)';
 const SCENE_SURFACE_FILL_STRONG = 'rgba(248,243,230,.72)';
 const INK_MUTED = 'rgba(90,74,66,.62)';
+const QA_COMMAND_STORAGE_KEY = 'daoyou.qa-command.v1';
+const GAME_CLUB_OPENLINK =
+  '-SSEykJvFV3pORt5kTNpS1oxPqxw21l22h4IMDy2FyXh4xJF5dPTSAL5Lnc_uBuisoPghozvy8YWRsYPUnVGUxtYwbJzShgi0mU742uQeUcKACB-AJ5xu2V2F5wmQkdh6ni6CCELf9QVUNsmHG2bsrBsfLYust6LHh05VOiC-K2EAMtJOVrSiLtP6kRYa4udYCvxgHm6EFbuueLrwZiS6OhCMRhhiICmoNq6qc_RRrnVxKFO-_BRF54fvKu6l4GlCnWaI7dqKYn_ycDDIUOAxOWnqjGuArbcnth_yIezXScrLuEP7dspeRTzZ5vAhf0VvvBTP8uYlgs7rq87RPdiEw';
 const QUALITY_COLORS: Record<string, string> = {
   凡品: '#758a99',
   灵品: '#16a951',
@@ -1076,6 +1102,7 @@ export class NativeDaoyouApp {
   private emojiImages = new Map<string, CanvasImageSource>();
   private officialUiLoading: Promise<void> | null = null;
   private userInfoButton: WxUserInfoButton | null = null;
+  private gameClubButton: WxGameClubButton | null = null;
   private typewriterStates = new Map<string, NativeTypewriterState>();
   private typewriterTimer: ReturnType<typeof setInterval> | null = null;
   private authAnnouncement = '';
@@ -1117,6 +1144,18 @@ export class NativeDaoyouApp {
   private retreatTab: 'retreat' | 'breakthrough' = 'retreat';
   private retreatTasks: Array<Record<string, unknown>> = [];
   private characterPrompt = '';
+  private genesisPresetId = '';
+  private genesisGenerating = false;
+  private genesisProgress = 0;
+  private genesisProgressTarget = 0;
+  private genesisProgressStage: 'safety' | 'character' | 'fates' = 'safety';
+  private genesisProgressTimer: ReturnType<typeof setInterval> | null = null;
+  private creationDetailsExpanded = false;
+  private genesisWelcome: {
+    name: string;
+    summary: string;
+    fateNames: string[];
+  } | null = null;
   private characterGenerationQuota: Record<string, unknown> | null = null;
   private chatDraft = '';
   private creationScroll = 0;
@@ -1684,7 +1723,26 @@ export class NativeDaoyouApp {
     this.loadShellAssets();
     this.preloadOfficialUi();
     void this.loadAuthAnnouncement();
-    void this.bootstrap();
+    void this.bootstrap().then(() => this.applyQaStartupCommand());
+  }
+
+  private applyQaStartupCommand(): void {
+    if (this.wx.getStorageSync(QA_COMMAND_STORAGE_KEY) !== 'open-genesis') return;
+    this.wx.removeStorageSync(QA_COMMAND_STORAGE_KEY);
+    this.needsCharacter = true;
+    this.characterDraft = null;
+    this.screen = 'cave';
+    this.genesisGenerating = false;
+    this.characterPrompt = '';
+    this.genesisPresetId = '';
+    this.genesisWelcome = null;
+    this.creationDetailsExpanded = false;
+    this.creationScroll = 0;
+    this.creationScrollMax = 0;
+    this.fateDetailIndex = null;
+    this.notice = '';
+    this.busy = false;
+    this.render();
   }
 
   private preloadOfficialAssets(): void {
@@ -2079,6 +2137,103 @@ export class NativeDaoyouApp {
     button.show();
   }
 
+  private canOpenNativeGameClub(): boolean {
+    const info = this.wx.getDeviceInfo?.() ?? this.wx.getSystemInfoSync?.();
+    const platform = String(info?.platform ?? '').toLowerCase();
+    if (!platform) return true;
+    // 开发者工具 / PC / Mac 没有游戏圈容器，openPage 会直接失败。
+    return platform === 'ios' || platform === 'android';
+  }
+
+  private destroyGameClubButton(): void {
+    try {
+      this.gameClubButton?.hide();
+      this.gameClubButton?.destroy();
+    } catch {
+      // ignore destroy races on page teardown
+    }
+    this.gameClubButton = null;
+  }
+
+  private openGameClub(): void {
+    if (!this.canOpenNativeGameClub()) {
+      this.notice =
+        '游戏圈需在手机微信中打开，开发者工具和电脑微信不能进圈';
+      this.render();
+      return;
+    }
+
+    // 导航抽屉是滚动列表，透明 createGameClubButton 盖层在真机上经常点不中。
+    // 官方推荐用 createPageManager + openlink，直接在用户点击手势里打开。
+    if (typeof this.wx.createPageManager === 'function') {
+      this.notice = '正在打开仙友会…';
+      this.render();
+      try {
+        const pageManager = this.wx.createPageManager();
+        void pageManager
+          .load({ openlink: GAME_CLUB_OPENLINK })
+          .then(() => {
+            pageManager.show();
+            this.closeNavigationDrawer();
+            this.notice = '';
+            this.render();
+          })
+          .catch((error: unknown) => {
+            const record = asRecord(error);
+            const code = numberValue(record, 'errCode', 'errno', 'code');
+            const detail =
+              stringValue(record, 'errMsg', 'errInfo', 'message') ||
+              compact(errorText(error), 40);
+            console.warn('[wechat-game] open game club failed', error);
+            this.notice =
+              code === -8
+                ? '当前小游戏版本与游戏圈链接不匹配，请用对应的开发/体验/正式版重试'
+                : code === -1
+                  ? '游戏圈链接无效，请在公众平台重新生成 openlink'
+                  : `打开仙友会失败：${detail || '未知错误'}`;
+            this.render();
+          });
+      } catch (error) {
+        console.warn('[wechat-game] createPageManager unavailable', error);
+        this.notice = `打开仙友会失败：${compact(errorText(error), 40)}`;
+        this.render();
+      }
+      return;
+    }
+
+    // 低版本基础库回退：固定可见的游戏圈图标按钮。
+    if (typeof this.wx.createGameClubButton !== 'function') {
+      this.notice = '当前微信版本过低，请升级后再打开仙友会';
+      this.render();
+      return;
+    }
+    this.destroyGameClubButton();
+    try {
+      this.gameClubButton =
+        this.wx.createGameClubButton({
+          type: 'image',
+          icon: 'green',
+          openlink: GAME_CLUB_OPENLINK,
+          hasRedDot: false,
+          style: {
+            left: Math.max(12, this.width - 52),
+            top: Math.max(this.topOffset + 12, 72),
+            width: 40,
+            height: 40,
+          },
+        }) ?? null;
+      this.gameClubButton?.show();
+      this.closeNavigationDrawer();
+      this.notice = '请点击右上角绿色游戏圈按钮进入仙友会';
+      this.render();
+    } catch (error) {
+      console.warn('[wechat-game] game club button unavailable', error);
+      this.destroyGameClubButton();
+      this.notice = `打开仙友会失败：${compact(errorText(error), 40)}`;
+      this.render();
+    }
+  }
+
   private async loadHome(
     target: 'cave' | 'cultivator' = 'cave',
     startupBundle: Record<string, unknown> | null = null,
@@ -2437,6 +2592,10 @@ export class NativeDaoyouApp {
       200,
       (prompt) => {
         this.characterPrompt = prompt;
+        const selectedPreset = GENESIS_PRESETS.find(
+          (preset) => preset.id === this.genesisPresetId,
+        );
+        if (selectedPreset?.prompt !== prompt) this.genesisPresetId = '';
         this.notice = '人物设定已记下';
       },
       '例：我想成为一位靠炼丹逆袭的废柴少主……',
@@ -2446,6 +2605,60 @@ export class NativeDaoyouApp {
         multiple: true,
       },
     );
+  }
+
+  private selectGenesisPreset(id: string, prompt: string): void {
+    if (this.busy) return;
+    this.genesisPresetId = id;
+    this.characterPrompt = prompt;
+    this.notice = '';
+    this.render();
+  }
+
+  private returnToGenesisPrompt(): void {
+    if (this.busy) return;
+    this.characterDraft = null;
+    this.creationDetailsExpanded = false;
+    this.creationScroll = 0;
+    this.creationScrollMax = 0;
+    this.fateDetailIndex = null;
+    this.notice = '可修改人物设定后重新推演';
+    this.render();
+  }
+
+  private startGenesisProgress(): void {
+    if (this.genesisProgressTimer) clearInterval(this.genesisProgressTimer);
+    this.genesisProgress = 0.04;
+    this.genesisProgressTarget = 0.2;
+    this.genesisProgressStage = 'safety';
+    this.genesisProgressTimer = setInterval(() => {
+      const remaining = this.genesisProgressTarget - this.genesisProgress;
+      if (remaining <= 0.002) return;
+      this.genesisProgress = Math.min(
+        this.genesisProgressTarget,
+        this.genesisProgress + Math.max(0.004, remaining * 0.12),
+      );
+      this.render();
+    }, 120);
+  }
+
+  private advanceGenesisProgress(
+    stage: 'safety' | 'character' | 'fates',
+    progress: number,
+  ): void {
+    this.genesisProgressStage = stage;
+    this.genesisProgress = Math.max(this.genesisProgress, progress);
+    this.genesisProgressTarget =
+      stage === 'safety' ? 0.2 : stage === 'character' ? 0.72 : 0.96;
+    this.render();
+  }
+
+  private stopGenesisProgress(completed = false): void {
+    if (this.genesisProgressTimer) clearInterval(this.genesisProgressTimer);
+    this.genesisProgressTimer = null;
+    this.genesisProgress = completed ? 1 : 0;
+    this.genesisProgressTarget = this.genesisProgress;
+    if (completed) this.render();
   }
 
   private generateCharacter(): void {
@@ -2463,40 +2676,56 @@ export class NativeDaoyouApp {
       this.render();
       return;
     }
+    if (this.busy) return;
+    this.genesisGenerating = true;
+    this.creationDetailsExpanded = false;
+    this.notice = '';
+    this.startGenesisProgress();
+    this.render();
     void this.run(async () => {
-      this.notice = '灵气汇聚中……';
-      this.render();
-      const generated = asRecord(await this.api.generateCharacter(prompt));
-      const data = asRecord(generated?.data);
-      const cultivator = asRecord(data?.cultivator);
-      const tempId = stringValue(data, 'tempCultivatorId');
-      if (!cultivator || !tempId) throw new Error('角色推演结果不完整');
-      this.characterDraft = {
-        cultivator,
-        tempId,
-        fates: [],
-        selected: [],
-        remainingRerolls: 0,
-      };
-      this.creationScroll = 0;
-      await this.rollFates();
-      if (this.characterGenerationQuota) {
-        this.characterGenerationQuota = {
-          ...this.characterGenerationQuota,
-          remaining: Math.max(
-            0,
-            numberValue(this.characterGenerationQuota, 'remaining') - 1,
-          ),
+      try {
+        await this.api.checkUserText('character', prompt);
+        this.advanceGenesisProgress('character', 0.24);
+        const generated = asRecord(await this.api.generateCharacter(prompt));
+        const data = asRecord(generated?.data);
+        const cultivator = asRecord(data?.cultivator);
+        const tempId = stringValue(data, 'tempCultivatorId');
+        if (!cultivator || !tempId) throw new Error('角色推演结果不完整');
+        this.advanceGenesisProgress('fates', 0.76);
+        const fateResult = await this.fetchFates(tempId);
+        this.stopGenesisProgress(true);
+        await new Promise((resolve) => setTimeout(resolve, 120));
+        this.characterDraft = {
+          cultivator,
+          tempId,
+          fates: fateResult.fates,
+          selected: [],
+          remainingRerolls: fateResult.remainingRerolls,
         };
+        this.creationScroll = 0;
+        this.fateDetailIndex = null;
+        if (this.characterGenerationQuota) {
+          this.characterGenerationQuota = {
+            ...this.characterGenerationQuota,
+            remaining: Math.max(
+              0,
+              numberValue(this.characterGenerationQuota, 'remaining') - 1,
+            ),
+          };
+        }
+        this.notice = '真形已现，请选择 3 个先天气运';
+      } finally {
+        this.stopGenesisProgress();
+        this.genesisGenerating = false;
       }
-      this.notice = '真形已现，请选择 3 个先天气运';
     });
   }
 
-  private async rollFates(): Promise<void> {
-    const draft = this.characterDraft;
-    if (!draft) return;
-    const result = asRecord(await this.api.generateFates(draft.tempId));
+  private async fetchFates(tempId: string): Promise<{
+    fates: Array<Record<string, unknown>>;
+    remainingRerolls: number;
+  }> {
+    const result = asRecord(await this.api.generateFates(tempId));
     const data = asRecord(result?.data);
     const fates = Array.isArray(data?.fates)
       ? data.fates
@@ -2504,9 +2733,19 @@ export class NativeDaoyouApp {
           .filter((fate): fate is Record<string, unknown> => Boolean(fate))
       : [];
     if (fates.length < 3) throw new Error('天命推演结果不完整');
-    draft.fates = fates;
+    return {
+      fates,
+      remainingRerolls: Number(data?.remainingRerolls ?? 0),
+    };
+  }
+
+  private async rollFates(): Promise<void> {
+    const draft = this.characterDraft;
+    if (!draft) return;
+    const result = await this.fetchFates(draft.tempId);
+    draft.fates = result.fates;
     draft.selected = [];
-    draft.remainingRerolls = Number(data?.remainingRerolls ?? 0);
+    draft.remainingRerolls = result.remainingRerolls;
     this.creationScroll = 0;
     this.fateDetailIndex = null;
     this.render();
@@ -2520,6 +2759,10 @@ export class NativeDaoyouApp {
       : draft.selected.length < 3
         ? [...draft.selected, index]
         : draft.selected;
+    if (draft.selected.length === 3) {
+      // 第三个命格选定后自动回到顶部确认区，避免玩家再手动滚动寻找保存按钮。
+      this.creationScroll = 0;
+    }
     this.notice = `已选 ${draft.selected.length}/3 个先天气运`;
     this.render();
   }
@@ -2531,19 +2774,40 @@ export class NativeDaoyouApp {
       this.render();
       return;
     }
+    const roots = this.recordArray(draft.cultivator.spiritual_roots)
+      .slice(0, 2)
+      .map((root) => stringValue(root, 'element'))
+      .filter(Boolean)
+      .join('');
+    const realm = [
+      stringValue(draft.cultivator, 'realm') || '炼气',
+      stringValue(draft.cultivator, 'realm_stage', 'realmStage') || '初期',
+    ].join('');
     this.openConfirm({
       title: '以此真身入世？',
       lines: [
         `道号：${stringValue(draft.cultivator, 'name') || '无名道友'}`,
-        `已选 ${draft.selected.length} 个先天气运，入世后正式建档。`,
+        `境界：${realm}`,
+        `灵根：${roots ? `${roots}灵根` : '无'}`,
       ],
       confirmLabel: '入世',
       cancelLabel: '再想想',
       onConfirm: () =>
         void this.run(async () => {
+          const welcome = {
+            name: stringValue(draft.cultivator, 'name') || '无名道友',
+            summary: `${roots ? `${roots}灵根 · ` : ''}${realm}`,
+            fateNames: draft.selected
+              .map(
+                (index) =>
+                  stringValue(draft.fates[index], 'name') || `命格${index + 1}`,
+              )
+              .filter(Boolean),
+          };
           await this.api.saveCharacter(draft.tempId, draft.selected);
-          this.notice = '道友真形已落地';
           await this.loadHome();
+          this.genesisWelcome = welcome;
+          this.notice = '';
         }),
     });
   }
@@ -24841,8 +25105,9 @@ export class NativeDaoyouApp {
     const left = SCENE_CONTENT_LEFT;
     const width = this.sceneLayoutWidth();
     let y = top - this.sceneScroll;
+    const genesisAccountOnly = this.needsCharacter;
     const tab = (
-      this.needsCharacter ? 'account' : this.officialViewTab || 'game'
+      genesisAccountOnly ? 'account' : this.officialViewTab || 'game'
     ) as 'game' | 'qi' | 'account' | 'llm' | 'connection';
     this.ctx.save();
     this.ctx.beginPath();
@@ -24852,8 +25117,10 @@ export class NativeDaoyouApp {
       left,
       width,
       y,
-      '系统设置',
-      '管理角色、账号与本地模型。',
+      genesisAccountOnly ? '账号互通' : '系统设置',
+      genesisAccountOnly
+        ? '连接 PC 与微信账号，共用同一份角色数据。'
+        : '管理角色、账号与本地模型。',
     );
     const tabs: Array<[typeof tab, string]> = [
       ['game', '游戏设置'],
@@ -24862,7 +25129,7 @@ export class NativeDaoyouApp {
       ['llm', '模型配置'],
       ['connection', '连接状态'],
     ];
-    if (this.needsCharacter) {
+    if (genesisAccountOnly) {
       this.addButton(
         'back',
         '返回',
@@ -24871,28 +25138,29 @@ export class NativeDaoyouApp {
       );
       y += 51;
     }
-    const visibleTabs = this.needsCharacter ? tabs.slice(2, 3) : tabs;
-    const tabWidth = this.needsCharacter ? width : (width - 8) / 3;
-    visibleTabs.forEach(([id, label], index) =>
-      this.addButton(
-        `settings-${id}`,
-        label,
-        {
-          x: left + (index % 3) * (tabWidth + 4),
-          y: y + Math.floor(index / 3) * 42,
-          width: tabWidth,
-          height: 37,
-        },
-        () => {
-          this.officialViewTab = id;
-          this.sceneScroll = 0;
-          if (id === 'account') this.loadSettingsAccounts();
-          this.render();
-        },
-        tab === id,
-      ),
-    );
-    y += this.needsCharacter ? 51 : 96;
+    if (!genesisAccountOnly) {
+      const tabWidth = (width - 8) / 3;
+      tabs.forEach(([id, label], index) =>
+        this.addButton(
+          `settings-${id}`,
+          label,
+          {
+            x: left + (index % 3) * (tabWidth + 4),
+            y: y + Math.floor(index / 3) * 42,
+            width: tabWidth,
+            height: 37,
+          },
+          () => {
+            this.officialViewTab = id;
+            this.sceneScroll = 0;
+            if (id === 'account') this.loadSettingsAccounts();
+            this.render();
+          },
+          tab === id,
+        ),
+      );
+      y += 96;
+    }
     const profile = asRecord(resourceData(this.resources, 'profile'));
     const cultivator = asRecord(profile?.cultivator);
     if (tab === 'game') {
@@ -25419,7 +25687,7 @@ export class NativeDaoyouApp {
           () =>
             this.openTextInput(
               '输入“注销账号”确认',
-              4,
+              16,
               (value) => {
                 this.settingsDeletionConfirmation = value;
                 this.render();
@@ -26824,7 +27092,10 @@ export class NativeDaoyouApp {
     return filtered.sort((a, b) => {
       const result =
         sortBy === 'name'
-          ? stringValue(a, 'name').localeCompare(stringValue(b, 'name'), 'zh-CN')
+          ? stringValue(a, 'name').localeCompare(
+              stringValue(b, 'name'),
+              'zh-CN',
+            )
           : sortBy === 'quantity'
             ? nativeAuctionItemQuantity(this.auctionListType, a) -
               nativeAuctionItemQuantity(this.auctionListType, b)
@@ -34849,9 +35120,7 @@ export class NativeDaoyouApp {
     };
   }
 
-  private resolveBattleResultDialog(
-    key: OfficialSceneKey,
-  ): {
+  private resolveBattleResultDialog(key: OfficialSceneKey): {
     title: string;
     lines: string[];
     confirmLabel: string;
@@ -41870,8 +42139,8 @@ export class NativeDaoyouApp {
       left,
       width,
       y,
-      '推演道身',
-      '以一念为引，凝聚今世道身。选定命格后细看根基与灵根。',
+      '凝气篇',
+      '以心念唤道，凝气成形',
     );
 
     const section = (title: string): void => {
@@ -41911,89 +42180,125 @@ export class NativeDaoyouApp {
       color: INK_SECONDARY,
       sans: true,
     });
+    const canRerollFates =
+      draft.fates.length === 0 || draft.remainingRerolls > 0;
     this.addButton(
       'reroll-fates',
-      `逆天改命 (${draft.remainingRerolls})`,
+      draft.fates.length
+        ? `逆天改命 (${draft.remainingRerolls})`
+        : '重试推演命格',
       { x: this.width - 190, y, width: 166, height: 38 },
       () => void this.run(() => this.rollFates()),
       false,
+      canRerollFates,
     );
     y += 49;
 
-    // The official mobile flow keeps fate selection before the character
-    // inspection sections. Reserve that exact block here; it is painted below
-    // after the shared card helpers have been declared.
+    section('道身速览');
+    line(
+      `☯ 姓名：${stringValue(cultivator, 'name') || '无名道友'} · ${stringValue(cultivator, 'realm') || '炼气'}${stringValue(cultivator, 'realm_stage', 'realmStage') || '初期'}`,
+      { color: INK },
+    );
+    const quickIdentity = `身世：${stringValue(cultivator, 'origin') || '散修'} · 性格：${stringValue(cultivator, 'personality') || '未明'}`;
+    line(quickIdentity, {
+      maxLines: this.measureWrappedLines(quickIdentity, width - 12, 12),
+    });
+    line(
+      `年龄：${stringValue(cultivator, 'age') || '—'} · 寿元：${stringValue(cultivator, 'lifespan') || '—'} · 性别：${stringValue(cultivator, 'gender') || '未知'}`,
+    );
+    this.addButton(
+      'toggle-creation-details',
+      this.creationDetailsExpanded ? '收起完整道身' : '查看完整道身',
+      { x: left, y, width, height: 36 },
+      () => {
+        this.creationDetailsExpanded = !this.creationDetailsExpanded;
+        this.render();
+      },
+      false,
+    );
+    y += 44;
+
+    this.addButton(
+      'save-character-primary',
+      '保存道身',
+      { x: left, y, width, height: 42 },
+      () => this.saveCharacter(),
+      true,
+      draft.selected.length === 3,
+    );
+    y += 55;
+    rule();
+
+    // 命格仍然使用 /api/generate-fates 返回的 draft.fates，前端不内置命格库。
     const fateTop = y;
     y += 55 + draft.fates.length * 142;
 
-    section('道身');
-    line(
-      `${stringValue(cultivator, 'name') || '无名道友'} · ${stringValue(cultivator, 'gender') || '未知'} · ${stringValue(cultivator, 'age') || '—'} 岁`,
-      { color: INK },
-    );
-    line(
-      `身世：${stringValue(cultivator, 'origin') || '散修'} · 性格：${stringValue(cultivator, 'personality') || '未明'}`,
-    );
-    line(
-      `境界：${stringValue(cultivator, 'realm') || '炼气'} · ${stringValue(cultivator, 'realm_stage', 'realmStage') || '初期'} · 寿元：${stringValue(cultivator, 'lifespan') || '—'}`,
-    );
-    const background = stringValue(cultivator, 'background');
-    if (background) line(`背景：${background}`, { maxLines: 2 });
-    const balance = stringValue(cultivator, 'balance_notes', 'balanceNotes');
-    if (balance) line(`天道评语：${balance}`, { maxLines: 2 });
-    rule();
-
-    section('灵根');
-    const roots = this.recordArray(cultivator.spiritual_roots);
-    if (roots.length) {
-      roots.forEach((root) =>
-        line(
-          `${stringValue(root, 'element') || '无'}灵根 · ${stringValue(root, 'grade') || '未定'} · 强度 ${stringValue(root, 'strength') || '0'}`,
-        ),
-      );
-    } else {
-      line('尚未显化灵根。');
-    }
-    rule();
-
-    section('根基属性');
-    const attributes = asRecord(cultivator.attributes);
-    const attributeLabels: Array<[string, string]> = [
-      ['vitality', '体魄'],
-      ['strength', '力道'],
-      ['spirit', '灵力'],
-      ['endurance', '根骨'],
-      ['speed', '身法'],
-      ['willpower', '神识'],
-    ];
-    for (let index = 0; index < attributeLabels.length; index += 2) {
-      const [leftKey, leftLabel] = attributeLabels[index];
-      const [rightKey, rightLabel] = attributeLabels[index + 1];
+    if (this.creationDetailsExpanded) {
+      section('完整道身');
       line(
-        `${leftLabel} ${stringValue(attributes, leftKey) || '0'}    ${rightLabel} ${stringValue(attributes, rightKey) || '0'}`,
+        `身世：${stringValue(cultivator, 'origin') || '散修'} · 性格：${stringValue(cultivator, 'personality') || '未明'}`,
       );
-    }
-    rule();
+      line(
+        `境界：${stringValue(cultivator, 'realm') || '炼气'} · ${stringValue(cultivator, 'realm_stage', 'realmStage') || '初期'} · 寿元：${stringValue(cultivator, 'lifespan') || '—'}`,
+      );
+      const background = stringValue(cultivator, 'background');
+      if (background) line(`背景：${background}`, { maxLines: 2 });
+      const balance = stringValue(cultivator, 'balance_notes', 'balanceNotes');
+      if (balance) line(`天道评语：${balance}`, { maxLines: 2 });
+      rule();
 
-    const renderProducts = (title: string, value: unknown): void => {
-      section(title);
-      const products = this.recordArray(value);
-      if (!products.length) {
-        line(`尚无${title}`);
-      } else {
-        products.forEach((product) => {
+      section('灵根');
+      const roots = this.recordArray(cultivator.spiritual_roots);
+      if (roots.length) {
+        roots.forEach((root) =>
           line(
-            `${stringValue(product, 'name') || `无名${title}`} · ${stringValue(product, 'quality') || '凡品'}${stringValue(product, 'element') ? ` · ${stringValue(product, 'element')}` : ''}`,
-            { color: INK },
-          );
-          const description = stringValue(product, 'description');
-          if (description) line(description, { maxLines: 2 });
-        });
+            `${stringValue(root, 'element') || '无'}灵根 · ${stringValue(root, 'grade') || '未定'} · 强度 ${stringValue(root, 'strength') || '0'}`,
+          ),
+        );
+      } else {
+        line('尚未显化灵根。');
       }
       rule();
-    };
-    renderProducts('功法', cultivator.cultivations);
-    renderProducts('神通', cultivator.skills);
+
+      section('根基属性');
+      const attributes = asRecord(cultivator.attributes);
+      const attributeLabels: Array<[string, string]> = [
+        ['vitality', '体魄'],
+        ['strength', '力道'],
+        ['spirit', '灵力'],
+        ['endurance', '根骨'],
+        ['speed', '身法'],
+        ['willpower', '神识'],
+      ];
+      for (let index = 0; index < attributeLabels.length; index += 2) {
+        const [leftKey, leftLabel] = attributeLabels[index];
+        const [rightKey, rightLabel] = attributeLabels[index + 1];
+        line(
+          `${leftLabel} ${stringValue(attributes, leftKey) || '0'}    ${rightLabel} ${stringValue(attributes, rightKey) || '0'}`,
+        );
+      }
+      rule();
+
+      const renderProducts = (title: string, value: unknown): void => {
+        section(title);
+        const products = this.recordArray(value);
+        if (!products.length) {
+          line(`尚无${title}`);
+        } else {
+          products.forEach((product) => {
+            line(
+              `${stringValue(product, 'name') || `无名${title}`} · ${stringValue(product, 'quality') || '凡品'}${stringValue(product, 'element') ? ` · ${stringValue(product, 'element')}` : ''}`,
+              { color: INK },
+            );
+            const description = stringValue(product, 'description');
+            if (description) line(description, { maxLines: 2 });
+          });
+        }
+        rule();
+      };
+      renderProducts('功法', cultivator.cultivations);
+      renderProducts('神通', cultivator.skills);
+    }
 
     const afterCharacterDetails = y;
     y = fateTop;
@@ -42002,7 +42307,16 @@ export class NativeDaoyouApp {
     draft.fates.forEach((fate, index) => {
       const selected = draft.selected.includes(index);
       const effects = this.fateEffectRecords(fate);
+      const previewEffects = [
+        ...effects
+          .filter((effect) => stringValue(effect, 'polarity') === 'boon')
+          .slice(0, 1),
+        ...effects
+          .filter((effect) => stringValue(effect, 'polarity') === 'burden')
+          .slice(0, 1),
+      ].slice(0, 2);
       const description = stringValue(fate, 'description');
+      const quality = stringValue(fate, 'quality') || '凡品';
       const cardHeight = 132;
       const rect: Rect = { x: left, y, width, height: cardHeight };
       this.ctx.fillStyle = selected
@@ -42015,37 +42329,35 @@ export class NativeDaoyouApp {
       this.ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
       this.ctx.restore();
       this.drawText(
-        `${selected ? '◆' : '◇'} ${index + 1}. ${stringValue(fate, 'name') || '无名命格'}`,
+        stringValue(fate, 'name') || '无名命格',
         left + 10,
         y + 23,
         13,
         { bold: true, color: selected ? CRIMSON : INK, sans: true },
       );
       this.drawText(
-        stringValue(fate, 'quality') || '凡品',
+        quality,
         right - 10,
         y + 23,
         11,
-        { align: 'right', color: INK_SECONDARY, sans: true },
+        {
+          align: 'right',
+          color: QUALITY_COLORS[quality] ?? INK_SECONDARY,
+          sans: true,
+        },
       );
-      effects.slice(0, 2).forEach((effect, effectIndex) => {
+      previewEffects.forEach((effect, effectIndex) => {
         this.drawText(
-          compact(
+          `· ${compact(
             stringValue(effect, 'label') ||
               stringValue(effect, 'description') ||
               '效果未明',
-            35,
-          ),
+            33,
+          )}`,
           left + 12,
           y + 47 + effectIndex * 18,
           11,
-          {
-            color:
-              stringValue(effect, 'polarity') === 'burden'
-                ? '#6b3f72'
-                : INK_SECONDARY,
-            sans: true,
-          },
+          { color: INK_SECONDARY, sans: true },
         );
       });
       if (description) {
@@ -42074,16 +42386,17 @@ export class NativeDaoyouApp {
           sans: true,
         });
       }
-      this.addButton(`fate-detail-${index}`, '详情', detailRect, () => {
-        this.fateDetailIndex = index;
-        this.render();
-      });
+      // 整卡负责获取/取消命格；详情按钮后绘制，确保其点击层级高于整卡。
       this.buttons.push({
         id: `fate-select-${index}`,
-        label: stringValue(fate, 'name') || `命格 ${index + 1}`,
+        label: stringValue(fate, 'name') || '无名命格',
         rect,
         action: () => this.toggleFate(index),
         primary: selected,
+      });
+      this.addButton(`fate-detail-${index}`, '详情', detailRect, () => {
+        this.fateDetailIndex = index;
+        this.render();
       });
       y += cardHeight + 10;
     });
@@ -42095,20 +42408,11 @@ export class NativeDaoyouApp {
       sans: true,
     });
     y += 29;
-    const gap = 8;
-    const buttonWidth = (width - gap) / 2;
     this.addButton(
       'regenerate-character',
       '重凝',
-      { x: left, y, width: buttonWidth, height: 40 },
-      () => this.generateCharacter(),
-    );
-    this.addButton(
-      'save-character',
-      '保存道身',
-      { x: left + buttonWidth + gap, y, width: buttonWidth, height: 40 },
-      () => this.saveCharacter(),
-      draft.selected.length === 3,
+      { x: left, y, width, height: 38 },
+      () => this.returnToGenesisPrompt(),
     );
     y += 52;
 
@@ -42257,6 +42561,103 @@ export class NativeDaoyouApp {
     }
   }
 
+  private renderGenesisWelcomeOverlay(): void {
+    const welcome = this.genesisWelcome;
+    if (!welcome) return;
+    // 入世成功页拦截底层洞府点击，只允许从诸宗山门入口继续。
+    this.buttons = [];
+    this.drawInkOverlay();
+    const panel = this.inkModalRect(520, 420);
+    this.drawInkModalSurface(panel);
+    this.addInkModalHitLayers('genesis-welcome', panel, () => undefined);
+
+    const centerX = panel.x + panel.width / 2;
+    const logoSize = 92;
+    if (this.logoImage) {
+      this.ctx.drawImage(
+        this.logoImage,
+        centerX - logoSize / 2,
+        panel.y + 30,
+        logoSize,
+        logoSize,
+      );
+    } else {
+      this.ctx.save();
+      this.ctx.strokeStyle = RULE;
+      this.ctx.setLineDash([4, 4]);
+      this.ctx.beginPath();
+      this.ctx.arc(centerX, panel.y + 76, 45, 0, Math.PI * 2);
+      this.ctx.stroke();
+      this.ctx.restore();
+    }
+
+    this.drawText('道身已成', centerX, panel.y + 150, 24, {
+      align: 'center',
+      bold: true,
+      heading: true,
+    });
+    this.drawText(
+      `${welcome.name} · ${welcome.summary}`,
+      centerX,
+      panel.y + 181,
+      12,
+      { align: 'center', color: INK_SECONDARY, sans: true },
+    );
+    this.drawWrappedText(
+      welcome.fateNames.length
+        ? `先天气运：${welcome.fateNames.join(' · ')}`
+        : '先天气运已经归入道身。',
+      centerX,
+      panel.y + 208,
+      panel.width - 52,
+      19,
+      2,
+      10,
+      { align: 'center', color: INK_SECONDARY, sans: true },
+    );
+
+    this.ctx.save();
+    this.ctx.strokeStyle = RULE;
+    this.ctx.setLineDash([4, 4]);
+    this.ctx.beginPath();
+    this.ctx.moveTo(panel.x + 28, panel.y + 254);
+    this.ctx.lineTo(panel.x + panel.width - 28, panel.y + 254);
+    this.ctx.stroke();
+    this.ctx.restore();
+
+    this.drawText('此世第一步 · 择宗入门', centerX, panel.y + 290, 15, {
+      align: 'center',
+      bold: true,
+      sans: true,
+    });
+    this.drawWrappedText(
+      '前往诸宗山门，选择此世传承。完成入门后，再正式踏上修行主线。',
+      centerX,
+      panel.y + 318,
+      panel.width - 64,
+      20,
+      2,
+      11,
+      { align: 'center', color: INK_SECONDARY, sans: true },
+    );
+
+    this.addButton(
+      'genesis-start-cultivation',
+      '前往诸宗山门',
+      {
+        x: panel.x + 30,
+        y: panel.y + panel.height - 62,
+        width: panel.width - 60,
+        height: 42,
+      },
+      () => {
+        this.genesisWelcome = null;
+        void this.openOfficialScene('sect-onboarding');
+      },
+      true,
+    );
+  }
+
   private homeLines(): string[] {
     const profile = asRecord(resourceData(this.resources, 'profile'));
     const cultivator = asRecord(profile?.cultivator);
@@ -42274,7 +42675,7 @@ export class NativeDaoyouApp {
       }
       return [
         '当前微信账号尚无活跃角色。',
-        '在上方写下人物设定，再凝气成形。',
+        '在上方写下人物设定，再推演道身。',
         '',
         `登录账号：${this.user?.name || '微信道友'}`,
       ];
@@ -43355,16 +43756,149 @@ export class NativeDaoyouApp {
     if (this.screen === 'cave' || this.screen === 'cultivator') {
       if (this.needsCharacter) {
         if (!this.characterDraft) {
+          if (this.genesisGenerating) {
+            const centerX = this.width / 2;
+            const progressBarLeft = centerX - 78;
+            const progressBarWidth = 156;
+            const logoSize = 94;
+            if (this.logoImage) {
+              this.ctx.drawImage(
+                this.logoImage,
+                centerX - logoSize / 2,
+                y + 18,
+                logoSize,
+                logoSize,
+              );
+            } else {
+              this.ctx.save();
+              this.ctx.strokeStyle = RULE;
+              this.ctx.setLineDash([4, 4]);
+              this.ctx.beginPath();
+              this.ctx.arc(centerX, y + 65, 46, 0, Math.PI * 2);
+              this.ctx.stroke();
+              this.ctx.restore();
+            }
+            this.drawText('天道正在推演你的今世', centerX, y + 142, 19, {
+              align: 'center',
+              bold: true,
+              heading: true,
+            });
+            this.drawText(
+              this.genesisProgressStage === 'safety'
+                ? '正在进行内容安全审核……'
+                : this.genesisProgressStage === 'character'
+                  ? '正在显化身世、灵根、根基与功法……'
+                  : '正在推演你的先天命格……',
+              centerX,
+              y + 174,
+              11,
+              {
+                align: 'center',
+                color: INK_SECONDARY,
+                sans: true,
+              },
+            );
+            this.drawText(
+              this.genesisProgressStage === 'safety'
+                ? '审核通过后，天道才会接纳这缕心念'
+                : this.genesisProgressStage === 'character'
+                  ? '随后将从服务端接收你的先天命格'
+                  : '道身已显，正在落定六道命格',
+              centerX,
+              y + 196,
+              11,
+              {
+                align: 'center',
+                color: INK_SECONDARY,
+                sans: true,
+              },
+            );
+            this.ctx.save();
+            this.ctx.strokeStyle = 'rgba(44,24,16,.12)';
+            this.ctx.lineWidth = 2;
+            this.ctx.beginPath();
+            this.ctx.moveTo(progressBarLeft, y + 226);
+            this.ctx.lineTo(progressBarLeft + progressBarWidth, y + 226);
+            this.ctx.stroke();
+            this.ctx.strokeStyle = CRIMSON;
+            this.ctx.beginPath();
+            this.ctx.moveTo(progressBarLeft, y + 226);
+            this.ctx.lineTo(
+              progressBarLeft + progressBarWidth * this.genesisProgress,
+              y + 226,
+            );
+            this.ctx.stroke();
+            this.ctx.restore();
+            this.drawText(
+              `${Math.round(this.genesisProgress * 100)}%`,
+              centerX + 78,
+              y + 246,
+              9,
+              { align: 'right', color: INK_SECONDARY, sans: true },
+            );
+            this.drawText('每一位道友的道身皆有所不同', centerX, y + 258, 10, {
+              align: 'center',
+              color: INK_SECONDARY,
+              sans: true,
+            });
+            return y + 286;
+          }
+
           const prompt =
             this.textInputOverlay?.label === '【以心念唤道】'
               ? this.textInputOverlay.value
               : this.characterPrompt;
+          this.drawText('定下今世之念', side, y + 18, 17, {
+            bold: true,
+            heading: true,
+          });
+          this.drawText(
+            '不知道怎么写？先选一种人生，也可以在下方自行修改。',
+            side,
+            y + 40,
+            10,
+            { color: INK_SECONDARY, sans: true },
+          );
+
+          const presetGap = 7;
+          const presetWidth = (this.width - side * 2 - presetGap) / 2;
+          GENESIS_PRESETS.forEach((preset, index) => {
+            const rect: Rect = {
+              x: side + (index % 2) * (presetWidth + presetGap),
+              y: y + 54 + Math.floor(index / 2) * 45,
+              width: presetWidth,
+              height: 38,
+            };
+            this.addInlineChoiceButton(
+              `genesis-preset-${preset.id}`,
+              preset.label,
+              rect,
+              () => this.selectGenesisPreset(preset.id, preset.prompt),
+              this.genesisPresetId === preset.id,
+            );
+          });
+
+          const selectedPreset = GENESIS_PRESETS.find(
+            (preset) => preset.id === this.genesisPresetId,
+          );
+          this.drawWrappedText(
+            selectedPreset?.prompt ||
+              '选一个方向即可开始；天道会根据你的描述生成真实角色数据。',
+            side + 3,
+            y + 158,
+            this.width - side * 2 - 6,
+            17,
+            2,
+            10,
+            { color: INK_SECONDARY, sans: true },
+          );
+
           this.drawInputField(
             'create-character-prompt',
             '【以心念唤道】',
             prompt,
             '例：我想成为一位靠炼丹逆袭的废柴少主……',
-            { x: side, y: y + 22, width: this.width - side * 2, height: 76 },
+            { x: side, y: y + 194, width: this.width - side * 2, height: 70 },
             () => this.beginCharacterCreation(),
             true,
           );
@@ -43378,14 +43912,14 @@ export class NativeDaoyouApp {
           this.drawText(
             `已输入 ${promptLength}/200 字 · 今日剩余 ${remaining}/${dailyLimit} 次`,
             side + 2,
-            y + 112,
+            y + 278,
             9,
             { color: remaining > 0 ? INK_SECONDARY : CRIMSON, sans: true },
           );
           this.addButton(
             'create-character',
-            '凝气成形',
-            { x: side, y: y + 128, width: this.width - side * 2, height: 40 },
+            '推演我的道身',
+            { x: side, y: y + 294, width: this.width - side * 2, height: 42 },
             () => this.generateCharacter(),
             true,
             promptLength >= 2 && promptLength <= 200 && remaining > 0,
@@ -43395,13 +43929,13 @@ export class NativeDaoyouApp {
             '账号互通',
             {
               x: side,
-              y: y + 175,
+              y: y + 342,
               width: this.width - side * 2,
               height: 38,
             },
             () => void this.openOfficialScene('settings'),
           );
-          return y + 225;
+          return y + 390;
         }
         this.addButton(
           'reroll-fates',
@@ -43753,7 +44287,16 @@ export class NativeDaoyouApp {
     this.ctx.stroke();
     this.ctx.restore();
 
-    const groups = getExpandedDockGroups();
+    const groups = getExpandedDockGroups().map((group) => ({
+      ...group,
+      actions: [...group.actions],
+    }));
+    const messageGroup = groups.find((group) => group.key === 'message');
+    messageGroup?.actions.push({
+      id: 'game-club',
+      label: '💬 仙友会',
+      href: '#game-club',
+    });
     const side = 18;
     const gap = 20;
     const columnWidth = (this.width - side * 2 - gap) / 2;
@@ -43806,19 +44349,24 @@ export class NativeDaoyouApp {
         const baseline = actionTop + 18;
         if (baseline >= contentTop - 4 && actionTop <= contentBottom) {
           this.drawText(`[${action.label}]`, x, baseline, 13);
+          const actionRect: Rect = {
+            x,
+            y: Math.max(contentTop, actionTop),
+            width: columnWidth,
+            height: Math.max(
+              0,
+              Math.min(27, contentBottom - Math.max(contentTop, actionTop)),
+            ),
+          };
           this.buttons.push({
             id: `navigation-${action.id}`,
             label: action.label,
-            rect: {
-              x,
-              y: Math.max(contentTop, actionTop),
-              width: columnWidth,
-              height: Math.max(
-                0,
-                Math.min(27, contentBottom - Math.max(contentTop, actionTop)),
-              ),
-            },
+            rect: actionRect,
             action: () => {
+              if (action.id === 'game-club') {
+                this.openGameClub();
+                return;
+              }
               this.closeNavigationDrawer();
               this.render();
               this.openNavigationScene(action.id);
@@ -44370,6 +44918,12 @@ export class NativeDaoyouApp {
             : this.listLines();
     if (isCreationDraft) {
       this.renderCreationDraft(actionStart, bodyBottom - 8);
+    } else if (
+      this.needsCharacter &&
+      !this.characterDraft &&
+      !isDirectOfficialScene
+    ) {
+      // 创角表单与炉鼎等待已由 renderActions 绘制；账号互通等 official 子页仍要继续渲染。
     } else if (isCaveHome) {
       this.renderCaveHome(actionStart, bodyBottom - 8);
     } else if (isCultivatorOverview) {
@@ -44623,6 +45177,7 @@ export class NativeDaoyouApp {
     this.renderTextInputOverlay();
     this.renderConfirmOverlay();
     this.renderFateDetailOverlay();
+    this.renderGenesisWelcomeOverlay();
     this.renderYieldResultOverlay();
     this.renderBreakthroughConfirmOverlay();
     this.renderRetreatResultOverlay();
