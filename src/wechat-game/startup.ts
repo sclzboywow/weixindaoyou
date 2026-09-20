@@ -40,9 +40,7 @@ class WechatStartupShell {
   private progress = 0;
   private status = '灵气汇聚，万界将启';
   private error = '';
-  private tick = 0;
   private active = true;
-  private timer: ReturnType<typeof setInterval> | null = null;
   private loadWatchdog: ReturnType<typeof setTimeout> | null = null;
   private loading = false;
   private packageLoaded = false;
@@ -111,11 +109,6 @@ class WechatStartupShell {
       this.logo = image;
     });
     this.wx.onTouchStart(this.startupTouchHandler);
-    this.timer = setInterval(() => {
-      if (!this.active) return;
-      this.tick += 1;
-      this.render();
-    }, 120);
     this.render();
     this.loadCore();
   }
@@ -304,9 +297,7 @@ class WechatStartupShell {
     this.launchTimer = null;
     if (this.coreEntryFallbackTimer) clearTimeout(this.coreEntryFallbackTimer);
     this.coreEntryFallbackTimer = null;
-    if (this.timer) clearInterval(this.timer);
     this.wx.offTouchStart?.(this.startupTouchHandler);
-    this.timer = null;
     this.retryRect = null;
   }
 
@@ -443,9 +434,8 @@ class WechatStartupShell {
     ctx.font = `${12 * scale}px ${this.bodyFont}`;
     ctx.fillText('正在准备你的道途', centerX, y(420));
 
-    const dots = '·'.repeat((this.tick % 3) + 1);
     const progressText = normalizeStartupCanvasText(
-      this.error || `${this.status}${dots}`,
+      this.error || this.status,
     );
     const barWidth = Math.min(286 * scale, this.width - 52);
     const barX = centerX - barWidth / 2;

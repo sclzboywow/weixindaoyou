@@ -772,6 +772,24 @@ function numberValue(
   return 0;
 }
 
+function worldChatRealmFields(message: unknown): {
+  realm: string;
+  stage: string;
+} {
+  const record = asRecord(message);
+  return {
+    realm: stringValue(record, 'senderRealm', 'sender_realm'),
+    stage: stringValue(record, 'senderRealmStage', 'sender_realm_stage'),
+  };
+}
+
+function worldChatRealmBadge(message: unknown): string {
+  const { realm, stage } = worldChatRealmFields(message);
+  if (realm && stage) return `「${realm}」${stage}`;
+  if (realm) return `「${realm}」`;
+  return stage;
+}
+
 function compact(value: string, limit: number): string {
   const normalized = value.replace(/\s+/g, ' ').trim();
   const chars = Array.from(normalized);
@@ -1150,6 +1168,10 @@ export class NativeDaoyouApp {
   } | null = null;
   private fateDetailIndex: number | null = null;
   private buttons: Button[] = [];
+  // Keep the startup shell's last frame on screen until the initial session
+  // check has resolved. Without this gate the app briefly paints auth/busy
+  // states before it knows whether the player should see login or the cave.
+  private initialBootstrapPending = true;
   private busy = false;
   private notice = '正在启动万界道友…';
   private noticeClearTimer: ReturnType<typeof setTimeout> | null = null;
@@ -1661,7 +1683,6 @@ export class NativeDaoyouApp {
     });
     this.loadShellAssets();
     this.preloadOfficialUi();
-    this.render();
     void this.loadAuthAnnouncement();
     void this.bootstrap();
   }
@@ -1979,6 +2000,7 @@ export class NativeDaoyouApp {
       console.error('[wechat-game] bootstrap failed', error);
       this.notice = `启动失败：${compact(errorText(error), 34)}`;
     } finally {
+      this.initialBootstrapPending = false;
       this.setBusy(false);
     }
   }
@@ -43151,9 +43173,7 @@ export class NativeDaoyouApp {
                 title: '收录道友',
                 lines: [
                   `确认将「${senderLabel}」加入好友名录？`,
-                  [message.senderRealm, message.senderRealmStage]
-                    .filter(Boolean)
-                    .join(' ') || '境界未知',
+                  worldChatRealmBadge(message) || '境界未知',
                 ],
                 confirmLabel: '确认收录',
                 cancelLabel: '再看看',
@@ -43168,14 +43188,18 @@ export class NativeDaoyouApp {
               }),
           });
         }
+        const realmFields = worldChatRealmFields(message);
         this.drawText(
-          systemRumor
-            ? '「天道」'
-            : message.senderRealmStage || message.senderRealm,
-          left + senderWidth,
+          systemRumor ? '「天道」' : worldChatRealmBadge(message),
+          left + senderWidth + 6,
           y + 18,
           9,
-          { color: systemRumor ? WOOD : INK_SECONDARY, sans: true },
+          {
+            color: systemRumor
+              ? WOOD
+              : (REALM_COLORS[realmFields.realm] ?? INK_SECONDARY),
+            sans: true,
+          },
         );
         this.drawText(
           formatChatRelativeTime(message.createdAt),
@@ -44005,6 +44029,10 @@ export class NativeDaoyouApp {
   }
 
   private render(): void {
+    // Do not expose transient auth/busy/home states during initial startup.
+    // The existing startup canvas remains visible until bootstrap releases
+    // exactly one stable first frame.
+    if (this.initialBootstrapPending) return;
     if (
       this.user &&
       this.screen === 'official' &&
