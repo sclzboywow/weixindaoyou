@@ -1,0 +1,30 @@
+{
+  "description": "万界道友生产移动端逐页移植",
+  "compileType": "game",
+  "appid": "wxded7d126f13e0ddf",
+  "projectname": "daoyou-mobile-port",
+  "libVersion": "3.11.3",
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "enhance": false,
+    "minified": false
+  },
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "file",
+        "value": "BUILD-INFO.json"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
+      },
+      {
+        "type": "file",
+        "value": "project.private.config.json"
+      }
+    ]
+  }
+}

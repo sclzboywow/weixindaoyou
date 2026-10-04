@@ -1,0 +1,116 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+  "workers": "workers",
+  "subpackages": [
+    {
+      "name": "content-safety",
+      "root": "content-safety/"
+    },
+    {
+      "name": "game-runtime",
+      "root": "runtime/"
+    },
+    {
+      "name": "shared-icons",
+      "root": "assets/icons/"
+    },
+    {
+      "name": "shared-divination",
+      "root": "assets/divination/"
+    },
+    {
+      "name": "shared-sponsors",
+      "root": "assets/sponsors/"
+    },
+    {
+      "name": "inscriptions",
+      "root": "inscriptions/"
+    },
+    {
+      "name": "enlightenment",
+      "root": "enlightenment/"
+    },
+    {
+      "name": "craft-alchemy",
+      "root": "craft-alchemy/"
+    },
+    {
+      "name": "craft-forging",
+      "root": "craft-forging/"
+    },
+    {
+      "name": "sect-onboarding",
+      "root": "sect-onboarding/"
+    },
+    {
+      "name": "sect-sweep",
+      "root": "sect-sweep/"
+    },
+    {
+      "name": "sect-mining",
+      "root": "sect-mining/"
+    },
+    {
+      "name": "font-body",
+      "root": "font-body/"
+    },
+    {
+      "name": "font-heading",
+      "root": "font-heading/"
+    },
+    {
+      "name": "atlas-world",
+      "root": "atlas-world/"
+    },
+    {
+      "name": "atlas-tiannan",
+      "root": "atlas-tiannan/"
+    },
+    {
+      "name": "atlas-luanxinghai",
+      "root": "atlas-luanxinghai/"
+    },
+    {
+      "name": "atlas-mulan",
+      "root": "atlas-mulan/"
+    },
+    {
+      "name": "atlas-dajin",
+      "root": "atlas-dajin/"
+    },
+    {
+      "name": "atlas-nanjiang",
+      "root": "atlas-nanjiang/"
+    },
+    {
+      "name": "atlas-northland",
+      "root": "atlas-northland/"
+    },
+    {
+      "name": "sect-map-lingxiao",
+      "root": "sect-map-lingxiao/"
+    },
+    {
+      "name": "sect-map-wuxiang",
+      "root": "sect-map-wuxiang/"
+    },
+    {
+      "name": "sect-map-tianyan",
+      "root": "sect-map-tianyan/"
+    },
+    {
+      "name": "sect-map-youdu",
+      "root": "sect-map-youdu/"
+    },
+    {
+      "name": "sect-map-jiujie",
+      "root": "sect-map-jiujie/"
+    }
+  ],
+  "networkTimeout": {
+    "request": 180000,
+    "connectSocket": 30000,
+    "downloadFile": 60000
+  }
+}
