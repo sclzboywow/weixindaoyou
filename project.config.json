@@ -14,6 +14,14 @@
   "packOptions": {
     "ignore": [
       {
+        "type": "folder",
+        "value": ".git"
+      },
+      {
+        "type": "file",
+        "value": "COMPATIBILITY.json"
+      },
+      {
         "type": "file",
         "value": "BUILD-INFO.json"
       },
