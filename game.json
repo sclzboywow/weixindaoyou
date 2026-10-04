@@ -2,6 +2,17 @@
   "deviceOrientation": "portrait",
   "showStatusBar": false,
   "workers": "workers",
+  "plugins": {
+    "MinigameLoading": {
+      "provider": "wxbd990766293b9dc4",
+      "version": "1.0.25",
+      "contexts": [
+        {
+          "type": "isolatedContext"
+        }
+      ]
+    }
+  },
   "subpackages": [
     {
       "name": "content-safety",

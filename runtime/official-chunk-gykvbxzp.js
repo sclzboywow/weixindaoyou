@@ -51,7 +51,7 @@ exports.Oa = jS;
 exports.Pa = dl;
 exports.Ra = D5;
 exports.Sa = L5;
-const official_chunk_nx6d9wvp_js_1 = require("./official-chunk-nx6d9wvp.js");
+const official_chunk_04cv4sxe_js_1 = require("./official-chunk-04cv4sxe.js");
 const official_chunk_h2eh160v_js_1 = require("./official-chunk-h2eh160v.js");
 const official_chunk_wje6zqc2_js_1 = require("./official-chunk-wje6zqc2.js");
 function fo(e, i) { var _b, _f, _g; let a = new Map(e.map((n) => [n.id, n])), t = new Set; for (let n of (_b = i.removed) !== null && _b !== void 0 ? _b : []) {
@@ -1498,7 +1498,7 @@ class Dp {
         let g = r.battleTarget;
         u.push({ speaker: a.name, body: `本次对手是${g.name}，${g.realm}${g.realmStage}。${g.description}`, tone: "attention" });
     } let d = []; if ((r === null || r === void 0 ? void 0 : r.state) === "active" && (l === null || l === void 0 ? void 0 : l.enabled))
-        d.push({ id: "start", label: l.label, tone: "primary" }); return d.push({ id: "leave", label: "弟子告退", tone: "muted" }), (0, official_chunk_nx6d9wvp_js_1.sb)(e, i, a, u, d, (g) => { if (g === "leave")
+        d.push({ id: "start", label: l.label, tone: "primary" }); return d.push({ id: "leave", label: "弟子告退", tone: "muted" }), (0, official_chunk_04cv4sxe_js_1.sb)(e, i, a, u, d, (g) => { if (g === "leave")
         t();
     else if (g === "start" && s && r && (l === null || l === void 0 ? void 0 : l.enabled))
         n(Pp(r.definitionId, s)); }, this.loading, this.error); }
@@ -2128,7 +2128,7 @@ class Fs {
         this.u = e;
         this.model = i;
         this.choose = a;
-        this.preview = new official_chunk_h2eh160v_js_1.te(e), this.filters = new official_chunk_nx6d9wvp_js_1.xb(e, (t) => { i.bag.page = 0, i.bag.setFilter(this.fixed ? { kind: "blueprint" } : t); });
+        this.preview = new official_chunk_h2eh160v_js_1.te(e), this.filters = new official_chunk_04cv4sxe_js_1.xb(e, (t) => { i.bag.page = 0, i.bag.setFilter(this.fixed ? { kind: "blueprint" } : t); });
     }
     reset() { this.selected = void 0, this.preview.close(), this.filters.closeFilter(); }
     setFilter(e) { this.model.bag.page = 0, this.model.bag.setFilter(e); }
@@ -2137,10 +2137,10 @@ class Fs {
         if (a.text(I, y + 4, f + 20, 14, n.source === w ? official_chunk_wje6zqc2_js_1.Be.crimson : official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), n.source === w)
             a.rect(y, f + 39, T, 1, "rgba(193,18,31,.6)");
         a.hit(y, f, T, 40, () => n.setSource(w)), y += T + 16;
-    } let h = a.buttonWidth("刷新"); a.inert(n.loading, () => a.button("刷新", c + e - h, f + 3.84, () => void n.reload())); let k = n.source === "bag" ? `${(_b = s === null || s === void 0 ? void 0 : s.used) !== null && _b !== void 0 ? _b : "—"} / 40` : `${(_f = s === null || s === void 0 ? void 0 : s.total) !== null && _f !== void 0 ? _f : "—"} 格`; a.text(k, c + e - h - 12 - a.measure(k, 12, "monospace"), f + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"); }), o.gap(12), o.block(32.32, (c, f) => a.button(`筛选${(0, official_chunk_nx6d9wvp_js_1.vb)(r) ? " · 已启用" : ""}`, c, f, () => this.filters.open(r, i))), o.gap(12), n.source === "storage" && n.storageError)
+    } let h = a.buttonWidth("刷新"); a.inert(n.loading, () => a.button("刷新", c + e - h, f + 3.84, () => void n.reload())); let k = n.source === "bag" ? `${(_b = s === null || s === void 0 ? void 0 : s.used) !== null && _b !== void 0 ? _b : "—"} / 40` : `${(_f = s === null || s === void 0 ? void 0 : s.total) !== null && _f !== void 0 ? _f : "—"} 格`; a.text(k, c + e - h - 12 - a.measure(k, 12, "monospace"), f + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"); }), o.gap(12), o.block(32.32, (c, f) => a.button(`筛选${(0, official_chunk_04cv4sxe_js_1.vb)(r) ? " · 已启用" : ""}`, c, f, () => this.filters.open(r, i))), o.gap(12), n.source === "storage" && n.storageError)
         o.text(n.storageError, 14, 20), o.gap(12);
     else if (!s)
-        o.text(`正在读取${n.source === "bag" ? "储物袋" : "储藏室"}……`, 14, 20), o.gap(12); o.text(`已备 ${t.total} / ${(_f = (_b = t.cost) === null || _b === void 0 ? void 0 : _b.quantity) !== null && _f !== void 0 ? _f : 0}`, 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), o.gap(12), o.text("轻点操作，长按查看详情", 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), o.gap(8); let l = ((_g = s === null || s === void 0 ? void 0 : s.items) !== null && _g !== void 0 ? _g : []).filter((c) => n.source === "storage" || !(0, official_chunk_nx6d9wvp_js_1.vb)(r) || (0, official_chunk_nx6d9wvp_js_1.wb)(c, r)), u = new Map(l.map((c) => [c.slotIndex, c])), d = n.source === "bag" && !(0, official_chunk_nx6d9wvp_js_1.vb)(r) ? Array.from({ length: 40 }, (c, f) => u.get(f)) : l, g = (e - 24) / 5, p = Math.ceil(d.length / 5); if (o.block(p * (g + 6) - Math.min(6, p * 6), (c, f) => d.forEach((y, h) => { var _b, _f; let k = c + h % 5 * (g + 6), w = f + Math.floor(h / 5) * (g + 6), I = y ? t.itemProblem(y) : null, T = y && !t.result ? ((_b = t.quantities.get(y.id)) !== null && _b !== void 0 ? _b : 0) + Number(((_f = t.blueprint) === null || _f === void 0 ? void 0 : _f.id) === y.id) : 0; (0, official_chunk_h2eh160v_js_1.ve)(a, k, w, g, y, { selected: !!y && y.id === this.selected, disabled: t.locked || !!I, badge: T ? `已投${T}` : y && !I ? "可选" : void 0, quick: y ? () => { this.selected = y.id, this.choose(y); } : void 0, preview: y ? () => this.preview.open(y, { x: k, y: w, w: g, h: g }, void 0, void 0, (L) => { let b = new official_chunk_wje6zqc2_js_1.Ce(a, L); if (I)
+        o.text(`正在读取${n.source === "bag" ? "储物袋" : "储藏室"}……`, 14, 20), o.gap(12); o.text(`已备 ${t.total} / ${(_f = (_b = t.cost) === null || _b === void 0 ? void 0 : _b.quantity) !== null && _f !== void 0 ? _f : 0}`, 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), o.gap(12), o.text("轻点操作，长按查看详情", 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), o.gap(8); let l = ((_g = s === null || s === void 0 ? void 0 : s.items) !== null && _g !== void 0 ? _g : []).filter((c) => n.source === "storage" || !(0, official_chunk_04cv4sxe_js_1.vb)(r) || (0, official_chunk_04cv4sxe_js_1.wb)(c, r)), u = new Map(l.map((c) => [c.slotIndex, c])), d = n.source === "bag" && !(0, official_chunk_04cv4sxe_js_1.vb)(r) ? Array.from({ length: 40 }, (c, f) => u.get(f)) : l, g = (e - 24) / 5, p = Math.ceil(d.length / 5); if (o.block(p * (g + 6) - Math.min(6, p * 6), (c, f) => d.forEach((y, h) => { var _b, _f; let k = c + h % 5 * (g + 6), w = f + Math.floor(h / 5) * (g + 6), I = y ? t.itemProblem(y) : null, T = y && !t.result ? ((_b = t.quantities.get(y.id)) !== null && _b !== void 0 ? _b : 0) + Number(((_f = t.blueprint) === null || _f === void 0 ? void 0 : _f.id) === y.id) : 0; (0, official_chunk_h2eh160v_js_1.ve)(a, k, w, g, y, { selected: !!y && y.id === this.selected, disabled: t.locked || !!I, badge: T ? `已投${T}` : y && !I ? "可选" : void 0, quick: y ? () => { this.selected = y.id, this.choose(y); } : void 0, preview: y ? () => this.preview.open(y, { x: k, y: w, w: g, h: g }, void 0, void 0, (L) => { let b = new official_chunk_wje6zqc2_js_1.Ce(a, L); if (I)
             b.text(I, 14, 24, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), b.gap(8); return b.block(32.32, (P, V) => a.inert(t.locked || !!I, () => a.button("放入器炉", P, V, () => { this.selected = y.id, this.choose(y), this.preview.close(); }))), b; }) : void 0 }); })), n.source === "storage" && s && s.total > 40)
         o.gap(12), o.block(32.32, (c, f) => { a.inert(n.loading || s.page === 0, () => a.button("上一页", c, f, () => n.setPage(s.page - 1))); let y = `${s.page + 1} / ${Math.ceil(s.total / 40)}`; a.text(y, c + (e - a.measure(y, 14, "monospace")) / 2, f + 16.16, 14, official_chunk_wje6zqc2_js_1.Be.ink, "monospace"), a.inert(n.loading || (s.page + 1) * 40 >= s.total, () => a.button("下一页", c + e - a.buttonWidth("下一页"), f, () => n.setPage(s.page + 1))); }); return o; }
     paintOverlay() { this.filters.paint(), this.preview.paint(); }
@@ -2173,7 +2173,7 @@ class $s {
         return; this.loading = !0, this.error = ""; let e = this.generation; official_chunk_wje6zqc2_js_1.De.loadSubpackage({ name: "craft-forging", success: () => { if (e !== this.generation)
             return; this.loaded = !0, this.loading = !1, this.u.invalidate(); }, fail: () => { if (e !== this.generation)
             return; this.loading = !1, this.error = "炼器炉素材加载失败", this.u.invalidate(); } }); }
-    paint(e, i, a) { let t = this.u, n = t.ctx, o = this.model, s = (0, official_chunk_nx6d9wvp_js_1.zb)(); if (o.pending && this.pendingAt === void 0)
+    paint(e, i, a) { let t = this.u, n = t.ctx, o = this.model, s = (0, official_chunk_04cv4sxe_js_1.zb)(); if (o.pending && this.pendingAt === void 0)
         this.pendingAt = s; if (!o.pending)
         this.pendingAt = void 0; if (o.result !== this.result)
         this.result = o.result, this.resultAt = o.result ? s : void 0, this.revealed = !1; let r = this.resultAt === void 0 ? 0 : s - this.resultAt; if (o.result && !this.revealed && r >= 1100)
@@ -2225,7 +2225,7 @@ class Am {
     body(e) { var _b, _f; let i = this.u, a = this.model, t = new official_chunk_wje6zqc2_js_1.Ce(i, e), n = a.error || a.bag.error; if (n)
         t.text(n, 14, 20, official_chunk_wje6zqc2_js_1.Be.crimson), t.block(32.32, (p, c) => { let f = 0; if (a.retryInput)
             f = i.button("重试本次开炉", p, c, () => void a.retry()); i.inert(a.pending, () => i.button("重新核对", p + f, c, () => a.reload())); }), t.gap(16); if (!this.facility) {
-        let p = (0, official_chunk_nx6d9wvp_js_1.rb)(i, e, { description: "地火映壁，炉中尚有余温。图卷与铸器碑分列两侧，择一处走近。", actors: _l, select: (c) => this.select(c), prompt: "选择一处设施" });
+        let p = (0, official_chunk_04cv4sxe_js_1.rb)(i, e, { description: "地火映壁，炉中尚有余温。图卷与铸器碑分列两侧，择一处走近。", actors: _l, select: (c) => this.select(c), prompt: "选择一处设施" });
         return t.block(p.height, (c, f) => p.paint(c, f)), t;
     } if (t.block(45.32, (p, c) => { i.text(_l.find((f) => f.id === this.facility).name, p, c + 16.16, 14), i.inert(a.pending, () => i.button("返回炼器室", p + e - i.buttonWidth("返回炼器室"), c, () => this.select(""))), i.rect(p, c + 44.32, e, 1, "rgba(44,24,16,.1)"); }), t.gap(16), this.facility === "archive") {
         let p = this.inventory.flow(e, !0);

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pb = exports.ob = exports.nb = exports.mb = exports.lb = exports.kb = exports.jb = exports.ib = void 0;
-const official_chunk_nx6d9wvp_js_1 = require("./official-chunk-nx6d9wvp.js");
+const official_chunk_04cv4sxe_js_1 = require("./official-chunk-04cv4sxe.js");
 const official_chunk_h2eh160v_js_1 = require("./official-chunk-h2eh160v.js");
 const official_chunk_wje6zqc2_js_1 = require("./official-chunk-wje6zqc2.js");
 var y = { minMaterialKinds: 1, maxMaterialKinds: 6, minQuantityPerMaterial: 1, maxQuantityPerMaterial: official_chunk_h2eh160v_js_1.ye }, X = official_chunk_h2eh160v_js_1.ye;
@@ -184,7 +184,7 @@ class tn {
         return; this.loading = !0, this.error = ""; let t = this.generation; official_chunk_wje6zqc2_js_1.De.loadSubpackage({ name: "craft-alchemy", success: () => { if (t !== this.generation)
             return; this.loaded = !0, this.loading = !1, this.u.invalidate(); }, fail: () => { if (t !== this.generation)
             return; this.loading = !1, this.error = "炼丹炉素材加载失败", this.u.invalidate(); } }); }
-    paint(t, h, n) { var _a, _c; let c = this.u, r = c.ctx, a = this.model, g = a.phase === "result" ? a.result.craftedConsumables[0] : void 0, V = a.mode === "formula" ? $n(7).slice(1) : $n(6), $ = (0, official_chunk_nx6d9wvp_js_1.zb)(); if (a.phase === "firing" && this.pendingAt === void 0)
+    paint(t, h, n) { var _a, _c; let c = this.u, r = c.ctx, a = this.model, g = a.phase === "result" ? a.result.craftedConsumables[0] : void 0, V = a.mode === "formula" ? $n(7).slice(1) : $n(6), $ = (0, official_chunk_04cv4sxe_js_1.zb)(); if (a.phase === "firing" && this.pendingAt === void 0)
         this.pendingAt = $; if (a.phase !== "firing")
         this.pendingAt = void 0; if (g !== this.result)
         this.result = g, this.resultAt = g ? $ : void 0, this.revealed = !1; let s = this.resultAt === void 0 ? 0 : $ - this.resultAt; if (g && !this.revealed && s >= 1100)
@@ -231,7 +231,7 @@ function en(t) { var _a, _c; let h = new Map; for (let n of [...t].sort((c, r) =
     let c = (0, official_chunk_h2eh160v_js_1.ee)(n.instanceData);
     if (c.type === "gongfa_manual" || c.type === "skill_manual")
         continue;
-    let r = (0, official_chunk_nx6d9wvp_js_1.yb)("material.v1", c), a = (_c = h.get(r)) !== null && _c !== void 0 ? _c : { ...c, id: n.id, quantity: 0, members: [] };
+    let r = (0, official_chunk_04cv4sxe_js_1.yb)("material.v1", c), a = (_c = h.get(r)) !== null && _c !== void 0 ? _c : { ...c, id: n.id, quantity: 0, members: [] };
     a.quantity += n.quantity, a.members.push({ id: n.id, revision: n.revision, quantity: n.quantity, slotIndex: n.slotIndex }), h.set(r, a);
 } return [...h.values()]; }
 function sn(t) { return t.filter((h) => { var _a; return h.location === "storage" && ((_a = (0, official_chunk_h2eh160v_js_1.Nd)(h.definitionId)) === null || _a === void 0 ? void 0 : _a.kind) === "material"; }).flatMap((h) => { let n = (0, official_chunk_h2eh160v_js_1.ee)(h.instanceData); return n.type === "gongfa_manual" || n.type === "skill_manual" ? [] : [{ ...n, id: h.id, quantity: h.quantity, members: [{ id: h.id, revision: h.revision, quantity: h.quantity, slotIndex: h.slotIndex }] }]; }); }
@@ -241,7 +241,7 @@ class E {
         this.u = t;
         this.model = h;
         this.onChoose = n;
-        this.bag = new official_chunk_h2eh160v_js_1.we(() => t.invalidate()), this.preview = new official_chunk_h2eh160v_js_1.te(t), this.filters = new official_chunk_nx6d9wvp_js_1.xb(t, (c) => { this.bag.page = 0, this.bag.setFilter(c); });
+        this.bag = new official_chunk_h2eh160v_js_1.we(() => t.invalidate()), this.preview = new official_chunk_h2eh160v_js_1.te(t), this.filters = new official_chunk_04cv4sxe_js_1.xb(t, (c) => { this.bag.page = 0, this.bag.setFilter(c); });
     }
     enter() { this.reset(), this.bag.enter(); }
     reset() { var _a; (_a = this.stopKeyboard) === null || _a === void 0 ? void 0 : _a.call(this), this.bag.leave(), this.preview.close(), this.filters.closeFilter(); }
@@ -252,10 +252,10 @@ class E {
         if (h.text(A, K + 4, Z + 20, 14, c.source === e ? official_chunk_wje6zqc2_js_1.Be.crimson : official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), c.source === e)
             h.rect(K, Z + 39, j, 1, "rgba(193,18,31,.6)");
         h.hit(K, Z, j, 40, () => c.setSource(e)), K += j + 16;
-    } let G = h.buttonWidth("刷新"); h.inert(c.loading, () => h.button("刷新", B + t - G, Z + 3.84, () => void c.reload())); let F = c.source === "bag" ? `${(_a = a === null || a === void 0 ? void 0 : a.used) !== null && _a !== void 0 ? _a : "—"} / 40` : `${(_c = a === null || a === void 0 ? void 0 : a.total) !== null && _c !== void 0 ? _c : "—"} 格`; h.text(F, B + t - G - 12 - h.measure(F, 12, "monospace"), Z + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"); }), r.gap(12), r.block(32.32, (B, Z) => h.button(`筛选${(0, official_chunk_nx6d9wvp_js_1.vb)(g) ? " · 已启用" : ""}`, B, Z, () => this.filters.open(g))), r.gap(12), c.error)
+    } let G = h.buttonWidth("刷新"); h.inert(c.loading, () => h.button("刷新", B + t - G, Z + 3.84, () => void c.reload())); let F = c.source === "bag" ? `${(_a = a === null || a === void 0 ? void 0 : a.used) !== null && _a !== void 0 ? _a : "—"} / 40` : `${(_c = a === null || a === void 0 ? void 0 : a.total) !== null && _c !== void 0 ? _c : "—"} 格`; h.text(F, B + t - G - 12 - h.measure(F, 12, "monospace"), Z + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"); }), r.gap(12), r.block(32.32, (B, Z) => h.button(`筛选${(0, official_chunk_04cv4sxe_js_1.vb)(g) ? " · 已启用" : ""}`, B, Z, () => this.filters.open(g))), r.gap(12), c.error)
         r.text(c.error, 14, 20, official_chunk_wje6zqc2_js_1.Be.crimson), r.gap(12);
     else if (!a)
-        r.text(`正在读取${c.source === "bag" ? "储物袋" : "储藏室"}……`, 14, 20), r.gap(12); r.text("轻点操作，长按查看详情", 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), r.gap(8); let s = ((_c = a === null || a === void 0 ? void 0 : a.items) !== null && _c !== void 0 ? _c : []).filter((B) => c.source === "storage" || !(0, official_chunk_nx6d9wvp_js_1.vb)(g) || (0, official_chunk_nx6d9wvp_js_1.wb)(B, g)), W = new Map(s.map((B) => [B.slotIndex, B])), Q = c.source === "bag" && !(0, official_chunk_nx6d9wvp_js_1.vb)(g) ? Array.from({ length: 40 }, (B, Z) => W.get(Z)) : s, v = (t - 24) / 5, J = Math.ceil(Q.length / 5); if (r.block(J * (v + 6) - Math.min(6, J * 6), (B, Z) => Q.forEach((K, G) => { var _a; let F = B + G % 5 * (v + 6), e = Z + Math.floor(G / 5) * (v + 6), A = K ? $.find((N) => N.members.some((O) => O.id === K.id)) : void 0, j = A ? { ...A, element: (_a = A.element) !== null && _a !== void 0 ? _a : void 0 } : void 0, b = j ? n.materials.doses[j.id] : void 0, C = n.materials.ids.length >= M && !b, f = (N) => { var _a; if (j && !V && !C)
+        r.text(`正在读取${c.source === "bag" ? "储物袋" : "储藏室"}……`, 14, 20), r.gap(12); r.text("轻点操作，长按查看详情", 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), r.gap(8); let s = ((_c = a === null || a === void 0 ? void 0 : a.items) !== null && _c !== void 0 ? _c : []).filter((B) => c.source === "storage" || !(0, official_chunk_04cv4sxe_js_1.vb)(g) || (0, official_chunk_04cv4sxe_js_1.wb)(B, g)), W = new Map(s.map((B) => [B.slotIndex, B])), Q = c.source === "bag" && !(0, official_chunk_04cv4sxe_js_1.vb)(g) ? Array.from({ length: 40 }, (B, Z) => W.get(Z)) : s, v = (t - 24) / 5, J = Math.ceil(Q.length / 5); if (r.block(J * (v + 6) - Math.min(6, J * 6), (B, Z) => Q.forEach((K, G) => { var _a; let F = B + G % 5 * (v + 6), e = Z + Math.floor(G / 5) * (v + 6), A = K ? $.find((N) => N.members.some((O) => O.id === K.id)) : void 0, j = A ? { ...A, element: (_a = A.element) !== null && _a !== void 0 ? _a : void 0 } : void 0, b = j ? n.materials.doses[j.id] : void 0, C = n.materials.ids.length >= M && !b, f = (N) => { var _a; if (j && !V && !C)
         ((_a = this.onChoose) !== null && _a !== void 0 ? _a : ((O, S) => n.addMaterial(O, S)))(j, N); }; (0, official_chunk_h2eh160v_js_1.ve)(h, F, e, v, K, { disabled: V || !!j && C, badge: b ? `已投${b}` : j && !C ? "可选" : void 0, quick: j ? () => f(Math.min((b !== null && b !== void 0 ? b : 0) + 1, j.quantity, X)) : void 0, preview: K ? () => { this.dose = b !== null && b !== void 0 ? b : 1, this.preview.open(K, { x: F, y: e, w: v, h: v }, void 0, void 0, (N) => { let O = new official_chunk_wje6zqc2_js_1.Ce(h, N); if (!j)
             O.text("此物品不能用于炼丹。", 14, 24, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]);
         else
@@ -568,9 +568,9 @@ class Dn {
         else
             s.push({ id: "guide-reference", label: "阅读炼丹说明", tone: "primary" });
         s.push({ id: "leave", label: "返回炼丹房", tone: "muted" });
-        let Q = (0, official_chunk_nx6d9wvp_js_1.sb)(h, t - 2, V, [{ body: W }], s, (v) => v === "leave" ? this.setLocation() : this.open(v));
+        let Q = (0, official_chunk_04cv4sxe_js_1.sb)(h, t - 2, V, [{ body: W }], s, (v) => v === "leave" ? this.setLocation() : this.open(v));
         return c.block(Q.height + 2, (v, J) => { h.ctx.strokeStyle = "rgba(44,24,16,.2)", h.ctx.strokeRect(v + 0.5, J + 0.5, t - 1, Q.height + 1), Q.paint(v + 1, J + 1); }), c;
-    } let a = Object.values(Vn).map((g) => ({ ...g, status: g.id === "furnace" ? { label: this.status(), tone: n.phase === "result" ? "attention" : n.materials.ids.length || n.formula || n.intent ? "active" : "neutral" } : { label: g.id === "cabinet" ? "库存可查" : g.id === "formulas" ? "玉简可阅" : "碑文可阅", tone: "neutral" } })); return (0, official_chunk_nx6d9wvp_js_1.rb)(h, t, { description: "中央丹炉火光微动，药柜、丹方玉简与炉理碑分列四周。走近一处设施，看看它能为你做什么。", actors: a, select: (g) => this.setLocation(g, g === "furnace" ? n.mode : g === "cabinet" ? "materials" : g === "formulas" ? "formula-library" : "guide-basics"), prompt: "选择一处设施进行交互" }); }
+    } let a = Object.values(Vn).map((g) => ({ ...g, status: g.id === "furnace" ? { label: this.status(), tone: n.phase === "result" ? "attention" : n.materials.ids.length || n.formula || n.intent ? "active" : "neutral" } : { label: g.id === "cabinet" ? "库存可查" : g.id === "formulas" ? "玉简可阅" : "碑文可阅", tone: "neutral" } })); return (0, official_chunk_04cv4sxe_js_1.rb)(h, t, { description: "中央丹炉火光微动，药柜、丹方玉简与炉理碑分列四周。走近一处设施，看看它能为你做什么。", actors: a, select: (g) => this.setLocation(g, g === "furnace" ? n.mode : g === "cabinet" ? "materials" : g === "formulas" ? "formula-library" : "guide-basics"), prompt: "选择一处设施进行交互" }); }
     paint(t, h) { let n = this.u, c = n.width - 56, r = this.flow(c), V = 116.2 + r.height, $ = t + 12 - n.scroll; n.clip(0, t, n.width, h - t, () => { n.rect(12, $, n.width - 24, V, "rgba(248,243,230,.82)"), n.text("炼丹房", 28, $ + 28, 23.2, official_chunk_wje6zqc2_js_1.Be.ink, n.headingFont); let s = 36 + n.measure("炼丹房", 23.2, n.headingFont); n.text("/", s, $ + 31, 14, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), n.tracked("修行", s + 14, $ + 31, 12.48, 1.9968, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), n.text("看药材、控炉候、炼丹息身。", 28, $ + 60, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), n.line(28, $ + 84.2 - 1, c), r.paint(28, $ + 84.2 + 16); }), n.scrollMax = Math.max(0, t + 24 + V - h); }
     paintOverlay() { if (!this.action)
         return; if (this.facility === "furnace")

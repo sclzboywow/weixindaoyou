@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SectAffairsConversation = exports.SectAffairsModel = exports.SectAffairsPage = exports.SectArchivePage = exports.SectBattleModel = exports.SectBattlePage = exports.SectHallModel = exports.SectHallPage = exports.SectHallTables = exports.SectIndustries = exports.SectMapAssets = exports.SectMapCamera = exports.SectMapTouch = exports.SectMapView = exports.SectMeridianModel = exports.SectModel = exports.SectOnboardingModel = exports.SectOnboardingPage = exports.SectPage = exports.SectShopModel = exports.SectShopView = exports.SectSubmissionDialog = exports.SectSubmissionModel = exports.SectTaskActions = exports.SectTaskLocation = exports.SectTransferModel = exports.SectTransferPage = exports.SectVisitModel = exports.SectVisitPage = exports.SectWorkspaceModel = void 0;
-const official_chunk_89xwxnzm_js_1 = require("./official-chunk-89xwxnzm.js");
-Object.defineProperty(exports, "SectTaskLocation", { enumerable: true, get: function () { return official_chunk_89xwxnzm_js_1.Ma; } });
-Object.defineProperty(exports, "SectModel", { enumerable: true, get: function () { return official_chunk_89xwxnzm_js_1.Qa; } });
+const official_chunk_gykvbxzp_js_1 = require("./official-chunk-gykvbxzp.js");
+Object.defineProperty(exports, "SectTaskLocation", { enumerable: true, get: function () { return official_chunk_gykvbxzp_js_1.Ma; } });
+Object.defineProperty(exports, "SectModel", { enumerable: true, get: function () { return official_chunk_gykvbxzp_js_1.Qa; } });
 const official_chunk_21q7yjsr_js_1 = require("./official-chunk-21q7yjsr.js");
-const official_chunk_zvyd0gzr_js_1 = require("./official-chunk-zvyd0gzr.js");
-const official_chunk_nx6d9wvp_js_1 = require("./official-chunk-nx6d9wvp.js");
+const official_chunk_44y73cy8_js_1 = require("./official-chunk-44y73cy8.js");
+const official_chunk_04cv4sxe_js_1 = require("./official-chunk-04cv4sxe.js");
 const official_chunk_h2eh160v_js_1 = require("./official-chunk-h2eh160v.js");
 const official_chunk_wje6zqc2_js_1 = require("./official-chunk-wje6zqc2.js");
 var br = "/api/combat-v6/sect-tasks", Ft = new Map;
@@ -27,14 +27,14 @@ class mt {
         this.href = "";
         this.changed = t;
         this.refreshPlayer = r;
-        this.context = new official_chunk_89xwxnzm_js_1.Qa(() => this.sync(), !1), this.tasks = new official_chunk_89xwxnzm_js_1.Ma(t), this.combat = new official_chunk_89xwxnzm_js_1.r(br, () => this.sync());
+        this.context = new official_chunk_gykvbxzp_js_1.Qa(() => this.sync(), !1), this.tasks = new official_chunk_gykvbxzp_js_1.Ma(t), this.combat = new official_chunk_gykvbxzp_js_1.r(br, () => this.sync());
     }
     enter(t, r) { var _a, _b, _c, _d; this.leave(), this.active = !0, this.href = t, this.owner = r; let e = t.split("?")[0], i = new URLSearchParams((_a = t.split("?")[1]) !== null && _a !== void 0 ? _a : ""); try {
         this.taskId = decodeURIComponent((_c = (_b = e.match(/^\/game\/sect\/tasks\/([^/]+)\/battle$/)) === null || _b === void 0 ? void 0 : _b[1]) !== null && _c !== void 0 ? _c : "");
     }
     catch (_e) {
         this.taskId = "";
-    } this.attemptId = (_d = i.get("attemptId")) !== null && _d !== void 0 ? _d : "", this.origin = (0, official_chunk_89xwxnzm_js_1.Ka)(i.get("origin")), this.context.enter(r); }
+    } this.attemptId = (_d = i.get("attemptId")) !== null && _d !== void 0 ? _d : "", this.origin = (0, official_chunk_gykvbxzp_js_1.Ka)(i.get("origin")), this.context.enter(r); }
     leave() { this.active = !1, this.generation++, this.context.leave(), this.tasks.close(), this.combat.leave(), this.entered = this.started = this.starting = !1, this.startError = this.settled = ""; }
     sync() { var _a; if (!this.active)
         return; let t = (_a = this.context.context) === null || _a === void 0 ? void 0 : _a.permissions["sect.tasks.use"]; if (!this.entered && (t === null || t === void 0 ? void 0 : t.granted))
@@ -64,7 +64,7 @@ class mt {
             this.starting = !1, this.changed();
     } }
     get error() { return this.combat.error || this.startError || (!this.combat.session && !this.combat.loading && (!this.taskId || !this.attemptId) ? "缺少宗门挑战标识" : ""); }
-    get back() { var _a; let t = (_a = this.tasks.data) === null || _a === void 0 ? void 0 : _a.items.find((r) => { var _a, _b; return r.definitionId === ((_b = (_a = this.combat.session) === null || _a === void 0 ? void 0 : _a.taskId) !== null && _b !== void 0 ? _b : this.taskId); }); return this.origin ? (0, official_chunk_89xwxnzm_js_1.Ja)(this.origin, t, "return").route : "/game/sect/affairs"; }
+    get back() { var _a; let t = (_a = this.tasks.data) === null || _a === void 0 ? void 0 : _a.items.find((r) => { var _a, _b; return r.definitionId === ((_b = (_a = this.combat.session) === null || _a === void 0 ? void 0 : _a.taskId) !== null && _b !== void 0 ? _b : this.taskId); }); return this.origin ? (0, official_chunk_gykvbxzp_js_1.Ja)(this.origin, t, "return").route : "/game/sect/affairs"; }
     retry() { if (this.starting || this.combat.pending)
         return; if (this.startError)
         this.enter(this.href, this.owner);
@@ -80,7 +80,7 @@ class Pr {
         this.u = t;
         this.player = r;
         this.navigate = e;
-        this.model = new mt(() => { var _a; (_a = this.controller) === null || _a === void 0 ? void 0 : _a.syncAuto(), t.invalidate(); }, () => r.load()), this.combat = this.model.combat, this.controller = new official_chunk_89xwxnzm_js_1.t(this.combat, () => t.invalidate()), this.commands = new official_chunk_89xwxnzm_js_1.z(t, this.controller, () => this.finish(), !1), this.roster = new official_chunk_89xwxnzm_js_1.A(t), this.log = new official_chunk_89xwxnzm_js_1.v(t);
+        this.model = new mt(() => { var _a; (_a = this.controller) === null || _a === void 0 ? void 0 : _a.syncAuto(), t.invalidate(); }, () => r.load()), this.combat = this.model.combat, this.controller = new official_chunk_gykvbxzp_js_1.t(this.combat, () => t.invalidate()), this.commands = new official_chunk_gykvbxzp_js_1.z(t, this.controller, () => this.finish(), !1), this.roster = new official_chunk_gykvbxzp_js_1.A(t), this.log = new official_chunk_gykvbxzp_js_1.v(t);
     }
     enter(t) { this.leave(), this.href = t; }
     leave() { this.model.leave(), this.controller.leave(), this.commands.reset(), this.roster.reset(), this.log.reset(), this.owner = "", this.commandScroll = 0; }
@@ -100,32 +100,32 @@ class Pr {
         n.inert(a.pending, () => n.button("重试结算", o, f, () => void a.resolve())), f += 32.32; if (!s) {
         n.text(this.model.error ? "尚未进入战斗。" : "正在准备战局…", o, f + 12, 16, official_chunk_wje6zqc2_js_1.Be.ink), n.button("返回任务地点", o, f + 32, () => this.navigate(this.model.back));
         return;
-    } let m = (0, official_chunk_89xwxnzm_js_1.l)(a.shown.units), v = h.ended, M = s.outcome ? { victory: "胜利", defeat: "落败", draw: "平局", aborted: "已离场" }[s.outcome] : "", l = v ? M : a.playing ? "战斗中" : "下令中", $ = `第 ${a.shown.round} 回合`, S = n.measure($, 13.6) + 10.4 + 61.2 + 10.4 + 52.8, P = b / 2, K = P + 9.6 + S > b, D = (K ? Math.max(34.8, n.menuBottom + 4 - f) + 24 : 25.2) + 12 + 1; n.text("宗门挑战", o, f + 12.6, 16.8, official_chunk_wje6zqc2_js_1.Be.ink, n.headingFont); let j = f + (K ? Math.max(34.8, n.menuBottom + 4 - f) : 0), z = K ? o : o + b - S, H = "第 ", G = String(a.shown.round); n.text(H, z, j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink), n.text(G, z + n.measure(H, 13.6), j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink, "monospace"), n.text(" 回合", z + n.measure(H, 13.6) + n.measure(G, 13.6, "monospace"), j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink), n.text(l, z + n.measure($, 13.6) + 10.4, j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink); {
+    } let m = (0, official_chunk_gykvbxzp_js_1.l)(a.shown.units), v = h.ended, M = s.outcome ? { victory: "胜利", defeat: "落败", draw: "平局", aborted: "已离场" }[s.outcome] : "", l = v ? M : a.playing ? "战斗中" : "下令中", $ = `第 ${a.shown.round} 回合`, S = n.measure($, 13.6) + 10.4 + 61.2 + 10.4 + 52.8, P = b / 2, K = P + 9.6 + S > b, D = (K ? Math.max(34.8, n.menuBottom + 4 - f) + 24 : 25.2) + 12 + 1; n.text("宗门挑战", o, f + 12.6, 16.8, official_chunk_wje6zqc2_js_1.Be.ink, n.headingFont); let j = f + (K ? Math.max(34.8, n.menuBottom + 4 - f) : 0), z = K ? o : o + b - S, H = "第 ", G = String(a.shown.round); n.text(H, z, j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink), n.text(G, z + n.measure(H, 13.6), j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink, "monospace"), n.text(" 回合", z + n.measure(H, 13.6) + n.measure(G, 13.6, "monospace"), j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink), n.text(l, z + n.measure($, 13.6) + 10.4, j + 12, 13.6, official_chunk_wje6zqc2_js_1.Be.ink); {
         let c = n.measure("返回任务地点", 12);
         n.text("返回任务地点", o + b - c, j + 12, 12, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), n.hit(o + b - c - 4, j, c + 4, 24, () => this.navigate(this.model.back));
-    } n.line(o, f + D - 1, b, official_chunk_wje6zqc2_js_1.Be["battle-faint"]), f += D; let Z = { units: a.shown.units, labels: m, appearances: (_f = s.display) === null || _f === void 0 ? void 0 : _f.unitAppearances, ownId: (_g = s.controlledUnitId) !== null && _g !== void 0 ? _g : (_h = h.commandOptions[0]) === null || _h === void 0 ? void 0 : _h.unitId, controlledId: a.playing ? void 0 : (_j = h.activeOptions) === null || _j === void 0 ? void 0 : _j.unitId, recalledOwnerIds: s.events.flatMap(({ seq: k, event: c }) => k <= a.shown.visibleSeq && c.type === "petRecalled" ? [c.unitId] : []), targetIds: h.disabled ? void 0 : (_k = h.choice) === null || _k === void 0 ? void 0 : _k.ids, selectedIds: h.targets, feedback: a.playing ? (0, official_chunk_89xwxnzm_js_1.n)(a.log.entries, a.shown.visibleSeq) : void 0, inspect: (k) => { h.inspected = k, n.modalScroll = 0, n.invalidate(); }, pick: (k) => h.pick(k) }, O = this.commands.flow(b, m), I = (0, official_chunk_89xwxnzm_js_1.B)(p - f, this.roster.height(1, Z), this.roster.height(0, Z)), q = p - I, F = this.roster.height(1, Z), E = this.roster.height(0, Z), ar = f + 8, sr = q - 8 - E, or = ar + F + 8, Pe = Math.max(0, sr - 8 - or); n.clip(o, f, b, Math.max(0, q - f), () => { this.roster.paint(1, o, ar, b, Z), this.log.paint(o, or, b, Pe, a.log.entries, a.shown.visibleSeq), this.roster.paint(0, o, sr, b, Z); }), this.commandScroll = Math.max(0, Math.min(this.commandScroll, O.height - I)), n.clip(o, q, b, I, () => O.paint(o, q - this.commandScroll)), n.scrollRegion(o, q, b, I, (k) => { this.commandScroll = Math.max(0, Math.min(O.height - I, this.commandScroll + k)), n.invalidate(); }); }
+    } n.line(o, f + D - 1, b, official_chunk_wje6zqc2_js_1.Be["battle-faint"]), f += D; let Z = { units: a.shown.units, labels: m, appearances: (_f = s.display) === null || _f === void 0 ? void 0 : _f.unitAppearances, ownId: (_g = s.controlledUnitId) !== null && _g !== void 0 ? _g : (_h = h.commandOptions[0]) === null || _h === void 0 ? void 0 : _h.unitId, controlledId: a.playing ? void 0 : (_j = h.activeOptions) === null || _j === void 0 ? void 0 : _j.unitId, recalledOwnerIds: s.events.flatMap(({ seq: k, event: c }) => k <= a.shown.visibleSeq && c.type === "petRecalled" ? [c.unitId] : []), targetIds: h.disabled ? void 0 : (_k = h.choice) === null || _k === void 0 ? void 0 : _k.ids, selectedIds: h.targets, feedback: a.playing ? (0, official_chunk_gykvbxzp_js_1.n)(a.log.entries, a.shown.visibleSeq) : void 0, inspect: (k) => { h.inspected = k, n.modalScroll = 0, n.invalidate(); }, pick: (k) => h.pick(k) }, O = this.commands.flow(b, m), I = (0, official_chunk_gykvbxzp_js_1.B)(p - f, this.roster.height(1, Z), this.roster.height(0, Z)), q = p - I, F = this.roster.height(1, Z), E = this.roster.height(0, Z), ar = f + 8, sr = q - 8 - E, or = ar + F + 8, Pe = Math.max(0, sr - 8 - or); n.clip(o, f, b, Math.max(0, q - f), () => { this.roster.paint(1, o, ar, b, Z), this.log.paint(o, or, b, Pe, a.log.entries, a.shown.visibleSeq), this.roster.paint(0, o, sr, b, Z); }), this.commandScroll = Math.max(0, Math.min(this.commandScroll, O.height - I)), n.clip(o, q, b, I, () => O.paint(o, q - this.commandScroll)), n.scrollRegion(o, q, b, I, (k) => { this.commandScroll = Math.max(0, Math.min(O.height - I, this.commandScroll + k)), n.invalidate(); }); }
     paintOverlay() { var _a; let t = this.controller, r = this.combat.session; if (!r)
         return; this.commands.paintOverlay(); let e = this.combat.shown.units.find((i) => i.id === t.inspected); if (e)
-        (0, official_chunk_89xwxnzm_js_1.C)(this.u, e, (_a = (0, official_chunk_89xwxnzm_js_1.l)(this.combat.shown.units).get(e.id)) !== null && _a !== void 0 ? _a : e.name, r.display, () => { t.inspected = void 0, this.u.modalScroll = 0, this.u.invalidate(); }); }
+        (0, official_chunk_gykvbxzp_js_1.C)(this.u, e, (_a = (0, official_chunk_gykvbxzp_js_1.l)(this.combat.shown.units).get(e.id)) !== null && _a !== void 0 ? _a : e.name, r.display, () => { t.inspected = void 0, this.u.modalScroll = 0, this.u.invalidate(); }); }
 }
 exports.SectBattlePage = Pr;
 const zod_1 = require("./zod.js");
 var Mt = { membershipId: zod_1.z.uuid(), expectedRevision: zod_1.z.number().int().nonnegative() }, Sr = zod_1.z.discriminatedUnion("action", [zod_1.z.object({ ...Mt, action: zod_1.z.literal("train"), methodId: zod_1.z.string().min(1).max(160), targetLevel: zod_1.z.number().int().min(1).max(180).optional() }).strict(), zod_1.z.object({ ...Mt, action: zod_1.z.literal("unlock") }).strict(), zod_1.z.object({ ...Mt, action: zod_1.z.literal("save"), pathId: zod_1.z.string().min(1).max(160), nodeIds: zod_1.z.array(zod_1.z.string().min(1).max(160)).max(7) }).strict(), zod_1.z.object({ ...Mt, action: zod_1.z.literal("activate"), pathId: zod_1.z.string().min(1).max(160) }).strict()]);
 class Y extends Error {
 }
-var x = official_chunk_89xwxnzm_js_1.K.meridian.characterLevels;
-function $t(t) { if (!Number.isInteger(t) || t < 1 || t > official_chunk_89xwxnzm_js_1.K.method.maxLevel)
-    throw new Y("心法等级无效"); return (0, official_chunk_89xwxnzm_js_1.I)(official_chunk_89xwxnzm_js_1.K, t); }
+var x = official_chunk_gykvbxzp_js_1.K.meridian.characterLevels;
+function $t(t) { if (!Number.isInteger(t) || t < 1 || t > official_chunk_gykvbxzp_js_1.K.method.maxLevel)
+    throw new Y("心法等级无效"); return (0, official_chunk_gykvbxzp_js_1.I)(official_chunk_gykvbxzp_js_1.K, t); }
 function At(t) { if (!Number.isInteger(t) || t < 1 || t > 7)
-    throw new Y("经脉层级无效"); return (0, official_chunk_89xwxnzm_js_1.J)(official_chunk_89xwxnzm_js_1.K, t); }
-function Hr(t, r, e) { var _a; let i = official_chunk_89xwxnzm_js_1.M[t.sectId], n = (0, official_chunk_wje6zqc2_js_1.Je)(t), a = { cultivationExp: 0, spiritStones: 0, comprehensionInsight: 0 }; if (e.action === "train") {
+    throw new Y("经脉层级无效"); return (0, official_chunk_gykvbxzp_js_1.J)(official_chunk_gykvbxzp_js_1.K, t); }
+function Hr(t, r, e) { var _a; let i = official_chunk_gykvbxzp_js_1.M[t.sectId], n = (0, official_chunk_wje6zqc2_js_1.Je)(t), a = { cultivationExp: 0, spiritStones: 0, comprehensionInsight: 0 }; if (e.action === "train") {
     let h = i.methods.find((f) => f.id === e.methodId);
     if (!h)
         throw new Y("心法不属于当前宗门");
     let o = t.methods[h.id], b = (_a = e.targetLevel) !== null && _a !== void 0 ? _a : o + 1, p = i.methods.find((f) => f.isPrimary);
     if (!Number.isInteger(b) || b <= o)
         throw new Y("目标等级必须高于当前等级");
-    if (b > (0, official_chunk_89xwxnzm_js_1.L)(r))
+    if (b > (0, official_chunk_gykvbxzp_js_1.L)(r))
         throw new Y("已达当前人物境界允许的心法上限");
     if (!h.isPrimary && b > t.methods[p.id])
         throw new Y(`分支不可超过${p.name}`);
@@ -153,7 +153,7 @@ else {
         n.activePathId = h.id;
     }
     else {
-        let o = n.meridianLoadouts.find((m) => m.pathId === h.id), b = new Set, p = (0, official_chunk_89xwxnzm_js_1.D)(h, e.nodeIds);
+        let o = n.meridianLoadouts.find((m) => m.pathId === h.id), b = new Set, p = (0, official_chunk_gykvbxzp_js_1.D)(h, e.nodeIds);
         for (let m of p) {
             let v = h.nodes.find((M) => M.id === m);
             if (!v)
@@ -162,18 +162,18 @@ else {
                 throw new Y("节点所在层尚未解锁");
             if (b.has(v.layer))
                 throw new Y("每层只能选择一个节点");
-            if (!(0, official_chunk_89xwxnzm_js_1.F)(h, p, v))
+            if (!(0, official_chunk_gykvbxzp_js_1.F)(h, p, v))
                 throw new Y("节点必须与前一层已选经脉连通");
             b.add(v.layer);
         }
-        o.nodeIds = (0, official_chunk_89xwxnzm_js_1.D)(h, e.nodeIds).sort((m, v) => h.nodes.find((M) => M.id === m).layer - h.nodes.find((M) => M.id === v).layer), o.revision++;
-        let f = (0, official_chunk_89xwxnzm_js_1.N)({ progress: { ...n, activePathId: h.id }, characterLevel: r });
+        o.nodeIds = (0, official_chunk_gykvbxzp_js_1.D)(h, e.nodeIds).sort((m, v) => h.nodes.find((M) => M.id === m).layer - h.nodes.find((M) => M.id === v).layer), o.revision++;
+        let f = (0, official_chunk_gykvbxzp_js_1.N)({ progress: { ...n, activePathId: h.id }, characterLevel: r });
         if (!f.ok)
             throw new Y(f.diagnostics.map((m) => m.message).join("；"));
     }
-} let s = (0, official_chunk_89xwxnzm_js_1.N)({ progress: n, characterLevel: r }); if (!s.ok)
+} let s = (0, official_chunk_gykvbxzp_js_1.N)({ progress: n, characterLevel: r }); if (!s.ok)
     throw new Y(s.diagnostics.map((h) => h.message).join("；")); return { progress: n, cost: a }; }
-function gt(t, r) { var _a, _b, _c, _d, _e; let e = official_chunk_89xwxnzm_js_1.M[t.sectId], i = e.paths.find((b) => b.id === t.activePathId), n = (0, official_chunk_89xwxnzm_js_1.N)({ progress: t, characterLevel: r }); if (!n.ok)
+function gt(t, r) { var _a, _b, _c, _d, _e; let e = official_chunk_gykvbxzp_js_1.M[t.sectId], i = e.paths.find((b) => b.id === t.activePathId), n = (0, official_chunk_gykvbxzp_js_1.N)({ progress: t, characterLevel: r }); if (!n.ok)
     throw Error(n.diagnostics.map((b) => b.message).join("；")); let a = n.projection, s = new Map([...a.skills, ...a.skillOverrides].map((b) => [b.id, b])), h = new Set(i ? (_b = (_a = t.meridianLoadouts.find((b) => b.pathId === i.id)) === null || _a === void 0 ? void 0 : _a.nodeIds) !== null && _b !== void 0 ? _b : [] : []); return [...e.skills.map((b) => ({ skill: b, requirement: "" })), ...((_c = i === null || i === void 0 ? void 0 : i.grantSkills) !== null && _c !== void 0 ? _c : []).map((b) => ({ skill: b, requirement: "" })), ...((_d = i === null || i === void 0 ? void 0 : i.foundationPassives) !== null && _d !== void 0 ? _d : []).map((b) => ({ skill: b, requirement: "" })), ...(_e = i === null || i === void 0 ? void 0 : i.nodes.flatMap((b) => { var _a, _b; return [...(_a = b.grantSkills) !== null && _a !== void 0 ? _a : [], ...(_b = b.passives) !== null && _b !== void 0 ? _b : []].map((p) => ({ skill: p, requirement: h.has(b.id) ? "" : `需选择第${b.layer}层「${b.name}」` })); })) !== null && _e !== void 0 ? _e : []].filter(({ skill: b }) => b.kind !== "internal").map(({ skill: b, requirement: p }) => { var _a; let f = (_a = s.get(b.definition.id)) !== null && _a !== void 0 ? _a : b.definition, m = a.activeSkillIds.includes(f.id) || a.passiveSkillIds.includes(f.id), v = e.methods.find((M) => M.id === b.sourceMethodId); return { id: f.id, name: f.name, methodId: v.id, methodName: v.name, level: t.methods[v.id], unlockLevel: b.unlockMethodLevel, available: m, passive: b.kind === "passive", requirement: m ? "" : p || (t.methods[v.id] < b.unlockMethodLevel ? `心法${b.unlockMethodLevel}级解锁` : "当前流派或节点替换了此技能"), description: (0, official_chunk_h2eh160v_js_1.kc)([f], e.statuses)[f.id].description }; }); }
 var ot = { maxHp: "气血上限", maxMp: "法力上限", physicalAtk: "物理攻击", physicalDef: "物理防御", magicAtk: "法术攻击", magicDef: "法术防御", speed: "速度", sealHit: "封印命中", sealResist: "封印抵抗", hit: "命中", evasion: "躲避", healingPower: "治疗强度" };
 function Lt(t) { return { membershipId: t.build.membershipId, expectedRevision: t.build.revision }; }
@@ -209,7 +209,7 @@ class Pt {
     enter(t) { this.leave(), this.active = !0, this.mode = t, this.view = void 0, this.error = this.notice = "", this.methodId = "", this.skillId = void 0, this.membership = "", this.refresh = 0, this.reload(); }
     leave() { var _a, _b; this.active = !1, this.generation++, this.sequence++, (_b = (_a = this.reader) === null || _a === void 0 ? void 0 : _a.abort) === null || _b === void 0 ? void 0 : _b.call(_a), this.reader = void 0, this.pending = this.loading = !1; }
     accept(t) { var _a; this.view = t; let r = (_a = t.build.membershipId) !== null && _a !== void 0 ? _a : ""; if (r !== this.membership || !this.methodId)
-        this.membership = r, this.methodId = t.progress ? official_chunk_89xwxnzm_js_1.M[t.progress.sectId].methods[0].id : "", this.skillId = void 0; }
+        this.membership = r, this.methodId = t.progress ? official_chunk_gykvbxzp_js_1.M[t.progress.sectId].methods[0].id : "", this.skillId = void 0; }
     async reload() { var _a, _b; if (!this.active || this.pending)
         return; let t = this.generation, r = ++this.sequence; (_b = (_a = this.reader) === null || _a === void 0 ? void 0 : _a.abort) === null || _b === void 0 ? void 0 : _b.call(_a), this.loading = !0, this.error = "", this.refresh++, this.changed(); let e = () => this.active && t === this.generation && r === this.sequence; try {
         let i = await (0, official_chunk_h2eh160v_js_1.Gb)("/api/combat-v6/sect", "GET", void 0, void 0, {}, { onTask: (n) => { var _a; if (e())
@@ -256,12 +256,12 @@ class Pt {
     act(t) { return this.submit("/api/combat-v6/sect", Sr.parse(t)); }
     enablePath(t) { let r = this.view; if (!r || r.progress || r.blockedReason !== "请先选择流派，启用宗门传承" || !r.build.paths.some((e) => e.id === t))
         return Promise.resolve(!1); return this.submit("/api/combat-v6/sect/path", { activePathId: t, expectedRevision: r.build.revision }); }
-    selectMethod(t) { var _a, _b; if (!((_b = (((_a = this.view) === null || _a === void 0 ? void 0 : _a.progress) ? official_chunk_89xwxnzm_js_1.M[this.view.progress.sectId] : void 0)) === null || _b === void 0 ? void 0 : _b.methods.some((e) => e.id === t)))
+    selectMethod(t) { var _a, _b; if (!((_b = (((_a = this.view) === null || _a === void 0 ? void 0 : _a.progress) ? official_chunk_gykvbxzp_js_1.M[this.view.progress.sectId] : void 0)) === null || _b === void 0 ? void 0 : _b.methods.some((e) => e.id === t)))
         return; this.methodId = t, this.skillId = void 0, this.changed(); }
     selectSkill(t) { this.skillId = t, this.changed(); }
     get methods() { var _a; let t = this.view, r = t === null || t === void 0 ? void 0 : t.progress; if (!t || !r)
-        return; let e = official_chunk_89xwxnzm_js_1.M[r.sectId], i = e.methods.find((S) => S.id === this.methodId); if (!i)
-        return; let n = r.methods[i.id], a = gt(r, t.characterLevel), s = a.filter((S) => S.methodId === i.id && (!S.passive || e.skills.some((P) => P.definition.id === S.id))), h = (_a = s.find((S) => S.id === this.skillId)) !== null && _a !== void 0 ? _a : s[0], o = { ...Lt(t), action: "train", methodId: i.id }, b = lt(t, o), p = (0, official_chunk_89xwxnzm_js_1.L)(t.characterLevel), f = i.isPrimary ? p : Math.min(p, r.methods[e.methods.find((S) => S.isPrimary).id]), m = n < f ? $t(n + 1) : void 0, v = 0, M = 0, l = 0, $ = 0; for (let S = n + 1; S <= Math.min(n + 10, f); S++) {
+        return; let e = official_chunk_gykvbxzp_js_1.M[r.sectId], i = e.methods.find((S) => S.id === this.methodId); if (!i)
+        return; let n = r.methods[i.id], a = gt(r, t.characterLevel), s = a.filter((S) => S.methodId === i.id && (!S.passive || e.skills.some((P) => P.definition.id === S.id))), h = (_a = s.find((S) => S.id === this.skillId)) !== null && _a !== void 0 ? _a : s[0], o = { ...Lt(t), action: "train", methodId: i.id }, b = lt(t, o), p = (0, official_chunk_gykvbxzp_js_1.L)(t.characterLevel), f = i.isPrimary ? p : Math.min(p, r.methods[e.methods.find((S) => S.isPrimary).id]), m = n < f ? $t(n + 1) : void 0, v = 0, M = 0, l = 0, $ = 0; for (let S = n + 1; S <= Math.min(n + 10, f); S++) {
         let P = $t(S);
         if (M + P.cultivationExp > t.resources.cultivationExp || l + P.spiritStones > t.resources.spiritStones || $ + P.comprehensionInsight > t.resources.comprehensionInsight)
             break;
@@ -284,10 +284,10 @@ class St {
         return; let r = `${t.build.membershipId}:${this.workspace.refresh}`; if (r === this.key)
         return; this.reset(), this.key = r, this.pathId = t.progress.activePathId; }
     get state() { var _a, _b, _c, _d, _e, _f, _g, _h; this.sync(); let t = this.workspace.view, r = t === null || t === void 0 ? void 0 : t.progress; if (!t || !r)
-        return; let e = official_chunk_89xwxnzm_js_1.M[r.sectId], i = e.paths.find(($) => $.id === this.pathId); if (!i)
-        return; let n = (0, official_chunk_89xwxnzm_js_1.G)(i, r.meridianLoadouts.find(($) => $.pathId === i.id).nodeIds), a = (_a = this.draft) !== null && _a !== void 0 ? _a : n, s = a.length !== n.length || a.some(($) => !n.includes($)), h = (_c = (_b = i.nodes.find(($) => $.id === this.focusedId)) !== null && _b !== void 0 ? _b : i.nodes.find(($) => n.includes($.id))) !== null && _c !== void 0 ? _c : i.nodes[0], o = x.map(($, S) => i.nodes.find((P) => P.layer === S + 1 && a.includes(P.id))), b = o.slice(0, -1).flatMap(($, S) => { if (!$)
+        return; let e = official_chunk_gykvbxzp_js_1.M[r.sectId], i = e.paths.find(($) => $.id === this.pathId); if (!i)
+        return; let n = (0, official_chunk_gykvbxzp_js_1.G)(i, r.meridianLoadouts.find(($) => $.pathId === i.id).nodeIds), a = (_a = this.draft) !== null && _a !== void 0 ? _a : n, s = a.length !== n.length || a.some(($) => !n.includes($)), h = (_c = (_b = i.nodes.find(($) => $.id === this.focusedId)) !== null && _b !== void 0 ? _b : i.nodes.find(($) => n.includes($.id))) !== null && _c !== void 0 ? _c : i.nodes[0], o = x.map(($, S) => i.nodes.find((P) => P.layer === S + 1 && a.includes(P.id))), b = o.slice(0, -1).flatMap(($, S) => { if (!$)
         return []; let P = o[S + 1]; if (P)
-        return [{ from: $, to: P }]; return i.requiresConnectedNodes ? i.nodes.filter((K) => K.layer <= r.meridianDepth && (0, official_chunk_89xwxnzm_js_1.E)($, K)).map((K) => ({ from: $, to: K })) : []; }), p = new Map([...e.skills, ...(_d = i.grantSkills) !== null && _d !== void 0 ? _d : [], ...(_e = i.foundationPassives) !== null && _e !== void 0 ? _e : [], ...i.nodes.flatMap(($) => { var _a, _b; return [...(_a = $.grantSkills) !== null && _a !== void 0 ? _a : [], ...(_b = $.passives) !== null && _b !== void 0 ? _b : []]; })].map(($) => [$.definition.id, $.definition.name])), f = [...new Set([...((_f = h.patches) !== null && _f !== void 0 ? _f : []).map(($) => p.get($.skillId)).filter(($) => !!$), ...((_g = h.grantSkills) !== null && _g !== void 0 ? _g : []).map(($) => $.definition.name), ...((_h = h.revokeSkillIds) !== null && _h !== void 0 ? _h : []).map(($) => p.get($)).filter(($) => !!$)])], m = Lt(t), v = { ...m, action: "save", pathId: i.id, nodeIds: [...a] }, M = { ...m, action: "activate", pathId: i.id }, l = { ...m, action: "unlock" }; return { view: t, progress: r, definition: e, path: i, original: n, nodes: a, dirty: s, focused: h, selectedByLayer: o, connections: b, affected: f, save: v, activate: M, unlock: l, locked: this.workspace.pending || !!t.blockedReason, saveProblem: s ? lt(t, v) : null, unlockProblem: r.meridianDepth < 7 ? lt(t, l) : null, unlockCost: r.meridianDepth < 7 ? At(r.meridianDepth + 1) : void 0, reachable: (0, official_chunk_89xwxnzm_js_1.F)(i, a, h) }; }
+        return [{ from: $, to: P }]; return i.requiresConnectedNodes ? i.nodes.filter((K) => K.layer <= r.meridianDepth && (0, official_chunk_gykvbxzp_js_1.E)($, K)).map((K) => ({ from: $, to: K })) : []; }), p = new Map([...e.skills, ...(_d = i.grantSkills) !== null && _d !== void 0 ? _d : [], ...(_e = i.foundationPassives) !== null && _e !== void 0 ? _e : [], ...i.nodes.flatMap(($) => { var _a, _b; return [...(_a = $.grantSkills) !== null && _a !== void 0 ? _a : [], ...(_b = $.passives) !== null && _b !== void 0 ? _b : []]; })].map(($) => [$.definition.id, $.definition.name])), f = [...new Set([...((_f = h.patches) !== null && _f !== void 0 ? _f : []).map(($) => p.get($.skillId)).filter(($) => !!$), ...((_g = h.grantSkills) !== null && _g !== void 0 ? _g : []).map(($) => $.definition.name), ...((_h = h.revokeSkillIds) !== null && _h !== void 0 ? _h : []).map(($) => p.get($)).filter(($) => !!$)])], m = Lt(t), v = { ...m, action: "save", pathId: i.id, nodeIds: [...a] }, M = { ...m, action: "activate", pathId: i.id }, l = { ...m, action: "unlock" }; return { view: t, progress: r, definition: e, path: i, original: n, nodes: a, dirty: s, focused: h, selectedByLayer: o, connections: b, affected: f, save: v, activate: M, unlock: l, locked: this.workspace.pending || !!t.blockedReason, saveProblem: s ? lt(t, v) : null, unlockProblem: r.meridianDepth < 7 ? lt(t, l) : null, unlockCost: r.meridianDepth < 7 ? At(r.meridianDepth + 1) : void 0, reachable: (0, official_chunk_gykvbxzp_js_1.F)(i, a, h) }; }
     get confirmingLeave() { return !!this.leaving; }
     requestLeave(t) { let r = this.state; if (this.workspace.pending)
         return !1; if (r === null || r === void 0 ? void 0 : r.dirty)
@@ -299,7 +299,7 @@ class St {
     focus(t) { var _a; if (!((_a = this.state) === null || _a === void 0 ? void 0 : _a.path.nodes.some((r) => r.id === t)))
         return; this.focusedId = t, this.detailOpen = !0, this.changed(); }
     choose() { let t = this.state; if (!t || t.locked || t.focused.automatic || t.focused.layer > t.progress.meridianDepth || !t.reachable)
-        return; this.draft = (0, official_chunk_89xwxnzm_js_1.H)(t.path, t.nodes, t.focused), this.detailOpen = !1, this.changed(); }
+        return; this.draft = (0, official_chunk_gykvbxzp_js_1.H)(t.path, t.nodes, t.focused), this.detailOpen = !1, this.changed(); }
     discard() { if (this.workspace.pending)
         return; this.draft = null, this.changed(); }
     openUnlock() { let t = this.state; if (!t || t.locked || t.dirty || t.progress.meridianDepth >= 7)
@@ -355,7 +355,7 @@ class Kt {
             return;
         if (((_c = i.resource) === null || _c === void 0 ? void 0 : _c.topic) !== "sect.shop" || ((_e = (_d = i.resource) === null || _d === void 0 ? void 0 : _d.scope) === null || _e === void 0 ? void 0 : _e.kind) !== "cultivator" || ((_g = (_f = i.resource) === null || _f === void 0 ? void 0 : _f.scope) === null || _g === void 0 ? void 0 : _g.id) !== this.owner)
             throw Error("资源地址不匹配: sect.shop");
-        this.data = official_chunk_89xwxnzm_js_1.Ga["sect.shop"].parse(i.data);
+        this.data = official_chunk_gykvbxzp_js_1.Ga["sect.shop"].parse(i.data);
     }
     catch (i) {
         if (e())
@@ -470,7 +470,7 @@ class Ht {
         (_a = t.abort) === null || _a === void 0 ? void 0 : _a.call(t); this.reads.clear(), clearTimeout(this.timer), this.timer = void 0, this.infrastructure = void 0, this.member = void 0, this.facilityKey = void 0, this.amount = void 0, this.loading = this.busy = !1, this.error = this.result = ""; }
     get facilities() { var _a; return De((_a = this.infrastructure) === null || _a === void 0 ? void 0 : _a.facilities); }
     get facility() { return this.facilities.find((t) => t.key === this.facilityKey); }
-    get quote() { return this.amount === void 0 ? void 0 : (0, official_chunk_89xwxnzm_js_1.ka)(this.amount); }
+    get quote() { return this.amount === void 0 ? void 0 : (0, official_chunk_gykvbxzp_js_1.ka)(this.amount); }
     midnight() { if (clearTimeout(this.timer), !this.active || !this.donation)
         return; let t = Date.now(), r = new Date(t + 28800000), e = Date.UTC(r.getUTCFullYear(), r.getUTCMonth(), r.getUTCDate() + 1) - 28800000; this.timer = setTimeout(() => { this.reload(); }, Math.max(1000, e - t)); }
     async reload() { var _a; if (!this.active)
@@ -482,7 +482,7 @@ class Ht {
                 (_a = v.abort) === null || _a === void 0 ? void 0 : _a.call(v); } }), p = b.resource, f = s === "sect.infrastructure" ? "sect" : "cultivator", m = s === "sect.infrastructure" ? this.sect : this.owner;
         if ((p === null || p === void 0 ? void 0 : p.topic) !== s || ((_a = p === null || p === void 0 ? void 0 : p.scope) === null || _a === void 0 ? void 0 : _a.kind) !== f || ((_b = p === null || p === void 0 ? void 0 : p.scope) === null || _b === void 0 ? void 0 : _b.id) !== m)
             throw Error(`资源地址不匹配: ${s}`);
-        return official_chunk_89xwxnzm_js_1.Ga[s].parse(b.data);
+        return official_chunk_gykvbxzp_js_1.Ga[s].parse(b.data);
     }
     finally {
         if (o)
@@ -507,7 +507,7 @@ class Ht {
     }
     else if (t.startsWith("amount:")) {
         let i = Number(t.slice(7));
-        if (official_chunk_89xwxnzm_js_1.ja.some((n) => n.spiritStones === i))
+        if (official_chunk_gykvbxzp_js_1.ja.some((n) => n.spiritStones === i))
             this.amount = i;
     } this.changed(); }
     async confirm(t) { var _a, _b; let r = this.facility, e = this.quote; if (!this.active || this.busy || this.loading || ((_a = this.member) === null || _a === void 0 ? void 0 : _a.constructedToday))
@@ -529,12 +529,12 @@ class Ht {
             this.busy = !1, this.changed();
     } }
     flow(t, r, e, i, n) { var _a, _b, _c, _d, _e; let a = [{ speaker: e.name, body: e.greeting }], s = { id: "leave", label: "弟子告退", tone: "muted" }; if (!this.donation)
-        return a.push({ speaker: e.name, body: this.facilities.length ? this.facilities.map((f) => { var _a; return Qr((_a = i[f.key]) !== null && _a !== void 0 ? _a : "未命名设施", f); }).join("；") + "。" : "宗门当前没有可继续建设的设施。" }), (0, official_chunk_nx6d9wvp_js_1.sb)(t, r, e, a, [s], n, this.loading, this.error); let h = this.facility, o = this.quote, b = this.member; if (b === null || b === void 0 ? void 0 : b.constructedToday)
+        return a.push({ speaker: e.name, body: this.facilities.length ? this.facilities.map((f) => { var _a; return Qr((_a = i[f.key]) !== null && _a !== void 0 ? _a : "未命名设施", f); }).join("；") + "。" : "宗门当前没有可继续建设的设施。" }), (0, official_chunk_04cv4sxe_js_1.sb)(t, r, e, a, [s], n, this.loading, this.error); let h = this.facility, o = this.quote, b = this.member; if (b === null || b === void 0 ? void 0 : b.constructedToday)
         a.push({ speaker: e.name, body: `今日建设已经完成：向${(_b = i[(_a = b.facilityKey) !== null && _a !== void 0 ? _a : ""]) !== null && _b !== void 0 ? _b : "所选设施"}捐献${dt((_c = b.spiritStones) !== null && _c !== void 0 ? _c : 0)}灵石，获得${(_d = b.contribution) !== null && _d !== void 0 ? _d : 0}点宗门贡献。`, tone: "attention" });
     else if (h)
         a.push({ speaker: e.name, body: `今日准备建设${(_e = i[h.key]) !== null && _e !== void 0 ? _e : "所选设施"}。${Qr("", h)}` }); if (o)
         a.push({ speaker: e.name, body: `本次需要捐献${dt(o.spiritStones)}灵石，可增加${o.constructionPoints}点建设进度并获得${o.contribution}点宗门贡献。` }); if (this.result)
-        a.push({ speaker: e.name, body: `${this.result}的建设已经登记，灵石与贡献均已结算。`, tone: "attention" }); let p = (b === null || b === void 0 ? void 0 : b.constructedToday) || !this.facilities.length ? [s] : !h ? [...this.facilities.map((f) => { var _a; return ({ id: `facility:${f.key}`, label: `建设${(_a = i[f.key]) !== null && _a !== void 0 ? _a : "这项设施"}` }); }), s] : this.amount === void 0 ? [...official_chunk_89xwxnzm_js_1.ja.map((f) => ({ id: `amount:${f.spiritStones}`, label: `捐献${dt(f.spiritStones)}灵石` })), { id: "back-facility", label: "改选设施" }, s] : [{ id: "confirm", label: "确认建设", tone: "primary" }, { id: "back-amount", label: "改选灵石档位" }, { id: "back-facility", label: "改选设施" }, s]; return (0, official_chunk_nx6d9wvp_js_1.sb)(t, r, e, a, p, (f) => this.select(f, n, i), this.loading || this.busy, this.error); }
+        a.push({ speaker: e.name, body: `${this.result}的建设已经登记，灵石与贡献均已结算。`, tone: "attention" }); let p = (b === null || b === void 0 ? void 0 : b.constructedToday) || !this.facilities.length ? [s] : !h ? [...this.facilities.map((f) => { var _a; return ({ id: `facility:${f.key}`, label: `建设${(_a = i[f.key]) !== null && _a !== void 0 ? _a : "这项设施"}` }); }), s] : this.amount === void 0 ? [...official_chunk_gykvbxzp_js_1.ja.map((f) => ({ id: `amount:${f.spiritStones}`, label: `捐献${dt(f.spiritStones)}灵石` })), { id: "back-facility", label: "改选设施" }, s] : [{ id: "confirm", label: "确认建设", tone: "primary" }, { id: "back-amount", label: "改选灵石档位" }, { id: "back-facility", label: "改选设施" }, s]; return (0, official_chunk_04cv4sxe_js_1.sb)(t, r, e, a, p, (f) => this.select(f, n, i), this.loading || this.busy, this.error); }
 }
 exports.SectIndustries = Ht;
 function je(t, r, e) { var _a, _b; let i = new official_chunk_wje6zqc2_js_1.Ce(t, r), n = e.methods; if (!n)
@@ -629,7 +629,7 @@ else if (o) {
         l.save(), l.strokeStyle = S ? "rgba(153,27,27,.7)" : "rgba(153,27,27,.3)", l.lineWidth = S ? 2 : 1.5, l.lineJoin = "round", l.beginPath(), l.moveTo(v + P, M + D - 12), l.lineTo(v + P, M + D), l.lineTo(v + K, M + D), l.lineTo(v + K, M + D + 12), l.stroke(), l.restore();
     } for (let $ = 1; $ <= 7; $++)
         for (let [S, P] of o.path.nodes.filter((K) => K.layer === $).sort((K, D) => K.slot - D.slot).entries()) {
-            let K = v + (S + 0.5) * m / 3 - 32, D = M + ($ - 1) * 88 + 12, j = P.automatic ? $ <= o.progress.meridianDepth : o.nodes.includes(P.id), z = !P.automatic && j !== o.original.includes(P.id), H = P.automatic || (0, official_chunk_89xwxnzm_js_1.F)(o.path, o.nodes, P), G = !P.automatic && !j && H && $ <= o.progress.meridianDepth && !o.selectedByLayer[$ - 1], Z = !H || $ > o.progress.meridianDepth, O = (F) => { if (l.beginPath(), P.automatic)
+            let K = v + (S + 0.5) * m / 3 - 32, D = M + ($ - 1) * 88 + 12, j = P.automatic ? $ <= o.progress.meridianDepth : o.nodes.includes(P.id), z = !P.automatic && j !== o.original.includes(P.id), H = P.automatic || (0, official_chunk_gykvbxzp_js_1.F)(o.path, o.nodes, P), G = !P.automatic && !j && H && $ <= o.progress.meridianDepth && !o.selectedByLayer[$ - 1], Z = !H || $ > o.progress.meridianDepth, O = (F) => { if (l.beginPath(), P.automatic)
                 l.arc(K + 32, D + 32, 32 + F, 0, Math.PI * 2);
             else
                 l.rect(K - F, D - F, 64 + 2 * F, 64 + 2 * F); };
@@ -677,11 +677,11 @@ function Or(t, r, e, i, n) { var _a, _b, _c, _d; let a = (_a = e.conversation.pa
         p.push({ speaker: e.name, body: h !== null && h !== void 0 ? h : "今日田间值录尚未归档，请稍后再来。", tone: o ? "normal" : "attention" });
 }
 else if (o) {
-    let { context: f, infrastructure: m } = i, v = (_c = Et(a, "effectKey")) !== null && _c !== void 0 ? _c : s, M = f && m ? (0, official_chunk_89xwxnzm_js_1.ma)(official_chunk_89xwxnzm_js_1.ua.registry.require(f.sectId).organization, f.discipleRank, new Map(m.facilities.map(($) => [$.key, $.level]))) : void 0, l = (0, official_chunk_89xwxnzm_js_1.na)({ facilityLabel: s ? (_d = i.presentation.facilityLabels[s]) !== null && _d !== void 0 ? _d : "此处设施" : "此处设施", facility: o, effect: v ? M === null || M === void 0 ? void 0 : M.facilityEffects[v] : void 0 });
+    let { context: f, infrastructure: m } = i, v = (_c = Et(a, "effectKey")) !== null && _c !== void 0 ? _c : s, M = f && m ? (0, official_chunk_gykvbxzp_js_1.ma)(official_chunk_gykvbxzp_js_1.ua.registry.require(f.sectId).organization, f.discipleRank, new Map(m.facilities.map(($) => [$.key, $.level]))) : void 0, l = (0, official_chunk_gykvbxzp_js_1.na)({ facilityLabel: s ? (_d = i.presentation.facilityLabels[s]) !== null && _d !== void 0 ? _d : "此处设施" : "此处设施", facility: o, effect: v ? M === null || M === void 0 ? void 0 : M.facilityEffects[v] : void 0 });
     p.push({ body: [...l.map(($) => ({ text: $.text, ...$.emphasis ? { color: $.emphasis === "benefit" ? official_chunk_wje6zqc2_js_1.Be.teal : official_chunk_wje6zqc2_js_1.Be.crimson, bold: !0 } : {} })), ...h ? [{ text: h }] : []] });
 }
 else if (!i.loading)
-    p.push({ body: "此处设施的值录暂未找到，请稍后再来。", tone: "attention" }); return (0, official_chunk_nx6d9wvp_js_1.sb)(t, r, e, p, [{ id: "leave", label: b ? "弟子告退" : "返回房间", tone: "muted" }], n, i.loading, i.error); }
+    p.push({ body: "此处设施的值录暂未找到，请稍后再来。", tone: "attention" }); return (0, official_chunk_04cv4sxe_js_1.sb)(t, r, e, p, [{ id: "leave", label: b ? "弟子告退" : "返回房间", tone: "muted" }], n, i.loading, i.error); }
 function Wr(t, r) { let e = new official_chunk_wje6zqc2_js_1.Ce(t, r), i = r - 64, n = i - 26, s = t.lines("弟子居所 · 门禁已启", n, 12), h = t.lines("此处记录你的宗门居所资格，暂不提供额外数值收益。", n, 14), o = 24 + s.length * 18 + 16 + h.length * 28, b = Math.max(256, 80 + o + 12); return e.block(b, (p, f) => { let m = t.ctx, v = m.createLinearGradient(p, f, p + r, f); v.addColorStop(0, "rgba(63,67,59,.12)"), v.addColorStop(0.18, "transparent"), v.addColorStop(0.82, "transparent"), v.addColorStop(1, "rgba(63,67,59,.12)"), m.fillStyle = v, m.fillRect(p, f, r, b); let M = m.createRadialGradient(p + r * 0.5, f + b * 0.35, 0, p + r * 0.5, f + b * 0.35, Math.hypot(r * 0.5, b * 0.65) * 0.25); M.addColorStop(0, "rgba(255,255,255,.78)"), M.addColorStop(1, "transparent"), m.fillStyle = M, m.fillRect(p, f, r, b); let l = p + 32, $ = f + (b - o - 12) / 2; t.rect(l, $, 2, o, official_chunk_wje6zqc2_js_1.Be.crimson), s.forEach((P, K) => t.tracked(P, l + 14 + (n - t.trackedWidth(P, 12, 3.6)) / 2, $ + 21 + K * 18, 12, 3.6, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])); let S = $ + 12 + s.length * 18 + 16; h.forEach((P, K) => t.text(P, l + 14 + (n - t.measure(P, 14)) / 2, S + 14 + K * 28, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])); }), e; }
 class kr {
     get sceneKey() { return this.mode === "alchemy" ? "alchemy" : this.mode === "refinery" ? "refinery" : this.mode === "garden" ? "herbGarden" : this.mode === "gate" ? "gate" : this.mode === "cave" ? "cave" : this.mode === "vein" ? "spiritVein" : this.mode === "cultivation" ? "cultivation" : this.mode === "industries" ? "industries" : this.mode === "treasury" ? "treasury" : this.mode === "skills" ? "arena" : this.mode === "paths" ? "paths" : "archive"; }
@@ -698,8 +698,8 @@ class kr {
         this.player = r;
         this.navigate = e;
         this.mode = i;
-        this.context = new official_chunk_89xwxnzm_js_1.Qa(() => t.invalidate(), i === "cultivation" || i === "vein" || i === "gate" || i === "garden" || i === "refinery" || i === "alchemy"), this.model = new Pt(() => { if (this.model.notice)
-            (0, official_chunk_wje6zqc2_js_1.Ge)(this.model.notice), this.model.notice = ""; t.invalidate(); }, () => r.load()), this.meridian = new St(this.model, () => t.invalidate()), this.taskLocation = new official_chunk_89xwxnzm_js_1.Ma(() => t.invalidate()), this.shop = new Kt(() => t.invalidate(), () => r.load()), this.shelf = new jt(t, this.shop), this.industries = new Ht(() => t.invalidate(), () => r.load()), this.retreat = new official_chunk_89xwxnzm_js_1.ya(t, r, e), this.forging = new official_chunk_89xwxnzm_js_1.Wa(t, r), this.alchemy = new official_chunk_zvyd0gzr_js_1.pb(t, r, e);
+        this.context = new official_chunk_gykvbxzp_js_1.Qa(() => t.invalidate(), i === "cultivation" || i === "vein" || i === "gate" || i === "garden" || i === "refinery" || i === "alchemy"), this.model = new Pt(() => { if (this.model.notice)
+            (0, official_chunk_wje6zqc2_js_1.Ge)(this.model.notice), this.model.notice = ""; t.invalidate(); }, () => r.load()), this.meridian = new St(this.model, () => t.invalidate()), this.taskLocation = new official_chunk_gykvbxzp_js_1.Ma(() => t.invalidate()), this.shop = new Kt(() => t.invalidate(), () => r.load()), this.shelf = new jt(t, this.shop), this.industries = new Ht(() => t.invalidate(), () => r.load()), this.retreat = new official_chunk_gykvbxzp_js_1.ya(t, r, e), this.forging = new official_chunk_gykvbxzp_js_1.Wa(t, r), this.alchemy = new official_chunk_44y73cy8_js_1.pb(t, r, e);
     }
     enter(t) { var _a, _b; this.leave(); let r = new URLSearchParams((_a = t.split("?")[1]) !== null && _a !== void 0 ? _a : ""); this.requested = (_b = r.get("npc")) !== null && _b !== void 0 ? _b : void 0, this.requestedWorkspace = (this.mode === "refinery" || this.mode === "alchemy") && r.get("workspace") === "craft" || this.mode === "skills" && r.get("workspace") === "loadout" || this.mode === "cultivation" && r.get("workspace") === "retreat", this.sync(); }
     leave() { if (this.alchemyOpen)
@@ -723,47 +723,47 @@ class kr {
         return this.alchemy.flow(t); if (this.mode === "cave")
         return Wr(r, t); if (this.mode === "skills" && this.workspace)
         return ct(r, t, this.model, () => this.navigate("/game/sect/arena")); let e = this.context.presentation.rooms[this.sceneKey], i = e === null || e === void 0 ? void 0 : e.actors.find((s) => s.roleKey === this.role); if (!e)
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(r, t, { sigil: "候", name: "当值弟子", identity: "当值弟子", responsibility: "负责接待来客。" }, [{ speaker: "当值弟子", body: "此处的经办人尚未到值，请稍后再来。", tone: "attention" }], [], () => { }); if (!i)
-        return (0, official_chunk_nx6d9wvp_js_1.rb)(r, t, { eyebrow: this.mode === "alchemy" ? "丹炉火候 · 药柜封签" : this.mode === "refinery" ? "地火炉道 · 锻台封签" : this.mode === "garden" ? "药畦晨露 · 草木值录" : this.mode === "gate" ? "山门值录 · 当日勤务" : this.mode === "vein" ? "矿场井口 · 脉息封签" : this.mode === "cultivation" ? "聚灵阵枢 · 闭关名册" : this.mode === "industries" ? "宗门设施 · 常态建设" : this.mode === "treasury" ? "贡献支取 · 库藏封签" : this.mode === "skills" ? "演武阵台 · 神通校验" : void 0, description: e.description, actors: e.actors, select: (s) => this.select(s), prompt: e.actors.some((s) => s.appearance === "facility") ? "点击人物或设施，查看详情" : "点击人物，与其交谈" }); let n = this.mode === "alchemy" || this.mode === "refinery" ? this.refineryConversation(t - 2, i) : this.mode === "garden" ? Or(r, t - 2, i, this.context, () => this.select()) : this.mode === "gate" ? this.gateConversation(t - 2, i) : this.mode === "vein" ? this.veinConversation(t - 2, i) : this.mode === "cultivation" ? this.cultivationConversation(t - 2, i) : this.mode === "industries" ? this.industries.flow(r, t - 2, i, this.context.presentation.facilityLabels, () => this.select()) : this.mode === "treasury" ? this.shop.catalogOpen ? this.shelf.flow(t - 2) : (0, official_chunk_nx6d9wvp_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: i.greeting }], [{ id: "catalog", label: "有劳执事取来本周库单", tone: "primary" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
+        return (0, official_chunk_04cv4sxe_js_1.sb)(r, t, { sigil: "候", name: "当值弟子", identity: "当值弟子", responsibility: "负责接待来客。" }, [{ speaker: "当值弟子", body: "此处的经办人尚未到值，请稍后再来。", tone: "attention" }], [], () => { }); if (!i)
+        return (0, official_chunk_04cv4sxe_js_1.rb)(r, t, { eyebrow: this.mode === "alchemy" ? "丹炉火候 · 药柜封签" : this.mode === "refinery" ? "地火炉道 · 锻台封签" : this.mode === "garden" ? "药畦晨露 · 草木值录" : this.mode === "gate" ? "山门值录 · 当日勤务" : this.mode === "vein" ? "矿场井口 · 脉息封签" : this.mode === "cultivation" ? "聚灵阵枢 · 闭关名册" : this.mode === "industries" ? "宗门设施 · 常态建设" : this.mode === "treasury" ? "贡献支取 · 库藏封签" : this.mode === "skills" ? "演武阵台 · 神通校验" : void 0, description: e.description, actors: e.actors, select: (s) => this.select(s), prompt: e.actors.some((s) => s.appearance === "facility") ? "点击人物或设施，查看详情" : "点击人物，与其交谈" }); let n = this.mode === "alchemy" || this.mode === "refinery" ? this.refineryConversation(t - 2, i) : this.mode === "garden" ? Or(r, t - 2, i, this.context, () => this.select()) : this.mode === "gate" ? this.gateConversation(t - 2, i) : this.mode === "vein" ? this.veinConversation(t - 2, i) : this.mode === "cultivation" ? this.cultivationConversation(t - 2, i) : this.mode === "industries" ? this.industries.flow(r, t - 2, i, this.context.presentation.facilityLabels, () => this.select()) : this.mode === "treasury" ? this.shop.catalogOpen ? this.shelf.flow(t - 2) : (0, official_chunk_04cv4sxe_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: i.greeting }], [{ id: "catalog", label: "有劳执事取来本周库单", tone: "primary" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
         this.select();
     else
-        this.shop.openCatalog(); }, !1, this.shop.error) : this.mode === "skills" ? this.arenaConversation(t - 2, i) : this.workspace ? this.mode === "paths" ? Vr(r, t - 2, this.meridian, () => { this.model.leave(), this.meridian.reset(), this.workspace = !1, r.invalidate(); }) : ct(r, t - 2, this.model, () => { this.model.leave(), this.meridian.reset(), this.workspace = !1, r.invalidate(); }) : (0, official_chunk_nx6d9wvp_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: i.greeting }], [{ id: "workspace", label: this.mode === "paths" ? "入定参悟" : "展开经卷研习" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
+        this.shop.openCatalog(); }, !1, this.shop.error) : this.mode === "skills" ? this.arenaConversation(t - 2, i) : this.workspace ? this.mode === "paths" ? Vr(r, t - 2, this.meridian, () => { this.model.leave(), this.meridian.reset(), this.workspace = !1, r.invalidate(); }) : ct(r, t - 2, this.model, () => { this.model.leave(), this.meridian.reset(), this.workspace = !1, r.invalidate(); }) : (0, official_chunk_04cv4sxe_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: i.greeting }], [{ id: "workspace", label: this.mode === "paths" ? "入定参悟" : "展开经卷研习" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
         this.select();
     else
         this.workspace = !0, this.model.enter(this.mode === "treasury" || this.mode === "industries" || this.mode === "cultivation" || this.mode === "cave" || this.mode === "vein" || this.mode === "gate" || this.mode === "garden" || this.mode === "refinery" || this.mode === "alchemy" ? "methods" : this.mode); r.invalidate(); }), a = new official_chunk_wje6zqc2_js_1.Ce(r, t); return a.block(n.height + 2, (s, h) => { r.rect(s, h, t, n.height + 2, "rgba(248,243,230,.42)"), r.ctx.save(), r.ctx.strokeStyle = "rgba(44,24,16,.2)", r.ctx.setLineDash([]), r.ctx.strokeRect(s + 0.5, h + 0.5, t - 1, n.height + 1), r.ctx.restore(), n.paint(s + 1, h + 1); }), a; }
     refineryConversation(t, r) { var _a, _b, _c, _d, _e, _f; let e = (_a = r.conversation.parameters) !== null && _a !== void 0 ? _a : {}, i = (f) => typeof e[f] === "string" && e[f].trim() ? e[f] : void 0, n = i("facilityKey"), a = (_b = i("effectKey")) !== null && _b !== void 0 ? _b : n, s = i("workspaceHref"), h = (_c = this.context.infrastructure) === null || _c === void 0 ? void 0 : _c.facilities.find((f) => f.key === n), o = this.context.context, b = this.context.infrastructure, p = [{ speaker: r.name, body: r.greeting }]; if (this.showFacilityStatus && h && n && o && b) {
-        let f = (0, official_chunk_89xwxnzm_js_1.ma)(official_chunk_89xwxnzm_js_1.ua.registry.require(o.sectId).organization, o.discipleRank, new Map(b.facilities.map((m) => [m.key, m.level])));
-        p.push({ speaker: r.name, body: (0, official_chunk_89xwxnzm_js_1.na)({ facilityLabel: (_d = this.context.presentation.facilityLabels[n]) !== null && _d !== void 0 ? _d : "此处设施", facility: h, effect: a ? f.facilityEffects[a] : void 0 }).map((m) => m.text).join("") });
+        let f = (0, official_chunk_gykvbxzp_js_1.ma)(official_chunk_gykvbxzp_js_1.ua.registry.require(o.sectId).organization, o.discipleRank, new Map(b.facilities.map((m) => [m.key, m.level])));
+        p.push({ speaker: r.name, body: (0, official_chunk_gykvbxzp_js_1.na)({ facilityLabel: (_d = this.context.presentation.facilityLabels[n]) !== null && _d !== void 0 ? _d : "此处设施", facility: h, effect: a ? f.facilityEffects[a] : void 0 }).map((m) => m.text).join("") });
     } if (!n || !s)
-        p.push({ body: "此处炉室的封签尚未核准，暂时无法开炉。", tone: "attention" }); return (0, official_chunk_nx6d9wvp_js_1.sb)(this.u, t, r, p, [{ id: "status", label: (_e = i("statusReply")) !== null && _e !== void 0 ? _e : "请说说此地设施灵效" }, { id: "workspace", label: (_f = i("workspaceReply")) !== null && _f !== void 0 ? _f : "请为我开启工坊", disabled: !s }, { id: "leave", label: "弟子告退", tone: "muted" }], (f) => { if (f === "leave")
+        p.push({ body: "此处炉室的封签尚未核准，暂时无法开炉。", tone: "attention" }); return (0, official_chunk_04cv4sxe_js_1.sb)(this.u, t, r, p, [{ id: "status", label: (_e = i("statusReply")) !== null && _e !== void 0 ? _e : "请说说此地设施灵效" }, { id: "workspace", label: (_f = i("workspaceReply")) !== null && _f !== void 0 ? _f : "请为我开启工坊", disabled: !s }, { id: "leave", label: "弟子告退", tone: "muted" }], (f) => { if (f === "leave")
         this.select();
     else if (f === "status")
         this.showFacilityStatus = !0, this.u.invalidate();
     else if (s)
         this.navigate(`${s}${s.includes("?") ? "&" : "?"}npc=${encodeURIComponent(r.roleKey)}`); }, this.context.loading, this.context.error); }
     gateConversation(t, r) { if (r.conversation.renderer === "sect.gate.sweep") {
-        let i = (0, official_chunk_89xwxnzm_js_1.Aa)(this.taskLocation.data);
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(this.u, t, r, [{ body: r.greeting }, { body: (0, official_chunk_89xwxnzm_js_1.Ba)(i) }], [{ id: "sweep", label: i.kind === "reward" ? "开始今日清扫" : "进入山门步道练习清扫", disabled: this.taskLocation.loading, tone: i.kind === "reward" ? "primary" : "normal" }, { id: "leave", label: "返回房间", tone: "muted" }], (n) => { if (n === "leave")
+        let i = (0, official_chunk_gykvbxzp_js_1.Aa)(this.taskLocation.data);
+        return (0, official_chunk_04cv4sxe_js_1.sb)(this.u, t, r, [{ body: r.greeting }, { body: (0, official_chunk_gykvbxzp_js_1.Ba)(i) }], [{ id: "sweep", label: i.kind === "reward" ? "开始今日清扫" : "进入山门步道练习清扫", disabled: this.taskLocation.loading, tone: i.kind === "reward" ? "primary" : "normal" }, { id: "leave", label: "返回房间", tone: "muted" }], (n) => { if (n === "leave")
             this.select();
         else
             this.navigate("/game/sect/gate/sweep"); }, !1, this.taskLocation.error);
     } let e = [{ speaker: r.name, body: r.greeting }]; if (this.showFacilityStatus)
-        e.push({ speaker: r.name, body: "今日山门内外无事，各处设施仍按常例修缮建设。" }); return (0, official_chunk_nx6d9wvp_js_1.sb)(this.u, t, r, e, [{ id: "news", label: "请执事说说今日山门动静" }, { id: "leave", label: "弟子告退", tone: "muted" }], (i) => { if (i === "leave")
+        e.push({ speaker: r.name, body: "今日山门内外无事，各处设施仍按常例修缮建设。" }); return (0, official_chunk_04cv4sxe_js_1.sb)(this.u, t, r, e, [{ id: "news", label: "请执事说说今日山门动静" }, { id: "leave", label: "弟子告退", tone: "muted" }], (i) => { if (i === "leave")
         this.select();
     else
         this.showFacilityStatus = !0, this.u.invalidate(); }, this.context.loading, this.context.error); }
     veinConversation(t, r) { var _a, _b; if (r.conversation.renderer === "sect.spirit-vein.patrol")
-        return this.taskLocation.flow(this.u, t, r, () => this.select(), this.navigate); let e = this.context.context, i = this.context.infrastructure, n = typeof ((_a = r.conversation.parameters) === null || _a === void 0 ? void 0 : _a.facilityKey) === "string" ? r.conversation.parameters.facilityKey : "spirit_vein", a = i === null || i === void 0 ? void 0 : i.facilities.find((o) => o.key === n), s = [{ body: r.greeting }], h = (0, official_chunk_89xwxnzm_js_1.Ra)(this.taskLocation.data); if (e && i && a) {
-        let o = official_chunk_89xwxnzm_js_1.ua.registry.require(e.sectId), b = (0, official_chunk_89xwxnzm_js_1.ma)(o.organization, e.discipleRank, new Map(i.facilities.map((p) => [p.key, p.level])));
-        s.push({ body: (0, official_chunk_89xwxnzm_js_1.na)({ facilityLabel: (_b = this.context.presentation.facilityLabels[n]) !== null && _b !== void 0 ? _b : r.name, facility: a, effect: b.facilityEffects.spirit_vein }).map((p) => p.text).join("") });
-    } return s.push({ body: (0, official_chunk_89xwxnzm_js_1.Sa)(h) }), (0, official_chunk_nx6d9wvp_js_1.sb)(this.u, t, r, s, [{ id: "mining", label: h.kind === "reward" ? "开始今日灵矿采掘" : "进入矿脉自由练习", disabled: this.context.loading || this.taskLocation.loading, tone: h.kind === "reward" ? "primary" : "normal" }, { id: "leave", label: "返回房间", tone: "muted" }], (o) => { if (o === "leave")
+        return this.taskLocation.flow(this.u, t, r, () => this.select(), this.navigate); let e = this.context.context, i = this.context.infrastructure, n = typeof ((_a = r.conversation.parameters) === null || _a === void 0 ? void 0 : _a.facilityKey) === "string" ? r.conversation.parameters.facilityKey : "spirit_vein", a = i === null || i === void 0 ? void 0 : i.facilities.find((o) => o.key === n), s = [{ body: r.greeting }], h = (0, official_chunk_gykvbxzp_js_1.Ra)(this.taskLocation.data); if (e && i && a) {
+        let o = official_chunk_gykvbxzp_js_1.ua.registry.require(e.sectId), b = (0, official_chunk_gykvbxzp_js_1.ma)(o.organization, e.discipleRank, new Map(i.facilities.map((p) => [p.key, p.level])));
+        s.push({ body: (0, official_chunk_gykvbxzp_js_1.na)({ facilityLabel: (_b = this.context.presentation.facilityLabels[n]) !== null && _b !== void 0 ? _b : r.name, facility: a, effect: b.facilityEffects.spirit_vein }).map((p) => p.text).join("") });
+    } return s.push({ body: (0, official_chunk_gykvbxzp_js_1.Sa)(h) }), (0, official_chunk_04cv4sxe_js_1.sb)(this.u, t, r, s, [{ id: "mining", label: h.kind === "reward" ? "开始今日灵矿采掘" : "进入矿脉自由练习", disabled: this.context.loading || this.taskLocation.loading, tone: h.kind === "reward" ? "primary" : "normal" }, { id: "leave", label: "返回房间", tone: "muted" }], (o) => { if (o === "leave")
         this.select();
     else
         this.navigate("/game/sect/spirit-vein/mining"); }, !1, this.context.error || this.taskLocation.error); }
     cultivationConversation(t, r) { let e = this.context.context, i = this.context.infrastructure, n = i === null || i === void 0 ? void 0 : i.facilities.find((s) => s.key === "cultivation_room"), a = [{ speaker: r.name, body: r.greeting }]; if (this.showFacilityStatus && e && i && n) {
-        let s = official_chunk_89xwxnzm_js_1.ua.registry.require(e.sectId), h = (0, official_chunk_89xwxnzm_js_1.ma)(s.organization, e.discipleRank, new Map(i.facilities.map((o) => [o.key, o.level])));
-        a.push({ speaker: r.name, body: (0, official_chunk_89xwxnzm_js_1.na)({ facilityLabel: this.context.presentation.facilityLabels.cultivation_room, facility: n, effect: h.facilityEffects.cultivation_room }).map((o) => o.text).join("") });
-    } return (0, official_chunk_nx6d9wvp_js_1.sb)(this.u, t, r, a, [{ id: "status", label: "请执事说说此地阵效" }, { id: "workspace", label: "有劳执事为我启阵闭关" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
+        let s = official_chunk_gykvbxzp_js_1.ua.registry.require(e.sectId), h = (0, official_chunk_gykvbxzp_js_1.ma)(s.organization, e.discipleRank, new Map(i.facilities.map((o) => [o.key, o.level])));
+        a.push({ speaker: r.name, body: (0, official_chunk_gykvbxzp_js_1.na)({ facilityLabel: this.context.presentation.facilityLabels.cultivation_room, facility: n, effect: h.facilityEffects.cultivation_room }).map((o) => o.text).join("") });
+    } return (0, official_chunk_04cv4sxe_js_1.sb)(this.u, t, r, a, [{ id: "status", label: "请执事说说此地阵效" }, { id: "workspace", label: "有劳执事为我启阵闭关" }, { id: "leave", label: "弟子告退", tone: "muted" }], (s) => { if (s === "leave")
         this.select();
     else if (s === "status")
         this.showFacilityStatus = !0, this.u.invalidate();
@@ -771,7 +771,7 @@ class kr {
         this.navigate(`/game/sect/cultivation-room?workspace=retreat&npc=${encodeURIComponent(r.roleKey)}`); }, !1, this.context.error); }
     arenaConversation(t, r) { let e = () => this.select(), i = this.u; if (r.conversation.renderer === "sect.arena.tournament")
         return this.taskLocation.flow(i, t, r, e, this.navigate); if (r.conversation.renderer === "sect.arena.marshal")
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(i, t, r, [{ speaker: r.name, body: r.greeting }, { speaker: r.name, body: "若已接下宗门小比，去场中的宗门擂台核对对手名录即可。" }], [{ id: "leave", label: "弟子告退", tone: "muted" }], e); return (0, official_chunk_nx6d9wvp_js_1.sb)(i, t, r, [{ speaker: r.name, body: "心法与经脉决定神通，已解锁的神通会自动用于战斗。可在此查阅当前效果。" }], [{ id: "workspace", label: "查阅宗门神通" }, { id: "leave", label: "弟子告退", tone: "muted" }], (n) => { if (n === "leave")
+        return (0, official_chunk_04cv4sxe_js_1.sb)(i, t, r, [{ speaker: r.name, body: r.greeting }, { speaker: r.name, body: "若已接下宗门小比，去场中的宗门擂台核对对手名录即可。" }], [{ id: "leave", label: "弟子告退", tone: "muted" }], e); return (0, official_chunk_04cv4sxe_js_1.sb)(i, t, r, [{ speaker: r.name, body: "心法与经脉决定神通，已解锁的神通会自动用于战斗。可在此查阅当前效果。" }], [{ id: "workspace", label: "查阅宗门神通" }, { id: "leave", label: "弟子告退", tone: "muted" }], (n) => { if (n === "leave")
         e();
     else
         this.navigate(`/game/sect/arena?workspace=loadout&npc=${encodeURIComponent(r.roleKey)}`); }); }
@@ -782,8 +782,8 @@ class kr {
     } if (this.requestedWorkspace && i.context && (!["cultivation", "refinery", "alchemy"].includes(this.mode) || i.infrastructure)) {
         if (this.requestedWorkspace = !1, (_c = i.context.permissions[this.permission]) === null || _c === void 0 ? void 0 : _c.granted)
             if (this.mode === "alchemy") {
-                let v = (0, official_chunk_89xwxnzm_js_1.ma)(official_chunk_89xwxnzm_js_1.ua.registry.require(i.context.sectId).organization, i.context.discipleRank, new Map(i.infrastructure.facilities.map((M) => [M.key, M.level]))).facilityEffects.alchemy;
-                this.alchemyOpen = !0, this.alchemy.enter("/game/sect/alchemy?workspace=craft", { facilityLevel: (0, official_chunk_89xwxnzm_js_1.Oa)(v, "level", 1), discountPercent: (0, official_chunk_89xwxnzm_js_1.Oa)(v, "discount") * 100, facilityLabel: (_d = i.presentation.facilityLabels.alchemy) !== null && _d !== void 0 ? _d : i.presentation.facilityLabels.workshop, scene: i.presentation.scenes.alchemy });
+                let v = (0, official_chunk_gykvbxzp_js_1.ma)(official_chunk_gykvbxzp_js_1.ua.registry.require(i.context.sectId).organization, i.context.discipleRank, new Map(i.infrastructure.facilities.map((M) => [M.key, M.level]))).facilityEffects.alchemy;
+                this.alchemyOpen = !0, this.alchemy.enter("/game/sect/alchemy?workspace=craft", { facilityLevel: (0, official_chunk_gykvbxzp_js_1.Oa)(v, "level", 1), discountPercent: (0, official_chunk_gykvbxzp_js_1.Oa)(v, "discount") * 100, facilityLabel: (_d = i.presentation.facilityLabels.alchemy) !== null && _d !== void 0 ? _d : i.presentation.facilityLabels.workshop, scene: i.presentation.scenes.alchemy });
             }
             else if (this.mode === "refinery")
                 this.forgingOpen = !0, this.forging.enter(i.presentation.scenes.refinery);
@@ -840,7 +840,7 @@ class kr {
             this.paintRefinerySurface(S, P, n, $); if (this.mode === "garden")
             this.paintGardenSurface(S, P, n, $); if (this.mode === "gate")
             this.paintGateSurface(S, P, n, $); if (!(v === null || v === void 0 ? void 0 : v.granted))
-            this.paintDeniedSurface(S, P, n, $); K.globalAlpha = 0.05, e.text(!(v === null || v === void 0 ? void 0 : v.granted) ? "殿" : this.mode === "alchemy" ? "丹" : this.mode === "refinery" ? "器" : this.mode === "garden" ? "药" : this.mode === "gate" ? "山" : this.mode === "cave" ? "隐" : this.mode === "vein" ? "脉" : this.mode === "cultivation" ? "静" : this.mode === "industries" ? "造" : this.mode === "treasury" ? "藏" : this.mode === "skills" ? "武" : this.mode === "paths" ? "悟" : "经", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = !(v === null || v === void 0 ? void 0 : v.granted) ? "rgba(120,53,15,.2)" : this.mode === "alchemy" ? "rgba(67,20,7,.2)" : this.mode === "refinery" ? "rgba(2,6,23,.25)" : this.mode === "garden" ? "rgba(2,44,34,.2)" : this.mode === "gate" ? "rgba(8,47,73,.15)" : this.mode === "cave" ? "rgba(41,37,36,.2)" : this.mode === "vein" ? "rgba(8,51,68,.2)" : this.mode === "cultivation" ? "rgba(19,78,74,.2)" : this.mode === "industries" ? "rgba(30,41,59,.2)" : this.mode === "treasury" ? "rgba(113,63,18,.2)" : this.mode === "skills" ? "rgba(127,29,29,.2)" : this.mode === "paths" ? "rgba(12,74,110,.15)" : "rgba(146,64,14,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_89xwxnzm_js_1.ua.registry.require(i.context.sectId).definition.name; K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - e.trackedWidth(D, 12, 4.2), P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
+            this.paintDeniedSurface(S, P, n, $); K.globalAlpha = 0.05, e.text(!(v === null || v === void 0 ? void 0 : v.granted) ? "殿" : this.mode === "alchemy" ? "丹" : this.mode === "refinery" ? "器" : this.mode === "garden" ? "药" : this.mode === "gate" ? "山" : this.mode === "cave" ? "隐" : this.mode === "vein" ? "脉" : this.mode === "cultivation" ? "静" : this.mode === "industries" ? "造" : this.mode === "treasury" ? "藏" : this.mode === "skills" ? "武" : this.mode === "paths" ? "悟" : "经", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = !(v === null || v === void 0 ? void 0 : v.granted) ? "rgba(120,53,15,.2)" : this.mode === "alchemy" ? "rgba(67,20,7,.2)" : this.mode === "refinery" ? "rgba(2,6,23,.25)" : this.mode === "garden" ? "rgba(2,44,34,.2)" : this.mode === "gate" ? "rgba(8,47,73,.15)" : this.mode === "cave" ? "rgba(41,37,36,.2)" : this.mode === "vein" ? "rgba(8,51,68,.2)" : this.mode === "cultivation" ? "rgba(19,78,74,.2)" : this.mode === "industries" ? "rgba(30,41,59,.2)" : this.mode === "treasury" ? "rgba(113,63,18,.2)" : this.mode === "skills" ? "rgba(127,29,29,.2)" : this.mode === "paths" ? "rgba(12,74,110,.15)" : "rgba(146,64,14,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_gykvbxzp_js_1.ua.registry.require(i.context.sectId).definition.name; K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - e.trackedWidth(D, 12, 4.2), P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
     } let b = e.lines(o, n, 14), p = 84.2 + Math.max(0, b.length - 1) * 24, f = p + 20 + s.height + 16, m = t + 12 - e.scroll; e.clip(0, t, e.width, r - t, () => { e.rect(12, m, e.width - 24, f, "rgba(248,243,230,.82)"), e.text(h, 28, m + 28, 23.2, official_chunk_wje6zqc2_js_1.Be.ink, e.headingFont); let v = 36 + e.measure(h, 23.2, e.headingFont); e.text("/", v, m + 31, 14, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), e.tracked("修行", v + 14, m + 31, 12.48, 1.9968, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), b.forEach((M, l) => e.text(M, 28, m + 60 + l * 24, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.line(28, m + p - 1, n), s.paint(28, m + p + 20); }), e.scrollMax = Math.max(0, t + 24 + f - r); }
     paintAlchemySurface(t, r, e, i) { let n = this.u, a = n.ctx; n.rect(t, r, e, i, "#f8f3e6"); let s = 145 * Math.PI / 180, h = Math.sin(s), o = -Math.cos(s), b = (e * Math.abs(h) + i * Math.abs(o)) / 2, p = a.createLinearGradient(t + e / 2 - h * b, r + i / 2 - o * b, t + e / 2 + h * b, r + i / 2 + o * b); p.addColorStop(0, "rgba(244,226,190,.92)"), p.addColorStop(1, "rgba(202,171,124,.48)"), a.fillStyle = p, a.fillRect(t, r, e, i); let f = Math.hypot(e * 0.5, i * 0.85) * 0.28, m = a.createRadialGradient(t + e * 0.5, r + i * 0.85, 0, t + e * 0.5, r + i * 0.85, f); m.addColorStop(0, "rgba(197,71,20,.22)"), m.addColorStop(1, "transparent"), a.fillStyle = m, a.fillRect(t, r, e, i); }
     paintRefinerySurface(t, r, e, i) { let n = this.u, a = n.ctx; n.rect(t, r, e, i, "#f8f3e6"); let s = Math.hypot(e * 0.78, i * 0.74) * 0.24, h = a.createRadialGradient(t + e * 0.78, r + i * 0.74, 0, t + e * 0.78, r + i * 0.74, s); h.addColorStop(0, "rgba(182,73,30,.16)"), h.addColorStop(1, "transparent"), a.fillStyle = h, a.fillRect(t, r, e, i); let o = (e + i) / 2, b = a.createLinearGradient(t + e / 2 - o / 2, r + i / 2 - o / 2, t + e / 2 + o / 2, r + i / 2 + o / 2); b.addColorStop(0, "rgba(56,63,66,.18)"), b.addColorStop(0.45, "transparent"), b.addColorStop(1, "transparent"), a.fillStyle = b, a.fillRect(t, r, e, i); }
@@ -894,7 +894,7 @@ class Jt {
     }
     get tasks() { var _a, _b; return ((_b = (_a = this.data) === null || _a === void 0 ? void 0 : _a.items) !== null && _b !== void 0 ? _b : []).filter((t) => t.kind === this.kind).map((t, r) => ({ task: t, index: r })).sort((t, r) => _r[t.task.state] - _r[r.task.state] || t.index - r.index).map((t) => t.task); }
     get selected() { var _a; let t = this.tasks.find((r) => ft(r) === this.selectedKey); return t && ((_a = this.outcome) === null || _a === void 0 ? void 0 : _a.task.definitionId) === t.definitionId ? this.outcome.task : t; }
-    get guidance() { return this.kind === "promotion" && this.promotion ? (0, official_chunk_89xwxnzm_js_1.la)({ nextRank: this.promotion.nextRank, missingRequirements: this.promotion.missing }) : void 0; }
+    get guidance() { return this.kind === "promotion" && this.promotion ? (0, official_chunk_gykvbxzp_js_1.la)({ nextRank: this.promotion.nextRank, missingRequirements: this.promotion.missing }) : void 0; }
     get nextRank() { var _a; return this.kind === "promotion" && ((_a = this.promotion) === null || _a === void 0 ? void 0 : _a.nextRank) && this.promotion.missing.length === 0 ? this.promotion.nextRank : void 0; }
     open(t, r) { this.close(), this.owner = t, this.kind = r, this.reload(); }
     close() { var _a; this.generation++, this.sequence++; for (let t of this.reads)
@@ -917,7 +917,7 @@ class Jt {
             return;
         if (((_a = n.resource) === null || _a === void 0 ? void 0 : _a.topic) !== "sect.tasks" || ((_c = (_b = n.resource) === null || _b === void 0 ? void 0 : _b.scope) === null || _c === void 0 ? void 0 : _c.kind) !== "cultivator" || ((_e = (_d = n.resource) === null || _d === void 0 ? void 0 : _d.scope) === null || _e === void 0 ? void 0 : _e.id) !== this.owner)
             throw Error("资源地址不匹配: sect.tasks");
-        if (this.data = official_chunk_89xwxnzm_js_1.Ga["sect.tasks"].parse(n.data), a)
+        if (this.data = official_chunk_gykvbxzp_js_1.Ga["sect.tasks"].parse(n.data), a)
             this.promotion = dr.parse(a.data);
     }
     catch (n) {
@@ -973,7 +973,7 @@ class Jt {
         if (r !== this.generation)
             return;
         let i = e.data;
-        if (this.promotionResult = `你的身份玉牒已经改录为${official_chunk_89xwxnzm_js_1.Y[(_a = i.discipleRank) !== null && _a !== void 0 ? _a : t]}。`, this.notice = `已晋升${official_chunk_89xwxnzm_js_1.Y[t]}`, await this.reload(), r !== this.generation)
+        if (this.promotionResult = `你的身份玉牒已经改录为${official_chunk_gykvbxzp_js_1.Y[(_a = i.discipleRank) !== null && _a !== void 0 ? _a : t]}。`, this.notice = `已晋升${official_chunk_gykvbxzp_js_1.Y[t]}`, await this.reload(), r !== this.generation)
             return;
         if (await this.refreshContext(), r !== this.generation)
             return;
@@ -1014,7 +1014,7 @@ class zt {
             break;
         }
         case "sect.action.battle":
-            o = (_d = (_c = (0, official_chunk_89xwxnzm_js_1.Ia)(s)) === null || _c === void 0 ? void 0 : _c.travelReply) !== null && _d !== void 0 ? _d : "我这就去应战";
+            o = (_d = (_c = (0, official_chunk_gykvbxzp_js_1.Ia)(s)) === null || _c === void 0 ? void 0 : _c.travelReply) !== null && _d !== void 0 ? _d : "我这就去应战";
             break;
         case "sect.action.sweep-entry":
             o = "我这就去办";
@@ -1043,15 +1043,15 @@ class zt {
                 this.confirmation = { task: t, action: r }, this.u.modalScroll = 0, this.u.invalidate();
             break;
         case "sect.action.battle": {
-            let e = (0, official_chunk_89xwxnzm_js_1.Ia)(r);
-            this.navigate(e ? (0, official_chunk_89xwxnzm_js_1.Ja)(e.key, t).route : (0, official_chunk_89xwxnzm_js_1.La)(t.definitionId));
+            let e = (0, official_chunk_gykvbxzp_js_1.Ia)(r);
+            this.navigate(e ? (0, official_chunk_gykvbxzp_js_1.Ja)(e.key, t).route : (0, official_chunk_gykvbxzp_js_1.La)(t.definitionId));
             break;
         }
         case "sect.action.sweep-entry":
-            this.navigate((0, official_chunk_89xwxnzm_js_1.Ha)("/game/sect/gate", "facility"));
+            this.navigate((0, official_chunk_gykvbxzp_js_1.Ha)("/game/sect/gate", "facility"));
             break;
         case "sect.action.mining-entry":
-            this.navigate((0, official_chunk_89xwxnzm_js_1.Ha)("/game/sect/spirit-vein", "facility"));
+            this.navigate((0, official_chunk_gykvbxzp_js_1.Ha)("/game/sect/spirit-vein", "facility"));
             break;
         case "sect.action.item-delivery":
             this.submission(t, r);
@@ -1086,7 +1086,7 @@ class Gt {
     get inventory() { return this.source === "bag" ? this.bag : this.storage; }
     get requirement() { var _a, _b, _c; return (_b = (_a = this.data) === null || _a === void 0 ? void 0 : _a.requirement) !== null && _b !== void 0 ? _b : (_c = this.task) === null || _c === void 0 ? void 0 : _c.requirement; }
     get total() { return this.selections.reduce((t, r) => t + Number(r.quantity), 0); }
-    get items() { let t = this.inventory; return t ? this.source === "bag" && (0, official_chunk_nx6d9wvp_js_1.vb)(this.filter) ? t.items.filter((r) => (0, official_chunk_nx6d9wvp_js_1.wb)(r, this.filter)) : t.items : []; }
+    get items() { let t = this.inventory; return t ? this.source === "bag" && (0, official_chunk_04cv4sxe_js_1.vb)(this.filter) ? t.items.filter((r) => (0, official_chunk_04cv4sxe_js_1.wb)(r, this.filter)) : t.items : []; }
     get locked() { return this.pending || this.interaction.busy; }
     get valid() { let t = this.requirement; if (!t || this.loading || this.inventoryLoading || this.inventoryError || !this.data)
         return !1; return this.selections.length > 0 && this.total === t.quantity && this.selections.every((r) => { var _a; return (r.item.location === "storage" || !!((_a = this.bag) === null || _a === void 0 ? void 0 : _a.items.some((e) => e.id === r.item.id && e.revision === r.item.revision))) && Number.isInteger(Number(r.quantity)) && Number(r.quantity) > 0 && Number(r.quantity) <= r.item.quantity; }); }
@@ -1199,7 +1199,7 @@ class qt {
         else
             this.reset(); this.u.invalidate(); };
         this.u = t;
-        this.model = new Gt(r, () => t.invalidate(), () => this.reset()), this.filters = new official_chunk_nx6d9wvp_js_1.xb(t, (e) => this.model.setFilter(e)), this.preview = new official_chunk_h2eh160v_js_1.te(t);
+        this.model = new Gt(r, () => t.invalidate(), () => this.reset()), this.filters = new official_chunk_04cv4sxe_js_1.xb(t, (e) => this.model.setFilter(e)), this.preview = new official_chunk_h2eh160v_js_1.te(t);
     }
     get active() { return !!this.model.task; }
     open(t, r) { this.reset(), this.u.modalScroll = 0, this.model.open(t, r); }
@@ -1211,7 +1211,7 @@ class qt {
     button(t, r, e, i, n, a = !1) { let s = this.u; if (s.ctx.save(), i)
         s.ctx.globalAlpha *= 0.5; s.inert(i, () => s.button(t, r, e, n, a ? official_chunk_wje6zqc2_js_1.Be.crimson : official_chunk_wje6zqc2_js_1.Be.ink)), s.ctx.restore(); }
     paint() { let t = this.model, r = t.task, e = t.requirement; if (!r || !e)
-        return; let i = this.u, n = Math.min(1024, i.width - 24) - 34, a = new official_chunk_wje6zqc2_js_1.Ce(i, n); if (a.text((0, official_chunk_89xwxnzm_js_1.ia)(e), 14, 28), a.gap(16), t.loading)
+        return; let i = this.u, n = Math.min(1024, i.width - 24) - 34, a = new official_chunk_wje6zqc2_js_1.Ce(i, n); if (a.text((0, official_chunk_gykvbxzp_js_1.ia)(e), 14, 28), a.gap(16), t.loading)
         a.text("正在查验物品…", 14, 21), a.gap(16); if (t.error || t.inventoryError)
         a.text(t.error || t.inventoryError, 14, 28, official_chunk_wje6zqc2_js_1.Be.crimson), a.gap(16); a.block(32.32, (o, b) => this.button("选择物品", o, b, t.locked || t.loading, () => { this.formScroll = i.modalScroll, this.bagOpen = !0, i.modalScroll = 0, i.invalidate(); })), a.gap(16); for (let o of t.selections) {
         let b = i.lines(o.item.name, n - 64 - 24 - i.buttonWidth("移出"), 14), p = Math.max(64, b.length * 21 + 8 + 24 + 8 + 51.6);
@@ -1223,11 +1223,11 @@ class qt {
         this.paintInventory(); this.filters.paint(), this.preview.paint(); }
     paintInventory() { var _a; let t = this.u, r = this.model, e = t.width - 32, i = new official_chunk_wje6zqc2_js_1.Ce(t, e), n = r.inventory; if (i.block(40, (h, o) => { var _a, _b; ["bag", "storage"].forEach((f, m) => { if (t.text(f === "bag" ? "储物袋" : "储藏室", h + 4 + m * 66, o + 20, 14, r.source === f ? official_chunk_wje6zqc2_js_1.Be.crimson : official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), r.source === f)
         t.rect(h + m * 66, o + 39, 50, 1, official_chunk_wje6zqc2_js_1.Be.crimson); if (!r.locked)
-        t.hit(h + m * 66, o, 50, 40, () => { r.setSource(f), t.modalScroll = 0; }); }); let b = t.buttonWidth("刷新"), p = r.source === "bag" ? `${(_a = n === null || n === void 0 ? void 0 : n.used) !== null && _a !== void 0 ? _a : "—"} / 40` : `${(_b = n === null || n === void 0 ? void 0 : n.total) !== null && _b !== void 0 ? _b : "—"} 格`; t.text(p, h + e - b - 12 - t.measure(p, 12, "monospace"), o + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"), this.button("刷新", h + e - b, o + 3.84, r.locked || r.inventoryLoading, () => { r.reloadInventory(), r.refreshCandidates(); }); }), i.gap(12), i.block(32.32, (h, o) => this.button(`筛选${(0, official_chunk_nx6d9wvp_js_1.vb)(r.filter) ? " · 已启用" : ""}`, h, o, r.locked, () => { this.bagScroll = t.modalScroll, this.filters.open(r.filter); })), i.gap(12), r.inventoryError)
+        t.hit(h + m * 66, o, 50, 40, () => { r.setSource(f), t.modalScroll = 0; }); }); let b = t.buttonWidth("刷新"), p = r.source === "bag" ? `${(_a = n === null || n === void 0 ? void 0 : n.used) !== null && _a !== void 0 ? _a : "—"} / 40` : `${(_b = n === null || n === void 0 ? void 0 : n.total) !== null && _b !== void 0 ? _b : "—"} 格`; t.text(p, h + e - b - 12 - t.measure(p, 12, "monospace"), o + 20, 12, official_chunk_wje6zqc2_js_1.Be["ink-secondary"], "monospace"), this.button("刷新", h + e - b, o + 3.84, r.locked || r.inventoryLoading, () => { r.reloadInventory(), r.refreshCandidates(); }); }), i.gap(12), i.block(32.32, (h, o) => this.button(`筛选${(0, official_chunk_04cv4sxe_js_1.vb)(r.filter) ? " · 已启用" : ""}`, h, o, r.locked, () => { this.bagScroll = t.modalScroll, this.filters.open(r.filter); })), i.gap(12), r.inventoryError)
         i.text(r.inventoryError, 14, 28, official_chunk_wje6zqc2_js_1.Be.crimson);
     else if (!n)
         i.text(`正在读取${r.source === "bag" ? "储物袋" : "储藏室"}……`, 14, 24, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); if (n) {
-        let h = r.items, o = r.source === "bag" && !(0, official_chunk_nx6d9wvp_js_1.vb)(r.filter) ? Array.from({ length: 40 }, (f, m) => h.find((v) => v.slotIndex === m)) : h, b = (e - 24) / 5, p = Math.ceil(o.length / 5);
+        let h = r.items, o = r.source === "bag" && !(0, official_chunk_04cv4sxe_js_1.vb)(r.filter) ? Array.from({ length: 40 }, (f, m) => h.find((v) => v.slotIndex === m)) : h, b = (e - 24) / 5, p = Math.ceil(o.length / 5);
         if (h.length)
             i.text("轻点操作，长按查看详情", 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), i.gap(8);
         if (i.block(p ? p * (b + 6) - 6 : 0, (f, m) => o.forEach((v, M) => { let l = f + M % 5 * (b + 6), $ = m + Math.floor(M / 5) * (b + 6), S = r.locked || r.loading || r.inventoryLoading || !!r.inventoryError, P = v ? r.reason(v) : "", K = () => { if (!v || S || P)
@@ -1252,15 +1252,15 @@ class Qt {
     close() { this.actions.close(), this.submission.reset(); }
     paintOverlay() { this.actions.paintOverlay(), this.submission.paint(); }
     flow(t, r, e) { var _a, _b; let i = this.model, n = this.u; if (!i.data && i.loading)
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(n, t, r, [{ speaker: r.name, body: "稍候，我查一查今日的功簿。" }], [], () => { }, !0); let a = i.selected; if (!a) {
+        return (0, official_chunk_04cv4sxe_js_1.sb)(n, t, r, [{ speaker: r.name, body: "稍候，我查一查今日的功簿。" }], [], () => { }, !0); let a = i.selected; if (!a) {
         let f = er(i.tasks), m = f.map((M) => ({ id: rr(M), label: yr(M), tone: M.state === "claimable" ? "primary" : M.state === "claimed" ? "muted" : "normal" }));
         if (i.nextRank)
-            m.push({ id: "promote-disciple", label: `请长老为弟子晋升${official_chunk_89xwxnzm_js_1.Y[i.nextRank]}`, tone: "primary" });
+            m.push({ id: "promote-disciple", label: `请长老为弟子晋升${official_chunk_gykvbxzp_js_1.Y[i.nextRank]}`, tone: "primary" });
         m.push({ id: "leave-conversation", label: "弟子告退", tone: "muted" });
         let v = [{ speaker: r.name, body: wr(r, i.tasks, i.guidance) }];
         if (i.promotionResult)
             v.push({ speaker: r.name, body: i.promotionResult, tone: "attention" });
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(n, t, r, v, m, (M) => { if (M === "leave-conversation")
+        return (0, official_chunk_04cv4sxe_js_1.sb)(n, t, r, v, m, (M) => { if (M === "leave-conversation")
             e();
         else if (M === "promote-disciple")
             i.promote();
@@ -1270,7 +1270,7 @@ class Qt {
                 i.select(l);
         } }, i.busy || i.loading, i.error);
     } let s = ((_a = i.outcome) === null || _a === void 0 ? void 0 : _a.task.definitionId) === a.definitionId ? i.outcome.outcome : void 0, h, o = ""; if (s) {
-        let f = official_chunk_89xwxnzm_js_1.Fa[s.renderer];
+        let f = official_chunk_gykvbxzp_js_1.Fa[s.renderer];
         if (!f)
             o = `暂不支持此任务结果：${s.renderer}`;
         else {
@@ -1292,7 +1292,7 @@ class Qt {
         let f = a.battleTarget;
         p.push({ speaker: r.name, body: `目标：${f.name}，${f.sectName ? `${f.sectName}，` : ""}${f.realm}${f.realmStage}。${f.description}`, tone: "attention" });
     } if (o)
-        p.push({ body: o, tone: "attention" }); return (0, official_chunk_nx6d9wvp_js_1.sb)(n, t, r, p, [{ id: "return-to-tasks", label: "我再问问别的" }, { id: "leave-conversation", label: "弟子告退", tone: "muted" }], (f) => { if (this.actions.close(), f === "return-to-tasks")
+        p.push({ body: o, tone: "attention" }); return (0, official_chunk_04cv4sxe_js_1.sb)(n, t, r, p, [{ id: "return-to-tasks", label: "我再问问别的" }, { id: "leave-conversation", label: "弟子告退", tone: "muted" }], (f) => { if (this.actions.close(), f === "return-to-tasks")
         i.back();
     else
         e(); }, i.busy, i.error, this.actions.flow(t - 40, a)); }
@@ -1304,7 +1304,7 @@ class re {
         this.u = t;
         this.player = r;
         this.navigate = e;
-        this.context = new official_chunk_89xwxnzm_js_1.Qa(() => t.invalidate(), !1), this.model = new Jt(() => t.invalidate(), () => r.load(), () => this.context.reload()), this.conversation = new Qt(t, this.model, e);
+        this.context = new official_chunk_gykvbxzp_js_1.Qa(() => t.invalidate(), !1), this.model = new Jt(() => t.invalidate(), () => r.load(), () => this.context.reload()), this.conversation = new Qt(t, this.model, e);
     }
     enter(t) { var _a, _b; this.leave(), this.requested = (_b = new URLSearchParams((_a = t.split("?")[1]) !== null && _a !== void 0 ? _a : "").get("npc")) !== null && _b !== void 0 ? _b : void 0, this.sync(); }
     leave() { this.owner = "", this.role = void 0, this.requested = void 0, this.conversation.close(), this.model.close(), this.context.leave(); }
@@ -1313,8 +1313,8 @@ class re {
     select(t) { var _a, _b; let r = (_a = this.context.presentation.rooms.affairs) === null || _a === void 0 ? void 0 : _a.actors.find((i) => i.id === t); this.role = r === null || r === void 0 ? void 0 : r.roleKey, this.conversation.close(), this.model.close(); let e = (_b = r === null || r === void 0 ? void 0 : r.conversation.parameters) === null || _b === void 0 ? void 0 : _b.kind; if ((r === null || r === void 0 ? void 0 : r.conversation.renderer) === "sect.affairs.tasks" && (e === "daily" || e === "weekly" || e === "promotion"))
         this.model.open(this.owner, e); this.u.invalidate(); }
     room(t) { let r = this.u, e = this.context.presentation.rooms.affairs, i = e === null || e === void 0 ? void 0 : e.actors.find((s) => s.roleKey === this.role); if (!e)
-        return (0, official_chunk_nx6d9wvp_js_1.sb)(r, t, { sigil: "候", name: "当值弟子", identity: "当值弟子", responsibility: "负责接待来客。" }, [{ speaker: "当值弟子", body: "此处的经办人尚未到值，请稍后再来。", tone: "attention" }], [], () => { }); if (!i)
-        return (0, official_chunk_nx6d9wvp_js_1.rb)(r, t, { eyebrow: "宗门公牍 · 当值录事", description: e.description, actors: e.actors, select: (s) => this.select(s), prompt: "点击人物，与其交谈" }); let n = this.model.kind ? this.conversation.flow(t - 2, i, () => this.select()) : (0, official_chunk_nx6d9wvp_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: "这册事务暂时无法查验，请稍后再来。", tone: "attention" }], [{ id: "leave", label: "弟子告退", tone: "muted" }], () => this.select()), a = new official_chunk_wje6zqc2_js_1.Ce(r, t); return a.block(n.height + 2, (s, h) => { r.rect(s, h, t, n.height + 2, "rgba(248,243,230,.42)"), r.ctx.save(), r.ctx.strokeStyle = "rgba(44,24,16,.2)", r.ctx.setLineDash([]), r.ctx.strokeRect(s + 0.5, h + 0.5, t - 1, n.height + 1), r.ctx.restore(), n.paint(s + 1, h + 1); }), a; }
+        return (0, official_chunk_04cv4sxe_js_1.sb)(r, t, { sigil: "候", name: "当值弟子", identity: "当值弟子", responsibility: "负责接待来客。" }, [{ speaker: "当值弟子", body: "此处的经办人尚未到值，请稍后再来。", tone: "attention" }], [], () => { }); if (!i)
+        return (0, official_chunk_04cv4sxe_js_1.rb)(r, t, { eyebrow: "宗门公牍 · 当值录事", description: e.description, actors: e.actors, select: (s) => this.select(s), prompt: "点击人物，与其交谈" }); let n = this.model.kind ? this.conversation.flow(t - 2, i, () => this.select()) : (0, official_chunk_04cv4sxe_js_1.sb)(r, t - 2, i, [{ speaker: i.name, body: "这册事务暂时无法查验，请稍后再来。", tone: "attention" }], [{ id: "leave", label: "弟子告退", tone: "muted" }], () => this.select()), a = new official_chunk_wje6zqc2_js_1.Ce(r, t); return a.block(n.height + 2, (s, h) => { r.rect(s, h, t, n.height + 2, "rgba(248,243,230,.42)"), r.ctx.save(), r.ctx.strokeStyle = "rgba(44,24,16,.2)", r.ctx.setLineDash([]), r.ctx.strokeRect(s + 0.5, h + 0.5, t - 1, n.height + 1), r.ctx.restore(), n.paint(s + 1, h + 1); }), a; }
     paint(t, r) { var _a, _b, _c; this.sync(); let e = this.u, i = this.context, n = e.width - 56, a = i.presentation.scenes.affairs, s = new official_chunk_wje6zqc2_js_1.Ce(e, n), h = a.title, o = a.description; if (this.requested && i.context) {
         let v = (_a = i.presentation.rooms.affairs) === null || _a === void 0 ? void 0 : _a.actors.find((M) => M.roleKey === this.requested);
         if (this.requested = void 0, v && ((_b = i.context.permissions["sect.tasks.use"]) === null || _b === void 0 ? void 0 : _b.granted))
@@ -1332,7 +1332,7 @@ class re {
             l.text((_c = v === null || v === void 0 ? void 0 : v.reason) !== null && _c !== void 0 ? _c : "当前弟子身份尚未获得此设施权限。", 14, 28, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]);
         let $ = 107.32 + l.height;
         s.block($, (S, P) => { let K = e.ctx; K.save(), e.clip(S, P, n, $, () => { let j = K.createLinearGradient(S, P, S + n, P + n * 0.364); j.addColorStop(0, "rgba(101,68,43,.12)"), j.addColorStop(0.35, "rgba(101,68,43,0)"), K.fillStyle = j, K.fillRect(S, P, n, $); for (let z = S; z < S + n; z += 72)
-            e.rect(z, P, 1, $, "rgba(255,255,255,.3)"); K.globalAlpha = 0.05, e.text("令", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = "rgba(68,64,60,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_89xwxnzm_js_1.ua.registry.require(i.context.sectId).definition.name; K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - e.trackedWidth(D, 12, 4.2), P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
+            e.rect(z, P, 1, $, "rgba(255,255,255,.3)"); K.globalAlpha = 0.05, e.text("令", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = "rgba(68,64,60,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_gykvbxzp_js_1.ua.registry.require(i.context.sectId).definition.name; K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - e.trackedWidth(D, 12, 4.2), P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
     } let b = e.lines(o, n, 14), p = 84.2 + Math.max(0, b.length - 1) * 24, f = p + 20 + s.height + 16, m = t + 12 - e.scroll; e.clip(0, t, e.width, r - t, () => { e.rect(12, m, e.width - 24, f, "rgba(248,243,230,.82)"), e.text(h, 28, m + 28, 23.2, official_chunk_wje6zqc2_js_1.Be.ink, e.headingFont); let v = 36 + e.measure(h, 23.2, e.headingFont); e.text("/", v, m + 31, 14, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), e.tracked("修行", v + 14, m + 31, 12.48, 1.9968, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), b.forEach((M, l) => e.text(M, 28, m + 60 + l * 24, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.line(28, m + p - 1, n), s.paint(28, m + p + 20); }), e.scrollMax = Math.max(0, t + 24 + f - r); }
     paintOverlay() { this.conversation.paintOverlay(); }
 }
@@ -1380,9 +1380,9 @@ class Zt {
             if (((_d = a.resource) === null || _d === void 0 ? void 0 : _d.topic) !== s || ((_f = (_e = a.resource) === null || _e === void 0 ? void 0 : _e.scope) === null || _f === void 0 ? void 0 : _f.kind) !== "sect" || ((_h = (_g = a.resource) === null || _g === void 0 ? void 0 : _g.scope) === null || _h === void 0 ? void 0 : _h.id) !== this.sectId)
                 throw Error(`资源地址不匹配: ${s}`);
             if (t === "members")
-                this.members = official_chunk_89xwxnzm_js_1.Ga["sect.members"].parse(a.data);
+                this.members = official_chunk_gykvbxzp_js_1.Ga["sect.members"].parse(a.data);
             else
-                this.ranking = official_chunk_89xwxnzm_js_1.Ga["sect.contribution-ranking"].parse(a.data);
+                this.ranking = official_chunk_gykvbxzp_js_1.Ga["sect.contribution-ranking"].parse(a.data);
         }
     }
     catch (a) {
@@ -1427,14 +1427,14 @@ class Vt {
     reset() { this.offset = 0, this.last = void 0; }
     flow(t, r) { let e = this.u, i = new official_chunk_wje6zqc2_js_1.Ce(e, t), n = t - 40, a = new official_chunk_wje6zqc2_js_1.Ce(e, n), s = r.topic === "members" ? r.members : void 0, h = r.topic === "ranking" ? r.ranking : void 0, o = () => { r.select(void 0), this.reset(), e.invalidate(); }; if (s) {
         let b = Math.max(1, Math.ceil(s.total / s.pageSize)), p = `同门名录 · 共 ${s.total} 人 · 第 ${s.page}/${b} 页${r.loading ? " · 正在更新" : ""}`, f = e.buttonWidth("合上名录"), m = e.lines(p, Math.max(20, n - f - 12), 14), v = Math.max(32.32, m.length * 21) + 17;
-        a.block(v, (M, l) => { m.forEach(($, S) => e.text($, M, l + 10.5 + S * 21, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.button("合上名录", M + n - f, l + (v - 17 - 32.32) / 2, o), e.rect(M, l + v - 1, n, 1, "rgba(44,24,16,.1)"); }), a.gap(20), this.table(a, ["名号", "境界", "身份", "职务", "近况"], s.items.map((M) => { var _a; return [M.name, `${M.realm}${M.realmStage}`, official_chunk_89xwxnzm_js_1.Y[M.discipleRank], M.office === "none" ? "无" : (_a = M.office) !== null && _a !== void 0 ? _a : "", Je[M.activityState]]; }), 0, 4, s.items.map((M) => M.activityState === "online")), a.gap(20), a.block(32.32, (M, l) => { let $ = e.buttonWidth("下一页"), S = e.buttonWidth("上一页"), P = (K, D, j, z) => { if (e.ctx.save(), j)
+        a.block(v, (M, l) => { m.forEach(($, S) => e.text($, M, l + 10.5 + S * 21, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.button("合上名录", M + n - f, l + (v - 17 - 32.32) / 2, o), e.rect(M, l + v - 1, n, 1, "rgba(44,24,16,.1)"); }), a.gap(20), this.table(a, ["名号", "境界", "身份", "职务", "近况"], s.items.map((M) => { var _a; return [M.name, `${M.realm}${M.realmStage}`, official_chunk_gykvbxzp_js_1.Y[M.discipleRank], M.office === "none" ? "无" : (_a = M.office) !== null && _a !== void 0 ? _a : "", Je[M.activityState]]; }), 0, 4, s.items.map((M) => M.activityState === "online")), a.gap(20), a.block(32.32, (M, l) => { let $ = e.buttonWidth("下一页"), S = e.buttonWidth("上一页"), P = (K, D, j, z) => { if (e.ctx.save(), j)
             e.ctx.globalAlpha *= 0.5; e.inert(j, () => e.button(K, D, l, () => { r.setPage(z), this.reset(); }, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.ctx.restore(); }; P("上一页", M + n - $ - 8 - S, s.page <= 1, s.page - 1), P("下一页", M + n - $, s.page >= b, s.page + 1); });
     }
     else if (h)
         if (a.text("宗门贡献榜 · 累积贡献", 14, 21, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), a.gap(4), a.text(`我的排名：第 ${h.currentMember.rank} 名 · ${h.currentMember.contribution.toLocaleString("zh-CN")} 点`, 14, 21), a.gap(12), a.block(32.32, (b, p) => { e.inert(r.loading, () => e.button(r.loading ? "更新中……" : "刷新", b, p, () => { r.reload(); }, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.button("收起榜单", b + e.buttonWidth(r.loading ? "更新中……" : "刷新") + 8, p, o); }), a.gap(16), a.rule(), a.gap(20), !h.entries.length)
             a.text("暂无贡献记录。", 14, 28, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]);
         else
-            this.table(a, ["名次", "名号", "身份", "职务", "累积贡献"], h.entries.map((b) => { var _a, _b; return [`第 ${b.rank} 名`, b.name, (_a = official_chunk_89xwxnzm_js_1.Y[b.discipleRank]) !== null && _a !== void 0 ? _a : "", b.office === "none" ? "无" : (_b = b.office) !== null && _b !== void 0 ? _b : "", b.contribution.toLocaleString("zh-CN")]; }), 1); if (i.gap(28), i.block(a.height, (b, p) => a.paint(b + 20, p)), i.gap(28), i.height < 544)
+            this.table(a, ["名次", "名号", "身份", "职务", "累积贡献"], h.entries.map((b) => { var _a, _b; return [`第 ${b.rank} 名`, b.name, (_a = official_chunk_gykvbxzp_js_1.Y[b.discipleRank]) !== null && _a !== void 0 ? _a : "", b.office === "none" ? "无" : (_b = b.office) !== null && _b !== void 0 ? _b : "", b.contribution.toLocaleString("zh-CN")]; }), 1); if (i.gap(28), i.block(a.height, (b, p) => a.paint(b + 20, p)), i.gap(28), i.height < 544)
         i.gap(544 - i.height); return i; }
     table(t, r, e, i, n = -1, a = []) { let s = this.u, h = Math.max(576, t.width), o = r.map((M, l) => Math.max(s.measure(M, 14) + 16, ...e.map(($) => s.measure($[l], 14) + 16 + (l === n ? 14 : 0)))), b = o.reduce((M, l) => M + l, 0); for (let M = 0; M < o.length; M++)
         o[M] += (Math.max(h, b) - b) / o.length; let p = o.reduce((M, l) => M + l, 0); this.max = Math.max(0, p - t.width), this.offset = Math.min(this.offset, this.max); let f = 38, m = 38, v = m + e.length * f; t.block(v, (M, l) => { s.clip(M, l, t.width, v, () => { let $ = (S, P, K, D) => { let j = M - this.offset; S.forEach((z, H) => { let G = n < 0 && H === 4; if (H === n && !K) {
@@ -1451,7 +1451,7 @@ class ee {
         this.u = t;
         this.player = r;
         this.navigate = e;
-        this.context = new official_chunk_89xwxnzm_js_1.Qa(() => t.invalidate()), this.hall = new Zt(() => t.invalidate(), () => r.load()), this.tables = new Vt(t);
+        this.context = new official_chunk_gykvbxzp_js_1.Qa(() => t.invalidate()), this.hall = new Zt(() => t.invalidate(), () => r.load()), this.tables = new Vt(t);
     }
     enter(t) { var _a, _b; this.leave(), this.requested = (_b = new URLSearchParams((_a = t.split("?")[1]) !== null && _a !== void 0 ? _a : "").get("npc")) !== null && _b !== void 0 ? _b : void 0, this.sync(); }
     leave() { this.owner = "", this.role = void 0, this.requested = void 0, this.context.leave(), this.hall.close(), this.tables.reset(); }
@@ -1466,13 +1466,13 @@ class ee {
         let o = new official_chunk_wje6zqc2_js_1.Ce(r, t);
         return o.text("此处的经办人尚未到值，请稍后再来。"), o;
     } if (!a)
-        return (0, official_chunk_nx6d9wvp_js_1.rb)(r, t, { eyebrow: "身份玉牒 · 俸册名录", description: n.description, actors: n.actors, select: (o) => this.select(o), prompt: n.actors.some((o) => o.appearance === "facility") ? "点击人物或设施，查看详情" : "点击人物，与其交谈" }); let s; if (i.topic === "members" && i.members || i.topic === "ranking" && i.ranking)
+        return (0, official_chunk_04cv4sxe_js_1.rb)(r, t, { eyebrow: "身份玉牒 · 俸册名录", description: n.description, actors: n.actors, select: (o) => this.select(o), prompt: n.actors.some((o) => o.appearance === "facility") ? "点击人物或设施，查看详情" : "点击人物，与其交谈" }); let s; if (i.topic === "members" && i.members || i.topic === "ranking" && i.ranking)
         s = this.tables.flow(t - 2, i);
     else {
         let o = [{ speaker: a.name, body: a.greeting }], b = [];
         if (i.actor === "registry") {
             if (i.topic === "identity" && e.context)
-                o.push({ speaker: a.name, body: [{ text: "玉牒上记的是" }, { text: official_chunk_89xwxnzm_js_1.Y[(_a = e.context.discipleRank) !== null && _a !== void 0 ? _a : "registered"], color: official_chunk_wje6zqc2_js_1.Be.crimson, bold: !0 }, { text: "，功簿尚余" }, { text: `${e.context.contribution.toLocaleString("zh-CN")}点贡献`, color: official_chunk_wje6zqc2_js_1.Be.crimson, bold: !0 }, { text: "。若要问晋升条件或正式晋升，去事务堂请教传功长老即可。" }] });
+                o.push({ speaker: a.name, body: [{ text: "玉牒上记的是" }, { text: official_chunk_gykvbxzp_js_1.Y[(_a = e.context.discipleRank) !== null && _a !== void 0 ? _a : "registered"], color: official_chunk_wje6zqc2_js_1.Be.crimson, bold: !0 }, { text: "，功簿尚余" }, { text: `${e.context.contribution.toLocaleString("zh-CN")}点贡献`, color: official_chunk_wje6zqc2_js_1.Be.crimson, bold: !0 }, { text: "。若要问晋升条件或正式晋升，去事务堂请教传功长老即可。" }] });
             if (i.topic === "announcement")
                 o.push({ speaker: a.name, body: e.presentation.announcement, tone: "attention" });
             b.push({ id: "identity", label: "请执事替我查验身份玉牒" }, { id: "members", label: "我想翻看同门名录" }, { id: "announcement", label: "请问宗门近来有何公告" }, { id: "ranking", label: "我想查看宗门贡献榜" });
@@ -1486,7 +1486,7 @@ class ee {
         }
         else
             o.push({ speaker: a.name, body: "这项事务眼下还无法办理，请稍后再来。", tone: "attention" });
-        b.push({ id: "leave", label: "弟子告退", tone: "muted" }), s = (0, official_chunk_nx6d9wvp_js_1.sb)(r, t - 2, a, o, b, (p) => { if (p === "leave")
+        b.push({ id: "leave", label: "弟子告退", tone: "muted" }), s = (0, official_chunk_04cv4sxe_js_1.sb)(r, t - 2, a, o, b, (p) => { if (p === "leave")
             this.select();
         else if (p === "claim")
             i.claim();
@@ -1509,7 +1509,7 @@ class ee {
         if (!(v === null || v === void 0 ? void 0 : v.granted))
             l.text((_c = v === null || v === void 0 ? void 0 : v.reason) !== null && _c !== void 0 ? _c : "当前弟子身份尚未获得此设施权限。", 14, 28, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]);
         let $ = 107.32 + l.height;
-        s.block($, (S, P) => { let K = e.ctx; K.save(), e.clip(S, P, n, $, () => { let z = K.createLinearGradient(0, P, 0, P + $); z.addColorStop(0, "rgba(250,244,224,.92)"), z.addColorStop(1, "rgba(242,229,199,.5)"), K.fillStyle = z, K.fillRect(S, P, n, $); let H = K.createRadialGradient(S + n / 2, P, 0, S + n / 2, P, Math.max(n, $) * 0.44); H.addColorStop(0, "rgba(146,83,37,.18)"), H.addColorStop(1, "rgba(146,83,37,0)"), K.fillStyle = H, K.fillRect(S, P, n, $), K.globalAlpha = 0.05, e.text("殿", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = "rgba(120,53,15,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_89xwxnzm_js_1.ua.registry.require(i.context.sectId).definition.name, j = e.trackedWidth(D, 12, 4.2); K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - j, P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
+        s.block($, (S, P) => { let K = e.ctx; K.save(), e.clip(S, P, n, $, () => { let z = K.createLinearGradient(0, P, 0, P + $); z.addColorStop(0, "rgba(250,244,224,.92)"), z.addColorStop(1, "rgba(242,229,199,.5)"), K.fillStyle = z, K.fillRect(S, P, n, $); let H = K.createRadialGradient(S + n / 2, P, 0, S + n / 2, P, Math.max(n, $) * 0.44); H.addColorStop(0, "rgba(146,83,37,.18)"), H.addColorStop(1, "rgba(146,83,37,0)"), K.fillStyle = H, K.fillRect(S, P, n, $), K.globalAlpha = 0.05, e.text("殿", S + n - 160, P + 40, 144, official_chunk_wje6zqc2_js_1.Be.ink), K.globalAlpha = 1; }), K.strokeStyle = "rgba(120,53,15,.2)", K.strokeRect(S + 0.5, P + 0.5, n - 1, $ - 1), K.restore(), e.button("返回宗门总视图", S + 17, P + 21, () => this.navigate("/game/sect"), official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); let D = official_chunk_gykvbxzp_js_1.ua.registry.require(i.context.sectId).definition.name, j = e.trackedWidth(D, 12, 4.2); K.save(), K.globalAlpha = 0.5, e.tracked(D, S + n - 17 - j, P + 37.16, 12, 4.2, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), K.restore(), e.rect(S + 17, P + 65.32, M, 1, "rgba(44,24,16,.1)"), l.paint(S + 17, P + 86.32); });
     } let b = e.lines(o, n, 14), p = 84.2 + Math.max(0, b.length - 1) * 24, f = p + 20 + s.height + 16, m = t + 12 - e.scroll; e.clip(0, t, e.width, r - t, () => { e.rect(12, m, e.width - 24, f, "rgba(248,243,230,.82)"), e.text(h, 28, m + 28, 23.2, official_chunk_wje6zqc2_js_1.Be.ink, e.headingFont); let v = 36 + e.measure(h, 23.2, e.headingFont); e.text("/", v, m + 31, 14, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), e.tracked("修行", v + 14, m + 31, 12.48, 1.9968, official_chunk_wje6zqc2_js_1.Be["battle-muted"]), b.forEach((M, l) => e.text(M, 28, m + 60 + l * 24, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), e.line(28, m + p - 1, n), s.paint(28, m + p + 20); }), e.scrollMax = Math.max(0, t + 24 + f - r); }
 }
 exports.SectHallPage = ee;
@@ -1527,7 +1527,7 @@ function se(t, r) { if (!t.revealed)
 function oe(t) { if (t.actIndex === 0)
     return t; return { actIndex: t.actIndex - 1, revealed: !0 }; }
 class Wt {
-    constructor(t, r, e, i = () => (0, official_chunk_nx6d9wvp_js_1.zb)()) {
+    constructor(t, r, e, i = () => (0, official_chunk_04cv4sxe_js_1.zb)()) {
         this.sectId = "";
         this.entry = "";
         this.busy = !1;
@@ -1544,7 +1544,7 @@ class Wt {
     enter(t) { var _a, _b, _c; this.leave(); let r = new URLSearchParams((_a = t.split("?")[1]) !== null && _a !== void 0 ? _a : ""); this.sectId = (_b = r.get("sectId")) !== null && _b !== void 0 ? _b : "", this.entry = (_c = r.get("entry")) !== null && _c !== void 0 ? _c : "", this.state = nr(), this.attempt = ir(), this.cueStart = this.now(), this.error = ""; }
     leave() { this.generation++, this.busy = !1; }
     get catalog() { var _a, _b; let t = (_b = (_a = this.home.baseline) === null || _a === void 0 ? void 0 : _a.resources.profile) === null || _b === void 0 ? void 0 : _b.data.cultivator; if (!t)
-        return; return official_chunk_89xwxnzm_js_1.ua.registry.listDefinitions().filter((r) => { var _a; return official_chunk_89xwxnzm_js_1.ua.registry.require(r.id).checkAdmission({ playerRace: (_a = t.playerRace) !== null && _a !== void 0 ? _a : "human", realm: t.realm, stage: t.realm_stage }).allowed; }).map((r) => ({ id: r.id, name: r.name, onboarding: (0, official_chunk_89xwxnzm_js_1.Na)(r.id).onboarding, paths: official_chunk_89xwxnzm_js_1.M[r.id].paths.map((e) => e.name).join(" · ") })); }
+        return; return official_chunk_gykvbxzp_js_1.ua.registry.listDefinitions().filter((r) => { var _a; return official_chunk_gykvbxzp_js_1.ua.registry.require(r.id).checkAdmission({ playerRace: (_a = t.playerRace) !== null && _a !== void 0 ? _a : "human", realm: t.realm, stage: t.realm_stage }).allowed; }).map((r) => ({ id: r.id, name: r.name, onboarding: (0, official_chunk_gykvbxzp_js_1.Na)(r.id).onboarding, paths: official_chunk_gykvbxzp_js_1.M[r.id].paths.map((e) => e.name).join(" · ") })); }
     get selected() { var _a; return (_a = this.catalog) === null || _a === void 0 ? void 0 : _a.find((t) => t.id === this.sectId); }
     get activeSectId() { var _a, _b, _c, _d; return (_d = (_c = (_b = (_a = this.home.baseline) === null || _a === void 0 ? void 0 : _a.resources.session) === null || _b === void 0 ? void 0 : _b.data.activeCultivator) === null || _c === void 0 ? void 0 : _c.sectId) !== null && _d !== void 0 ? _d : null; }
     get transfer() { return this.entry === "transfer" && this.activeSectId === this.sectId; }
@@ -1591,7 +1591,7 @@ class Wt {
 exports.SectOnboardingModel = Wt;
 class he {
     constructor(t, r, e) {
-        this.assets = new official_chunk_89xwxnzm_js_1.Xa;
+        this.assets = new official_chunk_gykvbxzp_js_1.Xa;
         this.assetError = "";
         this.generation = 0;
         this.u = t;
@@ -1700,18 +1700,18 @@ class Yt {
     constructor(t) {
         this.mode = "visitor";
         this.sectId = "";
-        this.tasks = new official_chunk_89xwxnzm_js_1.Ma(t);
+        this.tasks = new official_chunk_gykvbxzp_js_1.Ma(t);
     }
     enter(t, r) { this.leave(), this.sectId = t, this.tasks.open(r); }
     leave() { this.tasks.close(); }
-    get definition() { var _a; return (_a = official_chunk_89xwxnzm_js_1.ua.registry.get(this.sectId)) === null || _a === void 0 ? void 0 : _a.definition; }
+    get definition() { var _a; return (_a = official_chunk_gykvbxzp_js_1.ua.registry.get(this.sectId)) === null || _a === void 0 ? void 0 : _a.definition; }
     get landmark() { return (0, official_chunk_21q7yjsr_js_1.ab)(this.sectId); }
-    get presentation() { return (0, official_chunk_89xwxnzm_js_1.Na)(this.sectId); }
+    get presentation() { return (0, official_chunk_gykvbxzp_js_1.Na)(this.sectId); }
     get worldHref() { return this.landmark ? `/game/map-v2?intent=sect&nodeId=${encodeURIComponent(this.landmark.id)}` : "/game/map-v2?intent=sect"; }
     get visitHref() { return `/game/sect/${encodeURIComponent(this.sectId)}/visit`; }
     get bounty() { var _a; return (_a = this.tasks.data) === null || _a === void 0 ? void 0 : _a.items.find((t) => { var _a; return t.definitionId === "weekly_bounty_battle" && (t.state === "active" || t.state === "claimable") && ((_a = t.battleTarget) === null || _a === void 0 ? void 0 : _a.sectId) === this.sectId; }); }
     get visitorEntry() { var _a; return ((_a = this.bounty) === null || _a === void 0 ? void 0 : _a.state) === "active" ? { hotspotId: "gate", label: "前往山门查探悬赏目标", route: `/game/sect/${encodeURIComponent(this.sectId)}/gate` } : void 0; }
-    state(t) { return (0, official_chunk_89xwxnzm_js_1.Pa)(t, "visitor", new Map); }
+    state(t) { return (0, official_chunk_gykvbxzp_js_1.Pa)(t, "visitor", new Map); }
     description(t) { var _a; return (_a = this.state(t).reason) !== null && _a !== void 0 ? _a : t.note; }
 }
 exports.SectVisitModel = Yt;
@@ -1920,7 +1920,7 @@ class Me {
             this.navigate(r.visitHref);
             return;
         }
-        let $ = M.state === "claimable", S = (0, official_chunk_nx6d9wvp_js_1.sb)(t, h - 2, { sigil: l.name.slice(0, 1), name: l.name, identity: `${r.definition.name}修士 · 悬赏目标`, responsibility: `${l.realm}${l.realmStage}` }, [{ body: $ ? "山门外的战局已经结束，悬赏回执也已写成。" : `山门禁制外，那名修士已经察觉你的来意。${l.description}`, tone: $ ? "attention" : "normal" }], [{ id: $ ? "affairs" : "battle", label: $ ? "返回本宗事务堂复命" : `向${l.name}发起挑战`, tone: "primary" }, { id: "leave", label: "返回访宗舆图", tone: "muted" }], (P) => this.navigate(P === "battle" ? (0, official_chunk_89xwxnzm_js_1.La)(M.definitionId, "sect.foreign-gate") : P === "affairs" ? "/game/sect/affairs" : r.visitHref));
+        let $ = M.state === "claimable", S = (0, official_chunk_04cv4sxe_js_1.sb)(t, h - 2, { sigil: l.name.slice(0, 1), name: l.name, identity: `${r.definition.name}修士 · 悬赏目标`, responsibility: `${l.realm}${l.realmStage}` }, [{ body: $ ? "山门外的战局已经结束，悬赏回执也已写成。" : `山门禁制外，那名修士已经察觉你的来意。${l.description}`, tone: $ ? "attention" : "normal" }], [{ id: $ ? "affairs" : "battle", label: $ ? "返回本宗事务堂复命" : `向${l.name}发起挑战`, tone: "primary" }, { id: "leave", label: "返回访宗舆图", tone: "muted" }], (P) => this.navigate(P === "battle" ? (0, official_chunk_gykvbxzp_js_1.La)(M.definitionId, "sect.foreign-gate") : P === "affairs" ? "/game/sect/affairs" : r.visitHref));
         t.clip(0, n, t.width, a - n, () => { this.panel(12, s, h, S.height + 2), S.paint(13, s + 1); }), t.scrollMax = Math.max(0, S.height + 2 - (a - n));
         return;
     } let p = "外宗访客可远观诸院，只在山门与护山阵法外驻足，不得进入门内设施。", f = t.lines(p, h - 26, 14), m = Math.max(320, Math.min(t.height * 0.56, 427)) + 2, v = 26 + f.length * 28 + 12 + m; t.clip(0, n, t.width, a - n, () => { this.panel(12, s, h, v), f.forEach((M, l) => t.text(M, 25, s + 27 + l * 28, 14, official_chunk_wje6zqc2_js_1.Be["ink-secondary"])), this.map.paint(25, s + 13 + f.length * 28 + 12, h - 26, m); }), t.scrollMax = Math.max(0, v - (a - n)); }
@@ -1998,14 +1998,14 @@ class ge {
     card(t, r) { let e = this.u; t.block(r.height + 26, (i, n) => { e.rect(i, n, t.width, r.height + 26, "rgba(248,243,230,.5)"), e.ctx.save(), e.ctx.setLineDash([3, 3]), e.ctx.strokeStyle = "rgba(44,24,16,.2)", e.ctx.strokeRect(i + 0.5, n + 0.5, t.width - 1, r.height + 25), e.ctx.restore(), r.paint(i + 13, n + 13); }); }
     body(t) { var _a, _b, _c; let r = this.u, e = this.model, i = new official_chunk_wje6zqc2_js_1.Ce(r, t), n = (_c = (_b = (_a = this.home.baseline) === null || _a === void 0 ? void 0 : _a.resources.session) === null || _b === void 0 ? void 0 : _b.data.activeCultivator) === null || _c === void 0 ? void 0 : _c.sectId; if (!n)
         return i.block(32.32, (p, f) => r.button("前往诸宗山门", p, f, () => this.navigate("/game/sect/onboarding"))), i; let a = (p, f = !1) => { if (!f)
-        i.gap(20), i.rule(), i.gap(16); i.text(`「${p}」`, 16, 28, official_chunk_wje6zqc2_js_1.Be.ink, !0), i.gap(12); }; a("选择目标宗门", !0); for (let p of Object.values(official_chunk_89xwxnzm_js_1.M).filter((f) => f.id !== n)) {
+        i.gap(20), i.rule(), i.gap(16); i.text(`「${p}」`, 16, 28, official_chunk_wje6zqc2_js_1.Be.ink, !0), i.gap(12); }; a("选择目标宗门", !0); for (let p of Object.values(official_chunk_gykvbxzp_js_1.M).filter((f) => f.id !== n)) {
         let f = new official_chunk_wje6zqc2_js_1.Ce(r, t - 26);
         f.block(24, (m, v) => { if (r.text(p.name, m, v + 12, 16, official_chunk_wje6zqc2_js_1.Be.ink, r.bodyFont, !0), p.id === "jiujie")
             r.text("「新宗门」", m + f.width - r.measure("「新宗门」", 14), v + 12, 14, official_chunk_wje6zqc2_js_1.Be.crimson); }), f.gap(12), f.text(p.paths.map((m) => m.name).join(" · "), 14, 24, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), f.gap(12), f.block(32.32, (m, v) => r.inert(e.transferring, () => r.button(e.targetSectId === p.id ? "已选择" : "选择此宗", m, v, () => { this.confirming = !1, e.choose(p.id); }, e.targetSectId === p.id ? official_chunk_wje6zqc2_js_1.Be.crimson : official_chunk_wje6zqc2_js_1.Be["ink-secondary"]))), this.card(i, f), i.gap(24);
     } if (e.loading)
         i.text("正在计算转宗后的保留内容……", 14, 28, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]); if (e.error)
         i.text(e.error, 14, 28, official_chunk_wje6zqc2_js_1.Be.crimson); let s = e.preview; if (!s || e.loading)
-        return i; a("转宗后的变化"); for (let [p, f] of [["弟子身份", official_chunk_89xwxnzm_js_1.Y[s.discipleRank]], ["当前贡献", s.contribution.toLocaleString("zh-CN")], ["历史总贡献", s.lifetimeContribution.toLocaleString("zh-CN")]]) {
+        return i; a("转宗后的变化"); for (let [p, f] of [["弟子身份", official_chunk_gykvbxzp_js_1.Y[s.discipleRank]], ["当前贡献", s.contribution.toLocaleString("zh-CN")], ["历史总贡献", s.lifetimeContribution.toLocaleString("zh-CN")]]) {
         let m = new official_chunk_wje6zqc2_js_1.Ce(r, t - 26);
         m.text(p, 12, 16, official_chunk_wje6zqc2_js_1.Be["ink-secondary"]), m.gap(8), m.text(f, 16, 24, official_chunk_wje6zqc2_js_1.Be.ink, !0), this.card(i, m), i.gap(24);
     } a("心法等级保留"); for (let p of s.methodMappings) {
@@ -2030,7 +2030,7 @@ class le {
         this.u = t;
         this.player = r;
         this.navigate = e;
-        this.model = new official_chunk_89xwxnzm_js_1.Qa(() => t.invalidate()), this.map = new et(t, this.model, e);
+        this.model = new official_chunk_gykvbxzp_js_1.Qa(() => t.invalidate()), this.map = new et(t, this.model, e);
     }
     enter() { this.leave(), this.sync(); }
     leave() { this.owner = "", this.model.leave(), this.map.reset(); }
