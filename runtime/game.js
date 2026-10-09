@@ -18202,6 +18202,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
     const __officialBridge = { request: (...a) => X0(...a), ApiError: V9, getToken: AN, saveToken: LQ, clearSession: TN, configureRecovery: CD, readRecovery: VD, recoveryEntry: PD };
     GameGlobal.__officialBridge = __officialBridge;
     const module = { exports: require('./official-core.js') };
+    X0 = module.exports.wrapJournalRequests(X0, wx, () => { var _o, _p, _s; return (_s = (_p = (_o = GameGlobal.__officialApp) === null || _o === void 0 ? void 0 : _o.model.view()) === null || _p === void 0 ? void 0 : _p.cultivator.id) !== null && _s !== void 0 ? _s : ''; });
     GW = module.exports.DaoYouCircle;
     WW = module.exports.RewardedVideos;
     SW = module.exports.AdRewards;
@@ -18413,37 +18414,36 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
     LK = module.exports.WildPage;
     qK = module.exports.InnPage;
     gM = module.exports.waitForCanvasFont;
-    X0 = module.exports.wrapJournalRequests(X0, wx, () => { const app = GameGlobal.__officialApp; const view = app && app.model.view(); return view ? view.cultivator.id : ''; });
-    module.exports.installOfficialApp(BK, hM, UO, { "assets/daoyou_logo.webp": "runtime/assets/daoyou_logo.png", "assets/inventory/cultivator-male-ink.webp": "runtime/assets/inventory/cultivator-male-ink.png", "assets/inventory/cultivator-female-ink.webp": "runtime/assets/inventory/cultivator-female-ink.png", "atlas-dajin/map.webp": "atlas-dajin/map.jpg", "atlas-luanxinghai/map.webp": "atlas-luanxinghai/map.jpg", "atlas-mulan/map.webp": "atlas-mulan/map.jpg", "atlas-nanjiang/map.webp": "atlas-nanjiang/map.jpg", "atlas-northland/map.webp": "atlas-northland/map.jpg", "atlas-tiannan/map.webp": "atlas-tiannan/map.jpg", "atlas-world/map.webp": "atlas-world/map.jpg", "sect-map-jiujie/map.webp": "sect-map-jiujie/map.jpg", "sect-map-lingxiao/map.webp": "sect-map-lingxiao/map.jpg", "sect-map-tianyan/map.webp": "sect-map-tianyan/map.jpg", "sect-map-wuxiang/map.webp": "sect-map-wuxiang/map.jpg", "sect-map-youdu/map.webp": "sect-map-youdu/map.jpg", "sect-sweep/cloud-stair-courtyard.webp": "sect-sweep/cloud-stair-courtyard.jpg", "sect-sweep/sweep-atlas.webp": "sect-sweep/sweep-atlas.png", "sect-sweep/sweep-obstacles.webp": "sect-sweep/sweep-obstacles.png", "sect-sweep/virtual-joystick-base.webp": "sect-sweep/virtual-joystick-base.png", "sect-sweep/virtual-joystick-thumb.webp": "sect-sweep/virtual-joystick-thumb.png", "sect-mining/copper-ore.webp": "sect-mining/copper-ore.png", "sect-mining/dark-iron.webp": "sect-mining/dark-iron.png", "sect-mining/earth-essence.webp": "sect-mining/earth-essence.png", "sect-mining/explosive-barrel.webp": "sect-mining/explosive-barrel.png", "sect-mining/rope-cultivator.webp": "sect-mining/rope-cultivator.png", "sect-mining/spirit-crystal.webp": "sect-mining/spirit-crystal.png", "sect-mining/spirit-hook.webp": "sect-mining/spirit-hook.png", "sect-mining/spirit-vein-cavern.webp": "sect-mining/spirit-vein-cavern.jpg", "assets/icons/beast-fire-crow.webp": "assets/icons/beast-fire-crow.png", "assets/icons/beast-fusion-cauldron.webp": "assets/icons/beast-fusion-cauldron.png", "assets/icons/beast-ghost-lantern-butterfly.webp": "assets/icons/beast-ghost-lantern-butterfly.png", "assets/icons/beast-ink-jiao.webp": "assets/icons/beast-ink-jiao.png", "assets/icons/beast-mimi.webp": "assets/icons/beast-mimi.png", "assets/icons/beast-moon-marten.webp": "assets/icons/beast-moon-marten.png", "assets/icons/beast-nether-tiger.webp": "assets/icons/beast-nether-tiger.png", "assets/icons/beast-silverwing-mantis.webp": "assets/icons/beast-silverwing-mantis.png", "assets/icons/beast-six-eyed-ape.webp": "assets/icons/beast-six-eyed-ape.png", "assets/icons/beast-snake-neck-turtle.webp": "assets/icons/beast-snake-neck-turtle.png", "assets/icons/beast-snow-crane.webp": "assets/icons/beast-snow-crane.png", "assets/icons/beast-three-legged-golden-toad.webp": "assets/icons/beast-three-legged-golden-toad.png", "assets/icons/beast-thunder-peng.webp": "assets/icons/beast-thunder-peng.png", "assets/icons/beast-zheng.webp": "assets/icons/beast-zheng.png", "assets/icons/cultivator-female-avatar.webp": "runtime/assets/icons/cultivator-female-avatar.png", "assets/icons/cultivator-female-avatar.png": "runtime/assets/icons/cultivator-female-avatar.png", "assets/icons/cultivator-male-avatar.webp": "runtime/assets/icons/cultivator-male-avatar.png", "assets/icons/cultivator-male-avatar.png": "runtime/assets/icons/cultivator-male-avatar.png", "assets/icons/map-dungeon.webp": "runtime/assets/icons/map-dungeon.png", "assets/icons/map-dungeon.png": "runtime/assets/icons/map-dungeon.png", "assets/icons/map-landmark.webp": "runtime/assets/icons/map-landmark.png", "assets/icons/map-landmark.png": "runtime/assets/icons/map-landmark.png", "assets/icons/map-market.webp": "runtime/assets/icons/map-market.png", "assets/icons/map-market.png": "runtime/assets/icons/map-market.png", "assets/icons/map-sect.webp": "runtime/assets/icons/map-sect.png", "assets/icons/map-sect.png": "runtime/assets/icons/map-sect.png", "assets/icons/map-wild.webp": "runtime/assets/icons/map-wild.png", "assets/icons/map-wild.png": "runtime/assets/icons/map-wild.png" });
+    module.exports.installOfficialApp(BK, hM, UO, { "assets/icons/beast-fusion-cauldron.png": "assets/icons/beast-fusion-cauldron.webp", "craft-alchemy/furnace.png": "craft-alchemy/furnace.png", "craft-forging/furnace.png": "craft-forging/furnace.png", "assets/icons/cultivator-male-avatar.png": "runtime/assets/icons/cultivator-male-avatar.png", "assets/icons/cultivator-female-avatar.png": "runtime/assets/icons/cultivator-female-avatar.png", "craft-alchemy/furnace.webp": "craft-alchemy/furnace.png", "assets/icons/xuanfire-furnace-ink.png": "craft-alchemy/furnace.png", "craft-forging/furnace.webp": "craft-forging/furnace.png", "assets/icons/earthfire-furnace-ink.png": "craft-forging/furnace.png", "enlightenment/cultivator-male-meditation.webp": "enlightenment/cultivator-male-meditation.png", "enlightenment/cultivator-female-meditation.webp": "enlightenment/cultivator-female-meditation.png", "inscriptions/drawing-board.webp": "inscriptions/drawing-board.png", "assets/daoyou_logo.webp": "runtime/assets/daoyou_logo.png", "assets/inventory/cultivator-male-ink.webp": "runtime/assets/inventory/cultivator-male-ink.png", "assets/inventory/cultivator-female-ink.webp": "runtime/assets/inventory/cultivator-female-ink.png", "atlas-dajin/map.webp": "atlas-dajin/map.jpg", "atlas-luanxinghai/map.webp": "atlas-luanxinghai/map.jpg", "atlas-mulan/map.webp": "atlas-mulan/map.jpg", "atlas-nanjiang/map.webp": "atlas-nanjiang/map.jpg", "atlas-northland/map.webp": "atlas-northland/map.jpg", "atlas-tiannan/map.webp": "atlas-tiannan/map.jpg", "atlas-world/map.webp": "atlas-world/map.jpg", "sect-map-jiujie/map.webp": "sect-map-jiujie/map.jpg", "sect-map-lingxiao/map.webp": "sect-map-lingxiao/map.jpg", "sect-map-tianyan/map.webp": "sect-map-tianyan/map.jpg", "sect-map-wuxiang/map.webp": "sect-map-wuxiang/map.jpg", "sect-map-youdu/map.webp": "sect-map-youdu/map.jpg", "sect-sweep/cloud-stair-courtyard.webp": "sect-sweep/cloud-stair-courtyard.jpg", "sect-sweep/sweep-atlas.webp": "sect-sweep/sweep-atlas.png", "sect-sweep/sweep-obstacles.webp": "sect-sweep/sweep-obstacles.png", "sect-sweep/virtual-joystick-base.webp": "sect-sweep/virtual-joystick-base.png", "sect-sweep/virtual-joystick-thumb.webp": "sect-sweep/virtual-joystick-thumb.png", "sect-mining/copper-ore.webp": "sect-mining/copper-ore.png", "sect-mining/dark-iron.webp": "sect-mining/dark-iron.png", "sect-mining/earth-essence.webp": "sect-mining/earth-essence.png", "sect-mining/explosive-barrel.webp": "sect-mining/explosive-barrel.png", "sect-mining/rope-cultivator.webp": "sect-mining/rope-cultivator.png", "sect-mining/spirit-crystal.webp": "sect-mining/spirit-crystal.png", "sect-mining/spirit-hook.webp": "sect-mining/spirit-hook.png", "sect-mining/spirit-vein-cavern.webp": "sect-mining/spirit-vein-cavern.jpg", "assets/icons/beast-baize.webp": "assets/icons/beast-baize.png", "assets/icons/beast-bifang.webp": "assets/icons/beast-bifang.png", "assets/icons/beast-diting.webp": "assets/icons/beast-diting.png", "assets/icons/beast-fire-crow.webp": "assets/icons/beast-fire-crow.png", "assets/icons/beast-ghost-lantern-butterfly.webp": "assets/icons/beast-ghost-lantern-butterfly.png", "assets/icons/beast-golden-crow.webp": "assets/icons/beast-golden-crow.png", "assets/icons/beast-huodou.webp": "assets/icons/beast-huodou.png", "assets/icons/beast-ink-jiao.webp": "assets/icons/beast-ink-jiao.png", "assets/icons/beast-mimi.webp": "assets/icons/beast-mimi.png", "assets/icons/beast-mingshe.webp": "assets/icons/beast-mingshe.png", "assets/icons/beast-moon-marten.webp": "assets/icons/beast-moon-marten.png", "assets/icons/beast-nether-tiger.webp": "assets/icons/beast-nether-tiger.png", "assets/icons/beast-nine-tailed-fox.webp": "assets/icons/beast-nine-tailed-fox.png", "assets/icons/beast-qilin.webp": "assets/icons/beast-qilin.png", "assets/icons/beast-qingluan.webp": "assets/icons/beast-qingluan.png", "assets/icons/beast-qiongqi.webp": "assets/icons/beast-qiongqi.png", "assets/icons/beast-red-tail-scorpion.webp": "assets/icons/beast-red-tail-scorpion.png", "assets/icons/beast-rock-boar.webp": "assets/icons/beast-rock-boar.png", "assets/icons/beast-shen-clam.webp": "assets/icons/beast-shen-clam.png", "assets/icons/beast-silverwing-mantis.webp": "assets/icons/beast-silverwing-mantis.png", "assets/icons/beast-six-eyed-ape.webp": "assets/icons/beast-six-eyed-ape.png", "assets/icons/beast-skill-agility-totem-v2.webp": "assets/icons/beast-skill-agility-totem-v2.png", "assets/icons/beast-skill-all-seeing-totem-v2.webp": "assets/icons/beast-skill-all-seeing-totem-v2.png", "assets/icons/beast-skill-auspicious-vitality-totem-v2.webp": "assets/icons/beast-skill-auspicious-vitality-totem-v2.png", "assets/icons/beast-skill-barrier-breaker-totem-v2.webp": "assets/icons/beast-skill-barrier-breaker-totem-v2.png", "assets/icons/beast-skill-bloodthirsty-pursuit-totem-v2.webp": "assets/icons/beast-skill-bloodthirsty-pursuit-totem-v2.png", "assets/icons/beast-skill-combo-totem-v2.webp": "assets/icons/beast-skill-combo-totem-v2.png", "assets/icons/beast-skill-concentration-totem-v2.webp": "assets/icons/beast-skill-concentration-totem-v2.png", "assets/icons/beast-skill-counter-totem-v2.webp": "assets/icons/beast-skill-counter-totem-v2.png", "assets/icons/beast-skill-critical-totem-v2.webp": "assets/icons/beast-skill-critical-totem-v2.png", "assets/icons/beast-skill-defense-totem-v2.webp": "assets/icons/beast-skill-defense-totem-v2.png", "assets/icons/beast-skill-denial-totem-v2.webp": "assets/icons/beast-skill-denial-totem-v2.png", "assets/icons/beast-skill-eternity-totem-v2.webp": "assets/icons/beast-skill-eternity-totem-v2.png", "assets/icons/beast-skill-exorcism-totem-v2.webp": "assets/icons/beast-skill-exorcism-totem-v2.png", "assets/icons/beast-skill-ghost-totem-v2.webp": "assets/icons/beast-skill-ghost-totem-v2.png", "assets/icons/beast-skill-innate-wisdom-totem-v2.webp": "assets/icons/beast-skill-innate-wisdom-totem-v2.png", "assets/icons/beast-skill-karmic-retribution-totem-v2.webp": "assets/icons/beast-skill-karmic-retribution-totem-v2.png", "assets/icons/beast-skill-lifesteal-totem-v2.webp": "assets/icons/beast-skill-lifesteal-totem-v2.png", "assets/icons/beast-skill-meditation-totem-v2.webp": "assets/icons/beast-skill-meditation-totem-v2.png", "assets/icons/beast-skill-mind-shatter-totem-v2.webp": "assets/icons/beast-skill-mind-shatter-totem-v2.png", "assets/icons/beast-skill-miracle-totem-v2.webp": "assets/icons/beast-skill-miracle-totem-v2.png", "assets/icons/beast-skill-mountain-breaker-totem-v2.webp": "assets/icons/beast-skill-mountain-breaker-totem-v2.png", "assets/icons/beast-skill-overwhelming-might-totem-v2.webp": "assets/icons/beast-skill-overwhelming-might-totem-v2.png", "assets/icons/beast-skill-parry-totem-v2.webp": "assets/icons/beast-skill-parry-totem-v2.png", "assets/icons/beast-skill-radiant-barrier-totem-v2.webp": "assets/icons/beast-skill-radiant-barrier-totem-v2.png", "assets/icons/beast-skill-reflection-totem-v2.webp": "assets/icons/beast-skill-reflection-totem-v2.png", "assets/icons/beast-skill-regeneration-totem-v2.webp": "assets/icons/beast-skill-regeneration-totem-v2.png", "assets/icons/beast-skill-sluggish-totem-v2.webp": "assets/icons/beast-skill-sluggish-totem-v2.png", "assets/icons/beast-skill-sneak-attack-totem-v2.webp": "assets/icons/beast-skill-sneak-attack-totem-v2.png", "assets/icons/beast-skill-spell-combo-totem-v2.webp": "assets/icons/beast-skill-spell-combo-totem-v2.png", "assets/icons/beast-skill-spell-critical-totem-v2.webp": "assets/icons/beast-skill-spell-critical-totem-v2.png", "assets/icons/beast-skill-spell-fluctuation-totem-v2.webp": "assets/icons/beast-skill-spell-fluctuation-totem-v2.png", "assets/icons/beast-skill-spell-mastery-totem-v2.webp": "assets/icons/beast-skill-spell-mastery-totem-v2.png", "assets/icons/beast-skill-spell-reflection-totem-v2.webp": "assets/icons/beast-skill-spell-reflection-totem-v2.png", "assets/icons/beast-skill-spell-resistance-totem-v2.webp": "assets/icons/beast-skill-spell-resistance-totem-v2.png", "assets/icons/beast-skill-spirit-guard-totem-v2.webp": "assets/icons/beast-skill-spirit-guard-totem-v2.png", "assets/icons/beast-skill-surprise-spell-totem-v2.webp": "assets/icons/beast-skill-surprise-spell-totem-v2.png", "assets/icons/beast-skill-unanticipated-totem-v2.webp": "assets/icons/beast-skill-unanticipated-totem-v2.png", "assets/icons/beast-skill-water-attack-totem-v2.webp": "assets/icons/beast-skill-water-attack-totem-v2.png", "assets/icons/beast-skill-wildfire-totem-v2.webp": "assets/icons/beast-skill-wildfire-totem-v2.png", "assets/icons/beast-skill-wind-strike-totem-v2.webp": "assets/icons/beast-skill-wind-strike-totem-v2.png", "assets/icons/beast-skill-wisdom-totem-v2.webp": "assets/icons/beast-skill-wisdom-totem-v2.png", "assets/icons/beast-snake-neck-turtle.webp": "assets/icons/beast-snake-neck-turtle.png", "assets/icons/beast-snow-crane.webp": "assets/icons/beast-snow-crane.png", "assets/icons/beast-spirit-fox.webp": "assets/icons/beast-spirit-fox.png", "assets/icons/beast-stoneback-bear.webp": "assets/icons/beast-stoneback-bear.png", "assets/icons/beast-taotie.webp": "assets/icons/beast-taotie.png", "assets/icons/beast-three-legged-golden-toad.webp": "assets/icons/beast-three-legged-golden-toad.png", "assets/icons/beast-thunder-peng.webp": "assets/icons/beast-thunder-peng.png", "assets/icons/beast-wind-wolf.webp": "assets/icons/beast-wind-wolf.png", "assets/icons/beast-xiezhi.webp": "assets/icons/beast-xiezhi.png", "assets/icons/beast-xuangui.webp": "assets/icons/beast-xuangui.png", "assets/icons/beast-yinglong.webp": "assets/icons/beast-yinglong.png", "assets/icons/beast-zheng.webp": "assets/icons/beast-zheng.png", "assets/icons/beast-zhuyan.webp": "assets/icons/beast-zhuyan.png", "assets/icons/cultivator-female-avatar.webp": "runtime/assets/icons/cultivator-female-avatar.png", "assets/icons/cultivator-male-avatar.webp": "runtime/assets/icons/cultivator-male-avatar.png", "assets/icons/map-dungeon.webp": "runtime/assets/icons/map-dungeon.png", "assets/icons/map-dungeon.png": "runtime/assets/icons/map-dungeon.png", "assets/icons/map-landmark.webp": "runtime/assets/icons/map-landmark.png", "assets/icons/map-landmark.png": "runtime/assets/icons/map-landmark.png", "assets/icons/map-market.webp": "runtime/assets/icons/map-market.png", "assets/icons/map-market.png": "runtime/assets/icons/map-market.png", "assets/icons/map-sect.webp": "runtime/assets/icons/map-sect.png", "assets/icons/map-sect.png": "runtime/assets/icons/map-sect.png", "assets/icons/map-wild.webp": "runtime/assets/icons/map-wild.png", "assets/icons/map-wild.png": "runtime/assets/icons/map-wild.png" });
 })();
 (function () {
     const __sectActivityBridge = { SectModel: XA, SectTaskLocation: aT, request: X0 };
     const module = { exports: {} };
     const exports = module.exports;
     var _a, _b, _c, _d, _f;
-    var { defineProperty: Je, getOwnPropertyNames: Lr, getOwnPropertyDescriptor: Ir } = Object, Br = Object.prototype.hasOwnProperty;
-    function Gr(e) { return this[e]; }
-    var Fr = (e) => {
-        var t = (wt !== null && wt !== void 0 ? wt : (wt = new WeakMap)).get(e), r;
+    var { defineProperty: He, getOwnPropertyNames: Br, getOwnPropertyDescriptor: Gr } = Object, Fr = Object.prototype.hasOwnProperty;
+    function Vr(e) { return this[e]; }
+    var Ar = (e) => {
+        var t = (Kt !== null && Kt !== void 0 ? Kt : (Kt = new WeakMap)).get(e), r;
         if (t)
             return t;
-        if (t = Je({}, "__esModule", { value: !0 }), e && typeof e === "object" || typeof e === "function") {
-            for (var o of Lr(e))
-                if (!Br.call(t, o))
-                    Je(t, o, { get: Gr.bind(e, o), enumerable: !(r = Ir(e, o)) || r.enumerable });
+        if (t = He({}, "__esModule", { value: !0 }), e && typeof e === "object" || typeof e === "function") {
+            for (var o of Br(e))
+                if (!Fr.call(t, o))
+                    He(t, o, { get: Vr.bind(e, o), enumerable: !(r = Gr(e, o)) || r.enumerable });
         }
-        return wt.set(e, t), t;
-    }, wt;
-    var Vr = (e) => e;
-    function Ar(e, t) { this[e] = Vr.bind(null, t); }
-    var Wr = (e, t) => {
+        return Kt.set(e, t), t;
+    }, Kt;
+    var Wr = (e) => e;
+    function Xr(e, t) { this[e] = Wr.bind(null, t); }
+    var Zr = (e, t) => {
         for (var r in t)
-            Je(e, r, { get: t[r], enumerable: !0, configurable: !0, set: Ar.bind(t, r) });
+            He(e, r, { get: t[r], enumerable: !0, configurable: !0, set: Xr.bind(t, r) });
     };
-    var zn = {};
-    Wr(zn, { resizeCanvasViewport: () => Kt, SweepPage: () => _t, MiningPage: () => Tt });
-    module.exports = Fr(zn);
-    class me {
+    var eo = {};
+    Zr(eo, { resizeCanvasViewport: () => Nt, SweepPage: () => Dt, MiningPage: () => Ot });
+    module.exports = Ar(eo);
+    class de {
         constructor() {
             this.key = "";
             this.scroll = 0;
@@ -18452,19 +18452,19 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let s = JSON.stringify(t);
             if (s !== this.key)
                 this.key = s, this.scroll = 0;
-            let i = Math.max(24, e.safeLeft), a = e.width - Math.max(24, e.safeRight), n = Math.min(448, a - i), l = i + (a - i - n) / 2, c = Math.max(24, e.safeTop + 16, e.menuBottom + 8), p = e.height - Math.max(24, e.bottom + 12), h = t.map((k) => { var _a; return ({ ...k, rows: e.lines(k.text, n, (_a = k.size) !== null && _a !== void 0 ? _a : 14) }); }), f = h.reduce((k, _) => { var _a; return k + _.rows.length * (_.size === 20 ? 30 : 28) + ((_a = _.gap) !== null && _a !== void 0 ? _a : 8); }, 0), S = [];
+            let i = Math.max(24, e.safeLeft), a = e.width - Math.max(24, e.safeRight), n = Math.min(448, a - i), l = i + (a - i - n) / 2, c = Math.max(24, e.safeTop + 16, e.menuBottom + 8), p = e.height - Math.max(24, e.bottom + 12), x = t.map((k) => { var _a; return ({ ...k, rows: e.lines(k.text, n, (_a = k.size) !== null && _a !== void 0 ? _a : 14) }); }), f = x.reduce((k, _) => { var _a; return k + _.rows.length * (_.size === 20 ? 30 : 28) + ((_a = _.gap) !== null && _a !== void 0 ? _a : 8); }, 0), d = [];
             for (let k of r) {
-                let _ = { action: k, width: e.measure(k.label, 14) + 32 }, D = S.at(-1);
+                let _ = { action: k, width: e.measure(k.label, 14) + 32 }, D = d.at(-1);
                 if (!D || D.reduce((I, T) => I + T.width + 12, 0) + _.width > a - i)
-                    S.push([_]);
+                    d.push([_]);
                 else
                     D.push(_);
             }
-            let d = S.length ? 20 + S.length * 48 - 12 : 0, b = Math.max(28, p - c - d), u = Math.min(f, b), y = c + Math.max(0, (p - c - u - d) / 2), g = Math.max(0, f - u);
+            let m = d.length ? 20 + d.length * 48 - 12 : 0, b = Math.max(28, p - c - m), u = Math.min(f, b), y = c + Math.max(0, (p - c - u - m) / 2), g = Math.max(0, f - u);
             if (this.scroll = Math.max(0, Math.min(g, this.scroll)), e.beginModal(!1), e.modalMax = 0, e.modalScroll = 0, e.rect(0, 0, e.width, e.height, "rgba(0,0,0,.72)"), e.clip(l, y, n, u, () => {
                 var _a, _b, _c, _d;
                 let k = y - this.scroll;
-                for (let _ of h) {
+                for (let _ of x) {
                     for (let D of _.rows)
                         e.text(D, l + (n - e.measure(D, (_a = _.size) !== null && _a !== void 0 ? _a : 14)) / 2, k + 14, (_b = _.size) !== null && _b !== void 0 ? _b : 14, (_c = _.color) !== null && _c !== void 0 ? _c : "#d6d3d1"), k += _.size === 20 ? 30 : 28;
                     k += (_d = _.gap) !== null && _d !== void 0 ? _d : 8;
@@ -18475,7 +18475,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 e.rect(l + n + 6, y + (u - k) * this.scroll / g, 2, k, "rgba(255,255,255,.45)");
             }
             let R = y + u + 20;
-            for (let k of S) {
+            for (let k of d) {
                 let _ = k.reduce((I, T) => I + T.width, 0) + 12 * (k.length - 1), D = i + (a - i - _) / 2;
                 for (let I of k)
                     o(I.action.label, D, R, I.action.run), D += I.width + 12;
@@ -18485,49 +18485,67 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
     }
     var E = wx, le = () => "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (e) => { let t = Math.floor(Math.random() * 16); return (e === "x" ? t : t & 3 | 8).toString(16); });
     var _e = (e) => E.showToast({ title: e, icon: "none", duration: 2500 });
-    var He = new WeakMap;
-    function Ot(e, t) {
+    var Ye = new WeakMap, $t = new WeakMap;
+    function Pt(e, t) {
         var _a, _b;
         let r = (_b = (_a = E.getWindowInfo) === null || _a === void 0 ? void 0 : _a.call(E)) !== null && _b !== void 0 ? _b : E.getSystemInfoSync();
         if (!t || (r.windowWidth >= r.windowHeight ? "landscape" : "portrait") === t)
-            He.delete(e);
+            Ye.delete(e);
     }
-    function Kt(e, t) {
-        var _a, _b, _c, _d, _f, _g, _h, _j, _k;
+    function Nt(e, t) {
+        var _a, _b, _c, _d, _f, _g, _h, _j, _k, _l, _m;
         let r = (_b = (_a = E.getWindowInfo) === null || _a === void 0 ? void 0 : _a.call(E)) !== null && _b !== void 0 ? _b : E.getSystemInfoSync();
         if (t && t.windowWidth > 0 && t.windowHeight > 0)
-            He.set(e, t);
-        let o = (_c = He.get(e)) !== null && _c !== void 0 ? _c : r;
+            Ye.set(e, t);
+        let o = (_c = Ye.get(e)) !== null && _c !== void 0 ? _c : r;
         e.width = o.windowWidth, e.height = o.windowHeight;
-        let s = r.windowWidth === e.width && r.windowHeight === e.height, i = s ? r.safeArea : void 0, a = (_d = E.getMenuButtonBoundingClientRect) === null || _d === void 0 ? void 0 : _d.call(E);
-        e.safeLeft = Math.max(0, (_f = i === null || i === void 0 ? void 0 : i.left) !== null && _f !== void 0 ? _f : 0), e.safeRight = Math.max(0, e.width - ((_g = i === null || i === void 0 ? void 0 : i.right) !== null && _g !== void 0 ? _g : e.width)), e.safeTop = Math.max(0, (_h = i === null || i === void 0 ? void 0 : i.top) !== null && _h !== void 0 ? _h : 0), e.statusBarHeight = s ? Math.max(0, (_j = r.statusBarHeight) !== null && _j !== void 0 ? _j : e.safeTop) : 0;
-        let n = a && a.left >= e.width / 2 && a.left <= e.width && a.bottom >= 0 && a.bottom < e.height / 2;
-        e.menuLeft = n ? a.left : e.width, e.menuBottom = n ? a.bottom : e.safeTop, e.top = e.safeTop, e.bottom = Math.max(0, e.height - ((_k = i === null || i === void 0 ? void 0 : i.bottom) !== null && _k !== void 0 ? _k : e.height));
-        let l = Math.min(r.pixelRatio || 1, 2), c = Math.round(e.width * l), p = Math.round(e.height * l);
-        if (e.canvas.width !== c)
-            e.canvas.width = c;
-        if (e.canvas.height !== p)
-            e.canvas.height = p;
+        let s = r.windowWidth === e.width && r.windowHeight === e.height, i = s ? r.safeArea : void 0, a = i && i.left >= 0 && i.top >= 0 && i.right <= e.width && i.bottom <= e.height && i.right > i.left && i.bottom > i.top ? i : void 0, n = $t.get(e);
+        if (!n)
+            n = new Map, $t.set(e, n);
+        let l = `${e.width}:${e.height}`;
+        if (a)
+            n.set(l, { left: a.left, right: e.width - a.right, top: a.top, bottom: e.height - a.bottom, statusBarHeight: Math.max(0, (_d = r.statusBarHeight) !== null && _d !== void 0 ? _d : a.top) });
+        let c = n.get(l), p = (_f = E.getMenuButtonBoundingClientRect) === null || _f === void 0 ? void 0 : _f.call(E);
+        e.safeLeft = (_g = c === null || c === void 0 ? void 0 : c.left) !== null && _g !== void 0 ? _g : 0, e.safeRight = (_h = c === null || c === void 0 ? void 0 : c.right) !== null && _h !== void 0 ? _h : 0, e.safeTop = (_j = c === null || c === void 0 ? void 0 : c.top) !== null && _j !== void 0 ? _j : 0, e.statusBarHeight = (_k = c === null || c === void 0 ? void 0 : c.statusBarHeight) !== null && _k !== void 0 ? _k : (s ? Math.max(0, (_l = r.statusBarHeight) !== null && _l !== void 0 ? _l : 0) : 0);
+        let x = p && p.left >= e.width / 2 && p.left <= e.width && p.bottom >= 0 && p.bottom < e.height / 2;
+        e.menuLeft = x ? p.left : e.width, e.menuBottom = x ? p.bottom : e.safeTop, e.top = e.safeTop, e.bottom = (_m = c === null || c === void 0 ? void 0 : c.bottom) !== null && _m !== void 0 ? _m : 0;
+        let f = Math.min(r.pixelRatio || 1, 2), d = Math.round(e.width * f), m = Math.round(e.height * f);
+        if (e.canvas.width !== d)
+            e.canvas.width = d;
+        if (e.canvas.height !== m)
+            e.canvas.height = m;
         if (e.canvas.style)
             e.canvas.style.width = `${e.width}px`, e.canvas.style.height = `${e.height}px`;
-        e.ctx.setTransform(l, 0, 0, l, 0, 0);
+        e.ctx.setTransform(f, 0, 0, f, 0, 0);
     }
-    var $t = new WeakMap;
-    function Ce(e, t) {
+    var Ue = new WeakMap, Ce = new WeakMap;
+    function De(e, t) {
+        var _a;
+        for (let i of (_a = Ce.get(e)) !== null && _a !== void 0 ? _a : [])
+            clearTimeout(i);
+        Ce.delete(e);
         let r = {};
-        $t.set(e, r);
+        Ue.set(e, r);
         let o = () => {
-            if ($t.get(e) !== r)
+            if (Ue.get(e) !== r)
                 return;
-            Ot(e, t), e.resize(), e.invalidate();
+            Pt(e, t), e.resize(), e.invalidate();
+        }, s = () => {
+            var _a;
+            if (Ue.get(e) !== r)
+                return;
+            o();
+            for (let i of (_a = Ce.get(e)) !== null && _a !== void 0 ? _a : [])
+                clearTimeout(i);
+            Ce.set(e, [50, 150, 350, 750, 1500].map((i) => setTimeout(o, i)));
         };
         if (E.setDeviceOrientation)
-            E.setDeviceOrientation({ value: t, success: o, fail: o });
+            E.setDeviceOrientation({ value: t, success: s, fail: s });
         else
             o();
     }
-    function De(e, t) { let r = t.map((n) => e.measure(n, 14) + 32), o = e.width - Math.max(12, e.safeRight), s = Math.max(12, e.safeTop), i = Math.max(s, e.menuBottom > s ? e.menuBottom + 8 : s), a = o - r.reduce((n, l) => n + l, 0) - (t.length - 1) * 8; return r.map((n) => { let l = { x: a, y: i, width: n }; return a += n + 8, l; }); }
-    function Xr(e) {
+    function ve(e, t) { let r = t.map((n) => e.measure(n, 14) + 32), o = e.width - Math.max(12, e.safeRight), s = Math.max(12, e.safeTop), i = Math.max(s, e.menuBottom > s ? e.menuBottom + 8 : s), a = o - r.reduce((n, l) => n + l, 0) - (t.length - 1) * 8; return r.map((n) => { let l = { x: a, y: i, width: n }; return a += n + 8, l; }); }
+    function Jr(e) {
         let t = e(), r = 0;
         return () => {
             let o = e();
@@ -18536,10 +18554,10 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             return r;
         };
     }
-    var Pt = globalThis.performance, fe = Xr(typeof (Pt === null || Pt === void 0 ? void 0 : Pt.now) === "function" ? () => Pt.now() : () => Date.now());
-    function Zr(e) { return e === null || e === void 0 ? void 0 : e.items.find((t) => t.definitionId === "gate_sweep"); }
-    function Nt(e) {
-        let t = Zr(e);
+    var Et = globalThis.performance, fe = Jr(typeof (Et === null || Et === void 0 ? void 0 : Et.now) === "function" ? () => Et.now() : () => Date.now());
+    function Hr(e) { return e === null || e === void 0 ? void 0 : e.items.find((t) => t.definitionId === "gate_sweep"); }
+    function jt(e) {
+        let t = Hr(e);
         if ((t === null || t === void 0 ? void 0 : t.state) === "active")
             return { kind: "reward", task: t };
         if ((t === null || t === void 0 ? void 0 : t.state) === "claimable" || (t === null || t === void 0 ? void 0 : t.state) === "claimed")
@@ -18550,27 +18568,27 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             return { kind: "practice", task: t, reason: "locked" };
         return { kind: "practice", reason: "unavailable" };
     }
-    var x = require("./zod.js"), Ye = x.z.object({ sessionId: x.z.string(), seed: x.z.string(), rulesVersion: x.z.number(), expiresAt: x.z.string() }), Ue = x.z.object({ sessionId: x.z.string(), seed: x.z.string(), rulesVersion: x.z.number(), startedAt: x.z.string(), expiresAt: x.z.string(), durationMs: x.z.number().int().positive() }), Qe = x.z.object({ score: x.z.number().int().nonnegative(), maxScore: x.z.number().int().positive(), ratio: x.z.number().min(0).max(1), tier: x.z.enum(["D", "C", "B", "A", "S"]).optional(), qualified: x.z.boolean(), collected: x.z.number().int().nonnegative(), destroyed: x.z.number().int().nonnegative(), clearedAll: x.z.boolean(), ores: x.z.array(x.z.object({ kind: x.z.enum(["spirit_crystal", "copper_ore", "dark_iron", "earth_essence"]), count: x.z.number().int().positive(), score: x.z.number().int().positive() })), rewardSummary: x.z.array(x.z.string()).optional() }), Jr = x.z.object({ taskRecordId: x.z.string(), claimedAt: x.z.string(), rewards: x.z.object({ contribution: x.z.number().int().nonnegative(), cultivationExp: x.z.number().int().nonnegative(), spiritStones: x.z.number().int().nonnegative() }), lines: x.z.array(x.z.string()) }), lo = { "sect.outcome.sweep-session": Ye, "sect.outcome.mining-session": Ue, "sect.outcome.mining-result": Qe, "sect.outcome.accepted": x.z.record(x.z.string(), x.z.unknown()), "sect.outcome.abandoned": x.z.object({ abandoned: x.z.literal(!0) }), "sect.outcome.fulfilled": x.z.record(x.z.string(), x.z.unknown()), "sect.outcome.reward-claimed": Jr };
-    var ve = __sectActivityBridge.SectTaskLocation;
-    var Te = __sectActivityBridge.SectModel;
-    var Oe = 7, et = 5;
+    var h = require("./zod.js"), Qe = h.z.object({ sessionId: h.z.string(), seed: h.z.string(), rulesVersion: h.z.number(), expiresAt: h.z.string() }), ze = h.z.object({ sessionId: h.z.string(), seed: h.z.string(), rulesVersion: h.z.number(), startedAt: h.z.string(), expiresAt: h.z.string(), durationMs: h.z.number().int().positive() }), qe = h.z.object({ score: h.z.number().int().nonnegative(), maxScore: h.z.number().int().positive(), ratio: h.z.number().min(0).max(1), tier: h.z.enum(["D", "C", "B", "A", "S"]).optional(), qualified: h.z.boolean(), collected: h.z.number().int().nonnegative(), destroyed: h.z.number().int().nonnegative(), clearedAll: h.z.boolean(), ores: h.z.array(h.z.object({ kind: h.z.enum(["spirit_crystal", "copper_ore", "dark_iron", "earth_essence"]), count: h.z.number().int().positive(), score: h.z.number().int().positive() })), rewardSummary: h.z.array(h.z.string()).optional() }), Yr = h.z.object({ taskRecordId: h.z.string(), claimedAt: h.z.string(), rewards: h.z.object({ contribution: h.z.number().int().nonnegative(), cultivationExp: h.z.number().int().nonnegative(), spiritStones: h.z.number().int().nonnegative() }), lines: h.z.array(h.z.string()) }), po = { "sect.outcome.sweep-session": Qe, "sect.outcome.mining-session": ze, "sect.outcome.mining-result": qe, "sect.outcome.accepted": h.z.record(h.z.string(), h.z.unknown()), "sect.outcome.abandoned": h.z.object({ abandoned: h.z.literal(!0) }), "sect.outcome.fulfilled": h.z.record(h.z.string(), h.z.unknown()), "sect.outcome.reward-claimed": Yr };
+    var Te = __sectActivityBridge.SectTaskLocation;
+    var we = __sectActivityBridge.SectModel;
+    var Ke = 7, rt = 5;
     var Se = { width: 1120, height: 630 };
-    var Hr = ["up", "right", "down", "left"], Yr = { up: { x: 0, y: -1 }, right: { x: 1, y: 0 }, down: { x: 0, y: 1 }, left: { x: -1, y: 0 } };
-    function Ur(e) {
+    var Ur = ["up", "right", "down", "left"], Qr = { up: { x: 0, y: -1 }, right: { x: 1, y: 0 }, down: { x: 0, y: 1 }, left: { x: -1, y: 0 } };
+    function zr(e) {
         let t = 2166136261;
         for (let r of e)
             t ^= r.charCodeAt(0), t = Math.imul(t, 16777619);
         return t >>> 0 || 1;
     }
-    function Qr(e) { let t = Ur(e); return () => { return t ^= t << 13, t ^= t >>> 17, t ^= t << 5, (t >>> 0) / 4294967296; }; }
-    function qe(e) { return `${e.x}:${e.y}`; }
+    function qr(e) { let t = zr(e); return () => { return t ^= t << 13, t ^= t >>> 17, t ^= t << 5, (t >>> 0) / 4294967296; }; }
+    function tt(e) { return `${e.x}:${e.y}`; }
     function A(e, t) { return e.x === t.x && e.y === t.y; }
-    function zr(e) { return e.x >= 0 && e.x < 7 && e.y >= 0 && e.y < 5; }
-    function we(e) { return e.y * 7 + e.x; }
-    function jt(e, t) { let r = Yr[t]; return { x: e.x + r.x, y: e.y + r.y }; }
-    function qr(e) { return e.x === 0 || e.y === 0 || e.x === 6 || e.y === 4; }
-    function Lt(e, t) { return Math.abs(e.x - t.x) + Math.abs(e.y - t.y); }
-    function ze(e, t) {
+    function en(e) { return e.x >= 0 && e.x < 7 && e.y >= 0 && e.y < 5; }
+    function Oe(e) { return e.y * 7 + e.x; }
+    function It(e, t) { let r = Qr[t]; return { x: e.x + r.x, y: e.y + r.y }; }
+    function tn(e) { return e.x === 0 || e.y === 0 || e.x === 6 || e.y === 4; }
+    function Bt(e, t) { return Math.abs(e.x - t.x) + Math.abs(e.y - t.y); }
+    function et(e, t) {
         let r = [...e];
         for (let o = r.length - 1; o > 0; o -= 1) {
             let s = Math.floor(t() * (o + 1));
@@ -18578,33 +18596,33 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         }
         return r;
     }
-    function It() { return Array.from({ length: 35 }, (e, t) => ({ x: t % 7, y: Math.floor(t / 7) })); }
-    function Bt(e, t) { var _a; return zr(t) && ((_a = e.cells[we(t)]) === null || _a === void 0 ? void 0 : _a.kind) === "passable"; }
-    function Gt(e, t) { return Hr.map((r) => ({ direction: r, cell: jt(t, r) })).filter((r) => Bt(e, r.cell)); }
-    function Et(e, t) { let r = e.findIndex((o) => A(o, t)); return r < 0 ? 0 : 1 << r; }
-    function en(e, t) {
+    function Gt() { return Array.from({ length: 35 }, (e, t) => ({ x: t % 7, y: Math.floor(t / 7) })); }
+    function Ft(e, t) { var _a; return en(t) && ((_a = e.cells[Oe(t)]) === null || _a === void 0 ? void 0 : _a.kind) === "passable"; }
+    function Vt(e, t) { return Ur.map((r) => ({ direction: r, cell: It(t, r) })).filter((r) => Ft(e, r.cell)); }
+    function Lt(e, t) { let r = e.findIndex((o) => A(o, t)); return r < 0 ? 0 : 1 << r; }
+    function rn(e, t) {
         let r = (1 << e.leaves.length) - 1, o = Array.from({ length: e.cells.length }, () => !1), s = [{ ...e.start }];
-        o[we(e.start)] = !0;
-        let i = 0, a = (n, l, c, p, h) => {
+        o[Oe(e.start)] = !0;
+        let i = 0, a = (n, l, c, p, x) => {
             if (i += 1, i > 80000)
                 return !1;
             if (A(n, e.end))
-                return l === r && s.length - 1 >= 14 && p >= 5 && h >= 3;
-            let f = Gt(e, n).filter(({ cell: b }) => !o[we(b)]), S = h + (f.length >= 2 ? 1 : 0), d = f.map((b) => {
-                let u = l | Et(e.leaves, b.cell), y = A(b.cell, e.end), g = u === r, R = e.leaves.reduce((k, _, D) => {
+                return l === r && s.length - 1 >= 14 && p >= 5 && x >= 3;
+            let f = Vt(e, n).filter(({ cell: b }) => !o[Oe(b)]), d = x + (f.length >= 2 ? 1 : 0), m = f.map((b) => {
+                let u = l | Lt(e.leaves, b.cell), y = A(b.cell, e.end), g = u === r, R = e.leaves.reduce((k, _, D) => {
                     if ((u & 1 << D) !== 0)
                         return k;
-                    return Math.min(k, Lt(b.cell, _));
+                    return Math.min(k, Bt(b.cell, _));
                 }, Number.POSITIVE_INFINITY);
-                return { ...b, nextLeafMask: u, score: (Et(e.leaves, b.cell) ? 100 : 0) + (y && g ? 60 : 0) - (y && !g ? 1e4 : 0) - (Number.isFinite(R) ? R : 0) + t() };
+                return { ...b, nextLeafMask: u, score: (Lt(e.leaves, b.cell) ? 100 : 0) + (y && g ? 60 : 0) - (y && !g ? 1e4 : 0) - (Number.isFinite(R) ? R : 0) + t() };
             }).sort((b, u) => u.score - b.score);
-            for (let b of d) {
+            for (let b of m) {
                 if (A(b.cell, e.end) && b.nextLeafMask !== r)
                     continue;
-                let u = we(b.cell);
+                let u = Oe(b.cell);
                 o[u] = !0, s.push(b.cell);
                 let y = c && c !== b.direction ? p + 1 : p;
-                if (a(b.cell, b.nextLeafMask, b.direction, y, S))
+                if (a(b.cell, b.nextLeafMask, b.direction, y, d))
                     return !0;
                 s.pop(), o[u] = !1;
             }
@@ -18612,66 +18630,66 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         };
         return a(e.start, 0, void 0, 0, 0) ? s.map((n) => ({ ...n })) : void 0;
     }
-    function tn(e) {
-        let t = It(), r = ze(t.filter(qr), e), o = r[0], s = r.find((p) => !A(p, o) && Lt(p, o) >= 6);
+    function nn(e) {
+        let t = Gt(), r = et(t.filter(tn), e), o = r[0], s = r.find((p) => !A(p, o) && Bt(p, o) >= 6);
         if (!s)
             return;
-        let i = new Set(ze(t.filter((p) => !A(p, o) && !A(p, s)), e).slice(0, 9).map(qe)), a = t.map((p) => ({ ...p, kind: i.has(qe(p)) ? "blocked" : "passable" })), n = ze(a.filter((p) => p.kind === "passable" && !A(p, o) && !A(p, s)), e).slice(0, 4).map(({ x: p, y: h }) => ({ x: p, y: h })), l = { columns: 7, rows: 5, cells: a, start: { ...o }, end: { ...s }, leaves: n }, c = en(l, e);
+        let i = new Set(et(t.filter((p) => !A(p, o) && !A(p, s)), e).slice(0, 9).map(tt)), a = t.map((p) => ({ ...p, kind: i.has(tt(p)) ? "blocked" : "passable" })), n = et(a.filter((p) => p.kind === "passable" && !A(p, o) && !A(p, s)), e).slice(0, 4).map(({ x: p, y: x }) => ({ x: p, y: x })), l = { columns: 7, rows: 5, cells: a, start: { ...o }, end: { ...s }, leaves: n }, c = rn(l, e);
         return c ? { ...l, solution: c } : void 0;
     }
-    function rn() { let e = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 2, y: 1 }, { x: 1, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 0 }, { x: 6, y: 1 }, { x: 6, y: 2 }, { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 6, y: 4 }], t = new Set(["3:0", "5:1", "0:3", "0:4", "2:3", "4:3", "1:4", "3:4", "5:4"]); return { columns: 7, rows: 5, cells: It().map((r) => ({ ...r, kind: t.has(qe(r)) ? "blocked" : "passable" })), start: { ...e[0] }, end: { ...e[e.length - 1] }, leaves: [e[4], e[8], e[12], e[17]].map((r) => ({ ...r })), solution: e }; }
-    function nn(e) { return Gt(e.board, e.player).filter(({ cell: t }) => !e.visited.some((r) => A(r, t))).map(({ direction: t }) => t); }
-    function on(e) {
-        let t = Qr(e);
+    function on() { let e = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 2, y: 1 }, { x: 1, y: 1 }, { x: 0, y: 1 }, { x: 0, y: 2 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 0 }, { x: 6, y: 1 }, { x: 6, y: 2 }, { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 6, y: 3 }, { x: 6, y: 4 }], t = new Set(["3:0", "5:1", "0:3", "0:4", "2:3", "4:3", "1:4", "3:4", "5:4"]); return { columns: 7, rows: 5, cells: Gt().map((r) => ({ ...r, kind: t.has(tt(r)) ? "blocked" : "passable" })), start: { ...e[0] }, end: { ...e[e.length - 1] }, leaves: [e[4], e[8], e[12], e[17]].map((r) => ({ ...r })), solution: e }; }
+    function sn(e) { return Vt(e.board, e.player).filter(({ cell: t }) => !e.visited.some((r) => A(r, t))).map(({ direction: t }) => t); }
+    function an(e) {
+        let t = qr(e);
         for (let r = 0; r < 128; r += 1) {
-            let o = tn(t);
+            let o = nn(t);
             if (o)
                 return o;
         }
-        return rn();
+        return on();
     }
-    function tt(e) { let t = on(e); return { board: t, player: { ...t.start }, visited: [{ ...t.start }], collectedLeaves: [], moves: [], phase: "playing" }; }
-    function Ft(e) { return { player: { ...e.player }, visited: e.visited.map((t) => ({ ...t })), cleared: e.collectedLeaves.length, totalLeaves: e.board.leaves.length, steps: e.moves.length, phase: e.phase, ...e.failureReason ? { failureReason: e.failureReason } : {}, completed: e.phase === "completed" }; }
-    function Vt(e, t) {
+    function nt(e) { let t = an(e); return { board: t, player: { ...t.start }, visited: [{ ...t.start }], collectedLeaves: [], moves: [], phase: "playing" }; }
+    function At(e) { return { player: { ...e.player }, visited: e.visited.map((t) => ({ ...t })), cleared: e.collectedLeaves.length, totalLeaves: e.board.leaves.length, steps: e.moves.length, phase: e.phase, ...e.failureReason ? { failureReason: e.failureReason } : {}, completed: e.phase === "completed" }; }
+    function Wt(e, t) {
         if (e.phase !== "playing")
             return { state: e, moved: !1, reason: "finished" };
-        let r = jt(e.player, t);
-        if (!Bt(e.board, r))
+        let r = It(e.player, t);
+        if (!Ft(e.board, r))
             return { state: e, moved: !1, reason: "blocked" };
         if (e.visited.some((n) => A(n, r)))
             return { state: e, moved: !1, reason: "visited" };
         let o = e.board.leaves.some((n) => A(n, r)) ? [...e.collectedLeaves, { ...r }] : e.collectedLeaves, s = A(r, e.board.end), i = o.length === e.board.leaves.length, a = { ...e, player: r, visited: [...e.visited, r], collectedLeaves: o, moves: [...e.moves, t], phase: s ? i ? "completed" : "failed" : "playing", ...s && !i ? { failureReason: "end_too_early" } : {} };
-        if (a.phase === "playing" && nn(a).length === 0)
+        if (a.phase === "playing" && sn(a).length === 0)
             a.phase = "failed", a.failureReason = "dead_end";
         return { moved: !0, state: a };
     }
-    function At(e) { var _a; return (_a = e.sourceMethodId) !== null && _a !== void 0 ? _a : (e.unlock.type === "method" ? e.unlock.methodId : void 0); }
+    function Xt(e) { var _a; return (_a = e.sourceMethodId) !== null && _a !== void 0 ? _a : (e.unlock.type === "method" ? e.unlock.methodId : void 0); }
     var Z = ["炼气", "筑基", "金丹", "元婴", "化神", "炼虚", "合体", "大乘", "渡劫"], W = ["初期", "中期", "后期", "圆满"];
-    var Ke = ["凡品", "灵品", "玄品", "真品", "地品", "天品", "仙品", "神品"];
-    var ne = { 炼气: 0, 筑基: 1, 金丹: 2, 元婴: 3, 化神: 4, 炼虚: 5, 合体: 6, 大乘: 7, 渡劫: 8 }, Wt = ["seed", "herb", "ore", "monster", "tcdb", "aux", "gongfa_manual", "skill_manual"];
-    var sn = 10, an = 6, go = sn * an, cn = 5;
-    function be(e) { let t = Math.min(Z.length * W.length - 1, Math.max(0, Math.ceil(e / cn) - 1)), r = Z[Math.floor(t / W.length)], o = W[t % W.length]; return { realm: r, stage: o, label: `${r}${o}` }; }
-    function $e(e, t) { let r = Z.indexOf(e), o = W.indexOf(t); return Math.max(0, r) * W.length + Math.max(0, o); }
-    var rt = { registered: 0, outer: 1, inner: 2, true: 3 }, nt = { registered: "记名弟子", outer: "外门弟子", inner: "内门弟子", true: "真传弟子" }, Xt = { registered: 45, outer: 90, inner: 135, true: 180 };
-    function Zt(e, t) { return rt[e] >= rt[t]; }
+    var $e = ["凡品", "灵品", "玄品", "真品", "地品", "天品", "仙品", "神品"];
+    var ne = { 炼气: 0, 筑基: 1, 金丹: 2, 元婴: 3, 化神: 4, 炼虚: 5, 合体: 6, 大乘: 7, 渡劫: 8 }, Zt = ["seed", "herb", "ore", "monster", "tcdb", "aux", "gongfa_manual", "skill_manual"];
+    var cn = 10, ln = 6, ho = cn * ln, fn = 5;
+    function be(e) { let t = Math.min(Z.length * W.length - 1, Math.max(0, Math.ceil(e / fn) - 1)), r = Z[Math.floor(t / W.length)], o = W[t % W.length]; return { realm: r, stage: o, label: `${r}${o}` }; }
+    function Pe(e, t) { let r = Z.indexOf(e), o = W.indexOf(t); return Math.max(0, r) * W.length + Math.max(0, o); }
+    var ot = { registered: 0, outer: 1, inner: 2, true: 3 }, it = { registered: "记名弟子", outer: "外门弟子", inner: "内门弟子", true: "真传弟子" }, Jt = { registered: 45, outer: 90, inner: 135, true: 180 };
+    function Ht(e, t) { return ot[e] >= ot[t]; }
     var oe = Object.freeze({ methodCount: 6, methodSlots: Object.freeze([1, 2, 3, 4, 5, 6]), foundationPassiveCount: 1, activeAbilitySlotCount: 4, meridianLoadoutSlots: Object.freeze([1, 2, 3]), enabledMeridianLoadoutSlots: Object.freeze([1]), meridianNodeTransportLimit: 64, combatResourceCount: 1 });
-    var je = 60000;
-    var it = 500, Jt = 650, H = { width: 1120, height: 630 }, j = { x: 560, y: 174 }, st = 145, V = { left: 72, right: H.width - 72, top: 252, bottom: H.height - 38 }, Ht = ["spirit_crystal", "copper_ore", "dark_iron", "earth_essence"], Yt = ["D", "C", "B", "A", "S"], Ut = { small: { radius: 0.65, score: 0.5, weight: 0.5 }, medium: { radius: 1, score: 1, weight: 1 }, large: { radius: 1.55, score: 2.2, weight: 2.1 } }, Qt = [{ kind: "spirit_crystal", count: 6, radius: 22, score: 90, weight: 1, sizes: ["small", "medium", "large", "small", "medium", "large"] }, { kind: "copper_ore", count: 5, radius: 29, score: 150, weight: 2, sizes: ["small", "medium", "large", "small", "large"] }, { kind: "dark_iron", count: 3, radius: 41, score: 260, weight: 4, sizes: ["small", "medium", "large"] }, { kind: "earth_essence", count: 2, radius: 25, score: 420, weight: 3, sizes: ["medium", "large"] }];
-    function zt(e, t) { return Math.round(e * t / 10) * 10; }
-    var ln = Qt.reduce((e, t) => e + t.sizes.reduce((r, o) => r + zt(t.score, Ut[o].score), 0), 0);
-    function fn(e) {
+    var Le = 60000;
+    var at = 500, Yt = 650, H = { width: 1120, height: 630 }, j = { x: 560, y: 174 }, ct = 145, V = { left: 72, right: H.width - 72, top: 252, bottom: H.height - 38 }, Ut = ["spirit_crystal", "copper_ore", "dark_iron", "earth_essence"], Qt = ["D", "C", "B", "A", "S"], zt = { small: { radius: 0.65, score: 0.5, weight: 0.5 }, medium: { radius: 1, score: 1, weight: 1 }, large: { radius: 1.55, score: 2.2, weight: 2.1 } }, qt = [{ kind: "spirit_crystal", count: 6, radius: 22, score: 90, weight: 1, sizes: ["small", "medium", "large", "small", "medium", "large"] }, { kind: "copper_ore", count: 5, radius: 29, score: 150, weight: 2, sizes: ["small", "medium", "large", "small", "large"] }, { kind: "dark_iron", count: 3, radius: 41, score: 260, weight: 4, sizes: ["small", "medium", "large"] }, { kind: "earth_essence", count: 2, radius: 25, score: 420, weight: 3, sizes: ["medium", "large"] }];
+    function er(e, t) { return Math.round(e * t / 10) * 10; }
+    var pn = qt.reduce((e, t) => e + t.sizes.reduce((r, o) => r + er(t.score, zt[o].score), 0), 0);
+    function mn(e) {
         let t = 2166136261;
         for (let r of e)
             t ^= r.charCodeAt(0), t = Math.imul(t, 16777619);
         return t >>> 0 || 1;
     }
-    function pn(e) { let t = fn(e); return () => { return t ^= t << 13, t ^= t >>> 17, t ^= t << 5, (t >>> 0) / 4294967296; }; }
-    function ot(e, t) { return t.some((r) => { let o = r.x - e.x, s = r.y - e.y, i = r.radius + e.radius + 10; return o * o + s * s < i * i; }); }
-    function Pe(e, t) { let r = e / 180 * Math.PI; return { x: j.x + Math.sin(r) * t, y: j.y + Math.cos(r) * t }; }
-    var Ee = { "spirit_crystal:0": Pe(-32, 280), "earth_essence:1": Pe(-32, 445), "explosive_barrel:0": Pe(34, 350), "copper_ore:0": Pe(34, 445) }, dn = [{ angleMilliDegrees: -32000, distance: 520 }, { angleMilliDegrees: 34000, distance: 500 }];
-    function mn(e) { return e.x - e.radius >= V.left && e.x + e.radius <= V.right && e.y - e.radius >= V.top && e.y + e.radius <= V.bottom; }
-    function qt(e) { let t = e / 1000 / 180 * Math.PI; return { x: Math.sin(t), y: Math.cos(t) }; }
-    function er(e, t) {
+    function dn(e) { let t = mn(e); return () => { return t ^= t << 13, t ^= t >>> 17, t ^= t << 5, (t >>> 0) / 4294967296; }; }
+    function st(e, t) { return t.some((r) => { let o = r.x - e.x, s = r.y - e.y, i = r.radius + e.radius + 10; return o * o + s * s < i * i; }); }
+    function Ne(e, t) { let r = e / 180 * Math.PI; return { x: j.x + Math.sin(r) * t, y: j.y + Math.cos(r) * t }; }
+    var je = { "spirit_crystal:0": Ne(-32, 280), "earth_essence:1": Ne(-32, 445), "explosive_barrel:0": Ne(34, 350), "copper_ore:0": Ne(34, 445) }, Sn = [{ angleMilliDegrees: -32000, distance: 520 }, { angleMilliDegrees: 34000, distance: 500 }];
+    function bn(e) { return e.x - e.radius >= V.left && e.x + e.radius <= V.right && e.y - e.radius >= V.top && e.y + e.radius <= V.bottom; }
+    function tr(e) { let t = e / 1000 / 180 * Math.PI; return { x: Math.sin(t), y: Math.cos(t) }; }
+    function rr(e, t) {
         let r = t.x - j.x, o = t.y - j.y, s = r * e.x + o * e.y;
         if (s <= 0)
             return;
@@ -18680,47 +18698,47 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             return;
         return s - Math.sqrt(a - i);
     }
-    function tr(e) {
-        if (Ee[e.id])
+    function nr(e) {
+        if (je[e.id])
             return !1;
-        return dn.some((t) => { let r = er(qt(t.angleMilliDegrees), e); return r !== void 0 && r <= t.distance; });
+        return Sn.some((t) => { let r = rr(tr(t.angleMilliDegrees), e); return r !== void 0 && r <= t.distance; });
     }
-    function Sn(e, t) {
+    function yn(e, t) {
         for (let r = V.top + e.radius; r <= V.bottom - e.radius; r += 8)
             for (let o = V.left + e.radius; o <= V.right - e.radius; o += 8) {
                 let s = { ...e, x: o, y: r };
-                if (!ot(s, t) && !tr(s))
+                if (!st(s, t) && !nr(s))
                     return { x: o, y: r };
             }
         throw Error(`Unable to place mining target ${e.id}`);
     }
-    function bn() { let e = Qt.flatMap((r) => r.sizes.map((o, s) => { let i = Ut[o]; return { id: `${r.kind}:${s}`, category: "ore", kind: r.kind, size: o, x: 0, y: 0, radius: Math.round(r.radius * i.radius), score: zt(r.score, i.score), weight: Math.max(0.25, Math.round(r.weight * i.weight * 100) / 100) }; })), t = Array.from({ length: 2 }, (r, o) => ({ id: `explosive_barrel:${o}`, category: "hazard", kind: "explosive_barrel", x: 0, y: 0, radius: o === 0 ? 30 : 34, score: 0, weight: 1, blastRadius: 145 })); return [...e, ...t]; }
-    function at(e) {
-        let t = pn(e), r = bn(), o = r.filter((i) => Ee[i.id]).map((i) => ({ ...i, ...Ee[i.id] }));
+    function un() { let e = qt.flatMap((r) => r.sizes.map((o, s) => { let i = zt[o]; return { id: `${r.kind}:${s}`, category: "ore", kind: r.kind, size: o, x: 0, y: 0, radius: Math.round(r.radius * i.radius), score: er(r.score, i.score), weight: Math.max(0.25, Math.round(r.weight * i.weight * 100) / 100) }; })), t = Array.from({ length: 2 }, (r, o) => ({ id: `explosive_barrel:${o}`, category: "hazard", kind: "explosive_barrel", x: 0, y: 0, radius: o === 0 ? 30 : 34, score: 0, weight: 1, blastRadius: 145 })); return [...e, ...t]; }
+    function lt(e) {
+        let t = dn(e), r = un(), o = r.filter((i) => je[i.id]).map((i) => ({ ...i, ...je[i.id] }));
         for (let i of o) {
             let a = o.slice(0, o.indexOf(i));
-            if (!mn(i) || ot(i, a))
+            if (!bn(i) || st(i, a))
                 throw Error(`Invalid forced mining target ${i.id}`);
         }
         for (let i of r) {
-            if (Ee[i.id])
+            if (je[i.id])
                 continue;
             let a;
             for (let n = 0; n < 600; n += 1) {
                 let l = { ...i, x: V.left + i.radius + t() * (V.right - V.left - i.radius * 2), y: V.top + i.radius + t() * (V.bottom - V.top - i.radius * 2) };
-                if (!ot(l, o) && !tr(l)) {
+                if (!st(l, o) && !nr(l)) {
                     a = l;
                     break;
                 }
             }
-            o.push(a !== null && a !== void 0 ? a : { ...i, ...Sn(i, o) });
+            o.push(a !== null && a !== void 0 ? a : { ...i, ...yn(i, o) });
         }
         let s = new Map(o.map((i) => [i.id, i]));
         return r.map((i) => s.get(i.id));
     }
-    function yn(e) { let t = Math.max(0.25, e); return Math.min(650, Math.max(90, 520 / t ** 0.85)); }
-    function Le(e) { let t = Math.max(0, e) % 2800 / 2800 * 2; return -70000 + (t <= 1 ? t : 2 - t) * 140000; }
-    function Ie(e, t = ln) {
+    function gn(e) { let t = Math.max(0.25, e); return Math.min(650, Math.max(90, 520 / t ** 0.85)); }
+    function Ie(e) { let t = Math.max(0, e) % 2800 / 2800 * 2; return -70000 + (t <= 1 ? t : 2 - t) * 140000; }
+    function Be(e, t = pn) {
         let r = t > 0 ? e / t : 0;
         if (r < 0.2)
             return;
@@ -18734,99 +18752,99 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             return "A";
         return "S";
     }
-    function un(e) { let t = [e.y > 0 ? (H.height - 16 - j.y) / e.y : Number.POSITIVE_INFINITY, e.x > 0 ? (H.width - 16 - j.x) / e.x : Number.POSITIVE_INFINITY, e.x < 0 ? (16 - j.x) / e.x : Number.POSITIVE_INFINITY]; return Math.min(...t.filter((r) => r > 0)); }
-    function gn(e, t, r) {
+    function xn(e) { let t = [e.y > 0 ? (H.height - 16 - j.y) / e.y : Number.POSITIVE_INFINITY, e.x > 0 ? (H.width - 16 - j.x) / e.x : Number.POSITIVE_INFINITY, e.x < 0 ? (16 - j.x) / e.x : Number.POSITIVE_INFINITY]; return Math.min(...t.filter((r) => r > 0)); }
+    function hn(e, t, r) {
         return e.filter((o) => {
             if (o.category !== "ore" || r.has(o.id))
                 return !1;
             return Math.hypot(o.x - t.x, o.y - t.y) <= t.blastRadius + o.radius;
         });
     }
-    function ct(e, t) {
+    function ft(e, t) {
         var _a;
-        let r = at(e), o = r.filter((d) => d.category === "ore"), s = o.reduce((d, b) => d + b.score, 0);
+        let r = lt(e), o = r.filter((m) => m.category === "ore"), s = o.reduce((m, b) => m + b.score, 0);
         if (t.length > 24)
-            return Ne(s, "too_many_casts");
+            return Ee(s, "too_many_casts");
         let i = new Set, a = new Set, n = new Set, l = [], c = 0, p = 0;
-        for (let d = 0; d < t.length; d += 1) {
-            let b = t[d];
+        for (let m = 0; m < t.length; m += 1) {
+            let b = t[m];
             if (!Number.isSafeInteger(b.atMs) || b.atMs < 0 || b.atMs >= 60000)
-                return Ne(s, "invalid_time", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
-            if (!Number.isSafeInteger(b.angleMilliDegrees) || b.angleMilliDegrees < -70000 || b.angleMilliDegrees > 70000 || Math.abs(b.angleMilliDegrees - Math.round(Le(b.atMs))) > 2)
-                return Ne(s, "invalid_angle", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
+                return Ee(s, "invalid_time", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
+            if (!Number.isSafeInteger(b.angleMilliDegrees) || b.angleMilliDegrees < -70000 || b.angleMilliDegrees > 70000 || Math.abs(b.angleMilliDegrees - Math.round(Ie(b.atMs))) > 2)
+                return Ee(s, "invalid_angle", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
             if (b.atMs < Math.ceil(c))
-                return Ne(s, "hook_busy", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
-            let u = qt(b.angleMilliDegrees), y = un(u), g = r.filter((T) => !n.has(T.id)).map((T) => ({ target: T, distance: er(u, T) })).filter((T) => T.distance !== void 0 && T.distance <= y).sort((T, N) => T.distance - N.distance)[0], R = (_a = g === null || g === void 0 ? void 0 : g.distance) !== null && _a !== void 0 ? _a : y, k = R / 500 * 1000, _ = (g === null || g === void 0 ? void 0 : g.target.category) === "ore" ? yn(g.target.weight) : 650;
+                return Ee(s, "hook_busy", { score: p, availableAtMs: c, catches: l, collected: i, destroyed: a, removed: n });
+            let u = tr(b.angleMilliDegrees), y = xn(u), g = r.filter((T) => !n.has(T.id)).map((T) => ({ target: T, distance: rr(u, T) })).filter((T) => T.distance !== void 0 && T.distance <= y).sort((T, N) => T.distance - N.distance)[0], R = (_a = g === null || g === void 0 ? void 0 : g.distance) !== null && _a !== void 0 ? _a : y, k = R / 500 * 1000, _ = (g === null || g === void 0 ? void 0 : g.target.category) === "ore" ? gn(g.target.weight) : 650;
             if (c = b.atMs + k + R / _ * 1000, !g)
                 continue;
             let D = g.target;
             n.add(D.id);
-            let I = D.category === "hazard" ? gn(r, D, n).map((T) => T.id) : [];
+            let I = D.category === "hazard" ? hn(r, D, n).map((T) => T.id) : [];
             for (let T of I)
                 a.add(T), n.add(T);
             if (D.category === "ore")
                 i.add(D.id), p += D.score;
-            l.push({ castIndex: d, targetId: D.id, kind: D.kind, score: D.score, weight: D.weight, radius: D.radius, distance: g.distance, returnedAtMs: c, destroyedOreIds: I });
+            l.push({ castIndex: m, targetId: D.id, kind: D.kind, score: D.score, weight: D.weight, radius: D.radius, distance: g.distance, returnedAtMs: c, destroyedOreIds: I });
         }
-        let h = p / s, f = Ie(p, s), S = o.every((d) => n.has(d.id));
-        return { valid: !0, score: p, maxScore: s, ratio: h, ...f ? { tier: f } : {}, qualified: Boolean(f), collectedOreIds: [...i], destroyedOreIds: [...a], removedTargetIds: [...n], catches: l, availableAtMs: c, completedAtMs: S ? c : Math.max(60000, c), clearedAll: S };
+        let x = p / s, f = Be(p, s), d = o.every((m) => n.has(m.id));
+        return { valid: !0, score: p, maxScore: s, ratio: x, ...f ? { tier: f } : {}, qualified: Boolean(f), collectedOreIds: [...i], destroyedOreIds: [...a], removedTargetIds: [...n], catches: l, availableAtMs: c, completedAtMs: d ? c : Math.max(60000, c), clearedAll: d };
     }
-    function Ne(e, t, r) { var _a, _b, _c, _d, _f, _g, _h; let o = (_a = r === null || r === void 0 ? void 0 : r.score) !== null && _a !== void 0 ? _a : 0; return { valid: !1, score: o, maxScore: e, ratio: o / e, qualified: !1, collectedOreIds: [...(_b = r === null || r === void 0 ? void 0 : r.collected) !== null && _b !== void 0 ? _b : []], destroyedOreIds: [...(_c = r === null || r === void 0 ? void 0 : r.destroyed) !== null && _c !== void 0 ? _c : []], removedTargetIds: [...(_d = r === null || r === void 0 ? void 0 : r.removed) !== null && _d !== void 0 ? _d : []], catches: (_f = r === null || r === void 0 ? void 0 : r.catches) !== null && _f !== void 0 ? _f : [], availableAtMs: (_g = r === null || r === void 0 ? void 0 : r.availableAtMs) !== null && _g !== void 0 ? _g : 0, completedAtMs: (_h = r === null || r === void 0 ? void 0 : r.availableAtMs) !== null && _h !== void 0 ? _h : 0, clearedAll: !1, reason: t }; }
-    var Be = ["weapon", "head", "armor", "necklace", "belt", "footwear"];
-    var nr = [10, 30, 50, 70, 90, 110, 130, 150, 170];
-    var or = { weapon: "法兵", head: "法冠", armor: "法衣", necklace: "灵佩", belt: "腰封", footwear: "云履" }, Io = Be.flatMap((e) => nr.map((t) => { return { id: `blueprint.${e}.${t}`, name: `${be(t).realm}期${or[e]}`, kind: "blueprint", stackLimit: 99, slot: e, level: t }; }));
+    function Ee(e, t, r) { var _a, _b, _c, _d, _f, _g, _h; let o = (_a = r === null || r === void 0 ? void 0 : r.score) !== null && _a !== void 0 ? _a : 0; return { valid: !1, score: o, maxScore: e, ratio: o / e, qualified: !1, collectedOreIds: [...(_b = r === null || r === void 0 ? void 0 : r.collected) !== null && _b !== void 0 ? _b : []], destroyedOreIds: [...(_c = r === null || r === void 0 ? void 0 : r.destroyed) !== null && _c !== void 0 ? _c : []], removedTargetIds: [...(_d = r === null || r === void 0 ? void 0 : r.removed) !== null && _d !== void 0 ? _d : []], catches: (_f = r === null || r === void 0 ? void 0 : r.catches) !== null && _f !== void 0 ? _f : [], availableAtMs: (_g = r === null || r === void 0 ? void 0 : r.availableAtMs) !== null && _g !== void 0 ? _g : 0, completedAtMs: (_h = r === null || r === void 0 ? void 0 : r.availableAtMs) !== null && _h !== void 0 ? _h : 0, clearedAll: !1, reason: t }; }
+    var Ge = ["weapon", "head", "armor", "necklace", "belt", "footwear"];
+    var ir = [10, 30, 50, 70, 90, 110, 130, 150, 170];
+    var sr = { weapon: "法兵", head: "法冠", armor: "法衣", necklace: "灵佩", belt: "腰封", footwear: "云履" }, Go = Ge.flatMap((e) => ir.map((t) => { return { id: `blueprint.${e}.${t}`, name: `${be(t).realm}期${sr[e]}`, kind: "blueprint", stackLimit: 99, slot: e, level: t }; }));
     var ie = { vitality: "体魄", strength: "力道", spirit: "灵力", endurance: "根骨", speed: "身法", willpower: "神识" };
-    var xn = { hp: { label: "气血", icon: "❤️", description: "当前气血、气血条、恢复气血" }, mp: { label: "法力", icon: "\uD83D\uDCA7", description: "当前法力、法力条、法力消耗" }, maxHp: { label: "气血上限", icon: "❤️", description: "最大气血" }, maxMp: { label: "法力上限", icon: "\uD83D\uDCA7", description: "最大法力" }, hp_loss: { label: "气血损失", icon: "\uD83E\uDE78", description: "气血百分比损失" }, mp_loss: { label: "法力损失", icon: "\uD83D\uDCA7", description: "法力百分比损失" }, spirit_stones: { label: "灵石", icon: "\uD83D\uDCB0", description: "通用货币" }, reputation: { label: "声望", icon: "\uD83C\uDFF5️", description: "万界商行兑换所需的声望" }, contribution: { label: "宗门贡献", icon: "\uD83D\uDCDC", description: "宗门任务与建设所得的宗门内部凭证" }, cultivation_exp: { label: "修为", icon: "\uD83E\uDDD8", description: "修为进度" }, comprehension_insight: { label: "感悟", shortLabel: "感悟", icon: "\uD83D\uDCA1", description: "突破、推演功法与神通所需的感悟" }, world_qi: { label: "天地灵气", shortLabel: "灵气", icon: "\uD83C\uDF43", description: "玩法行动所消耗的天地灵气" }, lifespan: { label: "寿元", icon: "\uD83D\uDD6F️", description: "角色寿元" }, material: { label: "材料", icon: "\uD83D\uDCE6", description: "通用材料" }, artifact: { label: "法宝", icon: "\uD83D\uDDE1️", description: "法宝物品", aliases: { naming: "法宝灵器" } }, consumable: { label: "消耗品", icon: "\uD83C\uDF15", description: "丹药、符箓等消耗品" }, battle: { label: "战斗", icon: "⚔️", description: "战斗事件或代价" }, vitality: { label: ie.vitality, icon: "\uD83D\uDCAA", shortLabel: "体", description: "气血与生命根基，提升最大气血、治疗强度，并提供少量法术防御与行动速度" }, strength: { label: ie.strength, icon: "⚔️", shortLabel: "力", description: "筋力与兵刃威势，提升物理攻击，并提供少量法术防御与行动速度" }, spirit: { label: ie.spirit, icon: "⚡", shortLabel: "灵", description: "灵力浑厚程度，提升法术攻击、法力和封印命中，并提供少量法术防御" }, endurance: { label: ie.endurance, icon: "\uD83E\uDDB4", shortLabel: "骨", description: "筋骨坚韧程度，提升物理防御，并提供少量法术防御与行动速度" }, speed: { label: ie.speed, icon: "\uD83E\uDDB6", shortLabel: "身", description: "身形腾挪与步法根基，影响闪避、命中与行动速度" }, willpower: { label: ie.willpower, icon: "\uD83D\uDC41️", shortLabel: "识", description: "神魂与意志强度，提升法术防御、法力、治疗强度和封印抵抗" }, gongfa: { label: "功法", icon: "\uD83D\uDCD6", description: "功法产品", aliases: { naming: "功法典籍" } }, skill: { label: "神通", icon: "\uD83D\uDCDC", description: "神通产品", aliases: { naming: "神通招式" } }, consumable_pill: { label: "丹药", icon: "\uD83C\uDF15", description: "丹药消耗品" }, consumable_talisman: { label: "符箓", icon: "\uD83D\uDCDC", description: "符箓消耗品" }, material_herb: { label: "灵药", icon: "\uD83C\uDF3F" }, material_ore: { label: "矿石", icon: "\uD83E\uDEA8" }, material_monster: { label: "妖兽材料", icon: "\uD83D\uDC09" }, material_tcdb: { label: "天材地宝", icon: "\uD83D\uDC8E" }, material_aux: { label: "特殊辅料", icon: "\uD83D\uDCA7" }, material_gongfa_manual: { label: "功法典籍", icon: "\uD83D\uDCD6" }, material_skill_manual: { label: "神通秘术", icon: "\uD83D\uDCDC" }, element_metal: { label: "金", icon: "⚔️" }, element_wood: { label: "木", icon: "\uD83C\uDF3F" }, element_water: { label: "水", icon: "\uD83D\uDCA7" }, element_fire: { label: "火", icon: "\uD83D\uDD25" }, element_earth: { label: "土", icon: "⛰️" }, element_wind: { label: "风", icon: "\uD83C\uDF2A️" }, element_thunder: { label: "雷", icon: "⚡" }, element_ice: { label: "冰", icon: "❄️" }, equipment_weapon: { label: "攻击法宝", icon: "\uD83D\uDDE1️", aliases: { intent: "武器", naming: "战器", productNaming: "兵刃" } }, equipment_armor: { label: "护身法宝", icon: "\uD83D\uDEE1️", aliases: { intent: "护甲", naming: "护甲", productNaming: "护具" } }, equipment_accessory: { label: "辅助法宝", icon: "\uD83D\uDC8D", aliases: { intent: "配饰", naming: "玉佩", productNaming: "饰物" } }, attribute_atk: { label: "物理攻击", icon: "⚔️", shortLabel: "物攻" }, attribute_def: { label: "物理防御", icon: "\uD83D\uDEE1️", shortLabel: "物防" }, attribute_magic_atk: { label: "法术攻击", icon: "⚡", shortLabel: "法攻" }, attribute_magic_def: { label: "法术防御", icon: "\uD83D\uDEE1️", shortLabel: "法防" }, attribute_action_speed: { label: "速度", icon: "\uD83D\uDCA8", shortLabel: "速度", description: "决定战斗中的出手顺序" }, attribute_crit_rate: { label: "暴击率", icon: "\uD83C\uDFAF", shortLabel: "暴" }, attribute_crit_damage: { label: "暴击伤害", icon: "\uD83D\uDCA5", shortLabel: "暴伤" }, attribute_damage_reduction: { label: "伤害减免", icon: "\uD83D\uDEE1️", shortLabel: "减伤" }, attribute_hit_rate: { label: "命中率", icon: "\uD83C\uDFAF", shortLabel: "命" }, attribute_dodge_rate: { label: "闪避率", icon: "\uD83C\uDFC3‍♂️", shortLabel: "闪避" }, attribute_evasion_rate: { label: "闪避率", icon: "\uD83C\uDFC3‍♂️", shortLabel: "闪避" }, attribute_control_hit: { label: "控制命中", icon: "\uD83C\uDFAF", shortLabel: "控命" }, attribute_control_resistance: { label: "控制抗性", icon: "\uD83D\uDEE1️", shortLabel: "控抗" }, attribute_armor_penetration: { label: "破防", icon: "\uD83D\uDDE1️", shortLabel: "破防", aliases: { detailed: "破甲" } }, attribute_magic_penetration: { label: "法术穿透", icon: "⚡", shortLabel: "法穿", aliases: { compact: "法穿" } }, attribute_crit_resist: { label: "暴击抗性", icon: "\uD83D\uDEE1️", shortLabel: "暴抗", aliases: { detailed: "暴击韧性" } }, attribute_crit_damage_reduction: { label: "暴伤减免", icon: "\uD83D\uDEE1️", shortLabel: "暴减", aliases: { detailed: "暴击减伤" } }, attribute_accuracy: { label: "命中", icon: "\uD83C\uDFAF", shortLabel: "命中", aliases: { detailed: "精准" } }, attribute_heal_amplify: { label: "治疗加成", icon: "\uD83D\uDC9A", shortLabel: "治疗", aliases: { detailed: "治疗增强" } }, skill_type_attack: { label: "攻击", icon: "⚔️", description: "以伤害为主的直接输出神通" }, skill_type_heal: { label: "治疗", icon: "\uD83D\uDC9A", description: "恢复气血或护持自身的术法" }, skill_type_control: { label: "控制", icon: "\uD83C\uDF00", description: "封禁、禁锢、限制对手行动的术法" }, skill_type_debuff: { label: "削弱", icon: "\uD83D\uDE08", description: "削减对手战力或叠加负面状态的术法" }, skill_type_buff: { label: "增益", icon: "\uD83C\uDF1F", description: "临时强化自身或友方能力的神通" }, status_burn: { label: "灼烧", icon: "\uD83D\uDD25", description: "业火缠身，每回合损失气血" }, status_bleed: { label: "流血", icon: "\uD83E\uDE78", description: "伤口难愈，随时间流失气血" }, status_poison: { label: "中毒", icon: "☠️", description: "剧毒入骨，气血与法力缓慢流逝" }, status_stun: { label: "眩晕", icon: "\uD83C\uDF00", description: "元神震荡，暂时无法行动" }, status_silence: { label: "沉默", icon: "\uD83E\uDD10", description: "法咒受限，无法施展部分神通" }, status_root: { label: "定身", icon: "\uD83D\uDD12", description: "身形被禁锢，难以移动与闪避" }, status_armor_up: { label: "护体", icon: "\uD83D\uDEE1️", description: "护体罡气环绕，大幅减免伤害" }, status_speed_up: { label: "疾速", icon: "\uD83C\uDFC3‍♂️", description: "身形如电，出手与闪避皆获加成" }, status_crit_rate_up: { label: "会心", icon: "\uD83C\uDFAF", description: "战意如虹，暴击几率大幅提升" }, status_armor_down: { label: "破防", icon: "\uD83D\uDC94", description: "护体被破，所受伤害显著增加" }, status_crit_rate_down: { label: "暴击降低", icon: "\uD83D\uDC94", description: "暴击几率大幅降低" }, status_weakness: { label: "虚弱", icon: "\uD83D\uDE30", description: "元气大伤，尚待恢复" }, status_minor_wound: { label: "轻伤", icon: "\uD83E\uDE79", description: "身负轻伤，稍有影响" }, status_major_wound: { label: "重伤", icon: "\uD83D\uDCA5", description: "身负重伤，自然恢复减慢" }, status_near_death: { label: "濒死", icon: "☠️", description: "命悬一线，随时可能陨落" }, status_breakthrough_focus: { label: "破境凝神", icon: "\uD83D\uDD6F️", description: "心神收束，下一次破境成功率提升" }, status_protect_meridians: { label: "护脉", icon: "\uD83E\uDEA2", description: "药力护住经脉，突破失败时降低修为损失" }, status_clear_mind: { label: "清心", icon: "\uD83E\uDEB7", description: "心境澄明，突破失败不会滋生心魔" }, status_cultivation_boost: { label: "养元", icon: "\uD83C\uDF3F", description: "药力温养丹田，下一次闭关修为提升" }, status_artifact_damaged: { label: "法宝受损", icon: "\uD83D\uDC94", description: "法宝损坏，威力大减" }, status_mana_depleted: { label: "法力枯竭", icon: "\uD83D\uDCA7", description: "法力耗尽，难以施展术法" }, status_hp_deficit: { label: "气血不足", icon: "❤️", description: "气血亏虚，行动受限" }, status_scorching: { label: "酷热", icon: "\uD83C\uDF21️", description: "烈日当空，持续受到灼烧" }, status_freezing: { label: "严寒", icon: "❄️", description: "天寒地冻，行动迟缓" }, status_toxic_air: { label: "瘴气", icon: "☁️", description: "毒气弥漫，持续中毒" }, status_formation_suppressed: { label: "阵法压制", icon: "⛓️", description: "被阵法压制，实力受限" }, status_abundant_qi: { label: "灵气充沛", icon: "\uD83C\uDF43", description: "灵气浓郁，修炼速度提升" } };
+    var kn = { hp: { label: "气血", icon: "❤️", description: "当前气血、气血条、恢复气血" }, mp: { label: "法力", icon: "\uD83D\uDCA7", description: "当前法力、法力条、法力消耗" }, maxHp: { label: "气血上限", icon: "❤️", description: "最大气血" }, maxMp: { label: "法力上限", icon: "\uD83D\uDCA7", description: "最大法力" }, hp_loss: { label: "气血损失", icon: "\uD83E\uDE78", description: "气血百分比损失" }, mp_loss: { label: "法力损失", icon: "\uD83D\uDCA7", description: "法力百分比损失" }, spirit_stones: { label: "灵石", icon: "\uD83D\uDCB0", description: "通用货币" }, reputation: { label: "声望", icon: "\uD83C\uDFF5️", description: "万界商行兑换所需的声望" }, contribution: { label: "宗门贡献", icon: "\uD83D\uDCDC", description: "宗门任务与建设所得的宗门内部凭证" }, cultivation_exp: { label: "修为", icon: "\uD83E\uDDD8", description: "修为进度" }, comprehension_insight: { label: "感悟", shortLabel: "感悟", icon: "\uD83D\uDCA1", description: "突破、推演功法与神通所需的感悟" }, world_qi: { label: "天地灵气", shortLabel: "灵气", icon: "\uD83C\uDF43", description: "玩法行动所消耗的天地灵气" }, lifespan: { label: "寿元", icon: "\uD83D\uDD6F️", description: "角色寿元" }, material: { label: "材料", icon: "\uD83D\uDCE6", description: "通用材料" }, artifact: { label: "法宝", icon: "\uD83D\uDDE1️", description: "法宝物品", aliases: { naming: "法宝灵器" } }, consumable: { label: "消耗品", icon: "\uD83C\uDF15", description: "丹药、符箓等消耗品" }, battle: { label: "战斗", icon: "⚔️", description: "战斗事件或代价" }, vitality: { label: ie.vitality, icon: "\uD83D\uDCAA", shortLabel: "体", description: "气血与生命根基，提升最大气血、治疗强度，并提供少量法术防御与行动速度" }, strength: { label: ie.strength, icon: "⚔️", shortLabel: "力", description: "筋力与兵刃威势，提升物理攻击，并提供少量法术防御与行动速度" }, spirit: { label: ie.spirit, icon: "⚡", shortLabel: "灵", description: "灵力浑厚程度，提升法术攻击、法力和封印命中，并提供少量法术防御" }, endurance: { label: ie.endurance, icon: "\uD83E\uDDB4", shortLabel: "骨", description: "筋骨坚韧程度，提升物理防御，并提供少量法术防御与行动速度" }, speed: { label: ie.speed, icon: "\uD83E\uDDB6", shortLabel: "身", description: "身形腾挪与步法根基，影响闪避、命中与行动速度" }, willpower: { label: ie.willpower, icon: "\uD83D\uDC41️", shortLabel: "识", description: "神魂与意志强度，提升法术防御、法力、治疗强度和封印抵抗" }, gongfa: { label: "功法", icon: "\uD83D\uDCD6", description: "功法产品", aliases: { naming: "功法典籍" } }, skill: { label: "神通", icon: "\uD83D\uDCDC", description: "神通产品", aliases: { naming: "神通招式" } }, consumable_pill: { label: "丹药", icon: "\uD83C\uDF15", description: "丹药消耗品" }, consumable_talisman: { label: "符箓", icon: "\uD83D\uDCDC", description: "符箓消耗品" }, material_herb: { label: "灵药", icon: "\uD83C\uDF3F" }, material_ore: { label: "矿石", icon: "\uD83E\uDEA8" }, material_monster: { label: "妖兽材料", icon: "\uD83D\uDC09" }, material_tcdb: { label: "天材地宝", icon: "\uD83D\uDC8E" }, material_aux: { label: "特殊辅料", icon: "\uD83D\uDCA7" }, material_gongfa_manual: { label: "功法典籍", icon: "\uD83D\uDCD6" }, material_skill_manual: { label: "神通秘术", icon: "\uD83D\uDCDC" }, element_metal: { label: "金", icon: "⚔️" }, element_wood: { label: "木", icon: "\uD83C\uDF3F" }, element_water: { label: "水", icon: "\uD83D\uDCA7" }, element_fire: { label: "火", icon: "\uD83D\uDD25" }, element_earth: { label: "土", icon: "⛰️" }, element_wind: { label: "风", icon: "\uD83C\uDF2A️" }, element_thunder: { label: "雷", icon: "⚡" }, element_ice: { label: "冰", icon: "❄️" }, equipment_weapon: { label: "攻击法宝", icon: "\uD83D\uDDE1️", aliases: { intent: "武器", naming: "战器", productNaming: "兵刃" } }, equipment_armor: { label: "护身法宝", icon: "\uD83D\uDEE1️", aliases: { intent: "护甲", naming: "护甲", productNaming: "护具" } }, equipment_accessory: { label: "辅助法宝", icon: "\uD83D\uDC8D", aliases: { intent: "配饰", naming: "玉佩", productNaming: "饰物" } }, attribute_atk: { label: "物理攻击", icon: "⚔️", shortLabel: "物攻" }, attribute_def: { label: "物理防御", icon: "\uD83D\uDEE1️", shortLabel: "物防" }, attribute_magic_atk: { label: "法术攻击", icon: "⚡", shortLabel: "法攻" }, attribute_magic_def: { label: "法术防御", icon: "\uD83D\uDEE1️", shortLabel: "法防" }, attribute_action_speed: { label: "速度", icon: "\uD83D\uDCA8", shortLabel: "速度", description: "决定战斗中的出手顺序" }, attribute_crit_rate: { label: "暴击率", icon: "\uD83C\uDFAF", shortLabel: "暴" }, attribute_crit_damage: { label: "暴击伤害", icon: "\uD83D\uDCA5", shortLabel: "暴伤" }, attribute_damage_reduction: { label: "伤害减免", icon: "\uD83D\uDEE1️", shortLabel: "减伤" }, attribute_hit_rate: { label: "命中率", icon: "\uD83C\uDFAF", shortLabel: "命" }, attribute_dodge_rate: { label: "闪避率", icon: "\uD83C\uDFC3‍♂️", shortLabel: "闪避" }, attribute_evasion_rate: { label: "闪避率", icon: "\uD83C\uDFC3‍♂️", shortLabel: "闪避" }, attribute_control_hit: { label: "控制命中", icon: "\uD83C\uDFAF", shortLabel: "控命" }, attribute_control_resistance: { label: "控制抗性", icon: "\uD83D\uDEE1️", shortLabel: "控抗" }, attribute_armor_penetration: { label: "破防", icon: "\uD83D\uDDE1️", shortLabel: "破防", aliases: { detailed: "破甲" } }, attribute_magic_penetration: { label: "法术穿透", icon: "⚡", shortLabel: "法穿", aliases: { compact: "法穿" } }, attribute_crit_resist: { label: "暴击抗性", icon: "\uD83D\uDEE1️", shortLabel: "暴抗", aliases: { detailed: "暴击韧性" } }, attribute_crit_damage_reduction: { label: "暴伤减免", icon: "\uD83D\uDEE1️", shortLabel: "暴减", aliases: { detailed: "暴击减伤" } }, attribute_accuracy: { label: "命中", icon: "\uD83C\uDFAF", shortLabel: "命中", aliases: { detailed: "精准" } }, attribute_heal_amplify: { label: "治疗加成", icon: "\uD83D\uDC9A", shortLabel: "治疗", aliases: { detailed: "治疗增强" } }, skill_type_attack: { label: "攻击", icon: "⚔️", description: "以伤害为主的直接输出神通" }, skill_type_heal: { label: "治疗", icon: "\uD83D\uDC9A", description: "恢复气血或护持自身的术法" }, skill_type_control: { label: "控制", icon: "\uD83C\uDF00", description: "封禁、禁锢、限制对手行动的术法" }, skill_type_debuff: { label: "削弱", icon: "\uD83D\uDE08", description: "削减对手战力或叠加负面状态的术法" }, skill_type_buff: { label: "增益", icon: "\uD83C\uDF1F", description: "临时强化自身或友方能力的神通" }, status_burn: { label: "灼烧", icon: "\uD83D\uDD25", description: "业火缠身，每回合损失气血" }, status_bleed: { label: "流血", icon: "\uD83E\uDE78", description: "伤口难愈，随时间流失气血" }, status_poison: { label: "中毒", icon: "☠️", description: "剧毒入骨，气血与法力缓慢流逝" }, status_stun: { label: "眩晕", icon: "\uD83C\uDF00", description: "元神震荡，暂时无法行动" }, status_silence: { label: "沉默", icon: "\uD83E\uDD10", description: "法咒受限，无法施展部分神通" }, status_root: { label: "定身", icon: "\uD83D\uDD12", description: "身形被禁锢，难以移动与闪避" }, status_armor_up: { label: "护体", icon: "\uD83D\uDEE1️", description: "护体罡气环绕，大幅减免伤害" }, status_speed_up: { label: "疾速", icon: "\uD83C\uDFC3‍♂️", description: "身形如电，出手与闪避皆获加成" }, status_crit_rate_up: { label: "会心", icon: "\uD83C\uDFAF", description: "战意如虹，暴击几率大幅提升" }, status_armor_down: { label: "破防", icon: "\uD83D\uDC94", description: "护体被破，所受伤害显著增加" }, status_crit_rate_down: { label: "暴击降低", icon: "\uD83D\uDC94", description: "暴击几率大幅降低" }, status_weakness: { label: "虚弱", icon: "\uD83D\uDE30", description: "元气大伤，尚待恢复" }, status_minor_wound: { label: "轻伤", icon: "\uD83E\uDE79", description: "身负轻伤，稍有影响" }, status_major_wound: { label: "重伤", icon: "\uD83D\uDCA5", description: "身负重伤，自然恢复减慢" }, status_near_death: { label: "濒死", icon: "☠️", description: "命悬一线，随时可能陨落" }, status_breakthrough_focus: { label: "破境凝神", icon: "\uD83D\uDD6F️", description: "心神收束，下一次破境成功率提升" }, status_protect_meridians: { label: "护脉", icon: "\uD83E\uDEA2", description: "药力护住经脉，突破失败时降低修为损失" }, status_clear_mind: { label: "清心", icon: "\uD83E\uDEB7", description: "心境澄明，突破失败不会滋生心魔" }, status_cultivation_boost: { label: "养元", icon: "\uD83C\uDF3F", description: "药力温养丹田，下一次闭关修为提升" }, status_artifact_damaged: { label: "法宝受损", icon: "\uD83D\uDC94", description: "法宝损坏，威力大减" }, status_mana_depleted: { label: "法力枯竭", icon: "\uD83D\uDCA7", description: "法力耗尽，难以施展术法" }, status_hp_deficit: { label: "气血不足", icon: "❤️", description: "气血亏虚，行动受限" }, status_scorching: { label: "酷热", icon: "\uD83C\uDF21️", description: "烈日当空，持续受到灼烧" }, status_freezing: { label: "严寒", icon: "❄️", description: "天寒地冻，行动迟缓" }, status_toxic_air: { label: "瘴气", icon: "☁️", description: "毒气弥漫，持续中毒" }, status_formation_suppressed: { label: "阵法压制", icon: "⛓️", description: "被阵法压制，实力受限" }, status_abundant_qi: { label: "灵气充沛", icon: "\uD83C\uDF43", description: "灵气浓郁，修炼速度提升" } };
     function M(e) { let t = $(e); return { label: t.label, icon: t.icon }; }
-    var Q = { 金: "element_metal", 木: "element_wood", 水: "element_water", 火: "element_fire", 土: "element_earth", 风: "element_wind", 雷: "element_thunder", 冰: "element_ice" }, Vo = { 金: M(Q.金), 木: M(Q.木), 水: M(Q.水), 火: M(Q.火), 土: M(Q.土), 风: M(Q.风), 雷: M(Q.雷), 冰: M(Q.冰) };
+    var Q = { 金: "element_metal", 木: "element_wood", 水: "element_water", 火: "element_fire", 土: "element_earth", 风: "element_wind", 雷: "element_thunder", 冰: "element_ice" }, Wo = { 金: M(Q.金), 木: M(Q.木), 水: M(Q.水), 火: M(Q.火), 土: M(Q.土), 风: M(Q.风), 雷: M(Q.雷), 冰: M(Q.冰) };
     function X(e) { var _a, _b; let t = $(e); return { label: t.label, icon: t.icon, shortLabel: (_a = t.shortLabel) !== null && _a !== void 0 ? _a : t.label, description: (_b = t.description) !== null && _b !== void 0 ? _b : "" }; }
-    var Ao = { vitality: X("vitality"), strength: X("strength"), spirit: X("spirit"), endurance: X("endurance"), speed: X("speed"), willpower: X("willpower"), critRate: X("attribute_crit_rate"), critDamage: X("attribute_crit_damage"), damageReduction: X("attribute_damage_reduction"), flatDamageReduction: X("attribute_damage_reduction"), hitRate: X("attribute_hit_rate"), dodgeRate: X("attribute_dodge_rate") };
+    var Xo = { vitality: X("vitality"), strength: X("strength"), spirit: X("spirit"), endurance: X("endurance"), speed: X("speed"), willpower: X("willpower"), critRate: X("attribute_crit_rate"), critDamage: X("attribute_crit_damage"), damageReduction: X("attribute_damage_reduction"), flatDamageReduction: X("attribute_damage_reduction"), hitRate: X("attribute_hit_rate"), dodgeRate: X("attribute_dodge_rate") };
     function ye(e) { var _a; let t = $(e); return { label: t.label, icon: t.icon, description: (_a = t.description) !== null && _a !== void 0 ? _a : "" }; }
-    var Wo = { attack: ye("skill_type_attack"), heal: ye("skill_type_heal"), control: ye("skill_type_control"), debuff: ye("skill_type_debuff"), buff: ye("skill_type_buff") };
+    var Zo = { attack: ye("skill_type_attack"), heal: ye("skill_type_heal"), control: ye("skill_type_control"), debuff: ye("skill_type_debuff"), buff: ye("skill_type_buff") };
     function v(e) { var _a; let t = $(e); return { label: t.label, icon: t.icon, description: (_a = t.description) !== null && _a !== void 0 ? _a : "" }; }
-    var Xo = { burn: v("status_burn"), bleed: v("status_bleed"), poison: v("status_poison"), stun: v("status_stun"), silence: v("status_silence"), root: v("status_root"), armor_up: v("status_armor_up"), speed_up: v("status_speed_up"), crit_rate_up: v("status_crit_rate_up"), armor_down: v("status_armor_down"), crit_rate_down: v("status_crit_rate_down"), weakness: v("status_weakness"), minor_wound: v("status_minor_wound"), major_wound: v("status_major_wound"), near_death: v("status_near_death"), breakthrough_focus: v("status_breakthrough_focus"), protect_meridians: v("status_protect_meridians"), clear_mind: v("status_clear_mind"), cultivation_boost: v("status_cultivation_boost"), artifact_damaged: v("status_artifact_damaged"), mana_depleted: v("status_mana_depleted"), hp_deficit: v("status_hp_deficit"), scorching: v("status_scorching"), freezing: v("status_freezing"), toxic_air: v("status_toxic_air"), formation_suppressed: v("status_formation_suppressed"), abundant_qi: v("status_abundant_qi") };
-    var Zo = { weapon: M("equipment_weapon"), armor: M("equipment_armor"), accessory: M("equipment_accessory") };
-    var Jo = { 丹药: M("consumable_pill"), 符箓: M("consumable_talisman"), 灵果: { label: "灵果", icon: "\uD83C\uDF51" } };
-    var Ho = { seed: { label: "灵植种子", icon: "\uD83C\uDF31" }, herb: M("material_herb"), ore: M("material_ore"), monster: M("material_monster"), tcdb: M("material_tcdb"), aux: M("material_aux"), gongfa_manual: M("material_gongfa_manual"), skill_manual: M("material_skill_manual") };
-    var Yo = { hp: M("hp"), mp: M("mp"), maxHp: M("maxHp"), maxMp: M("maxMp"), spirit_stones: M("spirit_stones"), reputation: M("reputation"), lifespan: M("lifespan"), cultivation_exp: M("cultivation_exp"), comprehension_insight: M("comprehension_insight"), world_qi: M("world_qi"), material: M("material"), artifact: M("artifact"), consumable: M("consumable"), hp_loss: M("hp_loss"), mp_loss: M("mp_loss"), battle: M("battle") };
-    function $(e) { var _a; return (_a = xn[e]) !== null && _a !== void 0 ? _a : { label: e, icon: "" }; }
-    var Ge = ["healing", "mana", "detox", "cultivation", "beast_cultivation", "insight", "breakthrough", "tempering", "marrow_wash", "longevity", "hybrid"], ir = ["none", "long_term", "cultivation", "longevity"];
-    var sr = ["low", "middle", "high", "perfect"];
-    var ar = ["lock_on_enter_settle_on_exit", "consume_on_action"];
+    var Jo = { burn: v("status_burn"), bleed: v("status_bleed"), poison: v("status_poison"), stun: v("status_stun"), silence: v("status_silence"), root: v("status_root"), armor_up: v("status_armor_up"), speed_up: v("status_speed_up"), crit_rate_up: v("status_crit_rate_up"), armor_down: v("status_armor_down"), crit_rate_down: v("status_crit_rate_down"), weakness: v("status_weakness"), minor_wound: v("status_minor_wound"), major_wound: v("status_major_wound"), near_death: v("status_near_death"), breakthrough_focus: v("status_breakthrough_focus"), protect_meridians: v("status_protect_meridians"), clear_mind: v("status_clear_mind"), cultivation_boost: v("status_cultivation_boost"), artifact_damaged: v("status_artifact_damaged"), mana_depleted: v("status_mana_depleted"), hp_deficit: v("status_hp_deficit"), scorching: v("status_scorching"), freezing: v("status_freezing"), toxic_air: v("status_toxic_air"), formation_suppressed: v("status_formation_suppressed"), abundant_qi: v("status_abundant_qi") };
+    var Ho = { weapon: M("equipment_weapon"), armor: M("equipment_armor"), accessory: M("equipment_accessory") };
+    var Yo = { 丹药: M("consumable_pill"), 符箓: M("consumable_talisman"), 灵果: { label: "灵果", icon: "\uD83C\uDF51" } };
+    var Uo = { seed: { label: "灵植种子", icon: "\uD83C\uDF31" }, herb: M("material_herb"), ore: M("material_ore"), monster: M("material_monster"), tcdb: M("material_tcdb"), aux: M("material_aux"), gongfa_manual: M("material_gongfa_manual"), skill_manual: M("material_skill_manual") };
+    var Qo = { hp: M("hp"), mp: M("mp"), maxHp: M("maxHp"), maxMp: M("maxMp"), spirit_stones: M("spirit_stones"), reputation: M("reputation"), lifespan: M("lifespan"), cultivation_exp: M("cultivation_exp"), comprehension_insight: M("comprehension_insight"), world_qi: M("world_qi"), material: M("material"), artifact: M("artifact"), consumable: M("consumable"), hp_loss: M("hp_loss"), mp_loss: M("mp_loss"), battle: M("battle") };
+    function $(e) { var _a; return (_a = kn[e]) !== null && _a !== void 0 ? _a : { label: e, icon: "" }; }
+    var Fe = ["healing", "mana", "detox", "cultivation", "beast_cultivation", "insight", "breakthrough", "tempering", "marrow_wash", "longevity", "hybrid"], ar = ["none", "long_term", "cultivation", "longevity"];
+    var cr = ["low", "middle", "high", "perfect"];
+    var lr = ["lock_on_enter_settle_on_exit", "consume_on_action"];
     var K = require("./zod.js");
-    var hn = ["restore_hp", "restore_mp", "detox", "gain_cultivation", "gain_insight", "breakthrough_support", "tempering", "marrow_wash", "increase_lifespan"];
-    var Fe = { quantity: { pill: 1, equipment: 1, material: { min: 1, max: 3, highQuality: 1, highQualityThreshold: "地品" } }, pillAppearanceWeights: [{ grade: "low", weight: 30 }, { grade: "middle", weight: 45 }, { grade: "high", weight: 20 }, { grade: "perfect", weight: 5 }], optionalConditionChance: { materialElement: 0.35 }, difficulty: { qualityScoreMultiplier: 2, conditionScore: { pillCore: 3, exactAppearance: 3, highAppearance: 2, materialCore: 1, element: 1 }, maximumScore: { easy: 3, normal: 6, hard: 10 } } };
-    var cr = K.z.enum(Ke), kn = K.z.enum(sr), Mn = K.z.object({ kind: K.z.literal("pill"), quantity: K.z.literal(Fe.quantity.pill), minQuality: cr, family: K.z.enum(Ge), trait: K.z.enum(hn), appearance: K.z.object({ mode: K.z.enum(["at_least", "exact"]), grade: kn }) }).strict(), Rn = K.z.object({ kind: K.z.literal("equipment"), quantity: K.z.literal(Fe.quantity.equipment), minEquipmentLevel: K.z.number().int().min(10).max(180).multipleOf(10), slot: K.z.enum(Be), mustBeUnequipped: K.z.literal(!0) }).strict(), _n = K.z.object({ kind: K.z.literal("material"), quantity: K.z.number().int().min(Fe.quantity.material.min).max(Fe.quantity.material.max), minQuality: cr, materialType: K.z.enum(Wt), element: K.z.enum(["金", "木", "水", "火", "土", "风", "雷", "冰"]).optional() }).strict(), lr = K.z.discriminatedUnion("kind", [Mn, Rn, _n]);
-    var Cn = { 2: 250, 3: 500, 4: 900, 5: 1500 };
-    function fr(e, t = 5) {
+    var Mn = ["restore_hp", "restore_mp", "detox", "gain_cultivation", "gain_insight", "breakthrough_support", "tempering", "marrow_wash", "increase_lifespan"];
+    var Ve = { quantity: { pill: 1, equipment: 1, material: { min: 1, max: 3, highQuality: 1, highQualityThreshold: "地品" } }, pillAppearanceWeights: [{ grade: "low", weight: 30 }, { grade: "middle", weight: 45 }, { grade: "high", weight: 20 }, { grade: "perfect", weight: 5 }], optionalConditionChance: { materialElement: 0.35 }, difficulty: { qualityScoreMultiplier: 2, conditionScore: { pillCore: 3, exactAppearance: 3, highAppearance: 2, materialCore: 1, element: 1 }, maximumScore: { easy: 3, normal: 6, hard: 10 } } };
+    var fr = K.z.enum($e), Rn = K.z.enum(cr), _n = K.z.object({ kind: K.z.literal("pill"), quantity: K.z.literal(Ve.quantity.pill), minQuality: fr, family: K.z.enum(Fe), trait: K.z.enum(Mn), appearance: K.z.object({ mode: K.z.enum(["at_least", "exact"]), grade: Rn }) }).strict(), Cn = K.z.object({ kind: K.z.literal("equipment"), quantity: K.z.literal(Ve.quantity.equipment), minEquipmentLevel: K.z.number().int().min(10).max(180).multipleOf(10), slot: K.z.enum(Ge), mustBeUnequipped: K.z.literal(!0) }).strict(), Dn = K.z.object({ kind: K.z.literal("material"), quantity: K.z.number().int().min(Ve.quantity.material.min).max(Ve.quantity.material.max), minQuality: fr, materialType: K.z.enum(Zt), element: K.z.enum(["金", "木", "水", "火", "土", "风", "雷", "冰"]).optional() }).strict(), pr = K.z.discriminatedUnion("kind", [_n, Cn, Dn]);
+    var vn = { 2: 250, 3: 500, 4: 900, 5: 1500 };
+    function mr(e, t = 5) {
         if (!Number.isSafeInteger(e) || e < 0)
             throw Error("设施等级无效");
         if (e >= t)
             return null;
-        let r = Cn[e + 1];
+        let r = vn[e + 1];
         if (!r)
             throw Error("设施升级目标不存在");
         return r;
     }
     var se = { alchemy: "sect.craft.alchemy", refinery: "sect.craft.refinery" };
-    var m = require("./zod.js");
-    var ge = m.z.number().finite().nonnegative().max(2147483647), pr = m.z.enum(["weakness", "minor_wound", "major_wound", "near_death", "breakthrough_focus", "protect_meridians", "clear_mind", "cultivation_boost"]), Dn = m.z.discriminatedUnion("type", [m.z.object({ type: m.z.literal("restore_resource"), resource: m.z.enum(["hp", "mp"]), mode: m.z.enum(["flat", "percent"]), value: ge }).refine((e) => e.mode !== "percent" || e.value <= 1), m.z.object({ type: m.z.literal("change_gauge"), gauge: m.z.literal("pillToxicity"), delta: m.z.number().finite().min(-2147483647).max(2147483647) }), m.z.object({ type: m.z.literal("remove_status"), status: pr, removeAll: m.z.boolean().optional() }), m.z.object({ type: m.z.literal("add_status"), status: pr, stacks: m.z.number().int().positive().optional(), duration: m.z.union([m.z.object({ kind: m.z.literal("until_removed") }), m.z.object({ kind: m.z.literal("time"), expiresAt: m.z.iso.datetime({ offset: !0 }) })]).optional(), usesRemaining: m.z.number().int().nonnegative().optional(), payload: m.z.record(m.z.string(), m.z.union([m.z.string(), m.z.number().finite(), m.z.boolean()])).optional() }), m.z.object({ type: m.z.literal("advance_track"), track: m.z.enum(["body.skin", "body.sinew_bone", "body.organs", "body.qi_blood", "body.primordial_spirit", "tempering.vitality", "tempering.spirit", "tempering.wisdom", "tempering.speed", "tempering.willpower", "marrow_wash"]), value: ge }), m.z.object({ type: m.z.literal("gain_progress"), target: m.z.enum(["cultivation_exp", "comprehension_insight"]), value: ge }), m.z.object({ type: m.z.literal("increase_lifespan"), value: ge }), m.z.object({ type: m.z.literal("gain_beast_cultivation"), value: ge })]), dr = { family: m.z.enum(Ge), operations: m.z.array(Dn).min(1).max(30), consumeRules: m.z.object({ scene: m.z.literal("out_of_battle_only"), quotaCategory: m.z.enum(ir) }) }, Ki = m.z.discriminatedUnion("kind", [m.z.object({ kind: m.z.literal("pill"), ...dr, alchemyMeta: m.z.object({ source: m.z.enum(["improvised", "formula"]), sourceMaterials: m.z.array(m.z.string()), stability: m.z.number().finite(), toxicityRating: m.z.number().finite(), tags: m.z.array(m.z.string()) }).passthrough() }), m.z.object({ kind: m.z.literal("spirit_fruit"), ...dr, source: m.z.object({ kind: m.z.literal("spirit_field"), version: m.z.literal(1) }) }), m.z.object({ kind: m.z.literal("talisman"), scenario: m.z.string().min(1), sessionMode: m.z.enum(ar), notes: m.z.string().optional() })]);
-    class lt {
+    var S = require("./zod.js");
+    var ge = S.z.number().finite().nonnegative().max(2147483647), dr = S.z.enum(["weakness", "minor_wound", "major_wound", "near_death", "breakthrough_focus", "protect_meridians", "clear_mind", "cultivation_boost"]), Tn = S.z.discriminatedUnion("type", [S.z.object({ type: S.z.literal("restore_resource"), resource: S.z.enum(["hp", "mp"]), mode: S.z.enum(["flat", "percent"]), value: ge }).refine((e) => e.mode !== "percent" || e.value <= 1), S.z.object({ type: S.z.literal("change_gauge"), gauge: S.z.literal("pillToxicity"), delta: S.z.number().finite().min(-2147483647).max(2147483647) }), S.z.object({ type: S.z.literal("remove_status"), status: dr, removeAll: S.z.boolean().optional() }), S.z.object({ type: S.z.literal("add_status"), status: dr, stacks: S.z.number().int().positive().optional(), duration: S.z.union([S.z.object({ kind: S.z.literal("until_removed") }), S.z.object({ kind: S.z.literal("time"), expiresAt: S.z.iso.datetime({ offset: !0 }) })]).optional(), usesRemaining: S.z.number().int().nonnegative().optional(), payload: S.z.record(S.z.string(), S.z.union([S.z.string(), S.z.number().finite(), S.z.boolean()])).optional() }), S.z.object({ type: S.z.literal("advance_track"), track: S.z.enum(["body.skin", "body.sinew_bone", "body.organs", "body.qi_blood", "body.primordial_spirit", "tempering.vitality", "tempering.spirit", "tempering.wisdom", "tempering.speed", "tempering.willpower", "marrow_wash"]), value: ge }), S.z.object({ type: S.z.literal("gain_progress"), target: S.z.enum(["cultivation_exp", "comprehension_insight"]), value: ge }), S.z.object({ type: S.z.literal("increase_lifespan"), value: ge }), S.z.object({ type: S.z.literal("gain_beast_cultivation"), value: ge })]), Sr = { family: S.z.enum(Fe), operations: S.z.array(Tn).min(1).max(30), consumeRules: S.z.object({ scene: S.z.literal("out_of_battle_only"), quotaCategory: S.z.enum(ar) }) }, Pi = S.z.discriminatedUnion("kind", [S.z.object({ kind: S.z.literal("pill"), ...Sr, alchemyMeta: S.z.object({ source: S.z.enum(["improvised", "formula"]), sourceMaterials: S.z.array(S.z.string()), stability: S.z.number().finite(), toxicityRating: S.z.number().finite(), tags: S.z.array(S.z.string()) }).passthrough() }), S.z.object({ kind: S.z.literal("spirit_fruit"), ...Sr, source: S.z.object({ kind: S.z.literal("spirit_field"), version: S.z.literal(1) }) }), S.z.object({ kind: S.z.literal("talisman"), scenario: S.z.string().min(1), sessionMode: S.z.enum(lr), notes: S.z.string().optional() })]);
+    class pt {
         constructor(e, t = new Set) { this.minimumRanks = e; this.lockedCapabilities = t; this.capabilityKeys = Object.freeze(Object.keys(e)); }
         keys() { return this.capabilityKeys; }
         minimumRank(e) { return this.minimumRanks[e]; }
-        allows(e, t) { return !this.lockedCapabilities.has(t) && Boolean(this.minimumRank(t)) && Zt(e, this.minimumRank(t)); }
-        snapshot(e) { return Object.fromEntries(this.capabilityKeys.map((t) => { let r = this.minimumRank(t), o = this.allows(e, t); return [t, { granted: o, requiredRank: r, ...!o ? { reason: this.lockedCapabilities.has(t) ? "首版尚未开放" : r ? `须晋升${nt[r]}后开放` : "当前宗门未开放此能力", reasonCode: this.lockedCapabilities.has(t) ? "version_locked" : r ? "rank_locked" : "content_locked" } : {} }]; })); }
+        allows(e, t) { return !this.lockedCapabilities.has(t) && Boolean(this.minimumRank(t)) && Ht(e, this.minimumRank(t)); }
+        snapshot(e) { return Object.fromEntries(this.capabilityKeys.map((t) => { let r = this.minimumRank(t), o = this.allows(e, t); return [t, { granted: o, requiredRank: r, ...!o ? { reason: this.lockedCapabilities.has(t) ? "首版尚未开放" : r ? `须晋升${it[r]}后开放` : "当前宗门未开放此能力", reasonCode: this.lockedCapabilities.has(t) ? "version_locked" : r ? "rank_locked" : "content_locked" } : {} }]; })); }
     }
-    var ft = { 炼气: 1000, 筑基: 1800, 金丹: 3200, 元婴: 5600, 化神: 9000, 炼虚: 14000, 合体: 21000, 大乘: 30000, 渡劫: 42000 };
-    var mr = { minBaseExp: 1, difficultyDailyFraction: { easy: 0.05, normal: 0.08, hard: 0.12, elite: 0.18 } };
-    var vn = { realmDailyBudgetMultiplier: 2, rankMultiplierBps: { registered: 7500, outer: 1e4, inner: 12500, true: 15000 }, roundUnit: 100 };
-    function Sr(e, t) { let r = vn, o = ft[t] * r.realmDailyBudgetMultiplier * (r.rankMultiplierBps[e] / 1e4); return Math.round(o / r.roundUnit) * r.roundUnit; }
-    var Tn = new lt({ "sect.hall.view": "registered", "sect.tasks.use": "registered", "sect.archive.use": "registered", "sect.enlightenment.use": "registered", "sect.arena.use": "registered", "sect.shop.use": "outer", "sect.construction.view": "registered", "sect.construction.donate": "registered", "sect.facility.cultivation.use": "outer", "sect.facility.alchemy.use": "inner", "sect.facility.refinery.use": "inner", "sect.spirit_vein.view": "registered", "sect.herb_garden.view": "registered", "sect.cave.view": "inner", "sect.gate.view": "registered", "sect.formation.view": "true", "sect.task.pill_delivery.accept": "outer", "sect.task.artifact_delivery.accept": "inner", "sect.task.elder_trial.challenge": "inner" }, new Set(["sect.formation.view"])), br = [0, 40, 75, 110, 145, 180], Y = { gate_sweep: 4, mine_patrol: 4, spirit_mining: 4, pill_delivery: 4, artifact_delivery: 5, weekly_diligence: 30, weekly_tournament: 15, weekly_bounty_battle: 20, weekly_bounty_material: 20 };
+    var mt = { 炼气: 1000, 筑基: 1800, 金丹: 3200, 元婴: 5600, 化神: 9000, 炼虚: 14000, 合体: 21000, 大乘: 30000, 渡劫: 42000 };
+    var br = { minBaseExp: 1, difficultyDailyFraction: { easy: 0.05, normal: 0.08, hard: 0.12, elite: 0.18 } };
+    var wn = { realmDailyBudgetMultiplier: 2, rankMultiplierBps: { registered: 7500, outer: 1e4, inner: 12500, true: 15000 }, roundUnit: 100 };
+    function yr(e, t) { let r = wn, o = mt[t] * r.realmDailyBudgetMultiplier * (r.rankMultiplierBps[e] / 1e4); return Math.round(o / r.roundUnit) * r.roundUnit; }
+    var On = new pt({ "sect.hall.view": "registered", "sect.tasks.use": "registered", "sect.archive.use": "registered", "sect.enlightenment.use": "registered", "sect.arena.use": "registered", "sect.shop.use": "outer", "sect.construction.view": "registered", "sect.construction.donate": "registered", "sect.facility.cultivation.use": "outer", "sect.facility.alchemy.use": "inner", "sect.facility.refinery.use": "inner", "sect.spirit_vein.view": "registered", "sect.herb_garden.view": "registered", "sect.cave.view": "inner", "sect.gate.view": "registered", "sect.formation.view": "true", "sect.task.pill_delivery.accept": "outer", "sect.task.artifact_delivery.accept": "inner", "sect.task.elder_trial.challenge": "inner" }, new Set(["sect.formation.view"])), ur = [0, 40, 75, 110, 145, 180], Y = { gate_sweep: 4, mine_patrol: 4, spirit_mining: 4, pill_delivery: 4, artifact_delivery: 5, weekly_diligence: 30, weekly_tournament: 15, weekly_bounty_battle: 20, weekly_bounty_material: 20 };
     function J(e, t, r, o) { return { title: e, description: t, actionLabel: r, dialogue: o }; }
     function xe(e) { return [...e === "daily" ? [{ strategy: "sect.fulfillment.progress-signal", input: { source: "sect.task.daily.completed", amount: 1 } }] : []]; }
     var he = [{ id: "gate_sweep", kind: "daily", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.sweep", minimumDifficulty: "easy", reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.gate_sweep } }, fulfillment: xe("daily"), presentation: J("清扫山门", "清理山门步道，完成一轮宗门勤务。", "开始清扫", { offeredReply: "山门洒扫便交给我吧", activeReply: "山门那桩洒扫，我再确认一遍", claimableReply: "山门已经清扫妥当，请执事查验", claimedReply: "请替我查查山门勤务的功簿", instruction: { text: "去山门步道清理落叶，完成一轮洒扫后回来复命。" } }), target: 1 }, { id: "mine_patrol", kind: "daily", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.battle", minimumDifficulty: "normal", executionLocation: { key: "sect.spirit-vein", travelReply: "弟子这就前往矿场巡视" }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.mine_patrol } }, fulfillment: xe("daily"), presentation: J("巡视矿场", "前往宗门矿脉驱逐侵扰妖兽。", "开始巡逻", { offeredReply: "矿场巡视交给我", activeReply: "矿场那边的差事，请再说一遍", claimableReply: "矿场侵扰已经平息，请执事查验", claimedReply: "请替我查查矿场巡视的功簿", instruction: { text: "去宗门矿脉巡视一趟，将侵扰矿场的妖兽驱逐干净，再回来复命。" } }), target: 1 }, { id: "spirit_mining", kind: "daily", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.mining", minimumDifficulty: "normal", reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.spirit_mining } }, fulfillment: xe("daily"), presentation: J("灵矿采掘", "进入宗门灵脉，以灵索采集一轮矿藏。", "开始采掘", { offeredReply: "今日灵矿采掘便交给我吧", activeReply: "灵矿采掘的封签，请再替我核对一遍", claimableReply: "今日采掘已经结束，请执事验收回执", claimedReply: "请替我查查灵矿采掘的功簿", instruction: { text: "去宗门灵脉开启采掘封签，以灵索带回足够矿藏，再回来复命。" } }), target: 1 }, { id: "pill_delivery", kind: "daily", enrollment: "manual", requiredCapability: "sect.task.pill_delivery.accept", executorKey: "sect.delivery.pill", minimumDifficulty: "easy", offer: { policy: "sect.offer.delivery", input: { kind: "pill" } }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.pill_delivery } }, fulfillment: xe("daily"), presentation: J("丹药委托", "寻来符合要求的丹药，补充宗门日常储备。", "选择丹药", { offeredReply: "丹房所需之物，我来寻", activeReply: "丹房那桩委托，请再说一遍", claimableReply: "丹药已经带回，请执事查验", claimedReply: "请替我查查丹药委托的功簿", instruction: { text: "替丹房寻来一枚合用的丹药，取得后直接带回事务堂即可。", requirementPrefix: "替丹房寻来", requirementSuffix: "，取得后直接带回事务堂即可。" } }), target: 1 }, { id: "artifact_delivery", kind: "daily", enrollment: "manual", requiredCapability: "sect.task.artifact_delivery.accept", executorKey: "sect.delivery.equipment", minimumDifficulty: "easy", offer: { policy: "sect.offer.delivery", input: { kind: "equipment" } }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.artifact_delivery } }, fulfillment: xe("daily"), presentation: J("道装委托", "寻来符合要求且未装备的道装，交由宗门统一调度。", "选择道装", { offeredReply: "道装调度一事，我可以接下", activeReply: "道装那桩委托，请再说一遍", claimableReply: "道装已经移交，请执事查验", claimedReply: "请替我查查道装委托的功簿", instruction: { text: "替宗门寻来一件合用的未装备道装，带回事务堂核验。", requirementPrefix: "替宗门寻来", requirementSuffix: "，带回事务堂核验。" } }), target: 1 }, { id: "weekly_diligence", kind: "weekly", enrollment: "automatic", requiredCapability: "sect.tasks.use", executorKey: "sect.progress", minimumDifficulty: "easy", reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.weekly_diligence } }, fulfillment: [], presentation: J("勤务周录", "一周完成五次宗门日常。", "查看进度", { offeredReply: "本周勤务也记我一份", activeReply: "本周勤务，我已经办到哪里了", claimableReply: "本周勤务已经办足，请执事查验", claimedReply: "请替我翻翻本周勤务的功簿", instruction: { text: "本周要完成五次宗门日常，功簿会逐次记下。" } }), completionTags: ["weekly.diligence"], progress: { strategy: "sect.progress.completed-daily", source: "sect.task.daily.completed" }, target: 5 }, { id: "weekly_tournament", kind: "weekly", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.battle", minimumDifficulty: "hard", executionLocation: { key: "sect.arena", travelReply: "弟子这就去演武场候教" }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.weekly_tournament } }, fulfillment: [], presentation: J("宗门小比", "与本周演武名册中同境或低一境的同门切磋。", "参加宗门小比", { offeredReply: "本周小比，我来应战", activeReply: "小比的安排，请再说一遍", claimableReply: "本周小比已经结束，请执事查验", claimedReply: "请替我查查本周小比的功簿", instruction: { text: "去演武场的宗门擂台核对已锁定的同门对手，取胜后再回来复命。" } }), completionTags: ["promotion.tournament"], target: 1 }, { id: "weekly_bounty_battle", kind: "weekly", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.battle", minimumDifficulty: "hard", executionLocation: { key: "sect.foreign-gate", travelReply: "弟子这就循悬赏前往目标宗门" }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.weekly_bounty_battle } }, fulfillment: [], presentation: J("悬赏令·讨伐", "追缉一名与自身同境或低一境的外宗修士。", "前往讨伐", { offeredReply: "这份讨伐悬赏由我来办", activeReply: "讨伐目标的线索，请再交代一遍", claimableReply: "讨伐悬赏已经办妥，请执事查验", claimedReply: "请替我查查讨伐悬赏的功簿", instruction: { text: "循悬赏令前往目标宗门，在山门外找到目标并取胜，再回来复命。" } }), completionTags: ["promotion.bounty"], target: 1 }, { id: "weekly_bounty_material", kind: "weekly", enrollment: "manual", requiredCapability: "sect.tasks.use", executorKey: "sect.delivery.material", minimumDifficulty: "hard", offer: { policy: "sect.offer.delivery", input: { kind: "material" } }, reward: { policy: "sect.reward.realm-task", input: { baseContribution: Y.weekly_bounty_material } }, fulfillment: [], presentation: J("悬赏令·征集", "依照悬赏令征集一件稀有材料。", "交付悬赏材料", { offeredReply: "这份征集悬赏由我来办", activeReply: "征集所需的材料，请再交代一遍", claimableReply: "征集悬赏已经办妥，请执事查验", claimedReply: "请替我查查征集悬赏的功簿", instruction: { text: "依照悬赏令备齐材料后回来交付。", requirementPrefix: "这份悬赏要验一件证物。替我寻来", requirementSuffix: "，带回后我会核验其来路。" } }), completionTags: ["promotion.bounty"], target: 1 }, { id: "elder_trial", kind: "promotion", enrollment: "automatic", requiredCapability: "sect.task.elder_trial.challenge", executorKey: "sect.battle", fulfillment: [], presentation: J("长老试炼", "击败传功长老化身，取得真传资格。", "挑战长老试炼", { offeredReply: "弟子愿受晋升试炼", activeReply: "晋升试炼，请长老再作指点", claimableReply: "试炼已经通过，请长老查验", claimedReply: "请长老查验弟子的试炼记录", instruction: { text: "就在事务堂迎战传功长老的试炼化身，胜过此关，才算取得真传资格。" } }), completionTags: ["promotion.elder_trial"], target: 1 }];
-    class yr {
+    class gr {
         constructor() { this.byId = new Map(he.map((e) => [e.id, e])); }
         listDaily() { return he.filter((e) => e.kind === "daily"); }
         listWeekly() { return he.filter((e) => e.kind === "weekly"); }
@@ -18834,49 +18852,49 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         get(e) { return this.byId.get(e); }
         listByCompletionTag(e) { return he.filter((t) => { var _a; return (_a = t.completionTags) === null || _a === void 0 ? void 0 : _a.includes(e); }); }
     }
-    class ur {
-        stipendBase(e, t) { return Sr(e, t); }
+    class xr {
+        stipendBase(e, t) { return yr(e, t); }
     }
-    class gr {
+    class hr {
         constructor() {
             this.facilities = [{ key: "archive", initialLevel: 1, maxLevel: 5, upgradeable: !0 }, { key: "cultivation_room", initialLevel: 1, maxLevel: 5, upgradeable: !0 }, { key: "workshop", initialLevel: 1, maxLevel: 5, upgradeable: !0 }, { key: "spirit_vein", initialLevel: 1, maxLevel: 5, upgradeable: !0 }, { key: "herb_garden", initialLevel: 1, maxLevel: 5, upgradeable: !0 }, { key: "formation", initialLevel: 0, maxLevel: 0, upgradeable: !1 }];
         }
-        upgradeTarget(e) { return fr(e); }
+        upgradeTarget(e) { return mr(e); }
     }
-    class xr {
+    class kr {
         nextRank(e) { return { registered: "outer", outer: "inner", inner: "true", true: null }[e]; }
-        methodLevelCap(e) { return Xt[e]; }
+        methodLevelCap(e) { return Jt[e]; }
         requirement(e) { return { outer: { rank: "outer", minRealm: "炼气", contribution: 100, dailyCompletions: 3 }, inner: { rank: "inner", minRealm: "筑基", contribution: 500, requiredTaskTags: [{ tag: "promotion.tournament", label: "完成一次宗门小比" }] }, true: { rank: "true", minRealm: "元婴", contribution: 3000, requiredTaskTags: [{ tag: "promotion.bounty", label: "完成一次悬赏令" }, { tag: "promotion.elder_trial", label: "通过长老试炼" }] } }[e]; }
     }
-    class hr {
+    class Mr {
         constructor(e = {}) { this.theme = e; }
         facilityName(e, t) { var _a, _b; return (_b = (_a = this.theme.facilityNames) === null || _a === void 0 ? void 0 : _a[e]) !== null && _b !== void 0 ? _b : t; }
         snapshot(e, t) { let r = this.level(e, "cultivation_room"), o = this.level(e, "workshop"), s = this.level(e, "spirit_vein"), i = this.level(e, "herb_garden"), a = this.craftDiscount(se.alchemy, e, t).discount, n = this.craftDiscount(se.refinery, e, t).discount, l = this.retreatMultiplier(e); return { retreatMultiplier: l, craftDiscounts: { [se.alchemy]: a, [se.refinery]: n }, facilityEffects: { cultivation_room: { renderer: "sect.benefit.retreat", summary: `闭关修为提高 ${Math.round((l - 1) * 100)}%`, metrics: [{ key: "level", label: `${this.facilityName("cultivation_room", "修炼室")}等级`, value: r, format: "number" }, { key: "retreat_bonus", label: "闭关修为加成", value: r * 0.02, format: "percent" }] }, alchemy: { renderer: "sect.benefit.craft", summary: `炼丹灵石消耗减免 ${Math.round(a * 100)}%`, metrics: [{ key: "level", label: `${this.facilityName("workshop", "丹器坊")}等级`, value: o, format: "number" }] }, refinery: { renderer: "sect.benefit.craft", summary: `炼器灵石消耗减免 ${Math.round(n * 100)}%`, metrics: [{ key: "level", label: `${this.facilityName("workshop", "丹器坊")}等级`, value: o, format: "number" }] }, spirit_vein: { renderer: "sect.benefit.stipend", summary: `周俸灵石提高 ${s * 5}%`, metrics: [{ key: "level", label: `${this.facilityName("spirit_vein", "灵脉")}等级`, value: s, format: "number" }] }, herb_garden: { renderer: "sect.benefit.herbs", summary: `每周产出 ${i} 份基础灵草`, metrics: [{ key: "level", label: `${this.facilityName("herb_garden", "药田")}等级`, value: i, format: "number" }, { key: "weekly_herbs", label: "每周基础灵草", value: i, format: "number" }] } } }; }
         level(e, t) { var _a; return Math.max(1, Math.min(5, Math.floor((_a = e.get(t)) !== null && _a !== void 0 ? _a : 1))); }
         archiveLevel(e) { var _a; return (_a = e.get("archive")) !== null && _a !== void 0 ? _a : 1; }
-        methodLevelCap(e) { var _a; let t = Math.max(1, Math.min(5, Math.floor(this.archiveLevel(e)))); return (_a = br[t]) !== null && _a !== void 0 ? _a : br[1]; }
+        methodLevelCap(e) { var _a; let t = Math.max(1, Math.min(5, Math.floor(this.archiveLevel(e)))); return (_a = ur[t]) !== null && _a !== void 0 ? _a : ur[1]; }
         retreatMultiplier(e) { return 1 + this.level(e, "cultivation_room") * 0.02; }
         craftDiscount(e, t, r) { let o = this.level(t, "workshop"); return { capability: e === se.refinery ? "sect.facility.refinery.use" : "sect.facility.alchemy.use", discount: Math.min(0.2, o * 0.02 + (r === "true" ? 0.1 : 0)) }; }
         stipendMultiplier(e) { return 1 + this.level(e, "spirit_vein") * 0.05; }
     }
-    class pt {
+    class dt {
         constructor(e = {}) {
-            this.capabilities = Tn;
-            this.ranks = new xr;
-            this.construction = new gr;
+            this.capabilities = On;
+            this.ranks = new kr;
+            this.construction = new hr;
             this.theme = e;
-            this.tasks = new yr, this.economy = new ur, this.benefits = new hr(e);
+            this.tasks = new gr, this.economy = new xr, this.benefits = new Mr(e);
         }
     }
-    var zi = new pt;
+    var es = new dt;
     var G = require("./zod.js");
-    var kr = G.z.object({ schemaVersion: G.z.literal(2), kind: G.z.enum(["preset", "cultivator"]), challengeTitle: G.z.string().min(1), name: G.z.string().min(1), description: G.z.string().min(1), realm: G.z.enum(Z), realmStage: G.z.enum(W), sourceCultivatorId: G.z.uuid().optional(), sourceSectId: G.z.string().optional(), sourceSectName: G.z.string().optional(), lockedAt: G.z.iso.datetime(), seed: G.z.number().int().nonnegative(), contentVersion: G.z.literal("combat-v6-sect-task-v1"), resourcePolicy: G.z.enum(["full", "persistent"]), opponent: G.z.custom((e) => { let t = e; return (t === null || t === void 0 ? void 0 : t.version) === "sect-v6-opponent-v1" && Array.isArray(t.units) && t.units.length > 0 && t.units.every((r) => r.side === 1 && !!r.id && !r.benched) && Array.isArray(t.skills) && Array.isArray(t.statusDefs); }) }).strict();
-    var L = require("./zod.js"), wn = 1, Mr = L.z.object({ schemaVersion: L.z.literal(wn), challengeTitle: L.z.string().min(1).max(100), name: L.z.string().min(1).max(100), description: L.z.string().min(1).max(500), realm: L.z.enum(Z), realmStage: L.z.enum(W) }), On = Mr.extend({ kind: L.z.literal("preset"), presetId: L.z.string().min(1).max(128), rulesVersion: L.z.number().int().positive() }), Kn = Mr.extend({ kind: L.z.literal("cultivator"), sourceCultivatorId: L.z.string().uuid(), sourceSectId: L.z.string().min(1).max(64), sourceSectName: L.z.string().min(1).max(100), lockedAt: L.z.string().datetime() }), $n = L.z.discriminatedUnion("kind", [On, Kn]), is = L.z.union([kr, $n]);
+    var Rr = G.z.object({ schemaVersion: G.z.literal(2), kind: G.z.enum(["preset", "cultivator"]), challengeTitle: G.z.string().min(1), name: G.z.string().min(1), description: G.z.string().min(1), realm: G.z.enum(Z), realmStage: G.z.enum(W), sourceCultivatorId: G.z.uuid().optional(), sourceSectId: G.z.string().optional(), sourceSectName: G.z.string().optional(), lockedAt: G.z.iso.datetime(), seed: G.z.number().int().nonnegative(), contentVersion: G.z.literal("combat-v6-sect-task-v1"), resourcePolicy: G.z.enum(["full", "persistent"]), opponent: G.z.custom((e) => { let t = e; return (t === null || t === void 0 ? void 0 : t.version) === "sect-v6-opponent-v1" && Array.isArray(t.units) && t.units.length > 0 && t.units.every((r) => r.side === 1 && !!r.id && !r.benched) && Array.isArray(t.skills) && Array.isArray(t.statusDefs); }) }).strict();
+    var L = require("./zod.js"), Kn = 1, _r = L.z.object({ schemaVersion: L.z.literal(Kn), challengeTitle: L.z.string().min(1).max(100), name: L.z.string().min(1).max(100), description: L.z.string().min(1).max(500), realm: L.z.enum(Z), realmStage: L.z.enum(W) }), $n = _r.extend({ kind: L.z.literal("preset"), presetId: L.z.string().min(1).max(128), rulesVersion: L.z.number().int().positive() }), Pn = _r.extend({ kind: L.z.literal("cultivator"), sourceCultivatorId: L.z.string().uuid(), sourceSectId: L.z.string().min(1).max(64), sourceSectName: L.z.string().min(1).max(100), lockedAt: L.z.string().datetime() }), Nn = L.z.discriminatedUnion("kind", [$n, Pn]), as = L.z.union([Rr, Nn]);
     var C = require("./zod.js");
-    var P = require("./zod.js"), Pn = { cultivationFraction: mr.difficultyDailyFraction, cadenceMultiplier: { daily: 1, weekly: 3 }, spiritStoneMultiplier: 5, spiritStoneRoundUnit: 100, contributionDifficultyMultiplierBps: { easy: 1e4, normal: 11500, hard: 13500, elite: 16000 } }, ds = Pn.contributionDifficultyMultiplierBps;
-    var dt = P.z.object({ policyKey: P.z.string().min(1).max(128), policyVersion: P.z.number().int().positive(), difficulty: P.z.enum(["easy", "normal", "hard", "elite"]), contribution: P.z.number().int().nonnegative(), cultivationExp: P.z.number().int().nonnegative(), spiritStones: P.z.number().int().nonnegative(), summary: P.z.array(P.z.string().min(1).max(128)).max(8), grants: P.z.array(P.z.object({ quantity: P.z.number().int().positive().max(99), grant: P.z.object({ kind: P.z.literal("sect.reward.material"), name: P.z.string().min(1).max(100), quality: P.z.enum(Ke), description: P.z.string().min(1).max(500), type: P.z.enum(["herb", "ore", "aux"]), element: P.z.string().min(1).max(10).optional(), libraryItemId: P.z.string().min(1).max(120) }).strict() }).strict()).max(4).default([]) }).strict();
-    var Nn = C.z.object({ schemaVersion: C.z.literal(2), rulesVersion: C.z.number().int().positive(), anchorRealm: C.z.enum(Z), anchorRealmStage: C.z.enum(W), periodKey: C.z.string().min(1).max(32), executorKey: C.z.string().min(1).max(128), requirement: lr.optional(), difficulty: C.z.enum(["easy", "normal", "hard", "elite"]), reward: dt.optional() }).strict(), En = C.z.object({ itemId: C.z.string().min(1).max(128), kind: C.z.enum(["pill", "artifact", "equipment", "material"]), name: C.z.string().min(1).max(100), quality: C.z.string().min(1).max(20).optional(), equipmentLevel: C.z.number().int().min(0).max(180).optional(), quantity: C.z.number().int().positive().max(99), matchedFacts: C.z.array(C.z.string().min(1).max(128)).max(16) }).strict(), jn = C.z.object({ submittedItems: C.z.array(En).min(1).max(99).optional(), mining: C.z.object({ score: C.z.number().int().nonnegative(), maxScore: C.z.number().int().positive(), tier: C.z.enum(Yt), reward: dt }).strict().optional() }).strict().refine((e) => Number(Boolean(e.submittedItems)) + Number(Boolean(e.mining)) === 1, "宗门任务完成数据必须且只能包含一种结果"), gs = C.z.object({ schemaVersion: C.z.literal(2), target: C.z.number().int().positive(), offer: Nn, executorData: C.z.record(C.z.string(), C.z.unknown()), completionData: jn.optional() }).strict();
-    class Rr {
+    var P = require("./zod.js"), En = { cultivationFraction: br.difficultyDailyFraction, cadenceMultiplier: { daily: 1, weekly: 3 }, spiritStoneMultiplier: 5, spiritStoneRoundUnit: 100, contributionDifficultyMultiplierBps: { easy: 1e4, normal: 11500, hard: 13500, elite: 16000 } }, Ss = En.contributionDifficultyMultiplierBps;
+    var St = P.z.object({ policyKey: P.z.string().min(1).max(128), policyVersion: P.z.number().int().positive(), difficulty: P.z.enum(["easy", "normal", "hard", "elite"]), contribution: P.z.number().int().nonnegative(), cultivationExp: P.z.number().int().nonnegative(), spiritStones: P.z.number().int().nonnegative(), summary: P.z.array(P.z.string().min(1).max(128)).max(8), grants: P.z.array(P.z.object({ quantity: P.z.number().int().positive().max(99), grant: P.z.object({ kind: P.z.literal("sect.reward.material"), name: P.z.string().min(1).max(100), quality: P.z.enum($e), description: P.z.string().min(1).max(500), type: P.z.enum(["herb", "ore", "aux"]), element: P.z.string().min(1).max(10).optional(), libraryItemId: P.z.string().min(1).max(120) }).strict() }).strict()).max(4).default([]) }).strict();
+    var jn = C.z.object({ schemaVersion: C.z.literal(2), rulesVersion: C.z.number().int().positive(), anchorRealm: C.z.enum(Z), anchorRealmStage: C.z.enum(W), periodKey: C.z.string().min(1).max(32), executorKey: C.z.string().min(1).max(128), requirement: pr.optional(), difficulty: C.z.enum(["easy", "normal", "hard", "elite"]), reward: St.optional() }).strict(), Ln = C.z.object({ itemId: C.z.string().min(1).max(128), kind: C.z.enum(["pill", "artifact", "equipment", "material"]), name: C.z.string().min(1).max(100), quality: C.z.string().min(1).max(20).optional(), equipmentLevel: C.z.number().int().min(0).max(180).optional(), quantity: C.z.number().int().positive().max(99), matchedFacts: C.z.array(C.z.string().min(1).max(128)).max(16) }).strict(), In = C.z.object({ submittedItems: C.z.array(Ln).min(1).max(99).optional(), mining: C.z.object({ score: C.z.number().int().nonnegative(), maxScore: C.z.number().int().positive(), tier: C.z.enum(Qt), reward: St }).strict().optional() }).strict().refine((e) => Number(Boolean(e.submittedItems)) + Number(Boolean(e.mining)) === 1, "宗门任务完成数据必须且只能包含一种结果"), hs = C.z.object({ schemaVersion: C.z.literal(2), target: C.z.number().int().positive(), offer: jn, executorData: C.z.record(C.z.string(), C.z.unknown()), completionData: In.optional() }).strict();
+    class Cr {
         constructor() {
             this.templates = new Map;
         }
@@ -18885,17 +18903,17 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         has(e) { return this.templates.has(e); }
         getAll() { return Array.from(this.templates.values()); }
     }
-    function mt(e, t, r) { var _a; let o = $(`status_${e}`); return { key: e, name: o.label, description: (_a = o.description) !== null && _a !== void 0 ? _a : "", effectDetails: [`自然恢复速度降低至 ${Math.round(t * 100)}%。`], display: { icon: o.icon, shortDesc: r }, hooks: { onNaturalRecovery: () => t } }; }
-    var z = new Rr;
+    function bt(e, t, r) { var _a; let o = $(`status_${e}`); return { key: e, name: o.label, description: (_a = o.description) !== null && _a !== void 0 ? _a : "", effectDetails: [`自然恢复速度降低至 ${Math.round(t * 100)}%。`], display: { icon: o.icon, shortDesc: r }, hooks: { onNaturalRecovery: () => t } }; }
+    var z = new Cr;
     z.register({ key: "weakness", name: $("status_weakness").label, description: (_a = $("status_weakness").description) !== null && _a !== void 0 ? _a : "元气大伤，尚待恢复。", effectDetails: ["保留虚弱状态记录，不改变人物战斗属性。"], display: { icon: $("status_weakness").icon, shortDesc: "元气大伤，尚待恢复" }, hooks: {} });
-    z.register(mt("minor_wound", 0.88, "自然恢复速度降低至88%，需要疗伤"));
-    z.register(mt("major_wound", 0.68, "自然恢复速度降低至68%，需要疗伤"));
-    z.register(mt("near_death", 0.42, "命悬一线，需要紧急疗伤"));
+    z.register(bt("minor_wound", 0.88, "自然恢复速度降低至88%，需要疗伤"));
+    z.register(bt("major_wound", 0.68, "自然恢复速度降低至68%，需要疗伤"));
+    z.register(bt("near_death", 0.42, "命悬一线，需要紧急疗伤"));
     z.register({ key: "breakthrough_focus", name: $("status_breakthrough_focus").label, description: (_b = $("status_breakthrough_focus").description) !== null && _b !== void 0 ? _b : "", effectDetails: ["下一次突破按药力获得额外成功率。"], display: { icon: $("status_breakthrough_focus").icon, shortDesc: "突破前凝神蓄势" }, hooks: {} });
     z.register({ key: "protect_meridians", name: $("status_protect_meridians").label, description: (_c = $("status_protect_meridians").description) !== null && _c !== void 0 ? _c : "", effectDetails: ["突破失败时按药力降低修为损失。"], display: { icon: $("status_protect_meridians").icon, shortDesc: "护住经脉，降低反噬" }, hooks: {} });
     z.register({ key: "clear_mind", name: $("status_clear_mind").label, description: (_d = $("status_clear_mind").description) !== null && _d !== void 0 ? _d : "", effectDetails: ["突破失败不会滋生心魔，服用时清除既有心魔。"], display: { icon: $("status_clear_mind").icon, shortDesc: "清心定神，减少杂念" }, hooks: {} });
     z.register({ key: "cultivation_boost", name: $("status_cultivation_boost").label, description: (_f = $("status_cultivation_boost").description) !== null && _f !== void 0 ? _f : "", effectDetails: ["下一次闭关修炼获得的修为按药力百分比提升。"], display: { icon: $("status_cultivation_boost").icon, shortDesc: "下一次闭关修为提升" }, hooks: {} });
-    function _r(e, t, r) {
+    function Dr(e, t, r) {
         return r.map((o) => {
             let s = new Set, i = t;
             for (let l of [...o.path, void 0]) {
@@ -18920,15 +18938,15 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
 `);
     }
     var w = require("./zod.js");
-    var Cr = { $schema: "./body-cultivation.schema.json", formatVersion: 1, contentRevision: 1, tracks: { skin: { name: "炼体·皮肤", layerName: "防御修炼", shortDesc: "减少受到的物理伤害", benefit: { kind: "training", attribute: "defenseCultivate", perLevel: 1 } }, sinew_bone: { name: "炼体·筋骨", layerName: "攻法修炼", shortDesc: "提高造成的物理伤害", benefit: { kind: "training", attribute: "attackCultivate", perLevel: 1 } }, organs: { name: "炼体·脏腑", layerName: "法术修炼", shortDesc: "提高法术伤害与封印命中率", benefit: { kind: "training", attribute: "spellCultivate", perLevel: 1 } }, qi_blood: { name: "炼体·气血", layerName: "生命根基", shortDesc: "提高气血上限与施放治疗的恢复量", benefit: { kind: "life", hpRatioPerLevel: 0.005, healLevelsPerPoint: 2 } }, primordial_spirit: { name: "炼体·元神", layerName: "抗法修炼", shortDesc: "减少受到的法术伤害，降低被封印的概率", benefit: { kind: "training", attribute: "resistSpellCultivate", perLevel: 1 } } }, realms: [{ realm: "mortal_body", label: "凡躯", minCultivationRealm: "炼气", totalLevel: 0, softTrackCap: 5 }, { realm: "bronze_skin", label: "铜皮", minCultivationRealm: "炼气", totalLevel: 12, softTrackCap: 10 }, { realm: "iron_bone", label: "铁骨", minCultivationRealm: "筑基", totalLevel: 30, softTrackCap: 15 }, { realm: "jade_marrow", label: "玉髓", minCultivationRealm: "金丹", totalLevel: 55, softTrackCap: 22 }, { realm: "golden_body", label: "金身", minCultivationRealm: "元婴", totalLevel: 90, softTrackCap: 30 }, { realm: "dharma_body", label: "法身", minCultivationRealm: "化神", totalLevel: 140, softTrackCap: 45 }, { realm: "dao_body", label: "道体", minCultivationRealm: "合体", totalLevel: 220, softTrackCap: 60 }], progress: { base: 100, perLevel: 70, milestoneInterval: 5 } };
-    var ce = ["skin", "sinew_bone", "organs", "qi_blood", "primordial_spirit"], St = ["mortal_body", "bronze_skin", "iron_bone", "jade_marrow", "golden_body", "dharma_body", "dao_body"], Dr = ["attackCultivate", "defenseCultivate", "spellCultivate", "resistSpellCultivate"], Ae = w.z.string().min(1).max(100), ae = w.z.number().int().min(0).max(1e6), Ve = w.z.strictObject({ kind: w.z.literal("training"), attribute: w.z.enum(Dr), perLevel: w.z.number().min(0).max(100) }), In = w.z.strictObject({ kind: w.z.literal("life"), hpRatioPerLevel: w.z.number().min(0).max(1), healLevelsPerPoint: ae.min(1) }), ke = { name: Ae, layerName: Ae, shortDesc: Ae }, Bn = w.z.strictObject({ $schema: w.z.string().optional(), formatVersion: w.z.literal(1), contentRevision: ae.min(1), tracks: w.z.strictObject({ skin: w.z.strictObject({ ...ke, benefit: Ve }), sinew_bone: w.z.strictObject({ ...ke, benefit: Ve }), organs: w.z.strictObject({ ...ke, benefit: Ve }), qi_blood: w.z.strictObject({ ...ke, benefit: In }), primordial_spirit: w.z.strictObject({ ...ke, benefit: Ve }) }), realms: w.z.array(w.z.strictObject({ realm: w.z.enum(St), label: Ae, minCultivationRealm: w.z.enum(Object.keys(ne)), totalLevel: ae, softTrackCap: ae.min(1).max(1000) })).length(St.length), progress: w.z.strictObject({ base: ae.min(1), perLevel: ae, milestoneInterval: ae.min(1).max(1000) }) });
-    function Gn(e) {
-        let t = Bn.superRefine((r, o) => {
+    var vr = { $schema: "./body-cultivation.schema.json", formatVersion: 1, contentRevision: 1, tracks: { skin: { name: "炼体·皮肤", layerName: "防御修炼", shortDesc: "减少受到的物理伤害", benefit: { kind: "training", attribute: "defenseCultivate", perLevel: 1 } }, sinew_bone: { name: "炼体·筋骨", layerName: "攻法修炼", shortDesc: "提高造成的物理伤害", benefit: { kind: "training", attribute: "attackCultivate", perLevel: 1 } }, organs: { name: "炼体·脏腑", layerName: "法术修炼", shortDesc: "提高法术伤害与封印命中率", benefit: { kind: "training", attribute: "spellCultivate", perLevel: 1 } }, qi_blood: { name: "炼体·气血", layerName: "生命根基", shortDesc: "提高气血上限与施放治疗的恢复量", benefit: { kind: "life", hpRatioPerLevel: 0.005, healLevelsPerPoint: 2 } }, primordial_spirit: { name: "炼体·元神", layerName: "抗法修炼", shortDesc: "减少受到的法术伤害，降低被封印的概率", benefit: { kind: "training", attribute: "resistSpellCultivate", perLevel: 1 } } }, realms: [{ realm: "mortal_body", label: "凡躯", minCultivationRealm: "炼气", totalLevel: 0, softTrackCap: 5 }, { realm: "bronze_skin", label: "铜皮", minCultivationRealm: "炼气", totalLevel: 12, softTrackCap: 10 }, { realm: "iron_bone", label: "铁骨", minCultivationRealm: "筑基", totalLevel: 30, softTrackCap: 15 }, { realm: "jade_marrow", label: "玉髓", minCultivationRealm: "金丹", totalLevel: 55, softTrackCap: 22 }, { realm: "golden_body", label: "金身", minCultivationRealm: "元婴", totalLevel: 90, softTrackCap: 30 }, { realm: "dharma_body", label: "法身", minCultivationRealm: "化神", totalLevel: 140, softTrackCap: 45 }, { realm: "dao_body", label: "道体", minCultivationRealm: "合体", totalLevel: 220, softTrackCap: 60 }], progress: { base: 100, perLevel: 70, milestoneInterval: 5 } };
+    var ce = ["skin", "sinew_bone", "organs", "qi_blood", "primordial_spirit"], yt = ["mortal_body", "bronze_skin", "iron_bone", "jade_marrow", "golden_body", "dharma_body", "dao_body"], Tr = ["attackCultivate", "defenseCultivate", "spellCultivate", "resistSpellCultivate"], We = w.z.string().min(1).max(100), ae = w.z.number().int().min(0).max(1e6), Ae = w.z.strictObject({ kind: w.z.literal("training"), attribute: w.z.enum(Tr), perLevel: w.z.number().min(0).max(100) }), Gn = w.z.strictObject({ kind: w.z.literal("life"), hpRatioPerLevel: w.z.number().min(0).max(1), healLevelsPerPoint: ae.min(1) }), ke = { name: We, layerName: We, shortDesc: We }, Fn = w.z.strictObject({ $schema: w.z.string().optional(), formatVersion: w.z.literal(1), contentRevision: ae.min(1), tracks: w.z.strictObject({ skin: w.z.strictObject({ ...ke, benefit: Ae }), sinew_bone: w.z.strictObject({ ...ke, benefit: Ae }), organs: w.z.strictObject({ ...ke, benefit: Ae }), qi_blood: w.z.strictObject({ ...ke, benefit: Gn }), primordial_spirit: w.z.strictObject({ ...ke, benefit: Ae }) }), realms: w.z.array(w.z.strictObject({ realm: w.z.enum(yt), label: We, minCultivationRealm: w.z.enum(Object.keys(ne)), totalLevel: ae, softTrackCap: ae.min(1).max(1000) })).length(yt.length), progress: w.z.strictObject({ base: ae.min(1), perLevel: ae, milestoneInterval: ae.min(1).max(1000) }) });
+    function Vn(e) {
+        let t = Fn.superRefine((r, o) => {
             let s = (n, l) => o.addIssue({ code: "custom", path: n, message: l }), i = ce.flatMap((n) => r.tracks[n].benefit.kind === "training" ? [r.tracks[n].benefit.attribute] : []);
-            if (new Set(i).size !== Dr.length)
+            if (new Set(i).size !== Tr.length)
                 s(["tracks"], "四种修炼属性必须各映射一次");
             r.realms.forEach((n, l) => {
-                if (n.realm !== St[l])
+                if (n.realm !== yt[l])
                     s(["realms", l, n.realm], "肉身位阶顺序必须完整且与已有成长顺序一致");
                 let c = r.realms[l - 1];
                 if (!c) {
@@ -18947,13 +18965,13 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 s(["progress"], "最高等级进度需求溢出");
         }).safeParse(e);
         if (!t.success)
-            throw Error(_r("bodyCultivation/data/body-cultivation.json", e, t.error.issues));
+            throw Error(Dr("bodyCultivation/data/body-cultivation.json", e, t.error.issues));
         return t.data;
     }
-    var Me = Gn(Cr);
-    var $s = ce.map((e) => `body.${e}`);
-    var Ps = Object.fromEntries(ce.map((e) => { let { name: t, layerName: r, shortDesc: o } = Me.tracks[e]; return [e, { name: t, layerName: r, shortDesc: o }]; })), Fn = Object.fromEntries(Me.realms.map((e) => [e.realm, e.label])), Ns = Me.realms.map((e) => e.realm), Es = Object.fromEntries(Me.realms.map((e, t) => [e.realm, { ...e, unlockText: `五轨单轨上限${t === 0 ? " " : "提升至 "}Lv.${e.softTrackCap}` }]));
-    var F = (e, t, r) => ({ title: e, description: t, loadingText: r, permissionDeniedDescription: "设施禁制尚未开启，当前弟子身份不足以进入。" }), Vn = [{ id: "hall", label: "宗门大殿", route: "/game/sect/hall", permission: "sect.hall.view", left: "0", top: "0", note: "身份 · 同门 · 周俸" }, { id: "archive", label: "传承阁", route: "/game/sect/archive", facility: "archive", permission: "sect.archive.use", left: "0", top: "0", note: "心法研习" }, { id: "paths", label: "悟道处", route: "/game/sect/enlightenment-cliff", permission: "sect.enlightenment.use", left: "0", top: "0", note: "流派 · 参悟" }, { id: "arena", label: "演武场", route: "/game/sect/arena", permission: "sect.arena.use", left: "0", top: "0", note: "神通 · 战术 · 小比" }, { id: "affairs", label: "事务堂", route: "/game/sect/affairs", permission: "sect.tasks.use", left: "0", top: "0", note: "日常 · 周常 · 晋升" }, { id: "treasury", label: "宗门宝库", route: "/game/sect/treasury", permission: "sect.shop.use", left: "0", top: "0", note: "贡献兑换" }, { id: "industries", label: "建设院", route: "/game/sect/industries", permission: "sect.construction.view", left: "0", top: "0", note: "设施建设 · 灵石捐献" }, { id: "cultivation", label: "修炼室", route: "/game/sect/cultivation-room", facility: "cultivation_room", permission: "sect.facility.cultivation.use", left: "0", top: "0", note: "闭关修炼 · 设施灵效" }, { id: "alchemy", label: "丹房", route: "/game/sect/alchemy", facility: "workshop", permission: "sect.facility.alchemy.use", left: "0", top: "0", note: "炼丹 · 设施灵效" }, { id: "refinery", label: "器坊", route: "/game/sect/refinery", facility: "workshop", permission: "sect.facility.refinery.use", left: "0", top: "0", note: "炼器 · 设施灵效" }, { id: "vein", label: "灵脉", route: "/game/sect/spirit-vein", facility: "spirit_vein", permission: "sect.spirit_vein.view", left: "0", top: "0", note: "矿场巡视 · 灵石收益 · 采矿" }, { id: "garden", label: "药田", route: "/game/sect/herb-garden", facility: "herb_garden", permission: "sect.herb_garden.view", left: "0", top: "0", note: "草木长势 · 产出待开放" }, { id: "gate", label: "山门", route: "/game/sect/gate", permission: "sect.gate.view", left: "0", top: "0", note: "山门动态 · 清扫差事" }, { id: "cave", label: "弟子居所", route: "/game/sect/cave", permission: "sect.cave.view", left: "0", top: "0", note: "弟子居所" }], An = { map: F("宗门舆图", "宗门设施各司其职，可从此进入对应场所。", "宗门舆图正在展开……"), hall: F("宗门大殿", "身份、俸禄、晋升与同门名册均在此查验。", "身份玉牒正在核验……"), affairs: F("事务堂", "宗门日常、周常与晋升事务均在此领取和交付。", "事务目录正在整理……"), archive: F("传承阁", "宗门心法依传承次第收录，可在此逐卷研习。", "传承卷册正在归档……"), paths: F("悟道处", "选择流派，并为已解锁层级配置参悟节点。", "参悟记录正在展开……"), arena: F("演武场", "配置已解锁神通与自动战术，检视当前构筑效果。", "演武阵法正在开启……"), treasury: F("宗门宝库", "使用宗门贡献兑换常备物资与轮换珍材。", "宝库库存正在清点……"), industries: F("建设院", "选择宗门设施并捐献灵石，推进常态建设。", "设施建设进度正在汇总……"), cultivation: F("修炼室", "使用宗门修炼设施进行闭关。", "聚灵设施正在启动……"), alchemy: F("丹房", "使用宗门丹房炼制丹药。", "炼丹设施正在启动……"), refinery: F("器坊", "使用宗门器坊炼制法器。", "炼器设施正在启动……"), spiritVein: F("灵脉", "查看灵脉设施收益并办理矿场事务。", "灵脉记录正在读取……"), herbGarden: F("药田", "查看药田设施提供的周期产出。", "药田记录正在读取……"), gate: F("山门", "查看宗门近期动态与公共事务。", "山门记录正在读取……"), cave: F("弟子居所", "查看你在宗门中的个人居所资格。", "居所记录正在读取……"), taskBattle: F("宗门战局", "完成当前宗门战斗事务。", "宗门战局推演中……") }, O = (e, t, r, o, s, i, a, n, l = e, c = "person") => ({ roleKey: e, id: l, sigil: t, name: r, identity: o, responsibility: s, greeting: i, appearance: c, conversation: { renderer: a, parameters: n } }), Wn = Object.freeze({ affairs: { key: "affairs", description: "堂中卷宗分由三席执事经办。寻到对应执事，便可询问、接办或交回当前事务。", actors: [O("daily", "执", "值日执事", "值日执事", "负责日常委托。", "今日事务都在这里。你要先看哪一件？", "sect.affairs.tasks", { kind: "daily" }, "daily-steward"), O("weekly", "簿", "功簿执事", "功簿执事", "负责周常委托。", "本周卷宗已经归拢，你可逐项查验。", "sect.affairs.tasks", { kind: "weekly" }, "weekly-steward"), O("promotion", "传", "传功长老", "传功长老", "负责晋升试炼。", "晋升不可躁进。先看看你当前应过的关。", "sect.affairs.tasks", { kind: "promotion" }, "promotion-elder")] }, hall: { key: "hall", description: "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。", actors: [O("registry", "掌", "掌籍执事", "掌籍执事", "负责弟子身份与同门名录。", "身份玉牒与同门名录都在这里，你想查哪一项？", "sect.hall.registry"), O("stipend", "俸", "俸禄执事", "俸禄执事", "负责核算和发放宗门周俸。", "本周俸册已经核清，你可来查验或领取。", "sect.hall.stipend")] }, treasury: { key: "treasury", description: "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。", actors: [O("keeper", "库", "司库执事", "司库执事", "负责宝库库存与贡献兑换。", "宝库今日已经开封。你想查看哪一类物资？", "sect.treasury.shop")] }, industries: { key: "industries", description: "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。", actors: [O("construction", "造", "营造执事", "营造执事", "负责各处设施等级与建设进度。", "各处设施的建设进度都有记录，可以随时查验。", "sect.industries.construction"), O("donation", "石", "建设执事", "建设执事", "负责灵石捐献与建设登记。", "每日可择一处设施捐献灵石，你想建设哪一处？", "sect.industries.donation")] }, archive: { key: "archive", description: "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。", actors: [O("keeper", "阁", "守阁长老", "守阁长老", "负责心法经卷与研习。", "阁中经卷各有次第，你想研习哪一门心法？", "sect.archive.methods")] }, paths: { key: "paths", description: "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。", actors: [O("guide", "引", "引道长老", "引道长老", "负责流派选择与参悟引导。", "道途不可只看名目。你想从哪一脉开始问？", "sect.paths.guidance")] }, arena: { key: "arena", description: "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。", actors: [O("instructor", "武", "演武教习", "演武教习", "负责神通配置与自动战术。", "你的神通与战术都可在此调整，想先看哪一项？", "sect.arena.loadout"), O("marshal", "场", "值场执事", "值场执事", "负责演武场秩序与入场引导。", "演武场已经清过场，小比对手会在宗门擂台前候场。", "sect.arena.marshal"), O("ring", "⚔️", "宗门擂台", "宗门设施", "开启宗门小比战局。", "擂台阵纹已归位，有小比在身便可登台。", "sect.arena.tournament", { locationKey: "sect.arena" }, "sect-arena-ring", "facility")] }, cultivation: { key: "cultivation", description: "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。", actors: [O("keeper", "阵", "守阵执事", "守阵执事", "负责聚灵阵与闭关安排。", "阵息平稳。你要查问此地灵效，还是就此入静？", "sect.cultivation.retreat")] }, alchemy: { key: "alchemy", description: "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。", actors: [O("keeper", "丹", "丹房执事", "丹房执事", "负责丹房状态与炼丹安排。", "炉火正稳。你要先问丹房灵效，还是直接开炉？", "sect.alchemy.craft", { facilityKey: "workshop", effectKey: "alchemy", workspaceHref: "/game/sect/alchemy?workspace=craft", statusReply: "请执事说说丹房灵效", workspaceReply: "有劳执事为我开炉炼丹" }), O("furnace", "鼎", "宗门丹炉", "炼丹设施", "纳药、引火、聚蕴、凝丹。", "炉腹传来低沉回响，地火阵纹正等待灵石与药气。", "sect.alchemy.craft", { facilityKey: "workshop", effectKey: "alchemy", workspaceHref: "/game/sect/alchemy?workspace=craft", statusReply: "以神识察看丹炉灵效", workspaceReply: "唤醒丹炉，开始炼丹" }, "sect-alchemy-furnace", "facility")] }, refinery: { key: "refinery", description: "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。", actors: [O("keeper", "器", "器坊执事", "器坊执事", "负责器坊状态与炼器安排。", "地火可用。你要先问器坊灵效，还是就此开炉？", "sect.refinery.craft", { facilityKey: "workshop", effectKey: "refinery", workspaceHref: "/game/sect/refinery?workspace=craft", statusReply: "请执事说说器坊灵效", workspaceReply: "有劳执事为我开炉炼器" })] }, spiritVein: { key: "spiritVein", description: "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。", actors: [O("keeper", "脉", "守脉执事", "守脉执事", "负责矿场巡视交接。", "今日巡视封签已经备好，你若领了矿场差事便来核对。", "sect.spirit-vein.patrol", { locationKey: "sect.spirit-vein" }), O("facility", "⛏️", "宗门灵脉", "宗门设施", "查看设施等级、灵石收益并进行灵矿采掘。", "矿壁中的灵辉依旧沿岩隙缓缓流转。", "sect.spirit-vein.mining", { facilityKey: "spirit_vein", effectKey: "spirit_vein", detail: "灵石收益会随周俸一并核算，无需在矿场另行采收。" }, "spirit-vein-facility", "facility")] }, herbGarden: { key: "herbGarden", description: "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。", actors: [O("keeper", "药", "药园执事", "药园执事", "负责草木长势与周期产出。", "今日草木长势平稳，田间近况都已记在值录中。", "sect.herb-garden.caretaker", { facilityKey: "herb_garden", detail: "药田产出玩法后续开放。", stages: ["新畦初醒", "灵苗成行", "药香盈陌", "四时不歇", "百草丰登"] }), O("facility", "\uD83C\uDF3F", "宗门药田", "宗门设施", "查看设施等级与药田近况。", "灵泉润过畦垄，草木依照时序生长。", "sect.herb-garden.status", { facilityKey: "herb_garden", effectKey: "herb_garden", detail: "药田产出玩法后续开放。" }, "herb-garden-facility", "facility")] }, gate: { key: "gate", description: "山门内外人声往来，守山执事在门侧整理当日来往记录。", actors: [O("keeper", "门", "守山执事", "守山执事", "负责山门动态与来往记录。", "今日来往记录已经理清，山门内外的动静都可查问。", "sect.gate.news"), O("facility", "⛰️", "宗门山门", "宗门设施", "进入山门步道完成清扫。", "门前石阶延入山道，零落枝叶仍待清理。", "sect.gate.sweep", void 0, "gate-facility", "facility")] }, formation: { key: "formation", description: "护宗阵枢仍在封禁之中。", actors: [O("warden", "护", "护阵长老", "护阵长老", "负责护宗阵法管理。", "阵枢尚未开放，今日无需入内。", "sect.formation.status")] } }), Ea = Object.freeze({ announcement: "宗门诸务照常运转，请诸位弟子各安其位、勤勉修行。", map: Object.freeze({ alt: "宗门设施导航图", aspectRatio: 1.7768331562167907, hotspots: Vn }), facilityLabels: Object.freeze({ archive: "传承阁", cultivation_room: "修炼室", workshop: "丹器坊", spirit_vein: "灵脉", herb_garden: "药田", formation: "护宗大阵" }), lockedFacilities: Object.freeze(["formation"]), scenes: Object.freeze(An), rooms: Wn, terms: Object.freeze({ pathChanges: "流派变化", meridianPractice: "参悟进度", meridianLoadout: "参悟方案", abilityChanges: "神通变化", returnToAffairs: "返回事务堂", sweepActivity: "清扫山门", sweepCanvasLabel: "清扫山门游戏画布" }) });
+    var Me = Vn(vr);
+    var Ns = ce.map((e) => `body.${e}`);
+    var Es = Object.fromEntries(ce.map((e) => { let { name: t, layerName: r, shortDesc: o } = Me.tracks[e]; return [e, { name: t, layerName: r, shortDesc: o }]; })), An = Object.fromEntries(Me.realms.map((e) => [e.realm, e.label])), js = Me.realms.map((e) => e.realm), Ls = Object.fromEntries(Me.realms.map((e, t) => [e.realm, { ...e, unlockText: `五轨单轨上限${t === 0 ? " " : "提升至 "}Lv.${e.softTrackCap}` }]));
+    var F = (e, t, r) => ({ title: e, description: t, loadingText: r, permissionDeniedDescription: "设施禁制尚未开启，当前弟子身份不足以进入。" }), Wn = [{ id: "hall", label: "宗门大殿", route: "/game/sect/hall", permission: "sect.hall.view", left: "0", top: "0", note: "身份 · 同门 · 周俸" }, { id: "archive", label: "传承阁", route: "/game/sect/archive", facility: "archive", permission: "sect.archive.use", left: "0", top: "0", note: "心法研习" }, { id: "paths", label: "悟道处", route: "/game/sect/enlightenment-cliff", permission: "sect.enlightenment.use", left: "0", top: "0", note: "流派 · 参悟" }, { id: "arena", label: "演武场", route: "/game/sect/arena", permission: "sect.arena.use", left: "0", top: "0", note: "神通 · 战术 · 小比" }, { id: "affairs", label: "事务堂", route: "/game/sect/affairs", permission: "sect.tasks.use", left: "0", top: "0", note: "日常 · 周常 · 晋升" }, { id: "treasury", label: "宗门宝库", route: "/game/sect/treasury", permission: "sect.shop.use", left: "0", top: "0", note: "贡献兑换" }, { id: "industries", label: "建设院", route: "/game/sect/industries", permission: "sect.construction.view", left: "0", top: "0", note: "设施建设 · 灵石捐献" }, { id: "cultivation", label: "修炼室", route: "/game/sect/cultivation-room", facility: "cultivation_room", permission: "sect.facility.cultivation.use", left: "0", top: "0", note: "闭关修炼 · 设施灵效" }, { id: "alchemy", label: "丹房", route: "/game/sect/alchemy", facility: "workshop", permission: "sect.facility.alchemy.use", left: "0", top: "0", note: "炼丹 · 设施灵效" }, { id: "refinery", label: "器坊", route: "/game/sect/refinery", facility: "workshop", permission: "sect.facility.refinery.use", left: "0", top: "0", note: "炼器 · 设施灵效" }, { id: "vein", label: "灵脉", route: "/game/sect/spirit-vein", facility: "spirit_vein", permission: "sect.spirit_vein.view", left: "0", top: "0", note: "矿场巡视 · 灵石收益 · 采矿" }, { id: "garden", label: "药田", route: "/game/sect/herb-garden", facility: "herb_garden", permission: "sect.herb_garden.view", left: "0", top: "0", note: "草木长势 · 产出待开放" }, { id: "gate", label: "山门", route: "/game/sect/gate", permission: "sect.gate.view", left: "0", top: "0", note: "山门动态 · 清扫差事" }, { id: "cave", label: "弟子居所", route: "/game/sect/cave", permission: "sect.cave.view", left: "0", top: "0", note: "弟子居所" }], Xn = { map: F("宗门舆图", "宗门设施各司其职，可从此进入对应场所。", "宗门舆图正在展开……"), hall: F("宗门大殿", "身份、俸禄、晋升与同门名册均在此查验。", "身份玉牒正在核验……"), affairs: F("事务堂", "宗门日常、周常与晋升事务均在此领取和交付。", "事务目录正在整理……"), archive: F("传承阁", "宗门心法依传承次第收录，可在此逐卷研习。", "传承卷册正在归档……"), paths: F("悟道处", "选择流派，并为已解锁层级配置参悟节点。", "参悟记录正在展开……"), arena: F("演武场", "配置已解锁神通与自动战术，检视当前构筑效果。", "演武阵法正在开启……"), treasury: F("宗门宝库", "使用宗门贡献兑换常备物资与轮换珍材。", "宝库库存正在清点……"), industries: F("建设院", "选择宗门设施并捐献灵石，推进常态建设。", "设施建设进度正在汇总……"), cultivation: F("修炼室", "使用宗门修炼设施进行闭关。", "聚灵设施正在启动……"), alchemy: F("丹房", "使用宗门丹房炼制丹药。", "炼丹设施正在启动……"), refinery: F("器坊", "使用宗门器坊炼制法器。", "炼器设施正在启动……"), spiritVein: F("灵脉", "查看灵脉设施收益并办理矿场事务。", "灵脉记录正在读取……"), herbGarden: F("药田", "查看药田设施提供的周期产出。", "药田记录正在读取……"), gate: F("山门", "查看宗门近期动态与公共事务。", "山门记录正在读取……"), cave: F("弟子居所", "查看你在宗门中的个人居所资格。", "居所记录正在读取……"), taskBattle: F("宗门战局", "完成当前宗门战斗事务。", "宗门战局推演中……") }, O = (e, t, r, o, s, i, a, n, l = e, c = "person") => ({ roleKey: e, id: l, sigil: t, name: r, identity: o, responsibility: s, greeting: i, appearance: c, conversation: { renderer: a, parameters: n } }), Zn = Object.freeze({ affairs: { key: "affairs", description: "堂中卷宗分由三席执事经办。寻到对应执事，便可询问、接办或交回当前事务。", actors: [O("daily", "执", "值日执事", "值日执事", "负责日常委托。", "今日事务都在这里。你要先看哪一件？", "sect.affairs.tasks", { kind: "daily" }, "daily-steward"), O("weekly", "簿", "功簿执事", "功簿执事", "负责周常委托。", "本周卷宗已经归拢，你可逐项查验。", "sect.affairs.tasks", { kind: "weekly" }, "weekly-steward"), O("promotion", "传", "传功长老", "传功长老", "负责晋升试炼。", "晋升不可躁进。先看看你当前应过的关。", "sect.affairs.tasks", { kind: "promotion" }, "promotion-elder")] }, hall: { key: "hall", description: "玉牒、俸册与同门名录分案收存。寻到对应执事，便可当面查验。", actors: [O("registry", "掌", "掌籍执事", "掌籍执事", "负责弟子身份与同门名录。", "身份玉牒与同门名录都在这里，你想查哪一项？", "sect.hall.registry"), O("stipend", "俸", "俸禄执事", "俸禄执事", "负责核算和发放宗门周俸。", "本周俸册已经核清，你可来查验或领取。", "sect.hall.stipend")] }, treasury: { key: "treasury", description: "库架依次封存常备物资与轮换珍材，司库执事正在案前清点。", actors: [O("keeper", "库", "司库执事", "司库执事", "负责宝库库存与贡献兑换。", "宝库今日已经开封。你想查看哪一类物资？", "sect.treasury.shop")] }, industries: { key: "industries", description: "各处设施的等级与进度列于案前，宗门建设由两席执事共同经办。", actors: [O("construction", "造", "营造执事", "营造执事", "负责各处设施等级与建设进度。", "各处设施的建设进度都有记录，可以随时查验。", "sect.industries.construction"), O("donation", "石", "建设执事", "建设执事", "负责灵石捐献与建设登记。", "每日可择一处设施捐献灵石，你想建设哪一处？", "sect.industries.donation")] }, archive: { key: "archive", description: "传承经卷依次归架，守阁之人静候案前，为弟子查卷授业。", actors: [O("keeper", "阁", "守阁长老", "守阁长老", "负责心法经卷与研习。", "阁中经卷各有次第，你想研习哪一门心法？", "sect.archive.methods")] }, paths: { key: "paths", description: "道痕在静处交汇，引道长老在此为弟子辨明流派与参悟次第。", actors: [O("guide", "引", "引道长老", "引道长老", "负责流派选择与参悟引导。", "道途不可只看名目。你想从哪一脉开始问？", "sect.paths.guidance")] }, arena: { key: "arena", description: "演武阵纹铺陈场中，教习与值场执事分守两侧，宗门擂台立在中央。", actors: [O("instructor", "武", "演武教习", "演武教习", "负责神通配置与自动战术。", "你的神通与战术都可在此调整，想先看哪一项？", "sect.arena.loadout"), O("marshal", "场", "值场执事", "值场执事", "负责演武场秩序与入场引导。", "演武场已经清过场，小比对手会在宗门擂台前候场。", "sect.arena.marshal"), O("ring", "⚔️", "宗门擂台", "宗门设施", "开启宗门小比战局。", "擂台阵纹已归位，有小比在身便可登台。", "sect.arena.tournament", { locationKey: "sect.arena" }, "sect-arena-ring", "facility")] }, cultivation: { key: "cultivation", description: "聚灵阵息在静室中缓缓流转，守阵执事候在阵枢旁。", actors: [O("keeper", "阵", "守阵执事", "守阵执事", "负责聚灵阵与闭关安排。", "阵息平稳。你要查问此地灵效，还是就此入静？", "sect.cultivation.retreat")] }, alchemy: { key: "alchemy", description: "丹炉灵焰未熄，药柜依次封存。丹房执事正在炉前值守。", actors: [O("keeper", "丹", "丹房执事", "丹房执事", "负责丹房状态与炼丹安排。", "炉火正稳。你要先问丹房灵效，还是直接开炉？", "sect.alchemy.craft", { facilityKey: "workshop", effectKey: "alchemy", workspaceHref: "/game/sect/alchemy?workspace=craft", statusReply: "请执事说说丹房灵效", workspaceReply: "有劳执事为我开炉炼丹" }), O("furnace", "鼎", "宗门丹炉", "炼丹设施", "纳药、引火、聚蕴、凝丹。", "炉腹传来低沉回响，地火阵纹正等待灵石与药气。", "sect.alchemy.craft", { facilityKey: "workshop", effectKey: "alchemy", workspaceHref: "/game/sect/alchemy?workspace=craft", statusReply: "以神识察看丹炉灵效", workspaceReply: "唤醒丹炉，开始炼丹" }, "sect-alchemy-furnace", "facility")] }, refinery: { key: "refinery", description: "地火沿炉道升起，锻台已经清空。器坊执事守在火口旁。", actors: [O("keeper", "器", "器坊执事", "器坊执事", "负责器坊状态与炼器安排。", "地火可用。你要先问器坊灵效，还是就此开炉？", "sect.refinery.craft", { facilityKey: "workshop", effectKey: "refinery", workspaceHref: "/game/sect/refinery?workspace=craft", statusReply: "请执事说说器坊灵效", workspaceReply: "有劳执事为我开炉炼器" })] }, spiritVein: { key: "spiritVein", description: "矿道灵辉沿岩隙流转，守脉执事在井口整理今日的巡视封签。", actors: [O("keeper", "脉", "守脉执事", "守脉执事", "负责矿场巡视交接。", "今日巡视封签已经备好，你若领了矿场差事便来核对。", "sect.spirit-vein.patrol", { locationKey: "sect.spirit-vein" }), O("facility", "⛏️", "宗门灵脉", "宗门设施", "查看设施等级、灵石收益并进行灵矿采掘。", "矿壁中的灵辉依旧沿岩隙缓缓流转。", "sect.spirit-vein.mining", { facilityKey: "spirit_vein", effectKey: "spirit_vein", detail: "灵石收益会随周俸一并核算，无需在矿场另行采收。" }, "spirit-vein-facility", "facility")] }, herbGarden: { key: "herbGarden", description: "灵泉沿畦垄缓缓流过，药园执事正在田边查验草木长势。", actors: [O("keeper", "药", "药园执事", "药园执事", "负责草木长势与周期产出。", "今日草木长势平稳，田间近况都已记在值录中。", "sect.herb-garden.caretaker", { facilityKey: "herb_garden", detail: "药田产出玩法后续开放。", stages: ["新畦初醒", "灵苗成行", "药香盈陌", "四时不歇", "百草丰登"] }), O("facility", "\uD83C\uDF3F", "宗门药田", "宗门设施", "查看设施等级与药田近况。", "灵泉润过畦垄，草木依照时序生长。", "sect.herb-garden.status", { facilityKey: "herb_garden", effectKey: "herb_garden", detail: "药田产出玩法后续开放。" }, "herb-garden-facility", "facility")] }, gate: { key: "gate", description: "山门内外人声往来，守山执事在门侧整理当日来往记录。", actors: [O("keeper", "门", "守山执事", "守山执事", "负责山门动态与来往记录。", "今日来往记录已经理清，山门内外的动静都可查问。", "sect.gate.news"), O("facility", "⛰️", "宗门山门", "宗门设施", "进入山门步道完成清扫。", "门前石阶延入山道，零落枝叶仍待清理。", "sect.gate.sweep", void 0, "gate-facility", "facility")] }, formation: { key: "formation", description: "护宗阵枢仍在封禁之中。", actors: [O("warden", "护", "护阵长老", "护阵长老", "负责护宗阵法管理。", "阵枢尚未开放，今日无需入内。", "sect.formation.status")] } }), La = Object.freeze({ announcement: "宗门诸务照常运转，请诸位弟子各安其位、勤勉修行。", map: Object.freeze({ alt: "宗门设施导航图", aspectRatio: 1.7768331562167907, hotspots: Wn }), facilityLabels: Object.freeze({ archive: "传承阁", cultivation_room: "修炼室", workshop: "丹器坊", spirit_vein: "灵脉", herb_garden: "药田", formation: "护宗大阵" }), lockedFacilities: Object.freeze(["formation"]), scenes: Object.freeze(Xn), rooms: Zn, terms: Object.freeze({ pathChanges: "流派变化", meridianPractice: "参悟进度", meridianLoadout: "参悟方案", abilityChanges: "神通变化", returnToAffairs: "返回事务堂", sweepActivity: "清扫山门", sweepCanvasLabel: "清扫山门游戏画布" }) });
     function U(e) {
         let t = new Set;
         return e.filter((r) => {
@@ -18966,12 +18984,12 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         if (t.some((r) => !r.trim()))
             throw Error(`${e} ID不能为空`);
     }
-    function vr(e, t) {
+    function wr(e, t) {
         for (let [r, o] of Object.entries(t !== null && t !== void 0 ? t : {}))
             if (!r.trim() || !Number.isInteger(o) || o < 0)
                 throw Error(`${e}心法前置无效: ${r}`);
     }
-    function Xn(e, t) {
+    function Jn(e, t) {
         var _a, _b;
         if (!e.minRealm || !e.minRealmStage)
             throw Error(`流派 ${e.id} 必须声明境界门槛`);
@@ -18990,9 +19008,9 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 throw Error(`流派 ${e.id} 层级名称不能为空`);
             if (c.minRealm === void 0 !== (c.minRealmStage === void 0))
                 throw Error(`层级 ${c.id} 的境界前置必须同时提供境界和阶段`);
-            if (c.minRealm && c.minRealmStage && $e(c.minRealm, c.minRealmStage) < $e(e.minRealm, e.minRealmStage))
+            if (c.minRealm && c.minRealmStage && Pe(c.minRealm, c.minRealmStage) < Pe(e.minRealm, e.minRealmStage))
                 throw Error(`层级 ${c.id} 不得早于所属流派境界门槛`);
-            vr(`层级 ${c.id} `, c.requiredMethods);
+            wr(`层级 ${c.id} `, c.requiredMethods);
             for (let p of Object.values(c.cost))
                 if (!Number.isInteger(p) || p < 0)
                     throw Error(`层级 ${c.id} 的解锁费用无效`);
@@ -19018,13 +19036,13 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         for (let c of e.nodes) {
             if (!s.has(c.layerId))
                 throw Error(`节点 ${c.id} 引用了未知层级 ${c.layerId}`);
-            vr(`节点 ${c.id} `, c.requiredMethods);
+            wr(`节点 ${c.id} `, c.requiredMethods);
             for (let p of Object.keys((_b = c.requiredMethods) !== null && _b !== void 0 ? _b : {}))
                 if (!l.has(p))
                     throw Error(`节点 ${c.id} 引用了未知心法 ${p}`);
         }
     }
-    class bt {
+    class ut {
         validate(e) {
             var _a, _b;
             let t = e.definition;
@@ -19036,7 +19054,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 throw Error(`宗门 ${t.id} 的准入种族必须存在且唯一`);
             if (t.methods.length !== oe.methodCount)
                 throw Error(`宗门 ${t.id} 必须定义${oe.methodCount}本基础心法`);
-            if (t.methods.map((f) => f.slot).sort((f, S) => f - S).join(",") !== oe.methodSlots.join(","))
+            if (t.methods.map((f) => f.slot).sort((f, d) => f - d).join(",") !== oe.methodSlots.join(","))
                 throw Error(`宗门 ${t.id} 的心法槽位必须为1至6且不重复`);
             let o = t.methods.map((f) => f.id), s = t.abilities.map((f) => f.id);
             if (Re(`宗门 ${t.id} 心法`, o), Re(`宗门 ${t.id} 法术`, s), U(o).length)
@@ -19052,7 +19070,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (t.abilities.filter((f) => f.kind === "default").length !== 1)
                 throw Error(`宗门 ${t.id} 必须且只能声明一个默认能力`);
             for (let f of t.methods)
-                if (!t.abilities.some((S) => At(S) === f.id))
+                if (!t.abilities.some((d) => Xt(d) === f.id))
                     throw Error(`心法 ${f.id} 必须至少拥有一个基础法术`);
             for (let f of t.abilities) {
                 if (f.kind === "default" && f.unlock.type === "active_path")
@@ -19064,7 +19082,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                         throw Error(`法术 ${f.id} 解锁等级无效`);
                 }
             }
-            let a = t.paths.map((f) => f.id), n = t.paths.flatMap((f) => f.nodes.map((S) => S.id)), l = t.paths.flatMap((f) => f.tactics.map((S) => S.id));
+            let a = t.paths.map((f) => f.id), n = t.paths.flatMap((f) => f.nodes.map((d) => d.id)), l = t.paths.flatMap((f) => f.tactics.map((d) => d.id));
             if (U(a).length)
                 throw Error(`宗门 ${t.id} 存在重复流派ID`);
             if (U(n).length)
@@ -19072,15 +19090,15 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (U(l).length)
                 throw Error(`宗门 ${t.id} 存在跨流派重复战术ID`);
             for (let f of t.paths)
-                Xn(f, t);
+                Jn(f, t);
             let c = new Set(a);
             for (let f of t.abilities)
                 if (f.unlock.type === "active_path" && !c.has(f.unlock.pathId))
                     throw Error(`法术 ${f.id} 引用了未知流派 ${f.unlock.pathId}`);
-            for (let [f, S] of Object.entries(t.onboarding.initialMethods)) {
+            for (let [f, d] of Object.entries(t.onboarding.initialMethods)) {
                 if (!i.has(f))
                     throw Error(`入宗配置引用未知心法 ${f}`);
-                if (!Number.isInteger(S) || S < 0)
+                if (!Number.isInteger(d) || d < 0)
                     throw Error(`入宗配置心法等级无效: ${f}`);
             }
             if (!Number.isInteger(t.onboarding.initialContribution) || t.onboarding.initialContribution < 0)
@@ -19088,30 +19106,30 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let p = t.abilities.find((f) => f.kind === "default");
             if (p.unlock.type === "method" && ((_a = t.onboarding.initialMethods[p.unlock.methodId]) !== null && _a !== void 0 ? _a : 0) < p.unlock.level)
                 throw Error(`入宗心法配置未解锁默认能力 ${p.id}`);
-            let h = t.onboarding.initialAbilityLoadout.filter((f) => f !== null);
-            if (new Set(h).size !== h.length)
+            let x = t.onboarding.initialAbilityLoadout.filter((f) => f !== null);
+            if (new Set(x).size !== x.length)
                 throw Error("入宗配置神通不可重复");
-            for (let f of h) {
-                let S = t.abilities.find((d) => d.id === f);
-                if (!S)
+            for (let f of x) {
+                let d = t.abilities.find((m) => m.id === f);
+                if (!d)
                     throw Error(`入宗配置引用未知法术 ${f}`);
-                if (S.kind !== "active")
+                if (d.kind !== "active")
                     throw Error(`入宗配置包含非主动槽法术 ${f}`);
-                if (S.unlock.type === "method" && ((_b = t.onboarding.initialMethods[S.unlock.methodId]) !== null && _b !== void 0 ? _b : 0) < S.unlock.level)
+                if (d.unlock.type === "method" && ((_b = t.onboarding.initialMethods[d.unlock.methodId]) !== null && _b !== void 0 ? _b : 0) < d.unlock.level)
                     throw Error(`入宗配置包含未解锁法术 ${f}`);
             }
         }
     }
-    class yt {
+    class gt {
         constructor(e) { this.rules = e; }
         validate(e) {
             for (let t of this.rules)
                 t.validate(e);
         }
     }
-    var Zn = new yt([new bt]);
-    function Tr(e) { Zn.validate(e); }
-    class ut {
+    var Hn = new gt([new ut]);
+    function Or(e) { Hn.validate(e); }
+    class xt {
         validate(e, t) {
             var _a;
             if (!((_a = t.membershipId) === null || _a === void 0 ? void 0 : _a.trim()))
@@ -19126,15 +19144,15 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 throw Error("宗门归属不匹配");
         }
     }
-    class wr {
+    class Kr {
         constructor(e = []) {
             this.modules = new Map;
-            this.stateValidator = new ut;
+            this.stateValidator = new xt;
             for (let t of e)
                 this.register(t);
         }
         register(e) {
-            if (Tr(e), this.modules.has(e.definition.id))
+            if (Or(e), this.modules.has(e.definition.id))
                 throw Error(`宗门重复注册: ${e.definition.id}`);
             this.modules.set(e.definition.id, e);
         }
@@ -19148,60 +19166,60 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
         listDefinitions() { return Array.from(this.modules.values(), (e) => e.definition); }
         validateState(e) { this.stateValidator.validate(this.require(e.sectId), e); }
     }
-    var q = 78, ee = 66, te = 176, gt = Oe * q, re = (Se.width - gt) / 2;
-    var We = ["obstacleCracked", "obstacleAsh", "obstacleMoss", "obstacleSlate"];
+    var q = 78, ee = 66, te = 176, ht = Ke * q, re = (Se.width - ht) / 2;
+    var Xe = ["obstacleCracked", "obstacleAsh", "obstacleMoss", "obstacleSlate"];
     function pe(e) { return { x: re + e.x * q + q / 2, y: te + e.y * ee + ee / 2 }; }
-    function Or(e) { return We[(e.x * 3 + e.y * 5) % We.length]; }
-    function Kr(e) { return (e.x * 11 + e.y * 7) % 9 - 4; }
-    var Xe = ["cloud-stair-courtyard", "sweep-atlas", "sweep-obstacles", "virtual-joystick-base", "virtual-joystick-thumb"], Jn = { player: [0, 0], leafYellow: [1, 0], leafRed: [2, 0], sweepCurved: [3, 0], startSeal: [0, 1], endSeal: [1, 1], sweepStraight: [2, 1], sweepDiagonal: [3, 1] }, Hn = ["sweepCurved", "sweepStraight", "sweepDiagonal"];
-    class xt {
+    function $r(e) { return Xe[(e.x * 3 + e.y * 5) % Xe.length]; }
+    function Pr(e) { return (e.x * 11 + e.y * 7) % 9 - 4; }
+    var Ze = ["cloud-stair-courtyard", "sweep-atlas", "sweep-obstacles", "virtual-joystick-base", "virtual-joystick-thumb"], Yn = { player: [0, 0], leafYellow: [1, 0], leafRed: [2, 0], sweepCurved: [3, 0], startSeal: [0, 1], endSeal: [1, 1], sweepStraight: [2, 1], sweepDiagonal: [3, 1] }, Un = ["sweepCurved", "sweepStraight", "sweepDiagonal"];
+    class kt {
         constructor() {
             this.tinted = new Map;
         }
         paint(e, t, r, o, s, i, a) {
-            let n = e.ctx, l = Math.min(i / 1120, a / 630), c = o + (i - 1120 * l) / 2, p = s + (a - 630 * l) / 2, h = r.get("sweep-atlas"), f = r.get("sweep-obstacles"), S = r.get("cloud-stair-courtyard");
-            if (this.atlas !== h)
-                this.tinted.clear(), this.atlas = h;
-            if (e.rect(o, s, i, a, "#171b1a"), S) {
+            let n = e.ctx, l = Math.min(i / 1120, a / 630), c = o + (i - 1120 * l) / 2, p = s + (a - 630 * l) / 2, x = r.get("sweep-atlas"), f = r.get("sweep-obstacles"), d = r.get("cloud-stair-courtyard");
+            if (this.atlas !== x)
+                this.tinted.clear(), this.atlas = x;
+            if (e.rect(o, s, i, a, "#171b1a"), d) {
                 if (n.save(), n.globalAlpha = 0.55, "filter" in n)
                     n.filter = "blur(20px)";
-                let u = Math.max(i / S.width, a / S.height);
-                n.drawImage(S, o + (i - S.width * u) / 2, s + (a - S.height * u) / 2, S.width * u, S.height * u), n.restore(), e.rect(o, s, i, a, "rgba(16,21,19,.35)");
+                let u = Math.max(i / d.width, a / d.height);
+                n.drawImage(d, o + (i - d.width * u) / 2, s + (a - d.height * u) / 2, d.width * u, d.height * u), n.restore(), e.rect(o, s, i, a, "rgba(16,21,19,.35)");
             }
-            let d = (u, y, g, R, k, _) => {
-                if (!h)
+            let m = (u, y, g, R, k, _) => {
+                if (!x)
                     return;
-                let [D, I] = Jn[u];
+                let [D, I] = Yn[u];
                 if (_) {
                     let T = u + _, N = this.tinted.get(T);
                     if (!N) {
                         N = E.createCanvas(), N.width = N.height = 256;
                         let B = N.getContext("2d");
-                        B.drawImage(h, D * 256, I * 256, 256, 256, 0, 0, 256, 256), B.globalCompositeOperation = "multiply", B.fillStyle = _, B.fillRect(0, 0, 256, 256), B.globalCompositeOperation = "destination-in", B.drawImage(h, D * 256, I * 256, 256, 256, 0, 0, 256, 256), this.tinted.set(T, N);
+                        B.drawImage(x, D * 256, I * 256, 256, 256, 0, 0, 256, 256), B.globalCompositeOperation = "multiply", B.fillStyle = _, B.fillRect(0, 0, 256, 256), B.globalCompositeOperation = "destination-in", B.drawImage(x, D * 256, I * 256, 256, 256, 0, 0, 256, 256), this.tinted.set(T, N);
                     }
                     n.drawImage(N, y - R / 2, g - k / 2, R, k);
                 }
                 else
-                    n.drawImage(h, D * 256, I * 256, 256, 256, y - R / 2, g - k / 2, R, k);
+                    n.drawImage(x, D * 256, I * 256, 256, 256, y - R / 2, g - k / 2, R, k);
             }, b = (u, y, g, R, k) => { n.fillStyle = k, n.beginPath(), n.ellipse(u, y, g / 2, R / 2, 0, 0, Math.PI * 2), n.fill(); };
             return e.clip(o, s, i, a, () => {
-                if (n.save(), n.translate(c, p), n.scale(l, l), S)
-                    n.drawImage(S, 0, 0, 1120, 630);
+                if (n.save(), n.translate(c, p), n.scale(l, l), d)
+                    n.drawImage(d, 0, 0, 1120, 630);
                 n.save(), n.globalCompositeOperation = "multiply", n.strokeStyle = "rgba(110,103,90,.15)", n.lineWidth = 1, n.beginPath();
-                for (let y = 1; y < Oe; y++) {
+                for (let y = 1; y < Ke; y++) {
                     let g = re + y * q;
-                    n.moveTo(g, te + 4), n.lineTo(g, te + et * ee - 4);
+                    n.moveTo(g, te + 4), n.lineTo(g, te + rt * ee - 4);
                 }
-                for (let y = 1; y < et; y++) {
+                for (let y = 1; y < rt; y++) {
                     let g = te + y * ee;
-                    n.moveTo(re + 4, g), n.lineTo(re + gt - 4, g);
+                    n.moveTo(re + 4, g), n.lineTo(re + ht - 4, g);
                 }
                 if (n.stroke(), n.restore(), f)
                     for (let y of t.state.board.cells) {
                         if (y.kind !== "blocked")
                             continue;
-                        let g = pe(y), R = We.indexOf(Or(y));
-                        if (n.save(), n.translate(g.x, g.y), n.rotate(Kr(y) * Math.PI / 180), (y.x + y.y) % 2 === 1)
+                        let g = pe(y), R = Xe.indexOf($r(y));
+                        if (n.save(), n.translate(g.x, g.y), n.rotate(Pr(y) * Math.PI / 180), (y.x + y.y) % 2 === 1)
                             n.scale(-1, 1);
                         n.globalAlpha = 0.9, n.drawImage(f, R % 2 * 192, Math.floor(R / 2) * 192, 192, 192, -43, -37, 86, 74), n.restore();
                     }
@@ -19209,33 +19227,33 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                     let R = pe(y);
                     if (n.save(), n.globalAlpha = g === "startSeal" ? 0.48 : 0.72, g === "startSeal")
                         n.globalCompositeOperation = "multiply";
-                    d(g, R.x, R.y, 50, 40), n.restore();
+                    m(g, R.x, R.y, 50, 40), n.restore();
                 }
                 for (let y of t.state.visited) {
                     let g = pe(y);
-                    n.save(), n.translate(g.x, g.y), n.rotate(((y.x * 11 + y.y * 7) % 15 - 7) * Math.PI / 180), n.globalAlpha = 0.25, n.globalCompositeOperation = "multiply", d(Hn[(y.x * 17 + y.y * 31) % 3], 0, 0, 58, 48, "#5f584d"), n.restore();
+                    n.save(), n.translate(g.x, g.y), n.rotate(((y.x * 11 + y.y * 7) % 15 - 7) * Math.PI / 180), n.globalAlpha = 0.25, n.globalCompositeOperation = "multiply", m(Un[(y.x * 17 + y.y * 31) % 3], 0, 0, 58, 48, "#5f584d"), n.restore();
                 }
                 t.state.board.leaves.forEach((y, g) => {
                     let R = t.collectedAt.get(`${y.x}:${y.y}`), k = R === void 0 ? 0 : Math.min(1, (t.elapsedMs - R) / 150);
                     if (k >= 1)
                         return;
                     let _ = pe(y);
-                    n.save(), n.translate(_.x, _.y), n.rotate((g * 47 % 360 + 80 * k) * Math.PI / 180), n.scale(1 - 0.9 * k, 1 - 0.9 * k), n.globalAlpha = 1 - k, b(1, 5, 26, 10, "rgba(25,32,29,.2)"), d(g % 2 === 0 ? "leafYellow" : "leafRed", 0, -2, 36, 36), n.restore();
+                    n.save(), n.translate(_.x, _.y), n.rotate((g * 47 % 360 + 80 * k) * Math.PI / 180), n.scale(1 - 0.9 * k, 1 - 0.9 * k), n.globalAlpha = 1 - k, b(1, 5, 26, 10, "rgba(25,32,29,.2)"), m(g % 2 === 0 ? "leafYellow" : "leafRed", 0, -2, 36, 36), n.restore();
                 });
                 let u = pe(t.position);
                 if (b(u.x, u.y + 13, 38, 15, "rgba(21,27,25,.22)"), n.save(), n.translate(u.x, u.y - 4), n.rotate(t.angle * Math.PI / 180), t.flipX)
                     n.scale(-1, 1);
-                d("player", 0, 0, 66, 66, t.state.phase === "failed" ? "#a94032" : void 0), n.restore(), n.restore();
+                m("player", 0, 0, 66, 66, t.state.phase === "failed" ? "#a94032" : void 0), n.restore(), n.restore();
             }), { x: c, y: p, width: Se.width * l, height: Se.height * l, scale: l };
         }
     }
-    class ht {
+    class Mt {
         constructor() {
             this.images = new Map;
         }
         resetPending() { var _a; (_a = this.cancel) === null || _a === void 0 ? void 0 : _a.call(this), this.pending = void 0, this.images.clear(); }
         load() {
-            if (this.images.size === Xe.length)
+            if (this.images.size === Ze.length)
                 return Promise.resolve(this.images);
             if (this.pending)
                 return this.pending;
@@ -19258,12 +19276,12 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                             if (o)
                                 return;
                             try {
-                                for (let l of Xe) {
+                                for (let l of Ze) {
                                     let c = E.createImage();
                                     i.push(c), c.onload = () => {
                                         if (o)
                                             return;
-                                        if (s.set(l, c), s.size === Xe.length)
+                                        if (s.set(l, c), s.size === Ze.length)
                                             a();
                                     }, c.onerror = () => a(Error(`美术资源加载失败：${l}`)), c.src = GameGlobal.__remoteAssetPath(`sect-sweep/${l}.${l === "cloud-stair-courtyard" ? "jpg" : "png"}`);
                                 }
@@ -19283,8 +19301,8 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }).catch(() => { }), e;
         }
     }
-    var $r = 105;
-    class kt {
+    var Nr = 105;
+    class Rt {
         constructor(e, t = () => { }) {
             this.queue = [];
             this.reported = !1;
@@ -19293,14 +19311,14 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             this.collectedAt = new Map;
             this.seed = e;
             this.complete = t;
-            this.state = tt(e), this.queuedState = this.state;
+            this.state = nt(e), this.queuedState = this.state;
         }
-        get progress() { return Ft(this.state); }
+        get progress() { return At(this.state); }
         get busy() { return !!this.active || this.blockedAt !== void 0; }
         move(e) {
             if (this.queuedState.phase !== "playing")
                 return !1;
-            let t = Vt(this.queuedState, e);
+            let t = Wt(this.queuedState, e);
             if (!t.moved) {
                 if (!this.busy && !this.queue.length)
                     this.blockedAt = this.elapsedMs;
@@ -19326,7 +19344,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (this.elapsedMs = Math.max(this.elapsedMs, e), this.blockedAt !== void 0 && this.elapsedMs - this.blockedAt >= 180)
                 this.blockedAt = void 0, this.pump();
             let t = this.active;
-            if (!t || this.elapsedMs - t.at < $r)
+            if (!t || this.elapsedMs - t.at < Nr)
                 return;
             this.active = void 0, this.state = t.next;
             for (let r of this.state.collectedLeaves) {
@@ -19342,7 +19360,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let e = this.active;
             if (!e)
                 return this.state.player;
-            let t = Math.sin(Math.min(1, (this.elapsedMs - e.at) / $r) * Math.PI / 2);
+            let t = Math.sin(Math.min(1, (this.elapsedMs - e.at) / Nr) * Math.PI / 2);
             return { x: e.from.x + (e.next.player.x - e.from.x) * t, y: e.from.y + (e.next.player.y - e.from.y) * t };
         }
         get angle() {
@@ -19351,12 +19369,12 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let e = (this.elapsedMs - this.blockedAt) % 90;
             return e <= 45 ? -4 + 8 * e / 45 : 4 - 8 * (e - 45) / 45;
         }
-        reset() { this.queue = [], this.active = void 0, this.blockedAt = void 0, this.reported = !1, this.flipX = !1, this.collectedAt.clear(), this.state = tt(this.seed), this.queuedState = this.state; }
+        reset() { this.queue = [], this.active = void 0, this.blockedAt = void 0, this.reported = !1, this.flipX = !1, this.collectedAt.clear(), this.state = nt(this.seed), this.queuedState = this.state; }
     }
-    var de = __sectActivityBridge.request;
-    class Mt {
+    var me = __sectActivityBridge.request;
+    class _t {
         constructor(e, t, r = () => fe()) {
-            this.assets = new ht;
+            this.assets = new Mt;
             this.starting = !1;
             this.submitting = !1;
             this.started = !1;
@@ -19369,7 +19387,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             this.changed = e;
             this.refreshPlayer = t;
             this.now = r;
-            this.context = new Te(e, !1), this.tasks = new ve(e);
+            this.context = new we(e, !1), this.tasks = new Te(e);
         }
         enter(e) { this.leave(), this.active = !0, this.owner = e, this.images = void 0, this.runtime = void 0, this.session = void 0, this.settlement = void 0, this.error = "", this.started = !1, this.context.enter(e), this.tasks.open(e), this.loadAssets(); }
         leave() { this.active = !1, this.generation++, this.context.leave(), this.tasks.close(), this.assets.resetPending(), this.starting = this.submitting = this.assetsLoading = !1, this.runtime = void 0; }
@@ -19400,22 +19418,22 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let t = ++this.generation, r = () => this.active && t === this.generation;
             this.started = !0, this.starting = !0, this.runtime = void 0, this.session = void 0, this.settlement = void 0, this.error = "", this.changed();
             try {
-                let o = Nt(this.tasks.data), s;
+                let o = jt(this.tasks.data), s;
                 if (e || o.kind === "practice")
                     s = { kind: "practice", seed: `practice:${le()}` };
                 else {
-                    let i = await de(`/api/sects/current/tasks/${encodeURIComponent(o.task.definitionId)}/actions/start`, "POST", { input: {} }, void 0, { "Idempotency-Key": le() });
+                    let i = await me(`/api/sects/current/tasks/${encodeURIComponent(o.task.definitionId)}/actions/start`, "POST", { input: {} }, void 0, { "Idempotency-Key": le() });
                     if (!r())
                         return;
                     let a = i.data;
                     if (((_a = a.outcome) === null || _a === void 0 ? void 0 : _a.renderer) !== "sect.outcome.sweep-session")
                         throw Error("宗门返回的清扫场次无法识别");
-                    let n = Ye.parse(a.outcome.data);
+                    let n = Qe.parse(a.outcome.data);
                     s = { kind: "reward", seed: n.seed, task: o.task, server: n }, this.acceptTasks(a);
                 }
                 if (!r())
                     return;
-                this.session = s, this.clockStart = this.now(), this.runtime = new kt(s.seed, (i) => { this.complete(i, s, t); });
+                this.session = s, this.clockStart = this.now(), this.runtime = new Rt(s.seed, (i) => { this.complete(i, s, t); });
             }
             catch (o) {
                 if (r())
@@ -19473,7 +19491,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
             this.submitting = !0, this.error = "", this.changed();
             try {
-                let s = await de(`/api/sects/current/tasks/${encodeURIComponent(t.task.definitionId)}/actions/complete`, "POST", { input: { sessionId: t.server.sessionId, rulesVersion: t.server.rulesVersion, moves: e } }, void 0, { "Idempotency-Key": t.server.sessionId });
+                let s = await me(`/api/sects/current/tasks/${encodeURIComponent(t.task.definitionId)}/actions/complete`, "POST", { input: { sessionId: t.server.sessionId, rulesVersion: t.server.rulesVersion, moves: e } }, void 0, { "Idempotency-Key": t.server.sessionId });
                 if (!o())
                     return;
                 let i = s.data;
@@ -19489,7 +19507,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
         }
     }
-    class Rt {
+    class Ct {
         constructor(e = () => fe()) {
             this.armed = !0;
             this.held = !1;
@@ -19525,15 +19543,15 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
             let i = r.scale, a = Math.max(0, e.safeLeft - r.x) / i, n = Math.max(0, e.bottom - (e.height - r.y - r.height)) / i, l = r.x + Math.min(1002, Math.max(118, a + 118)) * i, c = r.y + Math.max(118, Math.min(512, 512 - n)) * i, p = e.ctx;
             p.save(), p.globalAlpha = this.alpha;
-            let h = t.get("virtual-joystick-base"), f = t.get("virtual-joystick-thumb");
-            if (h)
-                p.drawImage(h, l - 78 * i, c - 78 * i, 156 * i, 156 * i);
+            let x = t.get("virtual-joystick-base"), f = t.get("virtual-joystick-thumb");
+            if (x)
+                p.drawImage(x, l - 78 * i, c - 78 * i, 156 * i, 156 * i);
             if (f) {
                 let b = Math.min(1, Math.max(0, (this.now() - this.blockedAt) / 90)), u = 1 + 2.70158 * (b - 1) ** 3 + 1.70158 * (b - 1) ** 2, y = 72 * (0.88 + 0.12 * u);
                 p.drawImage(f, l + (this.dx - y / 2) * i, c + (this.dy - y / 2) * i, y * i, y * i);
             }
             p.restore();
-            let S = (b) => {
+            let d = (b) => {
                 var _a;
                 if (!o()) {
                     this.reset();
@@ -19543,22 +19561,22 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 if (u)
                     this.push((u.clientX - l) / i, (u.clientY - c) / i, s);
                 e.invalidate();
-            }, d = () => { this.release(), e.invalidate(); };
-            e.hit(l - 78 * i, c - 78 * i, 156 * i, 156 * i, () => { }, { surface: { start: S, move: S, end: d, cancel: d } });
+            }, m = () => { this.release(), e.invalidate(); };
+            e.hit(l - 78 * i, c - 78 * i, 156 * i, 156 * i, () => { }, { surface: { start: d, move: d, end: m, cancel: m } });
         }
     }
-    class _t {
+    class Dt {
         constructor(e, t, r) {
-            this.field = new xt;
-            this.joystick = new Rt;
+            this.field = new kt;
+            this.joystick = new Ct;
             this.owner = "";
             this.active = !1;
             this.exit = () => this.navigate("/game/sect/gate?npc=facility");
-            this.activityOverlay = new me;
+            this.activityOverlay = new de;
             this.u = e;
             this.player = t;
             this.navigate = r;
-            this.model = new Mt(() => e.invalidate(), () => t.load());
+            this.model = new _t(() => e.invalidate(), () => t.load());
         }
         enter() { this.leave(!1), this.active = !0, this.rotate("landscape"), this.timer = setInterval(() => this.u.invalidate(), 33); }
         leave(e = !0) {
@@ -19566,7 +19584,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (this.active = !1, this.joystick.reset(), clearInterval(this.timer), this.timer = void 0, this.model.leave(), this.owner = "", e && t)
                 this.rotate("portrait");
         }
-        rotate(e) { Ce(this.u, e); }
+        rotate(e) { De(this.u, e); }
         pill(e, t, r, o, s = !1) {
             let i = this.u, a = i.ctx, n = i.measure(e, 14) + 32;
             if (a.save(), a.globalAlpha = s ? 0.4 : 1, a.fillStyle = "rgba(24,32,28,.5)", a.beginPath(), a.moveTo(t + 18, r), a.arcTo(t + n, r, t + n, r + 36, 18), a.arcTo(t + n, r + 36, t, r + 36, 18), a.arcTo(t, r + 36, t, r, 18), a.arcTo(t, r, t + n, r, 18), a.closePath(), a.fill(), i.text(e, t + 16, r + 18, 14, "#ecfdf5"), a.restore(), o && !s)
@@ -19588,7 +19606,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (s && t.images) {
                 let f = this.field.paint(e, s, t.images, 0, 0, e.width, e.height);
                 if (i()) {
-                    let S = "", d = (b) => {
+                    let d = "", m = (b) => {
                         var _a, _b;
                         if (!i())
                             return;
@@ -19596,21 +19614,21 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                         if (!u)
                             return;
                         let y = Math.floor(((u.clientX - f.x) / f.scale - re) / q), g = Math.floor(((u.clientY - f.y) / f.scale - te) / ee), R = `${y}:${g}`;
-                        if (S === R)
+                        if (d === R)
                             return;
-                        if (S = R, y >= 0 && y < 7 && g >= 0 && g < 5 && ((_b = s.state.board.cells[g * 7 + y]) === null || _b === void 0 ? void 0 : _b.kind) === "passable")
+                        if (d = R, y >= 0 && y < 7 && g >= 0 && g < 5 && ((_b = s.state.board.cells[g * 7 + y]) === null || _b === void 0 ? void 0 : _b.kind) === "passable")
                             t.moveTo({ x: y, y: g });
                     };
-                    e.hit(f.x + re * f.scale, f.y + te * f.scale, 7 * q * f.scale, 5 * ee * f.scale, () => { }, { surface: { start: (b) => { S = "", d(b); }, move: d, end: () => { S = ""; }, cancel: () => { S = ""; } } });
+                    e.hit(f.x + re * f.scale, f.y + te * f.scale, 7 * q * f.scale, 5 * ee * f.scale, () => { }, { surface: { start: (b) => { d = "", m(b); }, move: m, end: () => { d = ""; }, cancel: () => { d = ""; } } });
                 }
-                this.joystick.paint(e, t.images, f, i, (S) => t.move(S));
+                this.joystick.paint(e, t.images, f, i, (d) => t.move(d));
             }
             let a = s === null || s === void 0 ? void 0 : s.progress, n = Math.max(12, e.safeTop), l = e.width - Math.max(12, e.safeRight), c = e.menuBottom > n ? e.menuBottom + 8 : n;
             this.pill(`叶 ${(_c = a === null || a === void 0 ? void 0 : a.cleared) !== null && _c !== void 0 ? _c : 0}/${(_d = a === null || a === void 0 ? void 0 : a.totalLeaves) !== null && _d !== void 0 ? _d : 4}    ${(_f = a === null || a === void 0 ? void 0 : a.steps) !== null && _f !== void 0 ? _f : 0}步`, Math.max(12, e.safeLeft), n);
-            let [p, h] = De(e, ["重走", "退出"]);
-            if (this.pill("重走", p.x, p.y, () => { this.joystick.reset(), t.reset(); }, !t.session || t.submitting || t.starting), this.pill("退出", h.x, h.y, this.exit, t.submitting), !o && t.session && (a === null || a === void 0 ? void 0 : a.phase) === "playing") {
-                let S = e.measure("推动左侧摇杆 · 收齐落叶后前往终点 · 不可返回", 12) + 32, d = e.height - Math.max(10.4, e.bottom) - 32;
-                e.rect((e.width - S) / 2, d, S, 32, "rgba(0,0,0,.45)"), e.text("推动左侧摇杆 · 收齐落叶后前往终点 · 不可返回", (e.width - S) / 2 + 16, d + 16, 12, "#d6d3d1");
+            let [p, x] = ve(e, ["重走", "退出"]);
+            if (this.pill("重走", p.x, p.y, () => { this.joystick.reset(), t.reset(); }, !t.session || t.submitting || t.starting), this.pill("退出", x.x, x.y, this.exit, t.submitting), !o && t.session && (a === null || a === void 0 ? void 0 : a.phase) === "playing") {
+                let d = e.measure("推动左侧摇杆 · 收齐落叶后前往终点 · 不可返回", 12) + 32, m = e.height - Math.max(10.4, e.bottom) - 32;
+                e.rect((e.width - d) / 2, m, d, 32, "rgba(0,0,0,.45)"), e.text("推动左侧摇杆 · 收齐落叶后前往终点 · 不可返回", (e.width - d) / 2 + 16, m + 16, 12, "#d6d3d1");
             }
             if (o) {
                 this.joystick.reset(), this.overlay([{ text: t.started ? "请恢复横屏" : "请将设备旋转为横屏", size: 20, color: "#fafaf9" }, { text: t.started ? "当前进度会保留，恢复横屏后即可继续操作。" : "向任一方向推动摇杆，每次前进一步；收齐落叶后再踏入终点。" }], [{ label: "进入横屏全屏", run: () => this.rotate("landscape") }, { label: "返回山门", run: this.exit }]);
@@ -19645,9 +19663,9 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 this.overlay([{ text: "正在绘制山门格阵……" }]);
         }
     }
-    function Yn(e) { return e === null || e === void 0 ? void 0 : e.items.find((t) => t.definitionId === "spirit_mining"); }
-    function Pr(e) {
-        let t = Yn(e);
+    function Qn(e) { return e === null || e === void 0 ? void 0 : e.items.find((t) => t.definitionId === "spirit_mining"); }
+    function Er(e) {
+        let t = Qn(e);
         if ((t === null || t === void 0 ? void 0 : t.state) === "active")
             return { kind: "reward", task: t };
         if ((t === null || t === void 0 ? void 0 : t.state) === "claimable" || (t === null || t === void 0 ? void 0 : t.state) === "claimed")
@@ -19658,74 +19676,74 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             return { kind: "practice", task: t, reason: "locked" };
         return { kind: "practice", reason: "unavailable" };
     }
-    var Ze = ["spirit-vein-cavern", "rope-cultivator", "spirit-hook", "spirit-crystal", "copper-ore", "dark-iron", "earth-essence", "explosive-barrel"], Un = { spirit_crystal: "spirit-crystal", copper_ore: "copper-ore", dark_iron: "dark-iron", earth_essence: "earth-essence", explosive_barrel: "explosive-barrel" };
-    function Nr(e, t, r, o, s, i, a) {
+    var Je = ["spirit-vein-cavern", "rope-cultivator", "spirit-hook", "spirit-crystal", "copper-ore", "dark-iron", "earth-essence", "explosive-barrel"], zn = { spirit_crystal: "spirit-crystal", copper_ore: "copper-ore", dark_iron: "dark-iron", earth_essence: "earth-essence", explosive_barrel: "explosive-barrel" };
+    function jr(e, t, r, o, s, i, a) {
         let n = e.ctx, l = Math.min(i / H.width, a / H.height), c = o + (i - H.width * l) / 2, p = s + (a - H.height * l) / 2;
         e.rect(o, s, i, a, "#091312");
-        let h = r.get("spirit-vein-cavern");
-        if (h) {
+        let x = r.get("spirit-vein-cavern");
+        if (x) {
             n.save(), n.globalAlpha = 0.55;
-            let f = Math.max(i / h.width, a / h.height);
+            let f = Math.max(i / x.width, a / x.height);
             if ("filter" in n)
                 n.filter = "blur(20px)";
-            n.drawImage(h, o + (i - h.width * f) / 2, s + (a - h.height * f) / 2, h.width * f, h.height * f), n.restore(), e.rect(o, s, i, a, "rgba(6,16,14,.35)");
+            n.drawImage(x, o + (i - x.width * f) / 2, s + (a - x.height * f) / 2, x.width * f, x.height * f), n.restore(), e.rect(o, s, i, a, "rgba(6,16,14,.35)");
         }
         return e.clip(o, s, i, a, () => {
             var _a;
-            if (n.save(), n.translate(c, p), n.scale(l, l), t.explosions.some((d) => t.animationMs - d.atMs >= 0 && t.animationMs - d.atMs < 220))
+            if (n.save(), n.translate(c, p), n.scale(l, l), t.explosions.some((m) => t.animationMs - m.atMs >= 0 && t.animationMs - m.atMs < 220))
                 n.translate((Math.random() * 2 - 1) * 1120 * 0.006, (Math.random() * 2 - 1) * 630 * 0.006);
-            let f = (d, b, u, y, g) => {
-                let R = r.get(d);
+            let f = (m, b, u, y, g) => {
+                let R = r.get(m);
                 if (R)
                     n.drawImage(R, b, u, y, g);
             };
             f("spirit-vein-cavern", 0, 0, 1120, 630), e.rect(0, 0, 1120, 630, "rgba(7,16,15,.18)");
-            let S = (d, b = !1) => {
+            let d = (m, b = !1) => {
                 var _a, _b;
-                let u = b ? t.caughtPosition : void 0, y = (_a = u === null || u === void 0 ? void 0 : u.x) !== null && _a !== void 0 ? _a : Math.round(d.x), g = (_b = u === null || u === void 0 ? void 0 : u.y) !== null && _b !== void 0 ? _b : Math.round(d.y), R = ((d.x * 7 + d.y * 11) % 22 - 11) * Math.PI / 180, k = Math.round(d.radius * (d.category === "hazard" ? 2.35 : 2.2)), _ = d.category === "hazard" ? { color: "255,90,54", alpha: 0.7, rings: 2 } : d.score >= 500 ? { color: "255,216,107", alpha: 0.75, rings: 3 } : d.score >= 300 ? { color: "207,140,255", alpha: 0.62, rings: 2 } : d.score >= 180 ? { color: "112,223,255", alpha: 0.48, rings: 2 } : { color: "100,215,189", alpha: 0.26, rings: 1 }, D = 900 + d.id.length % 4 * 170, I = (1 - Math.cos(t.animationMs / D * Math.PI)) / 2;
+                let u = b ? t.caughtPosition : void 0, y = (_a = u === null || u === void 0 ? void 0 : u.x) !== null && _a !== void 0 ? _a : Math.round(m.x), g = (_b = u === null || u === void 0 ? void 0 : u.y) !== null && _b !== void 0 ? _b : Math.round(m.y), R = ((m.x * 7 + m.y * 11) % 22 - 11) * Math.PI / 180, k = Math.round(m.radius * (m.category === "hazard" ? 2.35 : 2.2)), _ = m.category === "hazard" ? { color: "255,90,54", alpha: 0.7, rings: 2 } : m.score >= 500 ? { color: "255,216,107", alpha: 0.75, rings: 3 } : m.score >= 300 ? { color: "207,140,255", alpha: 0.62, rings: 2 } : m.score >= 180 ? { color: "112,223,255", alpha: 0.48, rings: 2 } : { color: "100,215,189", alpha: 0.26, rings: 1 }, D = 900 + m.id.length % 4 * 170, I = (1 - Math.cos(t.animationMs / D * Math.PI)) / 2;
                 n.save(), n.translate(y, g), n.rotate(R), n.save();
                 let T = 1 + 0.08 * I;
                 n.scale(T, T), n.globalCompositeOperation = "lighter", n.globalAlpha = 1 + (Math.max(0.3, _.alpha - 0.22) - 1) * I;
                 for (let B = 0; B < _.rings; B++)
-                    n.strokeStyle = `rgba(${_.color},${_.alpha / (B + 1)})`, n.lineWidth = 2 - B * 0.35, n.beginPath(), n.arc(0, 0, d.radius * (1.08 + B * 0.13), 0, Math.PI * 2), n.stroke();
+                    n.strokeStyle = `rgba(${_.color},${_.alpha / (B + 1)})`, n.lineWidth = 2 - B * 0.35, n.beginPath(), n.arc(0, 0, m.radius * (1.08 + B * 0.13), 0, Math.PI * 2), n.stroke();
                 n.restore();
-                let N = r.get(Un[d.kind]);
+                let N = r.get(zn[m.kind]);
                 if (N) {
                     let B = k / Math.max(N.width, N.height);
                     n.drawImage(N, -N.width * B / 2, -N.height * B / 2, N.width * B, N.height * B);
                 }
                 n.restore();
             };
-            for (let d of [...t.field].sort((b, u) => b.y - u.y))
-                if (!t.removed.has(d.id) && d.id !== ((_a = t.caughtPosition) === null || _a === void 0 ? void 0 : _a.id))
-                    S(d);
+            for (let m of [...t.field].sort((b, u) => b.y - u.y))
+                if (!t.removed.has(m.id) && m.id !== ((_a = t.caughtPosition) === null || _a === void 0 ? void 0 : _a.id))
+                    d(m);
             if (n.save(), n.strokeStyle = "rgba(214,195,148,.92)", n.lineWidth = 3.5, n.beginPath(), n.moveTo(j.x, j.y), n.lineTo(t.hook.x, t.hook.y), n.stroke(), n.restore(), t.caughtPosition) {
-                let d = t.field.find((b) => b.id === t.caughtPosition.id);
-                if (d && !t.removed.has(d.id))
-                    S(d, !0);
+                let m = t.field.find((b) => b.id === t.caughtPosition.id);
+                if (m && !t.removed.has(m.id))
+                    d(m, !0);
             }
             n.save(), n.translate(t.hook.x, t.hook.y), n.rotate(-t.hook.angleMilliDegrees / 1000 / 180 * Math.PI), f("spirit-hook", -21, -3.2399999999999998, 42, 54), n.restore(), f("rope-cultivator", j.x - 90, 36, 180, 180);
-            for (let d of t.explosions) {
-                let b = t.animationMs - d.atMs;
+            for (let m of t.explosions) {
+                let b = t.animationMs - m.atMs;
                 if (b < 0 || b > 560)
                     continue;
                 if (n.save(), n.globalCompositeOperation = "lighter", b <= 420) {
                     let R = b / 420, k = 1 - (1 - R) ** 2;
-                    n.globalAlpha = 1 - k, n.fillStyle = "rgba(255,179,63,.8)", n.beginPath(), n.arc(d.x, d.y, 24 + (st - 24) * k, 0, Math.PI * 2), n.fill();
+                    n.globalAlpha = 1 - k, n.fillStyle = "rgba(255,179,63,.8)", n.beginPath(), n.arc(m.x, m.y, 24 + (ct - 24) * k, 0, Math.PI * 2), n.fill();
                 }
-                let u = b / 560, y = 1 - (1 - u) ** 3, g = 18 + (st - 18) * y;
-                n.globalAlpha = 1 - y, n.strokeStyle = "rgba(255,210,115,.95)", n.lineWidth = 7 * g / 18, n.beginPath(), n.arc(d.x, d.y, g, 0, Math.PI * 2), n.stroke(), n.restore();
+                let u = b / 560, y = 1 - (1 - u) ** 3, g = 18 + (ct - 18) * y;
+                n.globalAlpha = 1 - y, n.strokeStyle = "rgba(255,210,115,.95)", n.lineWidth = 7 * g / 18, n.beginPath(), n.arc(m.x, m.y, g, 0, Math.PI * 2), n.stroke(), n.restore();
             }
             n.restore();
         }), { x: c, y: p, width: 1120 * l, height: 630 * l };
     }
-    class Ct {
+    class vt {
         constructor() {
             this.images = new Map;
         }
         resetPending() { var _a; (_a = this.cancel) === null || _a === void 0 ? void 0 : _a.call(this), this.pending = void 0, this.images.clear(); }
         load() {
-            if (this.images.size === Ze.length)
+            if (this.images.size === Je.length)
                 return Promise.resolve(this.images);
             if (this.pending)
                 return this.pending;
@@ -19748,12 +19766,12 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                             if (o)
                                 return;
                             try {
-                                for (let l of Ze) {
+                                for (let l of Je) {
                                     let c = E.createImage();
                                     i.push(c), c.onload = () => {
                                         if (o)
                                             return;
-                                        if (s.set(l, c), s.size === Ze.length)
+                                        if (s.set(l, c), s.size === Je.length)
                                             a();
                                     }, c.onerror = () => a(Error(`美术资源加载失败：${l}`)), c.src = GameGlobal.__remoteAssetPath(`sect-mining/${l}.${l === "spirit-vein-cavern" ? "jpg" : "png"}`);
                                 }
@@ -19773,8 +19791,8 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }).catch(() => { }), e;
         }
     }
-    var Er = (e) => { let t = e / 1000 / 180 * Math.PI; return { x: Math.sin(t), y: Math.cos(t) }; };
-    class Dt {
+    var Lr = (e) => { let t = e / 1000 / 180 * Math.PI; return { x: Math.sin(t), y: Math.cos(t) }; };
+    class Tt {
         constructor(e, t = () => { }) {
             this.collected = new Set;
             this.destroyedOres = new Set;
@@ -19789,21 +19807,21 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             this.hook = { x: j.x, y: j.y, angleMilliDegrees: 0 };
             this.seed = e;
             this.complete = t;
-            this.field = at(e), this.update(0);
+            this.field = lt(e), this.update(0);
         }
         drop(e) {
             var _a, _b;
             if (this.activeHook || this.finished)
                 return !1;
             let t = Math.floor(e);
-            if (t < 0 || t >= je)
+            if (t < 0 || t >= Le)
                 return !1;
-            let r = { atMs: t, angleMilliDegrees: Math.round(Le(t)) }, o = ct(this.seed, [...this.casts, r]);
+            let r = { atMs: t, angleMilliDegrees: Math.round(Ie(t)) }, o = ft(this.seed, [...this.casts, r]);
             if (!o.valid)
                 return this.error = "灵索轨迹无法记录，请重新进入矿脉。", !1;
             this.casts.push(r);
-            let s = o.catches.find((n) => n.castIndex === this.casts.length - 1), i = o.availableAtMs - r.atMs, a = (_a = s === null || s === void 0 ? void 0 : s.distance) !== null && _a !== void 0 ? _a : i / 1000 / (1 / it + 1 / Jt);
-            return this.activeHook = { cast: r, direction: Er(r.angleMilliDegrees), distance: a, outboundMs: a / it * 1000, totalMs: i, ...s ? { caughtId: s.targetId, caughtKind: s.kind, caughtRadius: s.radius } : {}, destroyedOreIds: (_b = s === null || s === void 0 ? void 0 : s.destroyedOreIds) !== null && _b !== void 0 ? _b : [], detonated: !1 }, !0;
+            let s = o.catches.find((n) => n.castIndex === this.casts.length - 1), i = o.availableAtMs - r.atMs, a = (_a = s === null || s === void 0 ? void 0 : s.distance) !== null && _a !== void 0 ? _a : i / 1000 / (1 / at + 1 / Yt);
+            return this.activeHook = { cast: r, direction: Lr(r.angleMilliDegrees), distance: a, outboundMs: a / at * 1000, totalMs: i, ...s ? { caughtId: s.targetId, caughtKind: s.kind, caughtRadius: s.radius } : {}, destroyedOreIds: (_b = s === null || s === void 0 ? void 0 : s.destroyedOreIds) !== null && _b !== void 0 ? _b : [], detonated: !1 }, !0;
         }
         update(e) {
             var _a;
@@ -19838,17 +19856,17 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
                 }
             }
             else {
-                let r = Le(this.elapsedMs), o = Er(r);
+                let r = Ie(this.elapsedMs), o = Lr(r);
                 this.hook = { x: j.x + o.x * 58, y: j.y + o.y * 58, angleMilliDegrees: r };
             }
-            if ((this.elapsedMs >= je || this.collected.size + this.destroyedOres.size === this.field.filter((r) => r.category === "ore").length) && !this.activeHook)
+            if ((this.elapsedMs >= Le || this.collected.size + this.destroyedOres.size === this.field.filter((r) => r.category === "ore").length) && !this.activeHook)
                 this.finished = !0, this.complete([...this.casts], this.progress);
         }
-        get progress() { let e = ct(this.seed, this.casts), t = Ht.flatMap((r) => { let o = this.field.filter((s) => s.kind === r && this.collected.has(s.id)); return o.length ? [{ kind: r, count: o.length, score: o.reduce((s, i) => s + i.score, 0) }] : []; }); return { score: this.score, maxScore: e.maxScore, collected: this.collected.size, destroyed: this.destroyedOres.size, total: this.field.filter((r) => r.category === "ore").length, elapsedMs: Math.floor(this.elapsedMs), remainingMs: Math.max(0, Math.ceil(je - this.elapsedMs)), casts: this.casts.length, hookBusy: !!this.activeHook, ores: t, ...Ie(this.score, e.maxScore) ? { tier: Ie(this.score, e.maxScore) } : {} }; }
+        get progress() { let e = ft(this.seed, this.casts), t = Ut.flatMap((r) => { let o = this.field.filter((s) => s.kind === r && this.collected.has(s.id)); return o.length ? [{ kind: r, count: o.length, score: o.reduce((s, i) => s + i.score, 0) }] : []; }); return { score: this.score, maxScore: e.maxScore, collected: this.collected.size, destroyed: this.destroyedOres.size, total: this.field.filter((r) => r.category === "ore").length, elapsedMs: Math.floor(this.elapsedMs), remainingMs: Math.max(0, Math.ceil(Le - this.elapsedMs)), casts: this.casts.length, hookBusy: !!this.activeHook, ores: t, ...Be(this.score, e.maxScore) ? { tier: Be(this.score, e.maxScore) } : {} }; }
     }
-    class vt {
+    class wt {
         constructor(e, t, r = () => fe()) {
-            this.assets = new Ct;
+            this.assets = new vt;
             this.starting = !1;
             this.submitting = !1;
             this.started = !1;
@@ -19861,7 +19879,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             this.changed = e;
             this.refreshPlayer = t;
             this.now = r;
-            this.context = new Te(e, !1), this.tasks = new ve(e);
+            this.context = new we(e, !1), this.tasks = new Te(e);
         }
         enter(e) { this.leave(), this.active = !0, this.owner = e, this.images = void 0, this.runtime = void 0, this.session = void 0, this.settlement = void 0, this.error = "", this.started = !1, this.context.enter(e), this.tasks.open(e), this.loadAssets(); }
         leave() { this.active = !1, this.generation++, this.context.leave(), this.tasks.close(), this.assets.resetPending(), this.starting = this.submitting = this.assetsLoading = !1, this.runtime = void 0; }
@@ -19892,22 +19910,22 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             let t = ++this.generation, r = () => this.active && t === this.generation;
             this.started = !0, this.starting = !0, this.runtime = void 0, this.session = void 0, this.settlement = void 0, this.error = "", this.changed();
             try {
-                let o = Pr(this.tasks.data), s;
+                let o = Er(this.tasks.data), s;
                 if (e || o.kind === "practice")
                     s = { kind: "practice", seed: `practice:${le()}` };
                 else {
-                    let i = await de(`/api/sects/current/tasks/${encodeURIComponent(o.task.definitionId)}/actions/start`, "POST", { input: {} }, void 0, { "Idempotency-Key": le() });
+                    let i = await me(`/api/sects/current/tasks/${encodeURIComponent(o.task.definitionId)}/actions/start`, "POST", { input: {} }, void 0, { "Idempotency-Key": le() });
                     if (!r())
                         return;
                     let a = i.data;
                     if (((_a = a.outcome) === null || _a === void 0 ? void 0 : _a.renderer) !== "sect.outcome.mining-session")
                         throw Error("宗门返回的灵矿采掘场次无法识别");
-                    let n = Ue.parse(a.outcome.data);
+                    let n = ze.parse(a.outcome.data);
                     s = { kind: "reward", seed: n.seed, task: o.task, server: n }, this.acceptTasks(a);
                 }
                 if (!r())
                     return;
-                this.session = s, this.clockStart = this.now(), this.runtime = new Dt(s.seed, (i, a) => { this.complete(i, a, s, t); });
+                this.session = s, this.clockStart = this.now(), this.runtime = new Tt(s.seed, (i, a) => { this.complete(i, a, s, t); });
             }
             catch (o) {
                 if (r())
@@ -19954,13 +19972,13 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
             this.submitting = !0, this.error = "", this.changed();
             try {
-                let i = await de(`/api/sects/current/tasks/${encodeURIComponent(r.task.definitionId)}/actions/complete`, "POST", { input: { sessionId: r.server.sessionId, rulesVersion: r.server.rulesVersion, casts: e } }, void 0, { "Idempotency-Key": r.server.sessionId });
+                let i = await me(`/api/sects/current/tasks/${encodeURIComponent(r.task.definitionId)}/actions/complete`, "POST", { input: { sessionId: r.server.sessionId, rulesVersion: r.server.rulesVersion, casts: e } }, void 0, { "Idempotency-Key": r.server.sessionId });
                 if (!s())
                     return;
                 let a = i.data;
                 if (((_a = a.outcome) === null || _a === void 0 ? void 0 : _a.renderer) !== "sect.outcome.mining-result")
                     throw Error("宗门无法识别本次采掘成绩");
-                let n = Qe.parse(a.outcome.data);
+                let n = qe.parse(a.outcome.data);
                 this.settlement = { kind: "reward", ...n }, this.acceptTasks(a), _e(n.qualified ? `灵矿采掘评定为 ${n.tier} 档` : "本轮采掘尚未达到验收线"), Promise.resolve().then(() => this.refreshPlayer()).catch(() => { });
             }
             catch (i) {
@@ -19973,18 +19991,18 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
         }
     }
-    var Qn = { spirit_crystal: "小型灵晶", copper_ore: "赤铜灵矿", dark_iron: "玄铁矿团", earth_essence: "地脉灵髓" };
-    function jr(e, t) { let r = [["D", 0.2], ["C", 0.35], ["B", 0.5], ["A", 0.65], ["S", 0.8]].find(([, o]) => e < Math.ceil(t * o)); return r ? `距离 ${r[0]} 档还差 ${Math.max(0, Math.ceil(t * r[1]) - e)} 分` : "已经达到最高档"; }
-    class Tt {
+    var qn = { spirit_crystal: "小型灵晶", copper_ore: "赤铜灵矿", dark_iron: "玄铁矿团", earth_essence: "地脉灵髓" };
+    function Ir(e, t) { let r = [["D", 0.2], ["C", 0.35], ["B", 0.5], ["A", 0.65], ["S", 0.8]].find(([, o]) => e < Math.ceil(t * o)); return r ? `距离 ${r[0]} 档还差 ${Math.max(0, Math.ceil(t * r[1]) - e)} 分` : "已经达到最高档"; }
+    class Ot {
         constructor(e, t, r) {
             this.owner = "";
             this.active = !1;
             this.exit = () => this.navigate("/game/sect/spirit-vein?npc=facility");
-            this.activityOverlay = new me;
+            this.activityOverlay = new de;
             this.u = e;
             this.player = t;
             this.navigate = r;
-            this.model = new vt(() => e.invalidate(), () => t.load());
+            this.model = new wt(() => e.invalidate(), () => t.load());
         }
         enter() { this.leave(!1), this.active = !0, this.rotate("landscape"), this.timer = setInterval(() => this.u.invalidate(), 33); }
         leave(e = !0) {
@@ -19992,7 +20010,7 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             if (this.active = !1, clearInterval(this.timer), this.timer = void 0, this.model.leave(), this.owner = "", e && t)
                 this.rotate("portrait");
         }
-        rotate(e) { Ce(this.u, e); }
+        rotate(e) { De(this.u, e); }
         pill(e, t, r, o, s = !1) {
             let i = this.u, a = i.ctx, n = i.measure(e, 14) + 32;
             if (a.save(), a.globalAlpha = s ? 0.4 : 1, a.fillStyle = "rgba(16,32,27,.78)", a.beginPath(), a.moveTo(t + 18, r), a.arcTo(t + n, r, t + n, r + 36, 18), a.arcTo(t + n, r + 36, t, r + 36, 18), a.arcTo(t, r + 36, t, r, 18), a.arcTo(t, r, t + n, r, 18), a.closePath(), a.fill(), i.text(e, t + 16, r + 18, 14, "#ecfdf5"), a.restore(), o && !s)
@@ -20012,21 +20030,21 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             t.tick(), e.rect(0, 0, e.width, e.height, "#07110f");
             let s = t.runtime;
             if (s && t.images)
-                Nr(e, s, t.images, 0, 0, e.width, e.height);
+                jr(e, s, t.images, 0, 0, e.width, e.height);
             let i = s === null || s === void 0 ? void 0 : s.progress;
             if (!o && s && !t.settlement && !t.error && !t.submitting)
                 e.hit(0, 0, e.width, e.height, () => { }, { surface: { start: () => t.drop(), move: () => { }, end: () => { }, cancel: () => { } } });
             let a = Math.max(12, e.safeTop), n = e.width - Math.max(12, e.safeRight), l = e.menuBottom > a ? e.menuBottom + 8 : a;
             if (i)
                 this.pill(`分 ${i.score}    矿 ${i.collected}/${i.total}${i.destroyed ? `    炸毁 ${i.destroyed}` : ""}    ${Math.ceil(i.remainingMs / 1000)}s`, Math.max(12, e.safeLeft), a);
-            let [c] = De(e, ["退出"]);
+            let [c] = ve(e, ["退出"]);
             if (this.pill("退出", c.x, c.y, this.exit, t.submitting), i && t.session && !t.settlement) {
-                let h = n - 64, f = Math.max(a + 68, l + 48, 76), S = t.submitting || t.starting || o || i.hookBusy;
-                if (e.ctx.save(), e.ctx.globalAlpha = S ? 0.4 : 1, e.ctx.fillStyle = "rgba(23,58,48,.78)", e.ctx.strokeStyle = "rgba(255,255,255,.25)", e.ctx.beginPath(), e.ctx.arc(h + 32, f + 32, 32, 0, Math.PI * 2), e.ctx.fill(), e.ctx.stroke(), e.text("放索", h + 17, f + 32, 14, "#ecfdf5"), e.ctx.restore(), !S)
-                    e.hit(h, f, 64, 64, () => { }, { surface: { start: () => t.drop(), move: () => { }, end: () => { }, cancel: () => { } } });
+                let x = n - 64, f = Math.max(a + 68, l + 48, 76), d = t.submitting || t.starting || o || i.hookBusy;
+                if (e.ctx.save(), e.ctx.globalAlpha = d ? 0.4 : 1, e.ctx.fillStyle = "rgba(23,58,48,.78)", e.ctx.strokeStyle = "rgba(255,255,255,.25)", e.ctx.beginPath(), e.ctx.arc(x + 32, f + 32, 32, 0, Math.PI * 2), e.ctx.fill(), e.ctx.stroke(), e.text("放索", x + 17, f + 32, 14, "#ecfdf5"), e.ctx.restore(), !d)
+                    e.hit(x, f, 64, 64, () => { }, { surface: { start: () => t.drop(), move: () => { }, end: () => { }, cancel: () => { } } });
                 if (!o) {
-                    let d = `看准摆角后点击“放索” · ${jr(i.score, i.maxScore)}`, b = e.measure(d, 12) + 32, u = e.height - Math.max(10.4, e.bottom) - 32;
-                    e.rect((e.width - b) / 2, u, b, 32, "rgba(0,0,0,.5)"), e.text(d, (e.width - b) / 2 + 16, u + 16, 12, "#e7e5e4");
+                    let m = `看准摆角后点击“放索” · ${Ir(i.score, i.maxScore)}`, b = e.measure(m, 12) + 32, u = e.height - Math.max(10.4, e.bottom) - 32;
+                    e.rect((e.width - b) / 2, u, b, 32, "rgba(0,0,0,.5)"), e.text(m, (e.width - b) / 2 + 16, u + 16, 12, "#e7e5e4");
                 }
             }
             if (o) {
@@ -20052,14 +20070,14 @@ ${D.omen.verse}` : K ? "今日尚未占卜" : "暂未读到今日卦象", 28, B,
             }
             let p = t.settlement;
             if (p) {
-                let h = [{ text: p.qualified ? `采掘评定 · ${p.tier} 档` : "本轮采掘未达标", size: 20, color: "#fafaf9" }, { text: `得分 ${p.score}/${p.maxScore}，${jr(p.score, p.maxScore)}。` }, { text: p.ores.length ? `采得：${p.ores.map((S) => `${Qn[S.kind]} ×${S.count}（${S.score}分）`).join("、")}` : "本轮未采得灵矿。" }];
+                let x = [{ text: p.qualified ? `采掘评定 · ${p.tier} 档` : "本轮采掘未达标", size: 20, color: "#fafaf9" }, { text: `得分 ${p.score}/${p.maxScore}，${Ir(p.score, p.maxScore)}。` }, { text: p.ores.length ? `采得：${p.ores.map((d) => `${qn[d.kind]} ×${d.count}（${d.score}分）`).join("、")}` : "本轮未采得灵矿。" }];
                 if (p.destroyed)
-                    h.push({ text: `爆破波及灵矿 ×${p.destroyed}，不会计入得分。`, color: "#fed7aa" });
-                for (let S of (_c = p.rewardSummary) !== null && _c !== void 0 ? _c : [])
-                    h.push({ text: S, color: "#d1fae5" });
-                h.push({ text: p.kind === "practice" ? "自由练习不会产生奖励。" : p.qualified ? "采掘回执已成，请回事务堂领取赏赐。" : "委托仍在名下，可以重新开启采掘场。", size: 12, color: "#a8a29e" });
+                    x.push({ text: `爆破波及灵矿 ×${p.destroyed}，不会计入得分。`, color: "#fed7aa" });
+                for (let d of (_c = p.rewardSummary) !== null && _c !== void 0 ? _c : [])
+                    x.push({ text: d, color: "#d1fae5" });
+                x.push({ text: p.kind === "practice" ? "自由练习不会产生奖励。" : p.qualified ? "采掘回执已成，请回事务堂领取赏赐。" : "委托仍在名下，可以重新开启采掘场。", size: 12, color: "#a8a29e" });
                 let f = p.kind === "reward" && p.qualified;
-                this.overlay(h, [{ label: "返回灵脉", run: this.exit }, { label: f ? "自由练习" : "再来一局", run: () => void t.begin(f) }]);
+                this.overlay(x, [{ label: "返回灵脉", run: this.exit }, { label: f ? "自由练习" : "再来一局", run: () => void t.begin(f) }]);
             }
         }
     }

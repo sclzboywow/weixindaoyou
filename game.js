@@ -1,155 +1,155 @@
-var { defineProperty: W, getOwnPropertyNames: c0, getOwnPropertyDescriptor: f0 } = Object, g0 = Object.prototype.hasOwnProperty;
-function z0(b) { return this[b]; }
-var d0 = (b) => { var c = (I !== null && I !== void 0 ? I : (I = new WeakMap)).get(b), f; if (c)
-    return c; if (c = W({}, "__esModule", { value: !0 }), b && typeof b === "object" || typeof b === "function") {
-    for (var g of c0(b))
-        if (!g0.call(c, g))
-            W(c, g, { get: z0.bind(b, g), enumerable: !(f = f0(b, g)) || f.enumerable });
-} return I.set(b, c), c; }, I;
-var j0 = (b) => b;
-function k0(b, c) { this[b] = j0.bind(null, c); }
-var Q0 = (b, c) => { for (var f in c)
-    W(b, f, { get: c[f], enumerable: !0, configurable: !0, set: k0.bind(c, f) }); };
-var N0 = {};
-Q0(N0, { startBootstrap: () => b0 });
-module.exports = d0(N0); /*! noble-hashes - MIT License (c) 2022 Paul Miller (paulmillr.com) */
-function Z0(b) { return b instanceof Uint8Array || ArrayBuffer.isView(b) && b.constructor.name === "Uint8Array"; }
-function M(b, ...c) { if (!Z0(b))
-    throw Error("Uint8Array expected"); if (c.length > 0 && !c.includes(b.length))
-    throw Error("Uint8Array expected of length " + c + ", got length=" + b.length); }
-function L(b, c = !0) { if (b.destroyed)
-    throw Error("Hash instance has been destroyed"); if (c && b.finished)
+var { defineProperty: K, getOwnPropertyNames: ae, getOwnPropertyDescriptor: ce } = Object, be = Object.prototype.hasOwnProperty;
+function de(e) { return this[e]; }
+var fe = (e) => { var a = (y !== null && y !== void 0 ? y : (y = new WeakMap)).get(e), c; if (a)
+    return a; if (a = K({}, "__esModule", { value: !0 }), e && typeof e === "object" || typeof e === "function") {
+    for (var b of ae(e))
+        if (!be.call(a, b))
+            K(a, b, { get: de.bind(e, b), enumerable: !(c = ce(e, b)) || c.enumerable });
+} return y.set(e, a), a; }, y;
+var se = (e) => e;
+function ie(e, a) { this[e] = se.bind(null, a); }
+var pe = (e, a) => { for (var c in a)
+    K(e, c, { get: a[c], enumerable: !0, configurable: !0, set: ie.bind(a, c) }); };
+var oe = {};
+pe(oe, { startBootstrap: () => ee });
+module.exports = fe(oe); /*! noble-hashes - MIT License (c) 2022 Paul Miller (paulmillr.com) */
+function ne(e) { return e instanceof Uint8Array || ArrayBuffer.isView(e) && e.constructor.name === "Uint8Array"; }
+function Z(e, ...a) { if (!ne(e))
+    throw Error("Uint8Array expected"); if (a.length > 0 && !a.includes(e.length))
+    throw Error("Uint8Array expected of length " + a + ", got length=" + e.length); }
+function P(e, a = !0) { if (e.destroyed)
+    throw Error("Hash instance has been destroyed"); if (a && e.finished)
     throw Error("Hash#digest() has already been called"); }
-function S(b, c) { M(b); let f = c.outputLen; if (b.length < f)
-    throw Error("digestInto() expects output buffer of length at least " + f); }
-function D(...b) { for (let c = 0; c < b.length; c++)
-    b[c].fill(0); }
-function F(b) { return new DataView(b.buffer, b.byteOffset, b.byteLength); }
-function K(b, c) { return b << 32 - c | b >>> c; }
-var $0 = (() => typeof Uint8Array.from([]).toHex === "function" && typeof Uint8Array.fromHex === "function")(), X0 = Array.from({ length: 256 }, (b, c) => c.toString(16).padStart(2, "0"));
-function n(b) { if (M(b), $0)
-    return b.toHex(); let c = ""; for (let f = 0; f < b.length; f++)
-    c += X0[b[f]]; return c; }
-function Y0(b) { if (typeof b !== "string")
-    throw Error("string expected"); return new Uint8Array(new TextEncoder().encode(b)); }
-function w(b) { if (typeof b === "string")
-    b = Y0(b); return M(b), b; }
-class y {
+function B(e, a) { Z(e); let c = a.outputLen; if (e.length < c)
+    throw Error("digestInto() expects output buffer of length at least " + c); }
+function $(...e) { for (let a = 0; a < e.length; a++)
+    e[a].fill(0); }
+function Y(e) { return new DataView(e.buffer, e.byteOffset, e.byteLength); }
+function w(e, a) { return e << 32 - a | e >>> a; }
+var te = (() => typeof Uint8Array.from([]).toHex === "function" && typeof Uint8Array.fromHex === "function")(), ge = Array.from({ length: 256 }, (e, a) => a.toString(16).padStart(2, "0"));
+function T(e) { if (Z(e), te)
+    return e.toHex(); let a = ""; for (let c = 0; c < e.length; c++)
+    a += ge[e[c]]; return a; }
+function ke(e) { if (typeof e !== "string")
+    throw Error("string expected"); return new Uint8Array(new TextEncoder().encode(e)); }
+function O(e) { if (typeof e === "string")
+    e = ke(e); return Z(e), e; }
+class R {
 }
-function _(b) { let c = (g) => b().update(w(g)).digest(), f = b(); return c.outputLen = f.outputLen, c.blockLen = f.blockLen, c.create = () => b(), c; }
-function q0(b, c, f, g) { if (typeof b.setBigUint64 === "function")
-    return b.setBigUint64(c, f, g); let j = BigInt(32), d = BigInt(4294967295), Q = Number(f >> j & d), z = Number(f & d), Y = g ? 4 : 0, X = g ? 0 : 4; b.setUint32(c + Y, Q, g), b.setUint32(c + X, z, g); }
-function H(b, c, f) { return b & c ^ ~b & f; }
-function A(b, c, f) { return b & c ^ b & f ^ c & f; }
-class x extends y {
-    constructor(b, c, f, g) { super(); this.finished = !1, this.length = 0, this.pos = 0, this.destroyed = !1, this.blockLen = b, this.outputLen = c, this.padOffset = f, this.isLE = g, this.buffer = new Uint8Array(b), this.view = F(this.buffer); }
-    update(b) { L(this), b = w(b), M(b); let { view: c, buffer: f, blockLen: g } = this, j = b.length; for (let d = 0; d < j;) {
-        let Q = Math.min(g - this.pos, j - d);
-        if (Q === g) {
-            let z = F(b);
-            for (; g <= j - d; d += g)
-                this.process(z, d);
+function x(e) { let a = (b) => e().update(O(b)).digest(), c = e(); return a.outputLen = c.outputLen, a.blockLen = c.blockLen, a.create = () => e(), a; }
+function me(e, a, c, b) { if (typeof e.setBigUint64 === "function")
+    return e.setBigUint64(a, c, b); let s = BigInt(32), f = BigInt(4294967295), p = Number(c >> s & f), d = Number(c & f), k = b ? 4 : 0, g = b ? 0 : 4; e.setUint32(a + k, p, b), e.setUint32(a + g, d, b); }
+function W(e, a, c) { return e & a ^ ~e & c; }
+function L(e, a, c) { return e & a ^ e & c ^ a & c; }
+class U extends R {
+    constructor(e, a, c, b) { super(); this.finished = !1, this.length = 0, this.pos = 0, this.destroyed = !1, this.blockLen = e, this.outputLen = a, this.padOffset = c, this.isLE = b, this.buffer = new Uint8Array(e), this.view = Y(this.buffer); }
+    update(e) { P(this), e = O(e), Z(e); let { view: a, buffer: c, blockLen: b } = this, s = e.length; for (let f = 0; f < s;) {
+        let p = Math.min(b - this.pos, s - f);
+        if (p === b) {
+            let d = Y(e);
+            for (; b <= s - f; f += b)
+                this.process(d, f);
             continue;
         }
-        if (f.set(b.subarray(d, d + Q), this.pos), this.pos += Q, d += Q, this.pos === g)
-            this.process(c, 0), this.pos = 0;
-    } return this.length += b.length, this.roundClean(), this; }
-    digestInto(b) { L(this), S(b, this), this.finished = !0; let { buffer: c, view: f, blockLen: g, isLE: j } = this, { pos: d } = this; if (c[d++] = 128, D(this.buffer.subarray(d)), this.padOffset > g - d)
-        this.process(f, 0), d = 0; for (let $ = d; $ < g; $++)
-        c[$] = 0; q0(f, g - 8, BigInt(this.length * 8), j), this.process(f, 0); let Q = F(b), z = this.outputLen; if (z % 4)
-        throw Error("_sha2: outputLen should be aligned to 32bit"); let Y = z / 4, X = this.get(); if (Y > X.length)
-        throw Error("_sha2: outputLen bigger than state"); for (let $ = 0; $ < Y; $++)
-        Q.setUint32(4 * $, X[$], j); }
-    digest() { let { buffer: b, outputLen: c } = this; this.digestInto(b); let f = b.slice(0, c); return this.destroy(), f; }
-    _cloneInto(b) { b || (b = new this.constructor), b.set(...this.get()); let { blockLen: c, buffer: f, length: g, finished: j, destroyed: d, pos: Q } = this; if (b.destroyed = d, b.finished = j, b.length = g, b.pos = Q, g % c)
-        b.buffer.set(f); return b; }
+        if (c.set(e.subarray(f, f + p), this.pos), this.pos += p, f += p, this.pos === b)
+            this.process(a, 0), this.pos = 0;
+    } return this.length += e.length, this.roundClean(), this; }
+    digestInto(e) { P(this), B(e, this), this.finished = !0; let { buffer: a, view: c, blockLen: b, isLE: s } = this, { pos: f } = this; if (a[f++] = 128, $(this.buffer.subarray(f)), this.padOffset > b - f)
+        this.process(c, 0), f = 0; for (let t = f; t < b; t++)
+        a[t] = 0; me(c, b - 8, BigInt(this.length * 8), s), this.process(c, 0); let p = Y(e), d = this.outputLen; if (d % 4)
+        throw Error("_sha2: outputLen should be aligned to 32bit"); let k = d / 4, g = this.get(); if (k > g.length)
+        throw Error("_sha2: outputLen bigger than state"); for (let t = 0; t < k; t++)
+        p.setUint32(4 * t, g[t], s); }
+    digest() { let { buffer: e, outputLen: a } = this; this.digestInto(e); let c = e.slice(0, a); return this.destroy(), c; }
+    _cloneInto(e) { e || (e = new this.constructor), e.set(...this.get()); let { blockLen: a, buffer: c, length: b, finished: s, destroyed: f, pos: p } = this; if (e.destroyed = f, e.finished = s, e.length = b, e.pos = p, b % a)
+        e.buffer.set(c); return e; }
     clone() { return this._cloneInto(); }
 }
-var p = Uint32Array.from([1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225]);
-var J0 = Uint32Array.from([1116352408, 1899447441, 3049323471, 3921009573, 961987163, 1508970993, 2453635748, 2870763221, 3624381080, 310598401, 607225278, 1426881987, 1925078388, 2162078206, 2614888103, 3248222580, 3835390401, 4022224774, 264347078, 604807628, 770255983, 1249150122, 1555081692, 1996064986, 2554220882, 2821834349, 2952996808, 3210313671, 3336571891, 3584528711, 113926993, 338241895, 666307205, 773529912, 1294757372, 1396182291, 1695183700, 1986661051, 2177026350, 2456956037, 2730485921, 2820302411, 3259730800, 3345764771, 3516065817, 3600352804, 4094571909, 275423344, 430227734, 506948616, 659060556, 883997877, 958139571, 1322822218, 1537002063, 1747873779, 1955562222, 2024104815, 2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298]), O = new Uint32Array(64);
-class C extends x {
-    constructor(b = 32) { super(64, b, 8, !1); this.A = p[0] | 0, this.B = p[1] | 0, this.C = p[2] | 0, this.D = p[3] | 0, this.E = p[4] | 0, this.F = p[5] | 0, this.G = p[6] | 0, this.H = p[7] | 0; }
-    get() { let { A: b, B: c, C: f, D: g, E: j, F: d, G: Q, H: z } = this; return [b, c, f, g, j, d, Q, z]; }
-    set(b, c, f, g, j, d, Q, z) { this.A = b | 0, this.B = c | 0, this.C = f | 0, this.D = g | 0, this.E = j | 0, this.F = d | 0, this.G = Q | 0, this.H = z | 0; }
-    process(b, c) { for (let $ = 0; $ < 16; $++, c += 4)
-        O[$] = b.getUint32(c, !1); for (let $ = 16; $ < 64; $++) {
-        let m = O[$ - 15], N = O[$ - 2], R = K(m, 7) ^ K(m, 18) ^ m >>> 3, P = K(N, 17) ^ K(N, 19) ^ N >>> 10;
-        O[$] = P + O[$ - 7] + R + O[$ - 16] | 0;
-    } let { A: f, B: g, C: j, D: d, E: Q, F: z, G: Y, H: X } = this; for (let $ = 0; $ < 64; $++) {
-        let m = K(Q, 6) ^ K(Q, 11) ^ K(Q, 25), N = X + m + H(Q, z, Y) + J0[$] + O[$] | 0, P = (K(f, 2) ^ K(f, 13) ^ K(f, 22)) + A(f, g, j) | 0;
-        X = Y, Y = z, z = Q, Q = d + N | 0, d = j, j = g, g = f, f = N + P | 0;
-    } f = f + this.A | 0, g = g + this.B | 0, j = j + this.C | 0, d = d + this.D | 0, Q = Q + this.E | 0, z = z + this.F | 0, Y = Y + this.G | 0, X = X + this.H | 0, this.set(f, g, j, d, Q, z, Y, X); }
-    roundClean() { D(O); }
-    destroy() { this.set(0, 0, 0, 0, 0, 0, 0, 0), D(this.buffer); }
+var v = Uint32Array.from([1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225]);
+var le = Uint32Array.from([1116352408, 1899447441, 3049323471, 3921009573, 961987163, 1508970993, 2453635748, 2870763221, 3624381080, 310598401, 607225278, 1426881987, 1925078388, 2162078206, 2614888103, 3248222580, 3835390401, 4022224774, 264347078, 604807628, 770255983, 1249150122, 1555081692, 1996064986, 2554220882, 2821834349, 2952996808, 3210313671, 3336571891, 3584528711, 113926993, 338241895, 666307205, 773529912, 1294757372, 1396182291, 1695183700, 1986661051, 2177026350, 2456956037, 2730485921, 2820302411, 3259730800, 3345764771, 3516065817, 3600352804, 4094571909, 275423344, 430227734, 506948616, 659060556, 883997877, 958139571, 1322822218, 1537002063, 1747873779, 1955562222, 2024104815, 2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298]), j = new Uint32Array(64);
+class M extends U {
+    constructor(e = 32) { super(64, e, 8, !1); this.A = v[0] | 0, this.B = v[1] | 0, this.C = v[2] | 0, this.D = v[3] | 0, this.E = v[4] | 0, this.F = v[5] | 0, this.G = v[6] | 0, this.H = v[7] | 0; }
+    get() { let { A: e, B: a, C: c, D: b, E: s, F: f, G: p, H: d } = this; return [e, a, c, b, s, f, p, d]; }
+    set(e, a, c, b, s, f, p, d) { this.A = e | 0, this.B = a | 0, this.C = c | 0, this.D = b | 0, this.E = s | 0, this.F = f | 0, this.G = p | 0, this.H = d | 0; }
+    process(e, a) { for (let t = 0; t < 16; t++, a += 4)
+        j[t] = e.getUint32(a, !1); for (let t = 16; t < 64; t++) {
+        let z = j[t - 15], o = j[t - 2], q = w(z, 7) ^ w(z, 18) ^ z >>> 3, h = w(o, 17) ^ w(o, 19) ^ o >>> 10;
+        j[t] = h + j[t - 7] + q + j[t - 16] | 0;
+    } let { A: c, B: b, C: s, D: f, E: p, F: d, G: k, H: g } = this; for (let t = 0; t < 64; t++) {
+        let z = w(p, 6) ^ w(p, 11) ^ w(p, 25), o = g + z + W(p, d, k) + le[t] + j[t] | 0, h = (w(c, 2) ^ w(c, 13) ^ w(c, 22)) + L(c, b, s) | 0;
+        g = k, k = d, d = p, p = f + o | 0, f = s, s = b, b = c, c = o + h | 0;
+    } c = c + this.A | 0, b = b + this.B | 0, s = s + this.C | 0, f = f + this.D | 0, p = p + this.E | 0, d = d + this.F | 0, k = k + this.G | 0, g = g + this.H | 0, this.set(c, b, s, f, p, d, k, g); }
+    roundClean() { $(j); }
+    destroy() { this.set(0, 0, 0, 0, 0, 0, 0, 0), $(this.buffer); }
 }
-var a = _(() => new C);
-var l = a;
-function i(b, c, f) { let g = b.getFileSystemManager(), j = b.env.USER_DATA_PATH + "/remote-assets-v1"; try {
-    g.mkdirSync(j, !0);
+var C = x(() => new M);
+var E = C;
+function V(e, a, c) { let b = e.getFileSystemManager(), s = e.env.USER_DATA_PATH + "/remote-assets-v1"; try {
+    b.mkdirSync(s, !0);
 }
-catch (k) { } let d = new Map, Q = new Map, z = 0, Y = []; async function X(k) { if (z >= 2)
-    await new Promise((Z) => Y.push(Z));
+catch (i) { } let f = new Map, p = new Map, d = 0, k = []; async function g(i) { if (d >= 2)
+    await new Promise((n) => k.push(n));
 else
-    z++; try {
-    return await k();
+    d++; try {
+    return await i();
 }
 finally {
-    let Z = Y.shift();
-    if (Z)
-        Z();
+    let n = k.shift();
+    if (n)
+        n();
     else
-        z--;
-} } let $ = new Map; for (let k of f) {
-    let Z = $.get(k.package) || [];
-    Z.push(k), $.set(k.package, Z);
-} let m = new Set(f.map((k) => k.file)); try {
-    for (let k of g.readdirSync(j))
-        if (/^[a-f0-9]{64}\.(png|jpg|jpeg|webp|gz)$/.test(k) && !m.has(k))
-            g.unlinkSync(j + "/" + k);
+        d--;
+} } let t = new Map; for (let i of c) {
+    let n = t.get(i.package) || [];
+    n.push(i), t.set(i.package, n);
+} let z = new Set(c.map((i) => i.file)); try {
+    for (let i of b.readdirSync(s))
+        if (/^[a-f0-9]{64}\.(png|jpg|jpeg|webp|gz)$/.test(i) && !z.has(i))
+            b.unlinkSync(s + "/" + i);
 }
-catch (k) { } let N = async (k, Z) => { try {
-    let q = new Uint8Array(g.readFileSync(k));
-    return q.byteLength === Z.size && n(l(q)) === Z.file.split(".")[0];
+catch (i) { } let o = async (i, n) => { try {
+    let m = new Uint8Array(b.readFileSync(i));
+    return m.byteLength === n.size && T(E(m)) === n.file.split(".")[0];
 }
-catch (q) {
+catch (m) {
     return !1;
-} }, R = (k) => { let Z = Q.get(k.path); if (Z)
-    return Z; let q = (async () => { let J = j + "/" + k.file; if (!await N(J, k)) {
-    let G;
-    for (let u = 0; u < 2; u++)
+} }, q = (i) => { let n = p.get(i.path); if (n)
+    return n; let m = (async () => { let l = s + "/" + i.file; if (!await o(l, i)) {
+    let X;
+    for (let G = 0; G < 2; G++)
         try {
-            let U = await X(() => new Promise((B, V) => b.downloadFile({ url: "https://yzdoc.cn/assets/minigame-v1/" + k.file, timeout: 60000, success: (T) => T.statusCode === 200 ? B(T.tempFilePath) : V(Error("Asset HTTP " + T.statusCode)), fail: V })));
-            if (!await N(U, k))
-                throw Error("Asset integrity check failed: " + k.path);
+            let Q = await g(() => new Promise((J, F) => e.downloadFile({ url: "https://yzdoc.cn/assets/minigame-v1/" + i.file, timeout: 60000, success: (N) => N.statusCode === 200 ? J(N.tempFilePath) : F(Error("Asset HTTP " + N.statusCode + ": " + i.path + " (" + i.file + ")")), fail: F })));
+            if (!await o(Q, i))
+                throw Error("Asset integrity check failed: " + i.path);
             try {
-                g.unlinkSync(J);
+                b.unlinkSync(l);
             }
-            catch (B) { }
-            g.copyFileSync(U, J);
+            catch (J) { }
+            b.copyFileSync(Q, l);
             try {
-                g.unlinkSync(U);
+                b.unlinkSync(Q);
             }
-            catch (B) { }
-            G = void 0;
+            catch (J) { }
+            X = void 0;
             break;
         }
-        catch (U) {
-            G = U;
+        catch (Q) {
+            X = Q;
         }
-    if (G)
-        throw G;
-} d.set(k.path, J); })(); return Q.set(k.path, q), q.then(() => Q.delete(k.path), () => Q.delete(k.path)), q; }; c.__remoteAssetPath = (k) => d.get(k) || k; let P = b.loadSubpackage.bind(b); b.loadSubpackage = (k) => { let Z = $.get(k.name); if (!Z)
-    return P(k); let q; return (async () => { for (let J = 0; J < Z.length; J++)
-    if (await R(Z[J]), q)
-        q({ progress: Math.round((J + 1) / Z.length * 100) }); P(k); })().catch((J) => { if (console.error("素材下载失败", k.name, J), k.fail)
-    k.fail(J); if (k.complete)
-    k.complete(J); }), { onProgressUpdate(J) { q = J; } }; }; }
-var e = [{ path: "sect-sweep/cloud-stair-courtyard.jpg", file: "e84cd74fe6cc4d1db82caffb8b21d9d6ef34d76091f978e76a4c2baa11a4edbc.jpg", size: 390460, md5: "d75dc3b3d854575f23e78c9b34d21d7e", package: "sect-sweep" }, { path: "sect-sweep/sweep-atlas.png", file: "be73f2b82011af2401c4a728d5910cf36c0ab62d2b43aa901fec485b5c02b392.png", size: 537176, md5: "85448b1e572a03abad2daab3fd0a49b7", package: "sect-sweep" }, { path: "sect-sweep/sweep-obstacles.png", file: "f8000cb373894ee376155f358b0b4fb2c83a782233b2dfec923baedd624fb198.png", size: 134933, md5: "4a3433df38f33e15091c3b37cd8cee1d", package: "sect-sweep" }, { path: "sect-sweep/virtual-joystick-base.png", file: "cf2b13eba0647fbc2b8cf202c5ccb8464c137ed52e62bc61ae68b66e9bae25fd.png", size: 39466, md5: "d3f60d127adad2a1ea1806371d5042ab", package: "sect-sweep" }, { path: "sect-sweep/virtual-joystick-thumb.png", file: "0b45b56626f7694b3119168606d73a6f7d9bc56576fabe89506a3f4a96ec24cb.png", size: 12238, md5: "aa0c76b564635742e3351888d2e22288", package: "sect-sweep" }, { path: "sect-mining/copper-ore.png", file: "e1e2932d261a03d870c42a4c1f36f068ebc1fd0aa658efcab65ee04c8c682ea6.png", size: 514132, md5: "40da4af600e29ba80d1ef7a42626c724", package: "sect-mining" }, { path: "sect-mining/dark-iron.png", file: "2d10f4f3f8b2532b27208e41aea0ec8e92fc1d446dd60a076900a6aba6ed1e06.png", size: 416455, md5: "cff5d02d8891514ecfbb6b131ec4513e", package: "sect-mining" }, { path: "sect-mining/earth-essence.png", file: "2291302f21bd2362c996e89b07548d649de90b5bbe1dd2e474fb9ca30056f491.png", size: 404594, md5: "af5bfad46759dabbf649753534e2455a", package: "sect-mining" }, { path: "sect-mining/explosive-barrel.png", file: "2e41afa6fac88bcd12a34515f59863271c5758561eb0335b07bb794d6478ae60.png", size: 241229, md5: "1c2c351c3628603b41b4f0d58876c42e", package: "sect-mining" }, { path: "sect-mining/rope-cultivator.png", file: "fb243cc0b673e3b044d112849186584b43b8011d04c90840b54c2b6257a5b052.png", size: 656645, md5: "3e0b8bfb0f6c90dcd260ee928408ef26", package: "sect-mining" }, { path: "sect-mining/spirit-crystal.png", file: "a68e80903007b0676d7e6156c7607d1bc0653e2fd12cadc3f47fa6486f5985ce.png", size: 190630, md5: "f9cf1edc93a627323a8c80f9e434eeef", package: "sect-mining" }, { path: "sect-mining/spirit-hook.png", file: "57e5e5aae4f9f9f0a5a238ccb02ed4caf103c81362ad8ea8ecd3e8c093679c83.png", size: 213532, md5: "aef70c2a68df9671ef4acff0730a2761", package: "sect-mining" }, { path: "sect-mining/spirit-vein-cavern.jpg", file: "c9d60b573d8ae81768539fdb4cec198e7c9f0af7decba3bf802911eaf0c0cc6b.jpg", size: 398016, md5: "8c4a7ac4d530bf07f342193d653d45e0", package: "sect-mining" }, { path: "font-body/font.ttf.gz", file: "be2499fe0241f05643c78d3e808073f04737dd9c8010cf324feb01b10cbd9e7c.gz", size: 8312435, md5: "06b8aa078eaa87319f420e5ede8b89d6", package: "font-body" }, { path: "font-heading/font.ttf.gz", file: "21b2bfac8628ece82d7c0c5d2c23922d5a8e54ae60369ced6a1003937eb9a344.gz", size: 3857387, md5: "db4e177ba5f703d17d72c1dee757556d", package: "font-heading" }, { path: "atlas-world/map.jpg", file: "f6bf3b92492d2a90261a1817c1709dfc57e4406158f0e9d1c96081998cee1b13.jpg", size: 576370, md5: "4f0319ef5d8caf0ca243cdeed9c90801", package: "atlas-world" }, { path: "atlas-tiannan/map.jpg", file: "7aaf4758e4d6ab2bdf20394e1cf8250b7ce4ade118cb58bf7e7ee9a778e67944.jpg", size: 786931, md5: "1c072ec52b75a88f14379d52599fb49d", package: "atlas-tiannan" }, { path: "atlas-luanxinghai/map.jpg", file: "541887e700e8588ca300fcd9ce408e729d812ffe26c3edc6dcc7b8f16ea8cf62.jpg", size: 592408, md5: "37c0e2506959059d439649cef9454a95", package: "atlas-luanxinghai" }, { path: "atlas-mulan/map.jpg", file: "edf662e9cf3069ef64a66c4e10117975fd924ed7b679ebe3fe833bbc75366b47.jpg", size: 720061, md5: "a4c31a575b5d31978a079a8b903bb8fb", package: "atlas-mulan" }, { path: "atlas-dajin/map.jpg", file: "22c7820cf48073c18e7e4c84c40ed13cc5428e15510432b0720f9e62e322e951.jpg", size: 809656, md5: "f32430570c01891414d439e367ab0526", package: "atlas-dajin" }, { path: "atlas-nanjiang/map.jpg", file: "4f1e41b10f661c882f6f6ad904c866d0ad069a2bb9231cdd61d902cf01a649f4.jpg", size: 768501, md5: "884035b58460fc7da4f43acda8f3deac", package: "atlas-nanjiang" }, { path: "atlas-northland/map.jpg", file: "47d810ca45a13471325f88af19b919e8f074175f64c0b5853b5940cbe8646b9b.jpg", size: 664330, md5: "df73cb9aa411c0b4d515da98d77fc1eb", package: "atlas-northland" }, { path: "sect-map-lingxiao/map.jpg", file: "90ce5c3091ec35f776216264d136c20cf587783d82ad9b33990ddb28653b70e0.jpg", size: 705923, md5: "38af47d72f1c3393f8c1e181edf3eb5f", package: "sect-map-lingxiao" }, { path: "sect-map-wuxiang/map.jpg", file: "69c2faff6f185e7c81e7f435968c1af666b5264155179c6b3c25e81c4b2c66bf.jpg", size: 602027, md5: "bab9bdd9b3e754d88fd5ced9ee0d35c3", package: "sect-map-wuxiang" }, { path: "sect-map-tianyan/map.jpg", file: "25790b6d0271c6f9c44ebd5bd0cb4a5922ea43c35c40a0db8d3daf6fb42bf5fc.jpg", size: 487490, md5: "ea6dd4634f9c11dabd1d05de51a25005", package: "sect-map-tianyan" }, { path: "sect-map-youdu/map.jpg", file: "a1c13baabd90aec539c04c49d3854ad960526d81ab127268ecb0036d3659ac00.jpg", size: 474597, md5: "f0a3a83b22770670cfec8db80f68b1e7", package: "sect-map-youdu" }, { path: "sect-map-jiujie/map.jpg", file: "31bf0465cb50d13a4dd23667a00554bb1c7c708aea04fac82ba057357c21940f.jpg", size: 585145, md5: "df4fa7d42733bd4241a02fd7bba0ba58", package: "sect-map-jiujie" }];
-function o(b, c) { let f = Date.now(), g = [], j = new Set; c.__bootEvents = g, c.__bootMark = (z) => { var _a; if (j.has(z))
-    return; j.add(z); let Y = { stage: z, ms: Date.now() - f }; if (g.push(Y), console.info("[BOOT]", Y), z === "first-frame")
-    (_a = c.__onFirstFrame) === null || _a === void 0 ? void 0 : _a.call(c); }, c.__bootMark("start"); let d = b.createCanvas; b.createCanvas = function (...z) { let Y = d.apply(this, z); return c.__bootMark("canvas-created"), Y; }; let Q = b.loadSubpackage; b.loadSubpackage = function (z) { return c.__bootMark("subpackage:" + z.name + ":start"), Q.call(this, { ...z, success: (Y) => { var _a; c.__bootMark("subpackage:" + z.name + ":complete"), (_a = z.success) === null || _a === void 0 ? void 0 : _a.call(z, Y); }, fail: (Y) => { var _a; console.warn("[BOOT] subpackage failed", z.name), (_a = z.fail) === null || _a === void 0 ? void 0 : _a.call(z, Y); } }); }; }
-class v {
-    constructor(b, c, f) {
+    if (X)
+        throw X;
+} f.set(i.path, l); })(); return p.set(i.path, m), m.then(() => p.delete(i.path), () => p.delete(i.path)), m; }; a.__remoteAssetPath = (i) => f.get(i) || i; let h = e.loadSubpackage.bind(e); e.loadSubpackage = (i) => { let n = t.get(i.name); if (!n)
+    return h(i); let m; return (async () => { for (let l = 0; l < n.length; l++)
+    if (await q(n[l]), m)
+        m({ progress: Math.round((l + 1) / n.length * 100) }); h(i); })().catch((l) => { if (console.error("素材下载失败", i.name, l), i.fail)
+    i.fail(l); if (i.complete)
+    i.complete(l); }), { onProgressUpdate(l) { m = l; } }; }; }
+var r = [{ path: "assets/icons/beast-baize.png", file: "c1fe52c9f2da967945a9645234e3627c891aa745c3d7f8a995fd0bc9ee497b23.png", size: 113288, md5: "4a7f1ce84d97f505ed365fa6e0747266", package: "shared-icons" }, { path: "assets/icons/beast-baize.webp", file: "571832766d7c7aaba76a3598449ff5baaa7f0315e96cb33d2a059bc03a344dbc.webp", size: 30788, md5: "8162f550db4bfdce92933b8afef672ca", package: "shared-icons" }, { path: "assets/icons/beast-bifang.png", file: "8b6fbafe4609364ac14fc43187f58c4981bc06f39281e14fcccd1139063f81c7.png", size: 89429, md5: "03c2a63a12ee872e802646459df66d08", package: "shared-icons" }, { path: "assets/icons/beast-bifang.webp", file: "23a1937e8b72a79401bc1456e4a26c498f55593ac6874f2a4d4dd8ea5962adeb.webp", size: 26944, md5: "e9fc1e40f66f5509d67f86e162356eae", package: "shared-icons" }, { path: "assets/icons/beast-diting.png", file: "0363603d9ca7be88609df1ff1bf837af8deccbc6fce065c397101f0d6b7ec78c.png", size: 129715, md5: "25066cbbd147a65deb61c1d91e7045a4", package: "shared-icons" }, { path: "assets/icons/beast-diting.webp", file: "f2fc9e7da6460302fcacc3057a8509fbcfcf466eeca0693a9119a721bc00f9c3.webp", size: 35398, md5: "f48494a4abed40cb203f59b707c7b0ea", package: "shared-icons" }, { path: "assets/icons/beast-fire-crow.png", file: "33bb30acf1d7a566cec3fff0b2c125e5b302ed9f11bd5f16b3bb79dc7df9e5d3.png", size: 113973, md5: "28d47784ce1d258075279bb79f5bd220", package: "shared-icons" }, { path: "assets/icons/beast-fire-crow.webp", file: "6cc96122e5033a1643f35ca82aa674e94f64dbb4e2d702b61342a7ac51bb353e.webp", size: 31692, md5: "f211d823470869d9eff8a4e12ec091c8", package: "shared-icons" }, { path: "assets/icons/beast-fusion-cauldron.webp", file: "101895656fdcc286746a3f1569304a7fc44f18fac5524269638991b9e753f580.webp", size: 1218288, md5: "7e36afe48abc597b0b2394e5b824e8b8", package: "shared-icons" }, { path: "assets/icons/beast-ghost-lantern-butterfly.png", file: "920f525317a0bbc75f093f80f14d65d4cbba6b0895be09836395c623a7a429e6.png", size: 106190, md5: "cb81ddceb00a41b5cbf7fd5a0bfc470f", package: "shared-icons" }, { path: "assets/icons/beast-ghost-lantern-butterfly.webp", file: "55f80f31cbb98de306983c64b274051d378d466b002a29765dca1270a1a8eb06.webp", size: 29052, md5: "592e7a4b1ff39d1d3c893af6b1e1c53a", package: "shared-icons" }, { path: "assets/icons/beast-golden-crow.png", file: "c66d63cfae3aa3e291a7af7ff2a0c4a61fffccafc3716faf47ce072fb58b3660.png", size: 108771, md5: "1beb7def196f117b40bbf598ca49a3c6", package: "shared-icons" }, { path: "assets/icons/beast-golden-crow.webp", file: "ec19654c5b98a70cfa8bc6df2fd6e646c2df561eafd89d8204da396fd8bb9c42.webp", size: 30302, md5: "56c95e1c7732d3f975d97100cae67e9b", package: "shared-icons" }, { path: "assets/icons/beast-huodou.png", file: "7b02f25284236801d73debae790d32eb8ebfbce705d69fda09dbbdf811b530dc.png", size: 103809, md5: "0e97997de11ec4443a6dabe3ef5a27fa", package: "shared-icons" }, { path: "assets/icons/beast-huodou.webp", file: "ba0dfe465e1201f8aa53f45d0691c7d73e49c62132801b7924d185514d9c2f30.webp", size: 30160, md5: "1ab2cdf1c8368842f6996d4919164066", package: "shared-icons" }, { path: "assets/icons/beast-ink-jiao.png", file: "e826c12638ff9e06424140643a910135302a9c40a80159f03b096cdee79fef16.png", size: 129746, md5: "9f7d7ecc0f963e8af3ba49e131f25c30", package: "shared-icons" }, { path: "assets/icons/beast-ink-jiao.webp", file: "f713b570ba17b35179ab8626384f237d8881826a3f87d145041c46a9d741c242.webp", size: 35992, md5: "ee9ff6bb7fc7bf6b22e920765dfde036", package: "shared-icons" }, { path: "assets/icons/beast-mimi.png", file: "cb6590ebd8c0913afb92378c2731f6822be6658e7e34ea9c6dd4715b77ddd751.png", size: 106007, md5: "2ae05b906f9614afaeea882874a9b928", package: "shared-icons" }, { path: "assets/icons/beast-mimi.webp", file: "abb681961e70ecc714221dee9b4f82fbe4ccf90b35f103e5db2a7b5db20361c0.webp", size: 24764, md5: "1440f431fcad41f959ed70791bbcabbd", package: "shared-icons" }, { path: "assets/icons/beast-mingshe.png", file: "d7d37d729e3281895fb19055495b6a3580ecc525c301a057709a3229e0af9bc6.png", size: 138100, md5: "b7248697b82167779bfc0371474dc696", package: "shared-icons" }, { path: "assets/icons/beast-mingshe.webp", file: "8b1f8055d8e10187325f59acb996eaf00b5e45c7795249fcc6c3f32bf695b2af.webp", size: 42140, md5: "73983aba11e8756bc6ccb9146285f626", package: "shared-icons" }, { path: "assets/icons/beast-moon-marten.png", file: "4e9707e5037b6eb2ac6b5a325eb8a9a161b52ca8e64f88d3cc163ea2e0efd16b.png", size: 94618, md5: "c629312858cc7d32a3edcde06d007350", package: "shared-icons" }, { path: "assets/icons/beast-moon-marten.webp", file: "bd7272114dd95aa9aac906e639b693c4aa815092dcf30cf85d5b08931a5f88fb.webp", size: 28710, md5: "f25e2a09a515929bdb67a5f73a23d71f", package: "shared-icons" }, { path: "assets/icons/beast-nether-tiger.png", file: "cad59a1424911fd5e7566211a5edcc05e121504bffbebe6221f80d4efb3a2c61.png", size: 136379, md5: "4031f51485686dda4dddb2e0825ebb53", package: "shared-icons" }, { path: "assets/icons/beast-nether-tiger.webp", file: "029e9823fa136376e81872d41a53b69a533a0b99562aa766f3f013a54fa51fc6.webp", size: 33854, md5: "c24363e1af3a8359b2aaa149c98d2d68", package: "shared-icons" }, { path: "assets/icons/beast-nine-tailed-fox.png", file: "b0b311e5c0d08d35f4c1a82b589497d95014b1ef50982a0b80270f09891775b4.png", size: 134761, md5: "84b82149a0801cd70252cf08963cd618", package: "shared-icons" }, { path: "assets/icons/beast-nine-tailed-fox.webp", file: "c01939b5a6107b6a89b9b7f814f5514cb99ec59b030d0b9dae2a8c3f9c32eae4.webp", size: 36674, md5: "8b6b24504ccccb7621cb5cfc3caa4d39", package: "shared-icons" }, { path: "assets/icons/beast-qilin.png", file: "9ed7818c10ddc0e2eb9078cdf3bc1b552eb8a35aca3fb6e0d894fd53d2aca15e.png", size: 106656, md5: "a96acd64f0e1850e31b7a7d19ddae4af", package: "shared-icons" }, { path: "assets/icons/beast-qilin.webp", file: "f884d089ee173fd27a3ebcce893c7cf86972901e56fd2b2ee3898ab779aae83e.webp", size: 30730, md5: "39690d991506ccc4f4576450619f66fa", package: "shared-icons" }, { path: "assets/icons/beast-qingluan.png", file: "e1ed7e38776d327f6e2b7980ac32da201f65df225fb97acdaa9b24aeee5a8b3f.png", size: 86951, md5: "abf9b4169dd7db14442784f03b7623e2", package: "shared-icons" }, { path: "assets/icons/beast-qingluan.webp", file: "59ddd7cfcea36cc1a4d5bd30060fc22a6e5362c3f4f79ca9d059b6a3b08aa0dc.webp", size: 25058, md5: "f5a750f44ca8b0cc0b74a640df005118", package: "shared-icons" }, { path: "assets/icons/beast-qiongqi.png", file: "9d95ec37fac0b477a515be6e9ddd2be9ac1d58c7ea6da71c3bf1e101dce9d616.png", size: 134198, md5: "05167c495a8e6905412a2b4710fd54b8", package: "shared-icons" }, { path: "assets/icons/beast-qiongqi.webp", file: "83bb9f91024dfca179cca0d491f8bb9fb1f991199479dc9533d2561eee73a407.webp", size: 35370, md5: "a6de9d8f1104b238d7cff83c71147a59", package: "shared-icons" }, { path: "assets/icons/beast-red-tail-scorpion.png", file: "b03f5ae2ae076eb0520ee9e02a2b53563c9324e95c472834d29e9d8c01b13a5a.png", size: 100825, md5: "37c62cb0de61d4fdf7cd3f44b85fb59f", package: "shared-icons" }, { path: "assets/icons/beast-red-tail-scorpion.webp", file: "2bd7b9e2489bcb3c75e8117add7be278f6ede4fa853e21600d82d87c01bbe566.webp", size: 29124, md5: "1d56a2bada856e08afe45c7c5e7e137a", package: "shared-icons" }, { path: "assets/icons/beast-rock-boar.png", file: "59555e55fe762da7c78bc504aa8ed487621a5fade5ca973105d7efd3671d0607.png", size: 103379, md5: "1c94ab41bb9a97b68417232cda60b1b3", package: "shared-icons" }, { path: "assets/icons/beast-rock-boar.webp", file: "0c336bbc165a67c46268a4c6390ab7ece3af1a31225dd9c27250bdd1d564f9dc.webp", size: 27968, md5: "74c93f9d691190ebbad983332f5d9b38", package: "shared-icons" }, { path: "assets/icons/beast-shen-clam.png", file: "8dc4314c3bad96905b9709f5f60b226eefeb8102fa55905a7c224bf24bae5a2d.png", size: 123186, md5: "9b9e61ce45a4fd0c8f4ea6fa6ab41243", package: "shared-icons" }, { path: "assets/icons/beast-shen-clam.webp", file: "bc301c259ac311faad429dd5678d580e4762944d6d071690dac5c4918da6a17f.webp", size: 32080, md5: "1ec9fd5972ce28ad4d231d83c3f7c565", package: "shared-icons" }, { path: "assets/icons/beast-silverwing-mantis.png", file: "829ab72c9d008c54258357f489c96a428168caacfa746c8bfb3213a1f74bed3a.png", size: 95932, md5: "8c91163bf9ef164c520993b2636e4429", package: "shared-icons" }, { path: "assets/icons/beast-silverwing-mantis.webp", file: "726aaa254eb44624d825590cbbf7dd5ee479eb2f261ec7ae9969d5371fe5a0a1.webp", size: 24944, md5: "55811b694fdc846bfa00b8fabdbf4ee5", package: "shared-icons" }, { path: "assets/icons/beast-six-eyed-ape.png", file: "25a6b2692dfa92fb51f2b59e391bae2c23a13e9499927a566d0168829da0365b.png", size: 110945, md5: "53abcf100f97c991c7f502c0297985b0", package: "shared-icons" }, { path: "assets/icons/beast-six-eyed-ape.webp", file: "f621149aaa51609180d102b41e6af82202dfc8d29df6987234815e802bdd3787.webp", size: 27648, md5: "607928bee479de5384129bc0e5b4bc4d", package: "shared-icons" }, { path: "assets/icons/beast-skill-agility-totem-v2.png", file: "a52b81722a725bbdb9463bc0c43463951d61ac881a2855fbe756478abfb0a9d9.png", size: 52491, md5: "83821b27a38f147379a8edd0bdc91a33", package: "shared-icons" }, { path: "assets/icons/beast-skill-agility-totem-v2.webp", file: "dd9c10ee0bf585741f5bd7dab3390609712b8a2ba03eebbbc890dd355134315b.webp", size: 32312, md5: "103a9c0228fe35ba2f55b1720013bdf3", package: "shared-icons" }, { path: "assets/icons/beast-skill-all-seeing-totem-v2.png", file: "86a95ef6423b895785fa43f11c3cbfaf60db0ec5064686521d9129e11814b3a1.png", size: 63690, md5: "df5676f6357d4e464292cb092dc39d33", package: "shared-icons" }, { path: "assets/icons/beast-skill-all-seeing-totem-v2.webp", file: "6be3c2a2b99c47b41d4e3c4c76cd4c4b705aef5e1a7c049d2504ae4c652c4dec.webp", size: 41962, md5: "592dcd9b340b8aeecefd0483ad0d6d34", package: "shared-icons" }, { path: "assets/icons/beast-skill-all-seeing.webp", file: "d9d5791d17ed2f5741091a30669952e8d2d228452712bb831fcc8e297f0a63d0.webp", size: 88522, md5: "7015e2da704cc3fb05b6450a1a3c848b", package: "shared-icons" }, { path: "assets/icons/beast-skill-auspicious-vitality-totem-v2.png", file: "ba1b35308b63315392f301f0814de38a8fbfee629a483b6f2c4e16bd306e346e.png", size: 95984, md5: "e66142c1a4853d5fabdb647ad68c8352", package: "shared-icons" }, { path: "assets/icons/beast-skill-auspicious-vitality-totem-v2.webp", file: "9092c35edb70b92b686f85cff48b146d3ba6d9b41e97b19c4b09177a4b7f995c.webp", size: 65784, md5: "25f274df6c9d07c263ebb8d16cbbd5a8", package: "shared-icons" }, { path: "assets/icons/beast-skill-auspicious-vitality.webp", file: "f5d853510547e1335d0ae4dbf689bbccbe1382f07567ef41caf7cdbbbda90a5c.webp", size: 64546, md5: "fbcb0cd5d9b30afb41dcbf603eec6b09", package: "shared-icons" }, { path: "assets/icons/beast-skill-barrier-breaker-totem-v2.png", file: "9c612d31e8d2e44615ecc070d0d367bad552d9c27384af354d636c1c0c2aeec2.png", size: 76725, md5: "b195f79eaa180b6c55693e6034dba9c6", package: "shared-icons" }, { path: "assets/icons/beast-skill-barrier-breaker-totem-v2.webp", file: "60d2e7a7cd7a05ca781da3c647d7b32d39294474da1f26f66193ffdd23bdd7b8.webp", size: 48096, md5: "b4e782a4e70e2bcdffeed6a73f8743d0", package: "shared-icons" }, { path: "assets/icons/beast-skill-barrier-breaker.webp", file: "239849a54d2a0f7467a2625997812c50f397f1668e49c98c6a0f8063495ae1d5.webp", size: 58412, md5: "816f0f7fd10172fc2d002b2cd7f9b361", package: "shared-icons" }, { path: "assets/icons/beast-skill-bloodthirsty-pursuit-totem-v2.png", file: "3ac432a85b32a93cdac4bdf2ebe08bca1bb3b03ae2b1ecfd5ff19f17ee71b13a.png", size: 55102, md5: "29b9171eac7f637dfbe06205a8927e18", package: "shared-icons" }, { path: "assets/icons/beast-skill-bloodthirsty-pursuit-totem-v2.webp", file: "0577df49a3e989fcbff679163afb9b79de411bd5cb9c377bee0d5b8e504ad5b0.webp", size: 35552, md5: "ce0f0932a634f44a99b12ca84fa13c08", package: "shared-icons" }, { path: "assets/icons/beast-skill-bloodthirsty-pursuit.webp", file: "51ac82c20f18e78d7d081fa5c2e8a07f6e46d7a9728a81244e846f394abcb765.webp", size: 41532, md5: "f9ae4f751f26400127db52c5722a7514", package: "shared-icons" }, { path: "assets/icons/beast-skill-combo-totem-v2.png", file: "fae3601f74b03f67b0292c9872375e1c0f1cd2292eee37ae8325f1f08d5aa002.png", size: 75251, md5: "2fb9ec8228c4c0cf88151a018048ed56", package: "shared-icons" }, { path: "assets/icons/beast-skill-combo-totem-v2.webp", file: "ccb06bf0753baeb48383fc868041e2de110cadcf8e439817f6691a1dd66c2c5e.webp", size: 48454, md5: "3a18786bd7a3a2b99c0582423dfae06a", package: "shared-icons" }, { path: "assets/icons/beast-skill-concentration-totem-v2.png", file: "215d4081c5096d48518a109d98bdb5e2f1ce1244c8e540fd196b3c3e5d662615.png", size: 77177, md5: "ce4e096f31caebe82517954844c05695", package: "shared-icons" }, { path: "assets/icons/beast-skill-concentration-totem-v2.webp", file: "ae88a62413e225e7975b874c227ffd96c1f7ec5beef7989e06c2c2516910b394.webp", size: 49018, md5: "1cdcebb9abccce24d9af4616ea64e63d", package: "shared-icons" }, { path: "assets/icons/beast-skill-concentration.webp", file: "e0051402e513749bf557f830f119790cb5b4c127434c462dec0338ead57702bf.webp", size: 41064, md5: "4b48e0b048d876263cd4e6b8545cde8f", package: "shared-icons" }, { path: "assets/icons/beast-skill-counter-totem-v2.png", file: "1d1bab1b899dde417437478bec314a8e94514f77453d0bad9c4f52cb1ff1d1d5.png", size: 62817, md5: "3be4306fb6e4af4099d6509b8111b3ca", package: "shared-icons" }, { path: "assets/icons/beast-skill-counter-totem-v2.webp", file: "9d35da19e32c81eb55f998d2ce51a2202dc25f5444d4a12cdbcd9b79b4ae7e43.webp", size: 38512, md5: "8875c395fd12f66366e42ae4b41fbfcf", package: "shared-icons" }, { path: "assets/icons/beast-skill-critical-totem-v2.png", file: "33f4f8286b87918b33bf56ae6434c2566ae0d365f5453af6a1ac24de5ef6e7b6.png", size: 41803, md5: "d0dcd9c1ab642bcbdc3908218abcc36f", package: "shared-icons" }, { path: "assets/icons/beast-skill-critical-totem-v2.webp", file: "bfc3189a619f61357e2f3101e4d9faa7deba841e096474158ba05a4575109183.webp", size: 26458, md5: "6f6521ace47c2d0edfe5a3a3def0eafa", package: "shared-icons" }, { path: "assets/icons/beast-skill-defense-totem-v2.png", file: "4bd7590eabaf12e2bbf8786b2f41037a6ad36563da8cedcba9755825149a886b.png", size: 70598, md5: "82c1755f7e3a283543e214b59228536a", package: "shared-icons" }, { path: "assets/icons/beast-skill-defense-totem-v2.webp", file: "497a1d148c9cf749c7f605b2f07af6132639196a1d8ece9401a221a8ea322732.webp", size: 43202, md5: "11737dcdfd48f74a645745f1f4a63e59", package: "shared-icons" }, { path: "assets/icons/beast-skill-denial-totem-v2.png", file: "4e12eadd4caf6b536f53e6d805dc0953a194b3451f521e20e2ba85b2e3877031.png", size: 64809, md5: "4794bf9dfc46857b999ef1335957ac4d", package: "shared-icons" }, { path: "assets/icons/beast-skill-denial-totem-v2.webp", file: "5a361c93cfc2484893be014a603ea211a48774b1e8851e50511277ae578c877a.webp", size: 41150, md5: "8ac6d6706897eba0a129e344e1b3745f", package: "shared-icons" }, { path: "assets/icons/beast-skill-denial.webp", file: "5204bdbe2bc22b13dfcd8f60ef464ba3c606d25446d62093af11a83f6e130ee8.webp", size: 75910, md5: "36d0046d06b4591968e02f82ce4d29c9", package: "shared-icons" }, { path: "assets/icons/beast-skill-eternity-totem-v2.png", file: "afee7a069ea2d14e84334355c09cf8c6f9a69070397532cb6aea60573a764ab1.png", size: 55194, md5: "7b221977b6e836f9d7d8cfdb35b0031e", package: "shared-icons" }, { path: "assets/icons/beast-skill-eternity-totem-v2.webp", file: "d328f29336b5a0667524fbd02d524ddeff8e53108f1c77ddf3a4782c9c0ce258.webp", size: 34746, md5: "3f38d21601a571655fa5701633eef7eb", package: "shared-icons" }, { path: "assets/icons/beast-skill-exorcism-totem-v2.png", file: "44a6d39eec665284ca0384a1d7cb9465de874e1eeed3048898db76370f33acb4.png", size: 73482, md5: "8b9df5dcaf44f7be34c05e3a4ff79534", package: "shared-icons" }, { path: "assets/icons/beast-skill-exorcism-totem-v2.webp", file: "9ae440cdd3c55a8a6daa713e0314fc30d0881fcbefd8a146b6f8e8f73fd794cb.webp", size: 48514, md5: "81613181236b9564f9cd4fd2bbc8c8e3", package: "shared-icons" }, { path: "assets/icons/beast-skill-exorcism.webp", file: "23692706528d2e8924882084a8217d93c5dc3bd7aa3a7da1cfde7c2ae5b2099f.webp", size: 48552, md5: "c62061e3059b1ec3589616e5ad5c4edb", package: "shared-icons" }, { path: "assets/icons/beast-skill-ghost-totem-v2.png", file: "9ea053e4323fa085e300997374348c6c631c4af84addc1f6002f4b20be3b6ce9.png", size: 44628, md5: "2e933a1b928e051c0682705233f89308", package: "shared-icons" }, { path: "assets/icons/beast-skill-ghost-totem-v2.webp", file: "5d09ba3eff97deade459054186ff6c90eef2d9c94c1c4ee5412eac68c1a38787.webp", size: 26280, md5: "b41ddb3f4cb4efa23dede9fe4855af43", package: "shared-icons" }, { path: "assets/icons/beast-skill-innate-wisdom-totem-v2.png", file: "075b3e7aaceb03862df9f89f7f7049dd14557e1e8d8213d14b21dad2db579b1d.png", size: 59600, md5: "0109dd490217533c9541d4ef37838391", package: "shared-icons" }, { path: "assets/icons/beast-skill-innate-wisdom-totem-v2.webp", file: "73e9f8128505e3fb212503de8c5491dc0fd3cac382cc7c6e3c99b9b0c19a1a96.webp", size: 38526, md5: "c43091826a6c252354b5e743be72d769", package: "shared-icons" }, { path: "assets/icons/beast-skill-innate-wisdom.webp", file: "323cde90b48d056b80ee83daa1b6db4eb067d5c326ab7ed9761b54474c1b5e82.webp", size: 39388, md5: "264d4cc06c83880dda242e7e714150ba", package: "shared-icons" }, { path: "assets/icons/beast-skill-karmic-retribution-totem-v2.png", file: "d9b57b6b66edf7f2a3a6a501c5d81c2858b7ff15a81205a4b90508a4f354aab3.png", size: 69006, md5: "fa9e34fa03247f93855acabe754ca381", package: "shared-icons" }, { path: "assets/icons/beast-skill-karmic-retribution-totem-v2.webp", file: "881151c0d5a20df78c793e95fe9f0afb402c1430c5e6eaad8f4a6e61765f7551.webp", size: 43304, md5: "0f8533fbc9ff0e99f0cb3fe8118e3427", package: "shared-icons" }, { path: "assets/icons/beast-skill-lifesteal-totem-v2.png", file: "01474577a2f22d64d2047cc10f52e45e56582ef67a2ac8d654916ed39b3bd27a.png", size: 86586, md5: "eba8a0f028fc49daddb44ade6ebbe959", package: "shared-icons" }, { path: "assets/icons/beast-skill-lifesteal-totem-v2.webp", file: "be6b675b7688ac9ddefdda68ee3f5faff81b2d57a75296034c69cbd15153419b.webp", size: 54366, md5: "13b713699bab23c9680309904446c737", package: "shared-icons" }, { path: "assets/icons/beast-skill-meditation-totem-v2.png", file: "29277075919471c27a8b901c9a5159fb35245754a69a30d91780bee44b0b21f3.png", size: 69629, md5: "a4be064f75f0b028e8585da22a88a1e3", package: "shared-icons" }, { path: "assets/icons/beast-skill-meditation-totem-v2.webp", file: "248a510b0b29fc75f3ea6623601c3924ed2e29ec19a1c5d2df980b11a6a924d6.webp", size: 42626, md5: "d320d83213f07c696bd8314fb2726600", package: "shared-icons" }, { path: "assets/icons/beast-skill-meditation.webp", file: "3a3b2154ceb4ab517db72db2d90151edd9f4054c3febc7dfe35570ac9bb926eb.webp", size: 47366, md5: "0b7861a6a5582308cec808a1be36d9a0", package: "shared-icons" }, { path: "assets/icons/beast-skill-mind-shatter-totem-v2.png", file: "6c56919f5e0fe5c89d92ecb6f3f8965c199ee625889c8b798994bba613e2d149.png", size: 80194, md5: "687224444acae8ba057b6ce4ac344387", package: "shared-icons" }, { path: "assets/icons/beast-skill-mind-shatter-totem-v2.webp", file: "8eeb9747627d8b626520102da1712d9966c126fbd918cb0676fc63f0fad23a63.webp", size: 51008, md5: "683bdd641fc46790595964dca92d1ca1", package: "shared-icons" }, { path: "assets/icons/beast-skill-mind-shatter.webp", file: "f6bfb4505c80f2eff08de6f77fef0282eda3e1b106e3bfb004737e9f52069fc3.webp", size: 58312, md5: "7fd631194d232bd4a8bf04614f5772c6", package: "shared-icons" }, { path: "assets/icons/beast-skill-miracle-totem-v2.png", file: "63e6f71ab8a5022c0e3e2810946a29bd323e3c389dcdb50dce9dcc88887afcd9.png", size: 70432, md5: "cbaf54ea1fb321305a59b7fdeb558d79", package: "shared-icons" }, { path: "assets/icons/beast-skill-miracle-totem-v2.webp", file: "9f1a4af24d51e65a558a2a846e18562b5ab246609238c897d25320e0945c15ec.webp", size: 43294, md5: "1795ed6a2dc0b65c189dbaaf8e125326", package: "shared-icons" }, { path: "assets/icons/beast-skill-miracle.webp", file: "2af7975e2083409db3cd4efab69fdf5bba38155952db1e52fb2b1d8789bbc75d.webp", size: 72454, md5: "4f41c89758672750ecaf7a5f8b1b31e2", package: "shared-icons" }, { path: "assets/icons/beast-skill-mountain-breaker-totem-v2.png", file: "3949ced0c8b0f5c9fd9c57ee30947c2861c7568c49b1d85cf390fdc7404e7191.png", size: 84189, md5: "f2e65808918bf7623f9d7276c0f63551", package: "shared-icons" }, { path: "assets/icons/beast-skill-mountain-breaker-totem-v2.webp", file: "ee8b1e6439ef30b438858b191b6bc51516b2cdf39c3cc16bcbf8282a4b711691.webp", size: 53118, md5: "83bb5e4158ef2af06f848bf19426df3e", package: "shared-icons" }, { path: "assets/icons/beast-skill-overwhelming-might-totem-v2.png", file: "42ead636fa23ce20aae27e40db2ba2fec17239c287ffb672ba6b16611f7a6240.png", size: 81385, md5: "ad1891578a1e19567319038aacabb70e", package: "shared-icons" }, { path: "assets/icons/beast-skill-overwhelming-might-totem-v2.webp", file: "9dcd22d3000766745bb20417de2c32065155565547f2fba4f9b14b6a10e15152.webp", size: 54354, md5: "e0b243b23a1e23f4cd13a2a63b81453b", package: "shared-icons" }, { path: "assets/icons/beast-skill-overwhelming-might.webp", file: "56ecbe6948fec99c319bda7eb49ecca5bb5646538d471041bf8e14852f8cdcad.webp", size: 71430, md5: "f8f92f72c180f886a7bdfe983fb2f104", package: "shared-icons" }, { path: "assets/icons/beast-skill-parry-totem-v2.png", file: "8a4cbdeaecff80ab445605bc21f1bee851bf9dbd9862b25c4a65afa0627e46db.png", size: 51603, md5: "cf054e974679f6e5d464b4010a71638f", package: "shared-icons" }, { path: "assets/icons/beast-skill-parry-totem-v2.webp", file: "46a975be79b699a4dbeba6a2fd67226733f53e9fbf4f18b1a71324f5e194e7ec.webp", size: 32244, md5: "a7ee241b6aee63ee1b60f6d97d513aca", package: "shared-icons" }, { path: "assets/icons/beast-skill-parry.webp", file: "eae250ed42afd760e4bb33a2bf8255bb3248a5359482991524574e9f191ec8ee.webp", size: 58250, md5: "9c904d81bf695f62379ea8380828d58c", package: "shared-icons" }, { path: "assets/icons/beast-skill-radiant-barrier-totem-v2.png", file: "788790cf29ffa238f38a3df2daa6c26567187f8ab469ddbb35ac7a89df0e2bf3.png", size: 82293, md5: "2449d53a1a2761ff63375657cdf830d0", package: "shared-icons" }, { path: "assets/icons/beast-skill-radiant-barrier-totem-v2.webp", file: "a9f40fd583b9b0cd4d13d67b7c22799bf0662432bd54c6d1a59898a8b8dedca7.webp", size: 53132, md5: "bc89780656ea91acd23c3a21ae3f61da", package: "shared-icons" }, { path: "assets/icons/beast-skill-radiant-barrier.webp", file: "64bf9684b4bf0f65fa293c57ec9831718ec62c1a65715da2cdff85122a4c93f6.webp", size: 38830, md5: "3c480447293e5ae446816537f5ca6bdf", package: "shared-icons" }, { path: "assets/icons/beast-skill-reflection-totem-v2.png", file: "0f5786e13786f2c5845c7249689909c54d697d2eea8f44248d015eb585cd6c89.png", size: 47307, md5: "0498fa39380d3d915d85a3510e249627", package: "shared-icons" }, { path: "assets/icons/beast-skill-reflection-totem-v2.webp", file: "5a64a17f7e532267a9b18874b68ceb8a06afdef8a6b1375429e895398a865f8e.webp", size: 28916, md5: "aa7481debcbe88c2e8e229fb1dc3c218", package: "shared-icons" }, { path: "assets/icons/beast-skill-regeneration-totem-v2.png", file: "5858e35e0bf6c746cf8ddc0cc7379a7f8456db91b70512ce1139326b133967a1.png", size: 61913, md5: "712da65999fe20b92b95081a6fdf7be2", package: "shared-icons" }, { path: "assets/icons/beast-skill-regeneration-totem-v2.webp", file: "14ab347190356d7d3ef601cd2d3d28922304945e61a9e463a1ad0b54a79e74a4.webp", size: 37994, md5: "32c902599d2616aa768fa7bea616b887", package: "shared-icons" }, { path: "assets/icons/beast-skill-sluggish-totem-v2.png", file: "3db6230a64d8e28a9ec140ee909a31408fe532d9a7b480ab56d3e89aa4439f29.png", size: 51298, md5: "a06f0e798cda4c490ea26ba62d58ac23", package: "shared-icons" }, { path: "assets/icons/beast-skill-sluggish-totem-v2.webp", file: "ae9f38732030bdd2bbb5e6a52a494ba7b07b0de2765f22241f7a99e08a1b2ae2.webp", size: 32164, md5: "83218f0802690f8c8b19aae632572e7c", package: "shared-icons" }, { path: "assets/icons/beast-skill-sneak-attack-totem-v2.png", file: "9d60bce2312b5f22e97208d860a347043bda3ce4bf9fd80876fbc8d3005fb228.png", size: 69404, md5: "f6a586ed9d6daf1f51f4c0849ade9c61", package: "shared-icons" }, { path: "assets/icons/beast-skill-sneak-attack-totem-v2.webp", file: "10d1b40994ef1d377a25d8b0f41993cdf75c5d3220dd8113cd63af523185540d.webp", size: 44236, md5: "bc10949507ea16b6d015bf7d77694896", package: "shared-icons" }, { path: "assets/icons/beast-skill-sneak-attack.webp", file: "40acdc16ffd5068fd0ed1cf84467bdb63e35d909fa0cd656bdb6312452d6a649.webp", size: 57740, md5: "00933ab2e20a8890cee720a33df57b51", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-combo-totem-v2.png", file: "f9594f4fdce9fb6d9e27631a09d5da5b40b60b5f1c1c3e49a51a0c6a81e90930.png", size: 66715, md5: "c4b255c33ab4660713fc6500877a095d", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-combo-totem-v2.webp", file: "a1393448f7e9a128bf1998e5a25ed8ed503b52e6e2fa4e58e79b99d9ceaca9d8.webp", size: 42454, md5: "a154933da32a00308a5035949a6e63a9", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-combo.webp", file: "ce81dc1d46d1443cc20bb5d37ab3e952e595a7b0503992b72482c03a82a85bb9.webp", size: 59958, md5: "e19277582286d7a3e0f81f8b6344a094", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-critical-totem-v2.png", file: "5740e83f98554cc465e8a4620091ff4c5f9546cefff15804e69103b0e7700d15.png", size: 74358, md5: "76d1b8f9b37a0fc07852837f23f4f35d", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-critical-totem-v2.webp", file: "29c5de286d83ec289255bb19a608a3cfe181d67a8126c8e5d6ba734c36072c7e.webp", size: 45834, md5: "2b47ad08a4e52114d18f5e12f42cdb22", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-fluctuation-totem-v2.png", file: "417239ad0e96c348027dfd6b0c39fcf2ff76f5baf000ded5117b7a568f3501ac.png", size: 66858, md5: "e7842a0188d17034e19a5fcbdb8579f3", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-fluctuation-totem-v2.webp", file: "db5688d9d1cd3e1e3961cec9aae4e7c60dca3c2c80db479d8a962cc9d2951c5e.webp", size: 40686, md5: "99620fa1ee5c71952d31d4ca99b6a3a5", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-mastery-totem-v2.png", file: "7cbae972eb405de852fae2e5c08c9646cf1ee185d28c04243406192245ea4558.png", size: 44108, md5: "7f995ce0ae355dfdbc0699004c482843", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-mastery-totem-v2.webp", file: "c96c1c8d6899177b0567f4f9a8e90858c1e828c1f978b60cbeeaa0f5e3026d92.webp", size: 28848, md5: "61fd3f08cd9f9fee045e9ece69e7803d", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-mastery.webp", file: "89f9c274d358fd1934a0f04469f1385833c99c91ca58a88073ca60439a9c193f.webp", size: 50218, md5: "4d5ff0b519478a9ff52129834e723a04", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-reflection-totem-v2.png", file: "ef4f0170e31f51c2b4502c80836da4c8d4737d2504e89852d505f8f1d7b73f5f.png", size: 70103, md5: "82889dd3879a159e46667a1c7407aaed", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-reflection-totem-v2.webp", file: "5186229e3f59a2b330b39ab8686cf8b158abfca019102a9478dd7acb7a56c2eb.webp", size: 45364, md5: "ed9119adffa1c93db0bef2e692a3e3c3", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-reflection.webp", file: "0af820384cbcaa04938460d09751d14593854d850f70c008172c6888afb0c4eb.webp", size: 62640, md5: "878507019078e3bd1ebbce46d8a44cf5", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-resistance-totem-v2.png", file: "4b7536ec3be8f7eb21d005f8b6628f49146a4198bff96f8420c258da9e614f2b.png", size: 79252, md5: "bce3eab4a779dfc1f08f9c742bd91215", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-resistance-totem-v2.webp", file: "93f41cd41d16b1e2e13e3722b775886126082a2a64427aaaeb8f6dc2ef74d9e3.webp", size: 50054, md5: "5335c9830ad323ed53cd95e148f1fa91", package: "shared-icons" }, { path: "assets/icons/beast-skill-spell-resistance.webp", file: "6b4055f9c0caba1b8c2e2c0ea62eb9eef4654a0b5fa74a36f3f27b1ce629c13a.webp", size: 50118, md5: "44f68f2b127e742a08bca531b7c2b831", package: "shared-icons" }, { path: "assets/icons/beast-skill-spirit-guard-totem-v2.png", file: "0bddbeb21b822c8fa8b5e4a47096e0b80a0023c91fe3ff6af89ea981d264921e.png", size: 73675, md5: "8e0ca6ebdc6bafc3fa7835b06ea9e959", package: "shared-icons" }, { path: "assets/icons/beast-skill-spirit-guard-totem-v2.webp", file: "09ffcbafbd6f49591a9210a02db90840ac2e55f3bbddd7639cd1af06d602a1fe.webp", size: 46876, md5: "3660cd57379845c524259d943aae8dc2", package: "shared-icons" }, { path: "assets/icons/beast-skill-spirit-guard.webp", file: "1f62e34ce7d6a901afb7b29b6bfe4fa852fa493d9b586cb7172e520db4c0346e.webp", size: 37192, md5: "44e6732b68b129c812c7266dff7816a6", package: "shared-icons" }, { path: "assets/icons/beast-skill-surprise-spell-totem-v2.png", file: "fb800401ed094881920bc13df740f8893ff3d0c3668d0e3c06b0946e54019ec2.png", size: 59504, md5: "95e10c7092527b84ab1b86f33aee715c", package: "shared-icons" }, { path: "assets/icons/beast-skill-surprise-spell-totem-v2.webp", file: "26704c33e5641f305d43115e0f04e0f8b676fe6262e10bf81cc8c047da085e7e.webp", size: 37374, md5: "7de478d96edcb1537a5020c774d0fe6f", package: "shared-icons" }, { path: "assets/icons/beast-skill-surprise-spell.webp", file: "fb22a7472bb38cb87c7fb3a427496dfbb495e1768674abdec888e25563ff9265.webp", size: 48576, md5: "98c29ca1937d2ac3525edc4865bc6cfa", package: "shared-icons" }, { path: "assets/icons/beast-skill-unanticipated-totem-v2.png", file: "81094bca7273ca61db486577c13c7946707fed906b47af2a50a8f2bf58c9768b.png", size: 94774, md5: "c1af3221da4f19466f5d72c209b547b8", package: "shared-icons" }, { path: "assets/icons/beast-skill-unanticipated-totem-v2.webp", file: "509f4e6cea9c379afce4ed1d37da5be005e619a067cf46a6f178e15831116a6a.webp", size: 60384, md5: "ae16a05b0226bf137c411d2aca61178e", package: "shared-icons" }, { path: "assets/icons/beast-skill-unanticipated.webp", file: "65431275a87b78cdcfc6d07161015bfc383a34aba22bc5f0bea6018b357b3eea.webp", size: 39308, md5: "dbe0681361c6c4e32a97f8f612e2a6e4", package: "shared-icons" }, { path: "assets/icons/beast-skill-water-attack-totem-v2.png", file: "0fba4113fec25eed47ce9bb9a44c66273836c2ad3f3685277d5cccf997274143.png", size: 84029, md5: "6eedced37dc6d650c714e1e9e50d17b1", package: "shared-icons" }, { path: "assets/icons/beast-skill-water-attack-totem-v2.webp", file: "897ce6e50c38a2d9cbffe7e1ad70b0541e9cedf513cec6f471367add8282332c.webp", size: 52432, md5: "301cd8573e62dafa53b99e3f43888796", package: "shared-icons" }, { path: "assets/icons/beast-skill-wildfire-totem-v2.png", file: "c39ca2efcf34c55fc35e0854920b35c8af567b24d81d66983151d9d9408e85b9.png", size: 80486, md5: "ac675051f362b28b6f20f54413203828", package: "shared-icons" }, { path: "assets/icons/beast-skill-wildfire-totem-v2.webp", file: "06b6c466dc8fa7bb8a7f675e72334b1d566c535233e9beb7abd348f84605b984.webp", size: 61002, md5: "c1b567f99f87711499b2658898586725", package: "shared-icons" }, { path: "assets/icons/beast-skill-wildfire.webp", file: "9367af9afec757bc366477ffadcc0bd6b02ff901fca5574bd82ab1f7ee691408.webp", size: 46164, md5: "c58da16b9eb578f1fcdbcd651a774ea3", package: "shared-icons" }, { path: "assets/icons/beast-skill-wind-strike-totem-v2.png", file: "1d493ba8fc017cbad56dce270beed22662486a68ae728d47087312e0fc46cf17.png", size: 58789, md5: "f09ade56ab481a2a7733109357413269", package: "shared-icons" }, { path: "assets/icons/beast-skill-wind-strike-totem-v2.webp", file: "f06ac4fd9bd8327d4727094bdc721ffb455bc85fb2301a42732d2f842e7763bc.webp", size: 36276, md5: "ebc74d14fabdf78e6663a0411f40aaf4", package: "shared-icons" }, { path: "assets/icons/beast-skill-wind-strike.webp", file: "ebf42b2911eab40829d8512fdb8c01d33741b056c9b77087605f1b82fa7338f4.webp", size: 37460, md5: "f17c8560695808a079afe24d26839788", package: "shared-icons" }, { path: "assets/icons/beast-skill-wisdom-totem-v2.png", file: "f822e453f0551cdbb495c39c06bc6becadcf8cbe3590872bbf84f292ad90ef1f.png", size: 69965, md5: "1bb9d1275a0c26e3c2966d753cd508c4", package: "shared-icons" }, { path: "assets/icons/beast-skill-wisdom-totem-v2.webp", file: "f3258762d52004338f263aded0ede5730a205fa3b919229e7edf674f271addc6.webp", size: 43542, md5: "dca232357520f5a1b827f68e8b61d856", package: "shared-icons" }, { path: "assets/icons/beast-skill-wisdom.webp", file: "c24102391b07935778ae33ceca091cf70992f304a989935aa9a6dfd597d5e53b.webp", size: 55762, md5: "c322da4eeeade74d41bba39b18d94c21", package: "shared-icons" }, { path: "assets/icons/beast-snake-neck-turtle.png", file: "4c1119e74a13472ea783a7f6bdb3fd5246161aeaecbef41f5853c747fe08ddd5.png", size: 91936, md5: "de933fde239ecf3105e61a040798333a", package: "shared-icons" }, { path: "assets/icons/beast-snake-neck-turtle.webp", file: "5ec4e932a040a9606a856ac65d3be8e806e7ec1a9470abfcc7663b95c00c0dfb.webp", size: 23032, md5: "8e0e89097cfdce6524ef63f6a3280b12", package: "shared-icons" }, { path: "assets/icons/beast-snow-crane.png", file: "ae180648f141b55209c9702bb50fa5eb7fa960221f137f107beaf08020f70687.png", size: 123612, md5: "8d1aa2758a3510cf15647733fbb9af44", package: "shared-icons" }, { path: "assets/icons/beast-snow-crane.webp", file: "e53bbfd9b45efa8f414ea66e3d01da3410f41629eebefd97412f6c4479cb450d.webp", size: 31854, md5: "0f7e69f694e53a5fb3fd854236dcf879", package: "shared-icons" }, { path: "assets/icons/beast-spirit-fox.png", file: "e47fa3cc1603893ae350fc11dd59ccf3e3c0da944686cfadbbd6802fc40ead45.png", size: 106099, md5: "0647c3ce9175cd91da2da7a68e80455a", package: "shared-icons" }, { path: "assets/icons/beast-spirit-fox.webp", file: "8d4c30b0b7baf0b639fda9da85ec6306864c39a0d7b18436dc3789b442d00e26.webp", size: 29100, md5: "28d055446761de859a469bdf564894e9", package: "shared-icons" }, { path: "assets/icons/beast-stoneback-bear.png", file: "2448d1864be2ca710d180182f214a9774a73d90656e663720777efbe3354897d.png", size: 106832, md5: "2444ccad70d0d7754376c40859f068a8", package: "shared-icons" }, { path: "assets/icons/beast-stoneback-bear.webp", file: "b9c4b4557e6efb5f3d6971ab84749055e09093722d9990ebb8a6945bdc7683fc.webp", size: 25126, md5: "aa44afb2c93074f5ca429ef2afc6650f", package: "shared-icons" }, { path: "assets/icons/beast-taotie.png", file: "2ab998738c2c03ce4f1d6f9ece922a7d5d96ddd625bed0898de956955cafb9f3.png", size: 137627, md5: "3cbaf5c5d7e0dd3d6ab2b54ca8460f84", package: "shared-icons" }, { path: "assets/icons/beast-taotie.webp", file: "b14b257954c410f2c873d603012dc847bc47255189d005af5c55c6cae60c81a2.webp", size: 36304, md5: "3596037d495473d8520a48c9d1c5646e", package: "shared-icons" }, { path: "assets/icons/beast-three-legged-golden-toad.png", file: "b173015c2d395030af5f578495648cf83335a2a302be9c1004f642e7a45fd022.png", size: 93681, md5: "31598f7c649cb327096c4c828ff60f80", package: "shared-icons" }, { path: "assets/icons/beast-three-legged-golden-toad.webp", file: "a7af4721a0e8fe479742be44cf4e6f6abdf15ef32ba602138d714ffe1e998c6e.webp", size: 23650, md5: "7eebea6e61325e14556c6d2f31a5a493", package: "shared-icons" }, { path: "assets/icons/beast-thunder-peng.png", file: "8c7cd913332d81564982848c61fffe88d4e1697a303212b4b532d8611c402287.png", size: 121044, md5: "351ced07a6bf43ffe1386e3acf06083d", package: "shared-icons" }, { path: "assets/icons/beast-thunder-peng.webp", file: "f08577cd9350d5db129a4f5704f48d5eb55da8da877ebfe1efca968472c903c1.webp", size: 31798, md5: "69667bc221b3108a0da6791322ff4671", package: "shared-icons" }, { path: "assets/icons/beast-wind-wolf.png", file: "e4899ad2b6d4676cafc7e11960ece5783e662e1f825b729dd3d0279a94b4a8fe.png", size: 86804, md5: "0709e28cfb110c26a7d1a84cf5ce726c", package: "shared-icons" }, { path: "assets/icons/beast-wind-wolf.webp", file: "d5b5055c69b8e01f03bb0b1449eecf00d09a58bd33b4c396483207ba54547531.webp", size: 24210, md5: "aeb6d31b86fb853d0cedebc1b784445b", package: "shared-icons" }, { path: "assets/icons/beast-xiezhi.png", file: "69553bdbad793feb29fa11e586dfbd58201af61f1144ba713b9502f1eb284431.png", size: 104793, md5: "fa1d4c7b4fa136867f1e2ebc64ccb381", package: "shared-icons" }, { path: "assets/icons/beast-xiezhi.webp", file: "d9d851ed6901a0b60e7a25a475f6075f0b5c16beb001f755949d4e8a4c21532d.webp", size: 27252, md5: "b7cdfeed0951192a653b4a3da693d976", package: "shared-icons" }, { path: "assets/icons/beast-xuangui.png", file: "2ab18b703d78468a359a2b185767a107e60a0d151f86ef32dab0bde2507b0727.png", size: 110233, md5: "ea1d659b78a09813082a32c31037d0ed", package: "shared-icons" }, { path: "assets/icons/beast-xuangui.webp", file: "756e41ef2e53c0533562811371220b76c2fde2b9ac536952a200fbbcf6342f43.webp", size: 29718, md5: "51c1bb01d85da3084c0c9ddae812940f", package: "shared-icons" }, { path: "assets/icons/beast-yinglong.png", file: "a818725f162a68007d6e4fe79ceaecc421a9f36b9c722cb0af0fdc9ecc525ec8.png", size: 132092, md5: "a4b79d56d05774fda18a5cbd2dcecf9f", package: "shared-icons" }, { path: "assets/icons/beast-yinglong.webp", file: "709305ee70126fdc4e8363224835bec261090ddfee8637a5697f0b3945307f4c.webp", size: 39308, md5: "313ee9a18b9bd46af10ba7279fc63e37", package: "shared-icons" }, { path: "assets/icons/beast-zheng.png", file: "3f8c91c6ecf7479b613dcb89066150ffd13c905c18ffb06bfd7ad0722da8a0bb.png", size: 134797, md5: "dc380c69d9420359e51c66869e2668c1", package: "shared-icons" }, { path: "assets/icons/beast-zheng.webp", file: "f937b0b446a3cfefd70db802274082817b7f657680e25a11a59659a7a078ae09.webp", size: 36162, md5: "d2b962b4c51fa47858fb38b1da8be543", package: "shared-icons" }, { path: "assets/icons/beast-zhuyan.png", file: "0fa45e6b0e6ec1ba89ddcdc6ec0c6f1b90b00443c64cd581ed80ac2a2fe32bde.png", size: 144994, md5: "83440fcd2f06572290959e86b0c2e92c", package: "shared-icons" }, { path: "assets/icons/beast-zhuyan.webp", file: "6fc8fc041ded89e1cb625acc3c200d8220ceca4ff99f039675ae6dea820cb66e.webp", size: 39284, md5: "a39b406b3987d51d4554b06c61daed3a", package: "shared-icons" }, { path: "assets/icons/map-dungeon.webp", file: "0865f23d6b2a6373e647ce7c4b77bd6b592704fcc826239e473f71cd3e1def71.webp", size: 26340, md5: "1daac019a63a73d879629302a01845bc", package: "shared-icons" }, { path: "assets/icons/map-landmark.webp", file: "4d7081f4292223b3157c3c6f7ee95960a87641edc8178c0bd91c0bbc10144ccf.webp", size: 28848, md5: "9d1e4d692074b3f6d15a961da2c3afcc", package: "shared-icons" }, { path: "assets/icons/map-market.webp", file: "419f9ecc17eb64e033ab2e43759f48000c9ae99537c892f2b4b09dc402bd426f.webp", size: 28074, md5: "70dfeb78e6ccc5a0f60e2a5acb362a2a", package: "shared-icons" }, { path: "assets/icons/map-sect.webp", file: "b12d2fca2f8a884169265d956a18f24633007fd728373704d468cab665becd77.webp", size: 28786, md5: "44cd86c875a24d91227fe612f29c5632", package: "shared-icons" }, { path: "assets/icons/map-wild.webp", file: "fc3d3e83901645c624db9455f85530a685cffddca288650aac067478d8304467.webp", size: 28812, md5: "3b9e1bef4b62782cea9127cbc9c588f2", package: "shared-icons" }, { path: "sect-sweep/cloud-stair-courtyard.jpg", file: "e84cd74fe6cc4d1db82caffb8b21d9d6ef34d76091f978e76a4c2baa11a4edbc.jpg", size: 390460, md5: "d75dc3b3d854575f23e78c9b34d21d7e", package: "sect-sweep" }, { path: "sect-sweep/sweep-atlas.png", file: "be73f2b82011af2401c4a728d5910cf36c0ab62d2b43aa901fec485b5c02b392.png", size: 537176, md5: "85448b1e572a03abad2daab3fd0a49b7", package: "sect-sweep" }, { path: "sect-sweep/sweep-obstacles.png", file: "f8000cb373894ee376155f358b0b4fb2c83a782233b2dfec923baedd624fb198.png", size: 134933, md5: "4a3433df38f33e15091c3b37cd8cee1d", package: "sect-sweep" }, { path: "sect-sweep/virtual-joystick-base.png", file: "cf2b13eba0647fbc2b8cf202c5ccb8464c137ed52e62bc61ae68b66e9bae25fd.png", size: 39466, md5: "d3f60d127adad2a1ea1806371d5042ab", package: "sect-sweep" }, { path: "sect-sweep/virtual-joystick-thumb.png", file: "0b45b56626f7694b3119168606d73a6f7d9bc56576fabe89506a3f4a96ec24cb.png", size: 12238, md5: "aa0c76b564635742e3351888d2e22288", package: "sect-sweep" }, { path: "sect-mining/copper-ore.png", file: "e1e2932d261a03d870c42a4c1f36f068ebc1fd0aa658efcab65ee04c8c682ea6.png", size: 514132, md5: "40da4af600e29ba80d1ef7a42626c724", package: "sect-mining" }, { path: "sect-mining/dark-iron.png", file: "2d10f4f3f8b2532b27208e41aea0ec8e92fc1d446dd60a076900a6aba6ed1e06.png", size: 416455, md5: "cff5d02d8891514ecfbb6b131ec4513e", package: "sect-mining" }, { path: "sect-mining/earth-essence.png", file: "2291302f21bd2362c996e89b07548d649de90b5bbe1dd2e474fb9ca30056f491.png", size: 404594, md5: "af5bfad46759dabbf649753534e2455a", package: "sect-mining" }, { path: "sect-mining/explosive-barrel.png", file: "2e41afa6fac88bcd12a34515f59863271c5758561eb0335b07bb794d6478ae60.png", size: 241229, md5: "1c2c351c3628603b41b4f0d58876c42e", package: "sect-mining" }, { path: "sect-mining/rope-cultivator.png", file: "fb243cc0b673e3b044d112849186584b43b8011d04c90840b54c2b6257a5b052.png", size: 656645, md5: "3e0b8bfb0f6c90dcd260ee928408ef26", package: "sect-mining" }, { path: "sect-mining/spirit-crystal.png", file: "a68e80903007b0676d7e6156c7607d1bc0653e2fd12cadc3f47fa6486f5985ce.png", size: 190630, md5: "f9cf1edc93a627323a8c80f9e434eeef", package: "sect-mining" }, { path: "sect-mining/spirit-hook.png", file: "57e5e5aae4f9f9f0a5a238ccb02ed4caf103c81362ad8ea8ecd3e8c093679c83.png", size: 213532, md5: "aef70c2a68df9671ef4acff0730a2761", package: "sect-mining" }, { path: "sect-mining/spirit-vein-cavern.jpg", file: "c9d60b573d8ae81768539fdb4cec198e7c9f0af7decba3bf802911eaf0c0cc6b.jpg", size: 398016, md5: "8c4a7ac4d530bf07f342193d653d45e0", package: "sect-mining" }, { path: "font-body/font.ttf.gz", file: "be2499fe0241f05643c78d3e808073f04737dd9c8010cf324feb01b10cbd9e7c.gz", size: 8312435, md5: "06b8aa078eaa87319f420e5ede8b89d6", package: "font-body" }, { path: "font-heading/font.ttf.gz", file: "21b2bfac8628ece82d7c0c5d2c23922d5a8e54ae60369ced6a1003937eb9a344.gz", size: 3857387, md5: "db4e177ba5f703d17d72c1dee757556d", package: "font-heading" }, { path: "atlas-world/map.jpg", file: "f6bf3b92492d2a90261a1817c1709dfc57e4406158f0e9d1c96081998cee1b13.jpg", size: 576370, md5: "4f0319ef5d8caf0ca243cdeed9c90801", package: "atlas-world" }, { path: "atlas-tiannan/map.jpg", file: "7aaf4758e4d6ab2bdf20394e1cf8250b7ce4ade118cb58bf7e7ee9a778e67944.jpg", size: 786931, md5: "1c072ec52b75a88f14379d52599fb49d", package: "atlas-tiannan" }, { path: "atlas-luanxinghai/map.jpg", file: "541887e700e8588ca300fcd9ce408e729d812ffe26c3edc6dcc7b8f16ea8cf62.jpg", size: 592408, md5: "37c0e2506959059d439649cef9454a95", package: "atlas-luanxinghai" }, { path: "atlas-mulan/map.jpg", file: "edf662e9cf3069ef64a66c4e10117975fd924ed7b679ebe3fe833bbc75366b47.jpg", size: 720061, md5: "a4c31a575b5d31978a079a8b903bb8fb", package: "atlas-mulan" }, { path: "atlas-dajin/map.jpg", file: "22c7820cf48073c18e7e4c84c40ed13cc5428e15510432b0720f9e62e322e951.jpg", size: 809656, md5: "f32430570c01891414d439e367ab0526", package: "atlas-dajin" }, { path: "atlas-nanjiang/map.jpg", file: "4f1e41b10f661c882f6f6ad904c866d0ad069a2bb9231cdd61d902cf01a649f4.jpg", size: 768501, md5: "884035b58460fc7da4f43acda8f3deac", package: "atlas-nanjiang" }, { path: "atlas-northland/map.jpg", file: "47d810ca45a13471325f88af19b919e8f074175f64c0b5853b5940cbe8646b9b.jpg", size: 664330, md5: "df73cb9aa411c0b4d515da98d77fc1eb", package: "atlas-northland" }, { path: "sect-map-lingxiao/map.jpg", file: "90ce5c3091ec35f776216264d136c20cf587783d82ad9b33990ddb28653b70e0.jpg", size: 705923, md5: "38af47d72f1c3393f8c1e181edf3eb5f", package: "sect-map-lingxiao" }, { path: "sect-map-wuxiang/map.jpg", file: "69c2faff6f185e7c81e7f435968c1af666b5264155179c6b3c25e81c4b2c66bf.jpg", size: 602027, md5: "bab9bdd9b3e754d88fd5ced9ee0d35c3", package: "sect-map-wuxiang" }, { path: "sect-map-tianyan/map.jpg", file: "25790b6d0271c6f9c44ebd5bd0cb4a5922ea43c35c40a0db8d3daf6fb42bf5fc.jpg", size: 487490, md5: "ea6dd4634f9c11dabd1d05de51a25005", package: "sect-map-tianyan" }, { path: "sect-map-youdu/map.jpg", file: "a1c13baabd90aec539c04c49d3854ad960526d81ab127268ecb0036d3659ac00.jpg", size: 474597, md5: "f0a3a83b22770670cfec8db80f68b1e7", package: "sect-map-youdu" }, { path: "sect-map-jiujie/map.jpg", file: "31bf0465cb50d13a4dd23667a00554bb1c7c708aea04fac82ba057357c21940f.jpg", size: 585145, md5: "df4fa7d42733bd4241a02fd7bba0ba58", package: "sect-map-jiujie" }];
+function I(e, a) { let c = Date.now(), b = [], s = new Set; a.__bootEvents = b, a.__bootMark = (d) => { var _a; if (s.has(d))
+    return; s.add(d); let k = { stage: d, ms: Date.now() - c }; if (b.push(k), console.info("[BOOT]", k), d === "first-frame")
+    (_a = a.__onFirstFrame) === null || _a === void 0 ? void 0 : _a.call(a); }, a.__bootMark("start"); let f = e.createCanvas; e.createCanvas = function (...d) { let k = f.apply(this, d); return a.__bootMark("canvas-created"), k; }; let p = e.loadSubpackage; e.loadSubpackage = function (d) { return a.__bootMark("subpackage:" + d.name + ":start"), p.call(this, { ...d, success: (k) => { var _a; a.__bootMark("subpackage:" + d.name + ":complete"), (_a = d.success) === null || _a === void 0 ? void 0 : _a.call(d, k); }, fail: (k) => { var _a; console.warn("[BOOT] subpackage failed", d.name), (_a = d.fail) === null || _a === void 0 ? void 0 : _a.call(d, k); } }); }; }
+class u {
+    constructor(e, a, c) {
         this.visible = !1;
         this.fallback = !1;
         this.closed = !1;
@@ -157,93 +157,93 @@ class v {
         this.progress = 0;
         this.renderedProgress = -1;
         this.renderedText = "正在进入万界……";
-        this.host = b;
-        this.plugin = c;
-        this.mark = f;
+        this.host = e;
+        this.plugin = a;
+        this.mark = c;
     }
     create() { if (this.ready)
         return this.ready; return this.mark("loading-plugin-start"), this.ready = (async () => { var _a, _b; try {
         this.manager = this.plugin().default, await this.manager.create({ images: [{ src: "startup/cover.jpg", displayConfig: { autoSwitchNext: !1, hideDuration: 0 } }], showLoading: !1, contextType: "2d", contextAttributes: {}, useMainCanvas: !1, designWidth: 540, designHeight: 960, scaleMode: "NO_BORDER", loadingTextConfig: { text: "正在进入万界……", textStyle: { fontSize: 20, color: "#483e32", textAlign: "center", bottom: 180 } }, loadingProgressConfig: { progressType: "text", config: { autoStart: !1, appendToLoadingText: !0 } } }), this.visible = !0, this.mark("loading-visible"), this.render();
     }
-    catch (b) {
-        if (console.warn("启动封面插件不可用", b), this.mark("loading-plugin-unavailable"), !this.visible) {
+    catch (e) {
+        if (console.warn("启动封面插件不可用", e), this.mark("loading-plugin-unavailable"), !this.visible) {
             if (this.fallback = !0, !this.failed && !this.closed)
                 (_b = (_a = this.host).showLoading) === null || _b === void 0 ? void 0 : _b.call(_a, { title: "正在入界…", mask: !0 });
         }
     } })(), this.ready; }
     render() { if (!this.visible || this.closed)
-        return; let b = this.failed ? "入界未完成，请检查网络后重新进入" : "正在进入万界……"; if (b !== this.renderedText)
-        this.manager.setLoadingText(b), this.renderedText = b; if (!this.failed && this.progress !== this.renderedProgress)
+        return; let e = this.failed ? "入界未完成，请检查网络后重新进入" : "正在进入万界……"; if (e !== this.renderedText)
+        this.manager.setLoadingText(e), this.renderedText = e; if (!this.failed && this.progress !== this.renderedProgress)
         this.manager.setProgress(this.progress), this.renderedProgress = this.progress; }
-    updateProgress(b) { if (this.failed || this.closed || !Number.isFinite(b))
-        return; this.progress = Math.max(this.progress, Math.min(95, Math.max(0, Math.floor(b)))); try {
+    updateProgress(e) { if (this.failed || this.closed || !Number.isFinite(e))
+        return; this.progress = Math.max(this.progress, Math.min(95, Math.max(0, Math.floor(e)))); try {
         this.render();
     }
-    catch (c) {
-        console.warn("封面进度更新失败", c);
+    catch (a) {
+        console.warn("封面进度更新失败", a);
     } }
-    showError(b) { var _a, _b, _c, _d; if (this.closed || this.failed)
+    showError(e) { var _a, _b, _c, _d; if (this.closed || this.failed)
         return; this.failed = !0; try {
         this.render();
     }
-    catch (c) {
-        console.warn("封面错误文案更新失败", c);
+    catch (a) {
+        console.warn("封面错误文案更新失败", a);
     } if (this.fallback)
-        (_b = (_a = this.host).hideLoading) === null || _b === void 0 ? void 0 : _b.call(_a); (_d = (_c = this.host).showModal) === null || _d === void 0 ? void 0 : _d.call(_c, { title: "入界未完成", content: "请检查网络后重新进入", confirmText: "重新加载", showCancel: !1, success: (c) => { if (c.confirm)
-            b(); } }); }
-    destroy(b) { var _a; return (_a = this.closing) !== null && _a !== void 0 ? _a : (this.closing = (async () => { var _a, _b; if (await this.ready, this.failed)
-        throw Error("Startup failed; retaining cover"); if (await (b === null || b === void 0 ? void 0 : b()), this.failed)
+        (_b = (_a = this.host).hideLoading) === null || _b === void 0 ? void 0 : _b.call(_a); (_d = (_c = this.host).showModal) === null || _d === void 0 ? void 0 : _d.call(_c, { title: "入界未完成", content: "请检查网络后重新进入", confirmText: "重新加载", showCancel: !1, success: (a) => { if (a.confirm)
+            e(); } }); }
+    destroy(e) { var _a; return (_a = this.closing) !== null && _a !== void 0 ? _a : (this.closing = (async () => { var _a, _b; if (await this.ready, this.failed)
+        throw Error("Startup failed; retaining cover"); if (await (e === null || e === void 0 ? void 0 : e()), this.failed)
         throw Error("Startup failed; retaining cover"); if (this.manager && this.visible)
         await this.manager.destroy(); if (this.failed)
         throw Error("Startup failed while closing cover"); if (this.fallback)
         (_b = (_a = this.host).hideLoading) === null || _b === void 0 ? void 0 : _b.call(_a); this.closed = !0, this.mark("loading-destroy"); })()); }
 }
-function h(b, c) { var _a, _b, _c, _d, _e, _f; let f = (_a = c.canvas) !== null && _a !== void 0 ? _a : (c.canvas = b.createCanvas()), g = (_e = (_c = (_b = b.getWindowInfo) === null || _b === void 0 ? void 0 : _b.call(b)) !== null && _c !== void 0 ? _c : (_d = b.getSystemInfoSync) === null || _d === void 0 ? void 0 : _d.call(b)) !== null && _e !== void 0 ? _e : {}, j = g.windowWidth || 390, d = g.windowHeight || 844, Q = Math.min(g.pixelRatio || 1, 2); f.width = Math.round(j * Q), f.height = Math.round(d * Q); let z = f.getContext("2d"); z.save(), z.setTransform(Q, 0, 0, Q, 0, 0), z.fillStyle = "#eee7d8", z.fillRect(0, 0, j, d), z.fillStyle = "#483e32", z.textAlign = "center", z.font = "28px sans-serif", z.fillText("万界道友", j / 2, d * 0.54), z.font = "16px sans-serif", z.fillText("正在进入万界……", j / 2, d * 0.78), z.restore(), (_f = c.__bootMark) === null || _f === void 0 ? void 0 : _f.call(c, "startup-canvas-painted"); let Y = !0, X = b.createImage(); return c.__claimStartupCanvas = () => { Y = !1, X.onload = null, X.onerror = null; }, X.onload = () => { if (!Y)
-    return; z.save(), z.setTransform(Q, 0, 0, Q, 0, 0); let $ = Math.max(j / X.width, d / X.height); z.drawImage(X, (j - X.width * $) / 2, (d - X.height * $) / 2, X.width * $, X.height * $), z.fillStyle = "#483e32", z.font = "16px sans-serif", z.textAlign = "center", z.fillText("正在进入万界……", j / 2, d * 0.78), z.restore(); }, X.onerror = () => { }, X.src = "startup/cover.jpg", f; }
-function t(b, c) { let f = typeof requestAnimationFrame === "function" ? (g) => requestAnimationFrame(g) : (g) => setTimeout(g, 32); return new Promise((g, j) => { f(() => { if (c()) {
-    j(Error("Startup failed before presentation"));
+function S(e, a) { var _a, _b, _c, _d, _e, _f; let c = (_a = a.canvas) !== null && _a !== void 0 ? _a : (a.canvas = e.createCanvas()), b = (_e = (_c = (_b = e.getWindowInfo) === null || _b === void 0 ? void 0 : _b.call(e)) !== null && _c !== void 0 ? _c : (_d = e.getSystemInfoSync) === null || _d === void 0 ? void 0 : _d.call(e)) !== null && _e !== void 0 ? _e : {}, s = b.windowWidth || 390, f = b.windowHeight || 844, p = Math.min(b.pixelRatio || 1, 2); c.width = Math.round(s * p), c.height = Math.round(f * p); let d = c.getContext("2d"); d.save(), d.setTransform(p, 0, 0, p, 0, 0), d.fillStyle = "#eee7d8", d.fillRect(0, 0, s, f), d.fillStyle = "#483e32", d.textAlign = "center", d.font = "28px sans-serif", d.fillText("万界道友", s / 2, f * 0.54), d.font = "16px sans-serif", d.fillText("正在进入万界……", s / 2, f * 0.78), d.restore(), (_f = a.__bootMark) === null || _f === void 0 ? void 0 : _f.call(a, "startup-canvas-painted"); let k = !0, g = e.createImage(); return a.__claimStartupCanvas = () => { k = !1, g.onload = null, g.onerror = null; }, g.onload = () => { if (!k)
+    return; d.save(), d.setTransform(p, 0, 0, p, 0, 0); let t = Math.max(s / g.width, f / g.height); d.drawImage(g, (s - g.width * t) / 2, (f - g.height * t) / 2, g.width * t, g.height * t), d.fillStyle = "#483e32", d.font = "16px sans-serif", d.textAlign = "center", d.fillText("正在进入万界……", s / 2, f * 0.78), d.restore(); }, g.onerror = () => { }, g.src = "startup/cover.jpg", c; }
+function _(e, a) { let c = typeof requestAnimationFrame === "function" ? (b) => requestAnimationFrame(b) : (b) => setTimeout(b, 32); return new Promise((b, s) => { c(() => { if (a()) {
+    s(Error("Startup failed before presentation"));
     return;
 } try {
-    let d = b.__officialApp;
-    if (d) {
-        if (d.mode === "loading")
+    let f = e.__officialApp;
+    if (f) {
+        if (f.mode === "loading")
             throw Error("Startup page is no longer ready");
-        d.paint();
+        f.paint();
     }
-    f(() => { var _a; if (c())
-        j(Error("Startup failed before presentation"));
+    c(() => { var _a; if (a())
+        s(Error("Startup failed before presentation"));
     else
-        (_a = b.__bootMark) === null || _a === void 0 ? void 0 : _a.call(b, "first-frame-presentable"), g(); });
+        (_a = e.__bootMark) === null || _a === void 0 ? void 0 : _a.call(e, "first-frame-presentable"), b(); });
 }
-catch (d) {
-    j(d);
+catch (f) {
+    s(f);
 } }); }); }
-function m0(b) { let c = b(), f = 0; return () => { let g = b(); if (Number.isFinite(g))
-    f += Math.max(0, g - c), c = g; return f; }; }
-var r = globalThis.performance, E = m0(typeof (r === null || r === void 0 ? void 0 : r.now) === "function" ? () => r.now() : () => Date.now());
-function s(b, c) { if (!b.performance)
-    b.performance = { now: E, timeOrigin: Date.now() - E() };
-else if (typeof b.performance.now !== "function")
-    b.performance.now = E; if (!c.performance)
-    c.performance = b.performance; }
-function b0(b, c, f, g = 45000) { var _a, _b, _c, _d; o(b, c); let j = c.__bootMark; j("boot-start"), s(globalThis, c); let d = !1, Q = !1, z = !1, Y; c.__startupReady = new Promise((Z) => { Y = Z; }); let X = new v(b, () => { return f(h(b, c)); }, j), $ = () => { let Z = () => { var _a; return (_a = b.showModal) === null || _a === void 0 ? void 0 : _a.call(b, { title: "请重新进入", content: "请关闭小游戏后重新打开万界道友。", showCancel: !1 }); }; try {
-    if (b.restartMiniProgram)
-        b.restartMiniProgram({ fail: Z });
+function ze(e) { let a = e(), c = 0; return () => { let b = e(); if (Number.isFinite(b))
+    c += Math.max(0, b - a), a = b; return c; }; }
+var H = globalThis.performance, D = ze(typeof (H === null || H === void 0 ? void 0 : H.now) === "function" ? () => H.now() : () => Date.now());
+function A(e, a) { if (!e.performance)
+    e.performance = { now: D, timeOrigin: Date.now() - D() };
+else if (typeof e.performance.now !== "function")
+    e.performance.now = D; if (!a.performance)
+    a.performance = e.performance; }
+function ee(e, a, c, b = 45000) { var _a, _b, _c, _d; I(e, a); let s = a.__bootMark; s("boot-start"), A(globalThis, a); let f = !1, p = !1, d = !1, k; a.__startupReady = new Promise((n) => { k = n; }); let g = new u(e, () => { return c(S(e, a)); }, s), t = () => { let n = () => { var _a; return (_a = e.showModal) === null || _a === void 0 ? void 0 : _a.call(e, { title: "请重新进入", content: "请关闭小游戏后重新打开万界道友。", showCancel: !1 }); }; try {
+    if (e.restartMiniProgram)
+        e.restartMiniProgram({ fail: n });
     else
-        Z();
+        n();
 }
 catch (_a) {
-    Z();
-} }, m = (Z) => { if (Q || d)
-    return; d = !0, clearTimeout(P), j("startup-error"), console.error("游戏启动失败", Z), X.showError($); }, N = (Z) => m(Z), R = (Z) => { var _a; return m((_a = Z === null || Z === void 0 ? void 0 : Z.reason) !== null && _a !== void 0 ? _a : Z); }, P = setTimeout(() => m(Error("首帧等待超时")), g); (_a = b.onError) === null || _a === void 0 ? void 0 : _a.call(b, N), (_b = b.onUnhandledRejection) === null || _b === void 0 ? void 0 : _b.call(b, R), c.__onFirstFrame = () => { if (d || Q || z)
-    return; z = !0, setTimeout(() => { if (d)
-    return; X.destroy(() => t(c, () => d)).then(() => { var _a, _b, _c; if (d)
-    return; Q = !0, clearTimeout(P), (_a = b.offError) === null || _a === void 0 ? void 0 : _a.call(b, N), (_b = b.offUnhandledRejection) === null || _b === void 0 ? void 0 : _b.call(b, R), (_c = c.__officialApp) === null || _c === void 0 ? void 0 : _c.ui.invalidate(), Y(); }).catch(m); }, 0); }; let k = new Map; c.__sharedArtworkReady = (Z) => { if (!["icons", "divination", "sponsors"].includes(Z))
-    return Promise.reject(Error("Unknown artwork package")); if (!k.has(Z))
-    k.set(Z, c.__startupReady.then(() => new Promise((q, J) => { j("shared-" + Z + "-start"), b.loadSubpackage({ name: "shared-" + Z, success: q, fail: J }); })).catch((q) => { throw k.delete(Z), q; })); return k.get(Z); }, c.__sharedIconsReady = () => c.__sharedArtworkReady("icons"), X.create(); try {
-    i(b, c, e), j("runtime-load-start"), (_d = (_c = b.loadSubpackage({ name: "game-runtime", success() { j("runtime-load-complete"), X.updateProgress(95); }, fail: m })) === null || _c === void 0 ? void 0 : _c.onProgressUpdate) === null || _d === void 0 ? void 0 : _d.call(_c, ({ progress: q }) => X.updateProgress(q * 0.9));
+    n();
+} }, z = (n) => { if (p || f)
+    return; f = !0, clearTimeout(h), s("startup-error"), console.error("游戏启动失败", n), g.showError(t); }, o = (n) => z(n), q = (n) => { var _a; return z((_a = n === null || n === void 0 ? void 0 : n.reason) !== null && _a !== void 0 ? _a : n); }, h = setTimeout(() => z(Error("首帧等待超时")), b); (_a = e.onError) === null || _a === void 0 ? void 0 : _a.call(e, o), (_b = e.onUnhandledRejection) === null || _b === void 0 ? void 0 : _b.call(e, q), a.__onFirstFrame = () => { if (f || p || d)
+    return; d = !0, setTimeout(() => { if (f)
+    return; g.destroy(() => _(a, () => f)).then(() => { var _a, _b, _c; if (f)
+    return; p = !0, clearTimeout(h), (_a = e.offError) === null || _a === void 0 ? void 0 : _a.call(e, o), (_b = e.offUnhandledRejection) === null || _b === void 0 ? void 0 : _b.call(e, q), (_c = a.__officialApp) === null || _c === void 0 ? void 0 : _c.ui.invalidate(), k(); }).catch(z); }, 0); }; let i = new Map; a.__sharedArtworkReady = (n) => { if (!["icons", "divination", "sponsors"].includes(n))
+    return Promise.reject(Error("Unknown artwork package")); if (!i.has(n))
+    i.set(n, a.__startupReady.then(() => new Promise((m, l) => { s("shared-" + n + "-start"), e.loadSubpackage({ name: "shared-" + n, success: m, fail: l }); })).catch((m) => { throw i.delete(n), m; })); return i.get(n); }, a.__sharedIconsReady = () => a.__sharedArtworkReady("icons"), g.create(); try {
+    V(e, a, r), s("runtime-load-start"), (_d = (_c = e.loadSubpackage({ name: "game-runtime", success() { s("runtime-load-complete"), g.updateProgress(95); }, fail: z })) === null || _c === void 0 ? void 0 : _c.onProgressUpdate) === null || _d === void 0 ? void 0 : _d.call(_c, ({ progress: m }) => g.updateProgress(m * 0.9));
 }
-catch (Z) {
-    m(Z);
+catch (n) {
+    z(n);
 } }
-b0(wx, GameGlobal, (b) => requirePlugin("MinigameLoading", { customEnv: { wx, canvas: b } }));
+ee(wx, GameGlobal, (e) => requirePlugin("MinigameLoading", { customEnv: { wx, canvas: e } }));
